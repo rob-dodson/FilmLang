@@ -10,33 +10,40 @@ import Cocoa
 
 class Canvas: NSView
 {
-    let r : FLRect
-    let r1 : FLRect
     var timer : Timer? = nil
-    var objects : [BlockProtocol]?
+    var objects : [Block]?
+    let topBlock : FLRect
     
     required init?(coder: NSCoder)
     {
-        r = FLRect(name:"R")
+        topBlock = FLRect(name:"Top",parent:nil)
+        
+        let r = FLRect(name:"R",parent:nil)
         r.fillColor = NSColor(red: 0.2, green: 0.2, blue: 0.8, alpha: 0.6)
         r.strokeColor = NSColor(red: 0.2, green: 0.2, blue: 0.8, alpha: 0.8)
-        r1 = FLRect(name:"R1")
+        
+        let r1 = FLRect(name:"R1",parent:nil)
         r1.fillColor = NSColor(red: 0.3, green: 0.2, blue: 0.4, alpha: 0.6)
         r1.strokeColor = NSColor(red: 0.3, green: 0.2, blue: 0.6, alpha: 0.8)
         
-        
-        
-        
         super.init(coder: coder)
 
-        objects = [BlockProtocol]()
-        objects?.append(r);
-        objects?.append(r1);
+        
+        topBlock.x = 100
+        topBlock.y = 100
+        topBlock.width = 200
+        topBlock.height = 200
+        topBlock.strokeColor = NSColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0)
+        topBlock.addChild(block:r);
+        topBlock.addChild(block:r1);
+        
         
         timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true)
         { (timer) in
             
-            for object in self.objects!
+            self.topBlock.animateBlock!(self.topBlock)
+            
+            for object in self.topBlock.children
             {
                 if object.animateBlock != nil
                 {
@@ -48,8 +55,19 @@ class Canvas: NSView
         }
         
         
+        topBlock.animateBlock =
+        { (obj:Block) in
+            let rect : FLRect = obj as! FLRect
+            rect.x = rect.x + 0.2
+            rect.y = rect.y + 0.3
+            
+            if rect.x > 200.0 { rect.x = 40.0 }
+            if rect.y > 200.0 { rect.y = 40.0 }
+        }
+        
+        
         r.animateBlock =
-        { (obj:BlockProtocol) in
+        { (obj:Block) in
             let rect : FLRect = obj as! FLRect
             rect.x = rect.x + 0.2
             rect.y = rect.y + 0.3
@@ -62,8 +80,9 @@ class Canvas: NSView
         }
     
         r1.animateBlock =
-        { (obj:BlockProtocol) in
+        { (obj:Block) in
             let rect : FLRect = obj as! FLRect
+            
             if rect.fillColor.alphaComponent <= 0.0 { rect.fillColor = rect.fillColor.withAlphaComponent(1.0) }
             rect.fillColor = rect.fillColor.withAlphaComponent(rect.fillColor.alphaComponent - 0.01)
         }
@@ -137,9 +156,15 @@ class Canvas: NSView
         yticks.stroke()
         
         
+        //
+        // blocks
+        //
+        topBlock.draw()
+        for block in topBlock.children
+        {
+            block.draw()
+        }
         
-        r.draw(offsetX: Double(originx + 100), offsetY: Double(originy + 100))
-        r1.draw(offsetX: Double(originx + 10), offsetY: Double(originy + 10))
         
         //
         // labels

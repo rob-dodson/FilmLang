@@ -12,11 +12,11 @@ class Canvas: NSView
 {
     var timer : Timer? = nil
     var objects : [Block]?
-    let topBlock : FLRect
+    let topBlock : FLGrid
     
     required init?(coder: NSCoder)
     {
-        topBlock = FLRect(name:"Top",parent:nil)
+        topBlock = FLGrid(name:"Top",parent:nil)
         
         let r = FLRect(name:"R",parent:nil)
         r.fillColor = NSColor(red: 0.2, green: 0.2, blue: 0.8, alpha: 0.6)
@@ -33,7 +33,6 @@ class Canvas: NSView
         topBlock.y = 100
         topBlock.width = 200
         topBlock.height = 200
-        topBlock.strokeColor = NSColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0)
         topBlock.addChild(block:r);
         topBlock.addChild(block:r1);
         
@@ -57,12 +56,14 @@ class Canvas: NSView
         
         topBlock.animateBlock =
         { (obj:Block) in
-            let rect : FLRect = obj as! FLRect
+            let rect : FLGrid = obj as! FLGrid
             rect.x = rect.x + 0.2
             rect.y = rect.y + 0.3
             
             if rect.x > 200.0 { rect.x = 40.0 }
             if rect.y > 200.0 { rect.y = 40.0 }
+            
+            rect.fillColor = rect.fillColor.withAlphaComponent(0.5)
         }
         
         

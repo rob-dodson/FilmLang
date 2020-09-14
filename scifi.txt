@@ -1,0 +1,61 @@
+
+block("Top Level Block")
+{
+	type:Rect
+	x:0
+	y:0
+	width:screen.width
+	height:screen.height
+	fillcolor:black
+	fill:true
+	stroke:true
+	strokecolor:green
+
+	block("Title")
+	{
+		type:Text
+		x:0
+		y:screen.height
+		text:"Space Control"
+		font:Futura
+		size:25
+	}
+
+
+	block("Flasher")
+	{
+		type:Rect
+		x:10
+		y:10
+		width:10
+		height:10
+		fillcolor: green
+		strokecolor: 255,0,0
+		fill:true
+		stroke:true
+		alpha = 0.0
+
+		animate(.01)
+		{
+			alpha = alpha + .01
+			if (alpha > 1.0)
+				alpha = 0.0
+		}
+	}	
+
+	block("Space Grid")
+	{
+		type:Grid
+		x:10
+		y:100
+		width:100
+		height:100
+		fillcolor: gradient(255,0,0 - 0,0,0)
+		strokecolor:blue
+		gridy = 10
+		gridx = 10
+		fill:true
+		stroke:true
+	}	
+}
+

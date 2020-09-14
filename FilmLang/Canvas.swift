@@ -65,7 +65,6 @@ class Canvas: NSView
             self.needsDisplay = true
         }
         
-        /*
         topBlock.animateBlock =
         { (obj:Block) in
             let rect : FLGrid = obj as! FLGrid
@@ -74,10 +73,7 @@ class Canvas: NSView
             
             if rect.x > 200.0 { rect.x = 40.0 }
             if rect.y > 200.0 { rect.y = 40.0 }
-            
-            rect.fillColor = rect.fillColor.withAlphaComponent(0.5)
         }
-        */
         
         r.animateBlock =
         { (obj:Block) in

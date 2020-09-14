@@ -20,10 +20,9 @@ class Block
     var y : Double = 10.0
     
     
-    init(name:String,parent:Block?)
+    init(name:String)
     {
         self.name = name
-        self.parent = parent
         self.children = [Block]()
     }
     

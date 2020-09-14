@@ -16,17 +16,18 @@ class Canvas: NSView
     
     required init?(coder: NSCoder)
     {
-        topBlock = FLGrid(name:"Top",parent:nil)
+        topBlock = FLGrid(name:"Top")
         
-        let r = FLRect(name:"R",parent:nil)
+        
+        let r = FLRect(name:"R")
         r.fillColor = NSColor(red: 0.2, green: 0.2, blue: 0.8, alpha: 0.6)
         r.strokeColor = NSColor(red: 0.2, green: 0.2, blue: 0.8, alpha: 0.8)
         
-        let r1 = FLRect(name:"R1",parent:nil)
+        let r1 = FLRect(name:"R1")
         r1.fillColor = NSColor(red: 0.3, green: 0.2, blue: 0.4, alpha: 0.6)
         r1.strokeColor = NSColor(red: 0.3, green: 0.2, blue: 0.6, alpha: 0.8)
         
-        let circle = FLCircle(name:"circle",parent:nil)
+        let circle = FLCircle(name:"circle")
         circle.x = 100
         circle.y = 100
         circle.width = 66
@@ -34,16 +35,22 @@ class Canvas: NSView
         circle.fillColor = NSColor(red: 0.5, green: 0.0, blue: 0.0, alpha: 0.6)
         circle.strokeColor = NSColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.8)
         
+        let path1 = FLPath(name:"Path")
+        
+        //
+        // init
+        //
         super.init(coder: coder)
 
         
         topBlock.x = 100
         topBlock.y = 100
-        topBlock.width = 200
+        topBlock.width = 400
         topBlock.height = 200
         topBlock.addChild(block:r);
         topBlock.addChild(block:r1);
         topBlock.addChild(block:circle)
+        topBlock.addChild(block:path1)
         
         
         timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true)
@@ -65,6 +72,7 @@ class Canvas: NSView
             self.needsDisplay = true
         }
         
+        /*
         topBlock.animateBlock =
         { (obj:Block) in
             let rect : FLGrid = obj as! FLGrid
@@ -74,6 +82,7 @@ class Canvas: NSView
             if rect.x > 200.0 { rect.x = 40.0 }
             if rect.y > 200.0 { rect.y = 40.0 }
         }
+ */
         
         r.animateBlock =
         { (obj:Block) in

@@ -43,7 +43,7 @@ class FLGrid : Block
         for yy in 1...ycount - 1
         {
             let bezierPath = NSBezierPath()
-            let y = CGFloat((Int(width) / ycount) * yy)
+            let y = CGFloat((Int(height) / ycount) * yy)
             
             bezierPath.move(to: NSPoint(x: rect.origin.x, y: rect.origin.y + y))
             bezierPath.line(to: NSPoint(x: rect.origin.x + rect.width, y: rect.origin.y + y))
@@ -57,7 +57,7 @@ class FLGrid : Block
         for xx in 1...xcount - 1
         {
             let bezierPath = NSBezierPath()
-            let x = CGFloat((Int(height) / xcount) * xx)
+            let x = CGFloat((Int(width) / xcount) * xx)
             
             bezierPath.move(to: NSPoint(x: rect.origin.x + x, y: rect.origin.y))
             bezierPath.line(to: NSPoint(x: rect.origin.x + x, y: rect.origin.y + rect.height))

@@ -22,9 +22,28 @@ class FLGrid : Block
     var ycount = 10
     var xcount = 10
     
+
+    
+    override func animate()
+    {
+        for var animator in animators
+        {
+            if animator.name == "x"
+            {
+                adjust(obj:&self.x, animator: &animator)
+            }
+            else if animator.name == "y"
+            {
+                adjust(obj:&self.y, animator: &animator)
+            }
+        }
+    }
+    
     
     override func draw()
     {
+        self.animate();
+        
         var xoffset : Double
         var yoffset : Double
         (xoffset,yoffset) = offset()

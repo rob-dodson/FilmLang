@@ -53,65 +53,30 @@ class Canvas: NSView
         topBlock.addChild(block:path1)
         
         
+        circle.animators.append(Animator(name: "fillalpha", amount: 0.01, min: 0.6, max: 1.0, up: true, type: .Bounce))
+        circle.animators.append(Animator(name: "x", amount: 0.2, min: 0.0, max: 100.0, up: true, type: .Inc))
+        r.animators.append(Animator(name: "x", amount: 0.4, min: 0.0, max: 100.0, up: true, type: .Inc))
+        r1.animators.append(Animator(name: "x", amount: 0.2, min: 0.0, max: 100.0, up: true, type: .Inc))
+        
         timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true)
         { (timer) in
             
-            if self.topBlock.animateBlock != nil
+            if self.topBlock.animators.count > 0
             {
-                self.topBlock.animateBlock!(self.topBlock)
+                self.topBlock.animate()
             }
             
             for object in self.topBlock.children
             {
-                if object.animateBlock != nil
+                if object.animators.count > 0
                 {
-                    object.animateBlock!(object)
+                    object.animate()
                 }
             }
             
             self.needsDisplay = true
         }
         
-        /*
-        topBlock.animateBlock =
-        { (obj:Block) in
-            let rect : FLGrid = obj as! FLGrid
-            rect.x = rect.x + 0.2
-            rect.y = rect.y + 0.3
-            
-            if rect.x > 200.0 { rect.x = 40.0 }
-            if rect.y > 200.0 { rect.y = 40.0 }
-        }
- */
-        
-        r.animateBlock =
-        { (obj:Block) in
-            let rect : FLRect = obj as! FLRect
-            rect.x = rect.x + 0.2
-            rect.y = rect.y + 0.3
-            
-            if rect.x > 200.0 { rect.x = 40.0 }
-            if rect.y > 200.0 { rect.y = 40.0 }
-            
-            if rect.fillColor.alphaComponent <= 0.0 { rect.fillColor = rect.fillColor.withAlphaComponent(1.0) }
-            rect.fillColor = rect.fillColor.withAlphaComponent(rect.fillColor.alphaComponent - 0.01)
-        }
-    
-        r1.animateBlock =
-        { (obj:Block) in
-            let rect : FLRect = obj as! FLRect
-            
-            if rect.fillColor.alphaComponent <= 0.0 { rect.fillColor = rect.fillColor.withAlphaComponent(1.0) }
-            rect.fillColor = rect.fillColor.withAlphaComponent(rect.fillColor.alphaComponent - 0.01)
-        }
-        
-        circle.animateBlock =
-        { (obj:Block) in
-            let rect : FLCircle = obj as! FLCircle
-            
-            if rect.fillColor.alphaComponent <= 0.0 { rect.fillColor = rect.fillColor.withAlphaComponent(1.0) }
-            rect.fillColor = rect.fillColor.withAlphaComponent(rect.fillColor.alphaComponent - 0.01)
-        }
     }
     
     

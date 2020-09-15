@@ -18,6 +18,23 @@ class FLCircle : Block
     var fillColor : NSColor = NSColor.darkGray
     var strokeColor : NSColor = NSColor.green
 
+    
+    override func animate()
+    {
+        for var animator in animators
+        {
+            if animator.name == "x"
+            {
+                adjust(obj:&self.x, animator: &animator)
+            }
+            else if animator.name == "fillalpha"
+            {
+                if fillColor.alphaComponent <= 0.0 { fillColor = fillColor.withAlphaComponent(1.0) }
+                fillColor = fillColor.withAlphaComponent(fillColor.alphaComponent - 0.01)
+            }
+        }
+    }
+    
     override func draw()
     {
         var xoffset : Double

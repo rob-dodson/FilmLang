@@ -236,24 +236,6 @@ class Canvas: NSView
         NSGraphicsContext.restoreGraphicsState()
         
         
-        //
-        // data
-        //
-        let bezierPath = NSBezierPath()
-        
-        let ox : Double = Double(originx)
-        let oy : Double = Double(originy)
-        
-        bezierPath.move(to: NSPoint(x: ox + 17.5, y: oy + 27.5))
-        bezierPath.curve(to: NSPoint(x: ox + 85.5, y: oy + 63.5),  controlPoint1: NSPoint(x: ox + 70.5, y: oy + 66.5),  controlPoint2: NSPoint(x: ox + 52.5, y: oy + 81.5))
-        bezierPath.curve(to: NSPoint(x: ox + 162.5, y: oy + 34.5), controlPoint1: NSPoint(x: ox + 118.5, y: oy + 45.5), controlPoint2: NSPoint(x: ox + 123.5, y: oy + -1.5))
-        bezierPath.curve(to: NSPoint(x: ox + 225.5, y: oy + 71.5), controlPoint1: NSPoint(x: ox + 201.5, y: oy + 70.5), controlPoint2: NSPoint(x: ox + 217.5, y: oy + 88.5))
-        NSColor.red.setStroke()
-        bezierPath.lineWidth = 1
-        bezierPath.stroke()
-        
-        
-        NSGraphicsContext.restoreGraphicsState()
     }
     
 }

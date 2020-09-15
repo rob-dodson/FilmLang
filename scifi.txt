@@ -1,3 +1,5 @@
+green:0,255,0,1
+blue:0,0,100,1
 
 block("Top Level Block")
 {
@@ -30,16 +32,16 @@ block("Top Level Block")
 		width:10
 		height:10
 		fillcolor: green
-		strokecolor: 255,0,0
+		strokecolor: 255,0,0,1
 		fill:true
 		stroke:true
-		alpha = 0.0
 
 		animate(.01)
 		{
-			alpha = alpha + .01
-			if (alpha > 1.0)
-				alpha = 0.0
+			fillcolor.alpha:.01,0,100,inc
+			fillcolor.red:1,0,255,bounce
+			fillcolor.blue:1,0,255,dec
+			x:5,0,screen.max,bounce
 		}
 	}	
 
@@ -50,7 +52,7 @@ block("Top Level Block")
 		y:100
 		width:100
 		height:100
-		fillcolor: gradient(255,0,0 - 0,0,0)
+		fillcolor: gradient(255,0,0,1 - 0,0,0,.5)
 		strokecolor:blue
 		gridy = 10
 		gridx = 10

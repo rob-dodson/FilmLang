@@ -33,7 +33,7 @@ class FLPath : Block
         
         
         strokeColor.setStroke()
-        bezierPath.lineWidth = CGFloat(arc4random_uniform(3)) //strokeWidth
+        bezierPath.lineWidth = CGFloat(arc4random_uniform(6)) //strokeWidth
         bezierPath.stroke()
     }
 }

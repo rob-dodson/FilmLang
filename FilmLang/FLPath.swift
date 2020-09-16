@@ -11,9 +11,6 @@ import Cocoa
 
 class FLPath : Block
 {
-    var strokeWidth : CGFloat = 1
-    var strokeColor : NSColor = NSColor.green
-
     override func draw()
     {
         var ox : Double
@@ -35,6 +32,8 @@ class FLPath : Block
         strokeColor.setStroke()
         bezierPath.lineWidth = CGFloat(arc4random_uniform(4)) //strokeWidth
         bezierPath.stroke()
+        
+        
     }
 }
        

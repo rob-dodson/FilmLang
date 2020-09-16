@@ -11,13 +11,6 @@ import Cocoa
 
 class FLCircle : Block
 {
-    var width : Double = 30
-    var height : Double = 30
-    var fill : Bool = false
-    var strokeWidth : CGFloat = 2
-    var strokeColor : NSColor = NSColor.green
-
-    
     override func animate()
     {
         super.animate()
@@ -35,6 +28,17 @@ class FLCircle : Block
         strokeColor.setStroke()
         ovalPath.lineWidth = 1
         ovalPath.stroke()
+        
+        // for debugging
+        let rectangleStyle = NSMutableParagraphStyle()
+        rectangleStyle.alignment = .center
+        let rectangleFontAttributes = [
+            .font: NSFont(name: "Futura", size: 12)!,
+            .foregroundColor: NSColor.white,
+            .paragraphStyle: rectangleStyle,
+        ] as [NSAttributedString.Key: Any]
+        name.draw(in: ovalPath.bounds.offsetBy(dx: 0, dy: -4), withAttributes: rectangleFontAttributes)
+        
     }
 
 }

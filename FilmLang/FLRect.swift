@@ -12,14 +12,6 @@ import Cocoa
 
 class FLRect : Block
 {
-    var width : Double = 30.0
-    var height : Double = 30.0
-    var fill : Bool = false
-    var strokeWidth : CGFloat = 1
-    var strokeColor : NSColor = NSColor.gray
-    var raduis : CGFloat = 2.0
-    
-    
     override func animate()
     {
         super.animate()
@@ -45,7 +37,7 @@ class FLRect : Block
         let rectangleStyle = NSMutableParagraphStyle()
         rectangleStyle.alignment = .center
         let rectangleFontAttributes = [
-            .font: NSFont(name: "HelveticaNeue", size: 12)!,
+            .font: NSFont(name: "Futura", size: 12)!,
             .foregroundColor: NSColor.white,
             .paragraphStyle: rectangleStyle,
         ] as [NSAttributedString.Key: Any]

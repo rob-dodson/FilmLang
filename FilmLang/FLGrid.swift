@@ -12,12 +12,7 @@ import Cocoa
 
 class FLGrid : Block
 {
-    var width : Double = 111.0
-    var height : Double = 111.0
-    var fill : Bool = false
-    var strokeWidth : CGFloat = 2
-    var strokeColor : NSColor = NSColor.green
-    var raduis : CGFloat = 1.0
+    
     var ycount = 10
     var xcount = 10
     
@@ -31,8 +26,6 @@ class FLGrid : Block
     
     override func draw()
     {
-        self.animate();
-        
         var xoffset : Double
         var yoffset : Double
         (xoffset,yoffset) = offset()
@@ -41,12 +34,15 @@ class FLGrid : Block
         let rectanglePath = NSBezierPath(roundedRect: rect, xRadius: raduis, yRadius: raduis)
 
 
-        let gradient = NSGradient(starting: NSColor.black, ending: NSColor.init(calibratedRed: 0.0, green: 0.5, blue: 0.0, alpha: 1.0))!
-
-        
-        fillColor.setFill()
-        //rectanglePath.fill()
-        gradient.draw(in: rectanglePath, angle: -90)
+        if fillGradient != nil
+        {
+            fillGradient?.draw(in: rectanglePath, angle: -90)
+        }
+        else
+        {
+            fillColor.setFill()
+            rectanglePath.fill()
+        }
         
         for yy in 1...ycount - 1
         {
@@ -58,7 +54,7 @@ class FLGrid : Block
             
             NSColor.green.setStroke()
             bezierPath.lineWidth = 0.5
-            bezierPath.setLineDash([2, 2], count: 2, phase: 0)
+            bezierPath.setLineDash([1, 2, 1 , 4], count: 4, phase: 0)
             bezierPath.stroke()
         }
         
@@ -79,6 +75,19 @@ class FLGrid : Block
         strokeColor.setStroke()
         rectanglePath.lineWidth = strokeWidth
         rectanglePath.stroke()
+       // rect.clip()
+        
+        
+        // for debugging
+        let rectangleStyle = NSMutableParagraphStyle()
+        rectangleStyle.alignment = .center
+        let rectangleFontAttributes = [
+            .font: NSFont(name: "Futura", size: 12)!,
+            .foregroundColor: NSColor.white,
+            .paragraphStyle: rectangleStyle,
+        ] as [NSAttributedString.Key: Any]
+        name.draw(in: rect.offsetBy(dx: 0, dy: -4), withAttributes: rectangleFontAttributes)
+        
         
     }
 }

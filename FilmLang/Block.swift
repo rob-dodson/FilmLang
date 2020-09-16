@@ -45,7 +45,12 @@ class Block
     var y : Double = 10.0
     var fillColor : NSColor = NSColor.darkGray
     var animators : [Animator]
-    
+    var fillGradient : NSGradient?
+    var width : Double = 111.0
+    var height : Double = 111.0
+    var strokeWidth : CGFloat = 2
+    var strokeColor : NSColor = NSColor.green
+    var raduis : CGFloat = 4.0
     
     init(name:String)
     {

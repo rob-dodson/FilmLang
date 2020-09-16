@@ -15,24 +15,12 @@ class FLCircle : Block
     var height : Double = 30
     var fill : Bool = false
     var strokeWidth : CGFloat = 2
-    var fillColor : NSColor = NSColor.darkGray
     var strokeColor : NSColor = NSColor.green
 
     
     override func animate()
     {
-        for var animator in animators
-        {
-            if animator.name == "x"
-            {
-                adjust(obj:&self.x, animator: &animator)
-            }
-            else if animator.name == "fillalpha"
-            {
-                if fillColor.alphaComponent <= 0.0 { fillColor = fillColor.withAlphaComponent(1.0) }
-                fillColor = fillColor.withAlphaComponent(fillColor.alphaComponent - 0.01)
-            }
-        }
+        super.animate()
     }
     
     override func draw()

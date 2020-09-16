@@ -22,9 +22,9 @@ class FLPath : Block
 
         let bezierPath = NSBezierPath()
 
-        let rr1 = Double(arc4random_uniform(15))
-        let rr2 = Double(arc4random_uniform(15)) + 380
-        let rr3 = Double(arc4random_uniform(15)) + 162
+        let rr1 = Double(arc4random_uniform(25))
+        let rr2 = Double(arc4random_uniform(25)) + 380
+        let rr3 = Double(arc4random_uniform(25)) + 162
         
         bezierPath.move(to: NSPoint(x: ox + rr1, y: oy + 27.5))
         bezierPath.curve(to: NSPoint(x: ox + 85.5, y: oy + 63.5),  controlPoint1: NSPoint(x: ox + 70.5, y: oy + 66.5),  controlPoint2: NSPoint(x: ox + 52.5, y: oy + 81.5))
@@ -33,7 +33,7 @@ class FLPath : Block
         
         
         strokeColor.setStroke()
-        bezierPath.lineWidth = CGFloat(arc4random_uniform(6)) //strokeWidth
+        bezierPath.lineWidth = CGFloat(arc4random_uniform(4)) //strokeWidth
         bezierPath.stroke()
     }
 }

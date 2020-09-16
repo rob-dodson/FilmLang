@@ -16,7 +16,6 @@ class FLGrid : Block
     var height : Double = 111.0
     var fill : Bool = false
     var strokeWidth : CGFloat = 2
-    var fillColor : NSColor = NSColor.darkGray
     var strokeColor : NSColor = NSColor.green
     var raduis : CGFloat = 1.0
     var ycount = 10
@@ -26,17 +25,7 @@ class FLGrid : Block
     
     override func animate()
     {
-        for var animator in animators
-        {
-            if animator.name == "x"
-            {
-                adjust(obj:&self.x, animator: &animator)
-            }
-            else if animator.name == "y"
-            {
-                adjust(obj:&self.y, animator: &animator)
-            }
-        }
+        super.animate()
     }
     
     

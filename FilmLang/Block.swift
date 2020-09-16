@@ -13,19 +13,17 @@ import Cocoa
 struct Animator
 {
     let name : String
-    let amount : Double
+    var amount : Double
     let min : Double
     let max : Double
-    var up : Bool
     let type : AnimatorType
     
-    internal init(name: String, amount: Double, min: Double, max: Double, up: Bool, type: Animator.AnimatorType)
+    internal init(name: String, amount: Double, min: Double, max: Double, type: Animator.AnimatorType)
     {
         self.name = name
         self.amount = amount
         self.min = min
         self.max = max
-        self.up = up
         self.type = type
     }
     
@@ -35,7 +33,6 @@ struct Animator
         case Dec
         case Bounce
     }
-    
 }
     
 
@@ -46,7 +43,9 @@ class Block
     var name: String
     var x : Double = 10.0
     var y : Double = 10.0
+    var fillColor : NSColor = NSColor.darkGray
     var animators : [Animator]
+    
     
     init(name:String)
     {
@@ -55,33 +54,55 @@ class Block
         self.animators = [Animator]()
     }
     
-    func adjust(obj:inout Double,animator:inout Animator)
+    func animate()
     {
-        if animator.type == .Inc
+        for index in 0..<animators.count
         {
-            obj = obj + animator.amount
-            if obj > animator.max { obj = animator.min }
-        }
-        else if animator.type == .Dec
-        {
-            obj = obj - animator.amount
-            if obj < animator.min { obj = animator.max }
-        }
-        else if animator.type == .Bounce
-        {
-            if animator.up
+            if animators[index].name == "x"
             {
-                obj = obj + animator.amount
-                if obj > animator.max { animator.up = false }
+                adjust(val:&x, animator: &animators[index])
             }
-            else
+            else if animators[index].name == "y"
             {
-                obj = obj - animator.amount
-                if obj < animator.min { animator.up = true }
+                adjust(val:&y, animator: &animators[index])
+            }
+            else if animators[index].name == "fillalpha"
+            {
+                var alpha = Double(fillColor.alphaComponent)
+                adjust(val:&alpha, animator: &animators[index])
+                fillColor = fillColor.withAlphaComponent(CGFloat(alpha))
             }
         }
     }
-            
+
+    
+    func adjust(val:inout Double,animator:inout Animator)
+    {
+        if animator.type == .Inc
+        {
+            val = val + animator.amount
+            if val > animator.max { val = animator.min }
+        }
+        else if animator.type == .Dec
+        {
+            val = val - animator.amount
+            if val < animator.min { val = animator.max }
+        }
+        else if animator.type == .Bounce
+        {
+            val = val + animator.amount
+            if val > animator.max
+            {
+                animator.amount = -animator.amount
+            }
+            else if val < animator.min
+            {
+                animator.amount = abs(animator.amount)
+            }
+        }
+    }
+    
+    
     func addChild(block:Block)
     {
         children.append(block);
@@ -105,13 +126,10 @@ class Block
     }
     
     
-    func draw()
-    {
-    }
-    
-    func animate()
-    {
-    }
+    //
+    // must override
+    //
+    func draw() {}
     
 }
 

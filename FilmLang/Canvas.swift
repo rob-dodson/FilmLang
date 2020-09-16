@@ -22,16 +22,20 @@ class Canvas: NSView
         let r = FLRect(name:"R")
         r.fillColor = NSColor(red: 0.2, green: 0.2, blue: 0.8, alpha: 0.6)
         r.strokeColor = NSColor(red: 0.2, green: 0.2, blue: 0.8, alpha: 0.8)
+        r.x = 10
+        r.y = 10
         
         let r1 = FLRect(name:"R1")
         r1.fillColor = NSColor(red: 0.3, green: 0.2, blue: 0.4, alpha: 0.6)
         r1.strokeColor = NSColor(red: 0.3, green: 0.2, blue: 0.6, alpha: 0.8)
+        r1.x = 100
+        r1.y = 100
         
         let circle = FLCircle(name:"circle")
         circle.x = 100
         circle.y = 100
-        circle.width = 66
-        circle.height = 70
+        circle.width = 50
+        circle.height = 50
         circle.fillColor = NSColor(red: 0.5, green: 0.0, blue: 0.0, alpha: 0.6)
         circle.strokeColor = NSColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.8)
         
@@ -53,10 +57,14 @@ class Canvas: NSView
         topBlock.addChild(block:path1)
         
         
-        circle.animators.append(Animator(name: "fillalpha", amount: 0.01, min: 0.6, max: 1.0, up: true, type: .Bounce))
-        circle.animators.append(Animator(name: "x", amount: 0.2, min: 0.0, max: 100.0, up: true, type: .Inc))
-        r.animators.append(Animator(name: "x", amount: 0.4, min: 0.0, max: 100.0, up: true, type: .Inc))
-        r1.animators.append(Animator(name: "x", amount: 0.2, min: 0.0, max: 100.0, up: true, type: .Inc))
+        circle.animators.append(Animator(name: "fillalpha", amount: 0.01, min: 0.1, max: 1.0, type: .Bounce))
+        circle.animators.append(Animator(name: "x", amount: 0.2, min: 100, max: 110.0, type: .Bounce))
+        
+        r.animators.append(Animator(name: "fillalpha", amount: 0.01, min: 0.1, max: 1.0, type: .Bounce))
+        r.animators.append(Animator(name: "x", amount: 0.1, min: 10, max: 20.0, type: .Bounce))
+        
+        r1.animators.append(Animator(name: "fillalpha", amount: 0.01, min: 0.1, max: 1.0, type: .Bounce))
+        r1.animators.append(Animator(name: "x", amount: 0.3, min: 90, max: 110.0, type: .Bounce))
         
         timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true)
         { (timer) in

@@ -1,0 +1,375 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AE183D2F250EB4180017805E /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE183D2E250EB4180017805E /* Block.swift */; };
+		AE24CB0F25096A02000F20D7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE24CB0E25096A02000F20D7 /* AppDelegate.swift */; };
+		AE24CB1225096A02000F20D7 /* FilmLang.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AE24CB1025096A02000F20D7 /* FilmLang.xcdatamodeld */; };
+		AE24CB1425096A05000F20D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE24CB1325096A05000F20D7 /* Assets.xcassets */; };
+		AE24CB1725096A06000F20D7 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE24CB1525096A06000F20D7 /* MainMenu.xib */; };
+		AE24CB2A25096DC7000F20D7 /* Canvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE24CB2925096DC7000F20D7 /* Canvas.swift */; };
+		AE8E380C2512B79F0092C187 /* FLText.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8E380B2512B79F0092C187 /* FLText.swift */; };
+		AEC3FBE7251009F200C32210 /* FLRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC3FBE6251009F200C32210 /* FLRect.swift */; };
+		AEC3FBE925100A3A00C32210 /* FLGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC3FBE825100A3A00C32210 /* FLGrid.swift */; };
+		AEC3FBEB25100A5B00C32210 /* FLCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC3FBEA25100A5B00C32210 /* FLCircle.swift */; };
+		AEC3FBED25101C1B00C32210 /* FLPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC3FBEC25101C1B00C32210 /* FLPath.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		AE183D2E250EB4180017805E /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
+		AE24CB0B25096A02000F20D7 /* FilmLang.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilmLang.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE24CB0E25096A02000F20D7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AE24CB1125096A02000F20D7 /* GraphToad.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GraphToad.xcdatamodel; sourceTree = "<group>"; };
+		AE24CB1325096A05000F20D7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AE24CB1625096A06000F20D7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		AE24CB1825096A06000F20D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AE24CB1925096A06000F20D7 /* FilmLang.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FilmLang.entitlements; sourceTree = "<group>"; };
+		AE24CB2925096DC7000F20D7 /* Canvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Canvas.swift; sourceTree = "<group>"; };
+		AE8E380B2512B79F0092C187 /* FLText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLText.swift; sourceTree = "<group>"; };
+		AEC3FBE6251009F200C32210 /* FLRect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLRect.swift; sourceTree = "<group>"; };
+		AEC3FBE825100A3A00C32210 /* FLGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLGrid.swift; sourceTree = "<group>"; };
+		AEC3FBEA25100A5B00C32210 /* FLCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLCircle.swift; sourceTree = "<group>"; };
+		AEC3FBEC25101C1B00C32210 /* FLPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLPath.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AE24CB0825096A02000F20D7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AE24CB0225096A02000F20D7 = {
+			isa = PBXGroup;
+			children = (
+				AE24CB0D25096A02000F20D7 /* FilmLang */,
+				AE24CB0C25096A02000F20D7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AE24CB0C25096A02000F20D7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AE24CB0B25096A02000F20D7 /* FilmLang.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AE24CB0D25096A02000F20D7 /* FilmLang */ = {
+			isa = PBXGroup;
+			children = (
+				AE24CB0E25096A02000F20D7 /* AppDelegate.swift */,
+				AE24CB1325096A05000F20D7 /* Assets.xcassets */,
+				AE24CB1525096A06000F20D7 /* MainMenu.xib */,
+				AE24CB1825096A06000F20D7 /* Info.plist */,
+				AE24CB1025096A02000F20D7 /* FilmLang.xcdatamodeld */,
+				AE24CB2925096DC7000F20D7 /* Canvas.swift */,
+				AE183D2E250EB4180017805E /* Block.swift */,
+				AE24CB1925096A06000F20D7 /* FilmLang.entitlements */,
+				AEC3FBEC25101C1B00C32210 /* FLPath.swift */,
+				AEC3FBEA25100A5B00C32210 /* FLCircle.swift */,
+				AEC3FBE825100A3A00C32210 /* FLGrid.swift */,
+				AE8E380B2512B79F0092C187 /* FLText.swift */,
+				AEC3FBE6251009F200C32210 /* FLRect.swift */,
+			);
+			path = FilmLang;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AE24CB0A25096A02000F20D7 /* FilmLang */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AE24CB1C25096A06000F20D7 /* Build configuration list for PBXNativeTarget "FilmLang" */;
+			buildPhases = (
+				AE24CB0725096A02000F20D7 /* Sources */,
+				AE24CB0825096A02000F20D7 /* Frameworks */,
+				AE24CB0925096A02000F20D7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FilmLang;
+			productName = GraphToad;
+			productReference = AE24CB0B25096A02000F20D7 /* FilmLang.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AE24CB0325096A02000F20D7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1170;
+				LastUpgradeCheck = 1170;
+				ORGANIZATIONNAME = "Robert Dodson";
+				TargetAttributes = {
+					AE24CB0A25096A02000F20D7 = {
+						CreatedOnToolsVersion = 11.7;
+					};
+				};
+			};
+			buildConfigurationList = AE24CB0625096A02000F20D7 /* Build configuration list for PBXProject "FilmLang" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AE24CB0225096A02000F20D7;
+			productRefGroup = AE24CB0C25096A02000F20D7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AE24CB0A25096A02000F20D7 /* FilmLang */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AE24CB0925096A02000F20D7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AE24CB1425096A05000F20D7 /* Assets.xcassets in Resources */,
+				AE24CB1725096A06000F20D7 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AE24CB0725096A02000F20D7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AEC3FBE7251009F200C32210 /* FLRect.swift in Sources */,
+				AE24CB1225096A02000F20D7 /* FilmLang.xcdatamodeld in Sources */,
+				AE8E380C2512B79F0092C187 /* FLText.swift in Sources */,
+				AE24CB0F25096A02000F20D7 /* AppDelegate.swift in Sources */,
+				AE24CB2A25096DC7000F20D7 /* Canvas.swift in Sources */,
+				AEC3FBEB25100A5B00C32210 /* FLCircle.swift in Sources */,
+				AE183D2F250EB4180017805E /* Block.swift in Sources */,
+				AEC3FBED25101C1B00C32210 /* FLPath.swift in Sources */,
+				AEC3FBE925100A3A00C32210 /* FLGrid.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		AE24CB1525096A06000F20D7 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AE24CB1625096A06000F20D7 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		AE24CB1A25096A06000F20D7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		AE24CB1B25096A06000F20D7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		AE24CB1D25096A06000F20D7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FilmLang/FilmLang.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = ZYF5X8SV2F;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = FilmLang/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = "Shy-Frog.FilmLang";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		AE24CB1E25096A06000F20D7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = FilmLang/FilmLang.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = ZYF5X8SV2F;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = FilmLang/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = "Shy-Frog.FilmLang";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AE24CB0625096A02000F20D7 /* Build configuration list for PBXProject "FilmLang" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AE24CB1A25096A06000F20D7 /* Debug */,
+				AE24CB1B25096A06000F20D7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AE24CB1C25096A06000F20D7 /* Build configuration list for PBXNativeTarget "FilmLang" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AE24CB1D25096A06000F20D7 /* Debug */,
+				AE24CB1E25096A06000F20D7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		AE24CB1025096A02000F20D7 /* FilmLang.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				AE24CB1125096A02000F20D7 /* GraphToad.xcdatamodel */,
+			);
+			currentVersion = AE24CB1125096A02000F20D7 /* GraphToad.xcdatamodel */;
+			path = FilmLang.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = AE24CB0325096A02000F20D7 /* Project object */;
+}

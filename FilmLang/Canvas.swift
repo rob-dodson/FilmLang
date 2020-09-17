@@ -33,14 +33,15 @@ class Canvas: NSView
         screenBlock.fillGradient = NSGradient(starting: NSColor.init(calibratedRed: 0.0, green: 0.0, blue: 0.0, alpha: 0.0), ending: NSColor.init(calibratedRed: 0.0, green: 0.4, blue: 0.0, alpha: 5.0))!
         
         let title = FLText(name:"title")
-        title.text = "Vision"
-        title.x = screenBlock.width / 2
+        title.text = "Vision Control Station"
+        title.x = 200
         title.y = screenBlock.height - 340
-        title.width = 350
+        title.width = 50
         title.height = 75
         title.size = 40
         title.strokeColor = NSColor.init(calibratedRed: 0.0, green: 0.5, blue: 0.0, alpha: 1.0)
         title.animators.append(Animator(name: "x", amount: 0.1, min: 0, max: 100, type: .Bounce))
+        title.fillGradient = NSGradient(starting: NSColor.black, ending: NSColor.init(calibratedRed: 0.0, green: 0.3, blue: 0.0, alpha: 0.5))!
         
         
         for bb in 1...4

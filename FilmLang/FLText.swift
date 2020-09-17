@@ -25,39 +25,41 @@ class FLText : Block
         var oy : Double
         (ox,oy) = offset()
         
-        //// Text Drawing
-        let textRect = NSRect(x: x + ox, y: y + oy, width: width, height: height)
+        let pad : CGFloat = 5.0
         
-        // debug
-        let rectanglePath = NSBezierPath(roundedRect: textRect, xRadius: raduis, yRadius: raduis)
-        strokeColor.setStroke()
-        rectanglePath.lineWidth = 2
-        rectanglePath.stroke()
-        
-        
-        let textTextContent = "Hello, World!"
         let textStyle = NSMutableParagraphStyle()
         textStyle.alignment = .left
         let textFontAttributes = [
-            .font: NSFont.systemFont(ofSize: size),
+            .font: NSFont(name: "Futura", size: size)!,
             .foregroundColor: strokeColor,
             .paragraphStyle: textStyle,
         ] as [NSAttributedString.Key: Any]
 
-        let textTextHeight: CGFloat = textTextContent.boundingRect(with: NSSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes).height
-        let textTextRect: NSRect = NSRect(x: textRect.minX, y: textRect.minY + (textRect.height - textTextHeight) / 2, width: textRect.width, height: textTextHeight)
         
-        // debug
-        let rectanglePath2 = NSBezierPath(roundedRect: textTextRect, xRadius: raduis, yRadius: raduis)
-        NSColor.red.setStroke()
-        rectanglePath2.lineWidth = 2
-        rectanglePath2.stroke()
+        let boundingRect = text.boundingRect(with: NSSize(width: CGFloat.infinity,
+                                                          height: CGFloat.infinity),
+                                             options: .usesLineFragmentOrigin,
+                                             attributes: textFontAttributes)
         
+        let textTextRect: NSRect = NSRect(x: CGFloat(x + ox) - pad,
+                                          y: CGFloat(y + oy) + (boundingRect.height / 2) - pad,
+                                          width: boundingRect.width + (pad * 2),
+                                          height: boundingRect.height + (pad * 2))
+
+        let rectanglePath = NSBezierPath(roundedRect: textTextRect, xRadius: raduis, yRadius: raduis)
+        strokeColor.setStroke()
+        rectanglePath.lineWidth = 2
+        rectanglePath.stroke()
+        if fillGradient != nil
+        {
+            fillGradient?.draw(in: rectanglePath, angle: -90)
+        }
+        else
+        {
+            fillColor.setFill()
+            rectanglePath.fill()
+        }
         
-        NSGraphicsContext.saveGraphicsState()
-        textRect.clip()
-        text.draw(in: textTextRect.offsetBy(dx: 0, dy: 0.5), withAttributes: textFontAttributes)
-        
-        NSGraphicsContext.restoreGraphicsState()
+        text.draw(in: textTextRect.offsetBy(dx: 0 + pad, dy: 0.0 - pad), withAttributes: textFontAttributes)
     }
 }

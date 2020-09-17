@@ -38,9 +38,9 @@ class FLGrid : Block
         {
             fillGradient?.draw(in: rectanglePath, angle: -90)
         }
-        else
+        else if fillColor != nil
         {
-            fillColor.setFill()
+            fillColor!.setFill()
             rectanglePath.fill()
         }
         
@@ -72,11 +72,13 @@ class FLGrid : Block
             bezierPath.stroke()
         }
         
-        strokeColor.setStroke()
-        rectanglePath.lineWidth = strokeWidth
-        rectanglePath.stroke()
-       // rect.clip()
-        
+        if strokeColor != nil
+        {
+            strokeColor!.setStroke()
+            rectanglePath.lineWidth = strokeWidth
+            rectanglePath.stroke()
+           // rect.clip()
+        }
         
         // for debugging
         let rectangleStyle = NSMutableParagraphStyle()

@@ -26,11 +26,18 @@ class FLRect : Block
         let rect = NSRect(x: x + xoffset, y: y + yoffset, width: width, height: height)
         let rectanglePath = NSBezierPath(roundedRect: rect, xRadius: raduis, yRadius: raduis)
 
-        fillColor.setFill()
-        rectanglePath.fill()
-        strokeColor.setStroke()
-        rectanglePath.lineWidth = strokeWidth
-        rectanglePath.stroke()
+        if fillColor != nil
+        {
+            fillColor!.setFill()
+            rectanglePath.fill()
+        }
+        
+        if strokeColor != nil
+        {
+            strokeColor!.setStroke()
+            rectanglePath.lineWidth = strokeWidth
+            rectanglePath.stroke()
+        }
         
         
         // for debugging

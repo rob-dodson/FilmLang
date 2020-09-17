@@ -43,13 +43,15 @@ class Block
     var name: String
     var x : Double = 10.0
     var y : Double = 10.0
-    var fillColor : NSColor = NSColor.darkGray
+    var fillColor : NSColor?
+    var strokeColor : NSColor?
     var animators : [Animator]
     var fillGradient : NSGradient?
     var width : Double = 111.0
     var height : Double = 111.0
     var strokeWidth : CGFloat = 2
-    var strokeColor : NSColor = NSColor.green
+    var rotation : Double = 0.0
+    
     var raduis : CGFloat = 4.0
     
     init(name:String)
@@ -57,6 +59,7 @@ class Block
         self.name = name
         self.children = [Block]()
         self.animators = [Animator]()
+        self.strokeColor = NSColor.green
     }
     
     func animate()
@@ -71,11 +74,15 @@ class Block
             {
                 adjust(val:&y, animator: &animators[index])
             }
-            else if animators[index].name == "fillalpha"
+            else if animators[index].name == "rotation"
             {
-                var alpha = Double(fillColor.alphaComponent)
+                adjust(val:&rotation, animator: &animators[index])
+            }
+            else if animators[index].name == "fillalpha" && fillColor != nil
+            {
+                var alpha = Double(fillColor!.alphaComponent)
                 adjust(val:&alpha, animator: &animators[index])
-                fillColor = fillColor.withAlphaComponent(CGFloat(alpha))
+                fillColor = fillColor!.withAlphaComponent(CGFloat(alpha))
             }
         }
     }

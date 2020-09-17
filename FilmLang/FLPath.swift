@@ -29,9 +29,12 @@ class FLPath : Block
         bezierPath.curve(to: NSPoint(x: ox + rr2, y: oy + 71.5), controlPoint1: NSPoint(x: ox + 200, y: oy + 70.5), controlPoint2: NSPoint(x: ox + 217.5, y: oy + 88.5))
         
         
-        strokeColor.setStroke()
-        bezierPath.lineWidth = CGFloat(arc4random_uniform(4)) //strokeWidth
-        bezierPath.stroke()
+        if strokeColor != nil
+        {
+            strokeColor!.setStroke()
+            bezierPath.lineWidth = CGFloat(arc4random_uniform(4)) //strokeWidth
+            bezierPath.stroke()
+        }
         
         
     }

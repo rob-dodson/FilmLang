@@ -24,25 +24,41 @@ class Canvas: NSView
         super.init(coder: coder)
         
         
-        screenBlock.x = 0
-        screenBlock.y = 0
+        screenBlock.x = 10
+        screenBlock.y = 10
         screenBlock.width = 1000
-        screenBlock.height = 1000
+        screenBlock.height = 700
         screenBlock.xcount = 50
         screenBlock.ycount = 50
         screenBlock.fillGradient = NSGradient(starting: NSColor.init(calibratedRed: 0.0, green: 0.0, blue: 0.0, alpha: 0.0), ending: NSColor.init(calibratedRed: 0.0, green: 0.4, blue: 0.0, alpha: 5.0))!
         
         let title = FLText(name:"title")
-        title.text = "Vision Control Station"
-        title.x = 200
-        title.y = screenBlock.height - 340
-        title.width = 50
-        title.height = 75
+        title.text = "FilmLang Control Station"
+        title.x = screenBlock.width / 2
+        title.y = screenBlock.height - 100
         title.size = 40
         title.strokeColor = NSColor.init(calibratedRed: 0.0, green: 0.5, blue: 0.0, alpha: 1.0)
-        title.animators.append(Animator(name: "x", amount: 0.1, min: 0, max: 100, type: .Bounce))
         title.fillGradient = NSGradient(starting: NSColor.black, ending: NSColor.init(calibratedRed: 0.0, green: 0.3, blue: 0.0, alpha: 0.5))!
         
+        //
+        // axis labels
+        //
+        let xaxislabel = FLText(name:"X Axis")
+        xaxislabel.text = "X Axis"
+        xaxislabel.x = screenBlock.width / 2
+        xaxislabel.y = 10
+        xaxislabel.size = 15
+        xaxislabel.textColor = NSColor.init(calibratedRed: 0.0, green: 0.9, blue: 0.0, alpha: 1.0)
+        xaxislabel.strokeColor = nil
+        
+        let yaxislabel = FLText(name:"Y Axis")
+        yaxislabel.text = "Y Axis"
+        yaxislabel.x = 120
+        yaxislabel.y = 50
+        yaxislabel.size = 15
+        yaxislabel.rotation = 80.0
+        yaxislabel.textColor = NSColor.init(calibratedRed: 0.0, green: 0.9, blue: 0.0, alpha: 1.0)
+        yaxislabel.strokeColor = NSColor.init(calibratedRed: 0.0, green: 0.9, blue: 0.0, alpha: 1.0)
         
         for bb in 1...4
         {
@@ -87,11 +103,6 @@ class Canvas: NSView
             
             screenBlock.addChild(block:gridBlock1);
             
-            
-            //let rr1 = Double(arc4random_uniform(100)) / 100
-           // let rr2 = Double(arc4random_uniform(100))
-            //gridBlock1.animators.append(Animator(name: "x", amount: rr1, min: rr2, max: 102.0, type: .Bounce))
-            
             circle.animators.append(Animator(name: "fillalpha", amount: 0.01, min: 0.1, max: 1.0, type: .Bounce))
             circle.animators.append(Animator(name: "x", amount: 0.2, min: 100, max: 110.0, type: .Bounce))
             
@@ -102,7 +113,12 @@ class Canvas: NSView
             r1.animators.append(Animator(name: "x", amount: 1.0, min: 90, max: 210.0, type: .Bounce))
         }
         
+        //yaxislabel.animators.append(Animator(name: "x", amount: 1.0, min: 90, max: 210.0, type: .Bounce))
+        yaxislabel.animators.append(Animator(name: "rotation", amount: 1.0, min: 2.0, max: 90, type: .Bounce))
+        
         screenBlock.addChild(block: title)
+        screenBlock.addChild(block: xaxislabel)
+        screenBlock.addChild(block: yaxislabel)
         
         timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true)
         { (timer) in
@@ -156,8 +172,6 @@ class Canvas: NSView
     {
         super.draw(dirtyRect)
        
-        
-        NSGraphicsContext.saveGraphicsState()
         
         //
         // background
@@ -224,50 +238,6 @@ class Canvas: NSView
         //
         screenBlock.draw()
         drawChildren(children: screenBlock.children)
-        
-        
-        //
-        // labels
-        //
-        NSGraphicsContext.saveGraphicsState()
-        
-        let textRect = NSRect(x: width / 2, y: originy - 28, width: 75, height: 16)
-        let textTextContent = "X Axis"
-        let textStyle = NSMutableParagraphStyle()
-        textStyle.alignment = .center
-        let textFontAttributes = [
-            .font: NSFont.systemFont(ofSize: NSFont.systemFontSize),
-            .foregroundColor: NSColor.systemPurple,
-            .paragraphStyle: textStyle,
-        ] as [NSAttributedString.Key: Any]
-
-        let textTextHeight: CGFloat = textTextContent.boundingRect(with: NSSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributes).height
-        let textTextRect: NSRect = NSRect(x: textRect.minX, y: textRect.minY + (textRect.height - textTextHeight) / 2, width: textRect.width, height: textTextHeight)
-        textRect.clip()
-        textTextContent.draw(in: textTextRect.offsetBy(dx: 0, dy: 0.5), withAttributes: textFontAttributes)
-       NSGraphicsContext.restoreGraphicsState()
-
-        NSGraphicsContext.saveGraphicsState()
-        let textRecty = NSRect(x: 0, y: 0, width: 75, height: 16)
-        let context = NSGraphicsContext.current!.cgContext
-        context.translateBy(x: CGFloat(originx) - (CGFloat(padding) / 2.0), y: (CGFloat(height) / 2.0) - (textRecty.width / 2))
-        context.rotate(by: 90 * CGFloat.pi/180)
-        
-        let textTextContenty = "Y Axis"
-        let textStyley = NSMutableParagraphStyle()
-        textStyley.alignment = .center
-        let textFontAttributesy = [
-            .font: NSFont.systemFont(ofSize: NSFont.systemFontSize),
-            .foregroundColor: NSColor.systemPurple,
-            .paragraphStyle: textStyley,
-        ] as [NSAttributedString.Key: Any]
-
-        let textTextHeighty: CGFloat = textTextContent.boundingRect(with: NSSize(width: textRect.width, height: CGFloat.infinity), options: .usesLineFragmentOrigin, attributes: textFontAttributesy).height
-        let textTextRecty: NSRect = NSRect(x: textRecty.minX, y: textRecty.minY + (textRecty.height - textTextHeighty) / 2, width: textRect.width, height: textTextHeighty)
-        textRecty.clip()
-        textTextContenty.draw(in: textTextRecty.offsetBy(dx: 0, dy: 0.5), withAttributes: textFontAttributes)
-         
-        NSGraphicsContext.restoreGraphicsState()
         
         
     }

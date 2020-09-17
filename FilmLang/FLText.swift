@@ -13,6 +13,7 @@ class FLText : Block
 {
     var text : String = "???"
     var size : CGFloat = 24.0
+    var textColor = NSColor.green
     
     override func animate()
     {
@@ -25,41 +26,61 @@ class FLText : Block
         var oy : Double
         (ox,oy) = offset()
         
+        let label = "\(text) - \(rotation)"
+        
+        let context = NSGraphicsContext.current!.cgContext
         let pad : CGFloat = 5.0
         
         let textStyle = NSMutableParagraphStyle()
         textStyle.alignment = .left
         let textFontAttributes = [
             .font: NSFont(name: "Futura", size: size)!,
-            .foregroundColor: strokeColor,
+            .foregroundColor: textColor,
             .paragraphStyle: textStyle,
         ] as [NSAttributedString.Key: Any]
 
+        NSGraphicsContext.saveGraphicsState()
         
-        let boundingRect = text.boundingRect(with: NSSize(width: CGFloat.infinity,
+        if rotation != 0.0
+        {
+            context.translateBy(x: 0 - CGFloat(x + ox), y:0 - CGFloat(y + oy))
+            context.rotate(by: CGFloat(rotation) * CGFloat.pi/180)
+        }
+        
+        
+        let boundingRect = label.boundingRect(with: NSSize(width: CGFloat.infinity,
                                                           height: CGFloat.infinity),
                                              options: .usesLineFragmentOrigin,
                                              attributes: textFontAttributes)
         
-        let textTextRect: NSRect = NSRect(x: CGFloat(x + ox) - pad,
+        let textTextRect: NSRect = NSRect(x: CGFloat(x + ox) - pad - (boundingRect.width / 2), // center on X 
                                           y: CGFloat(y + oy) + (boundingRect.height / 2) - pad,
                                           width: boundingRect.width + (pad * 2),
                                           height: boundingRect.height + (pad * 2))
 
+        
         let rectanglePath = NSBezierPath(roundedRect: textTextRect, xRadius: raduis, yRadius: raduis)
-        strokeColor.setStroke()
-        rectanglePath.lineWidth = 2
-        rectanglePath.stroke()
+        
+        
+        if strokeColor != nil
+        {
+            strokeColor!.setStroke()
+            rectanglePath.lineWidth = strokeWidth
+            rectanglePath.stroke()
+        }
+        
         if fillGradient != nil
         {
             fillGradient?.draw(in: rectanglePath, angle: -90)
         }
-        else
+        else if fillColor != nil
         {
-            fillColor.setFill()
+            fillColor!.setFill()
             rectanglePath.fill()
         }
         
-        text.draw(in: textTextRect.offsetBy(dx: 0 + pad, dy: 0.0 - pad), withAttributes: textFontAttributes)
+        label.draw(in: textTextRect.offsetBy(dx: 0 + pad, dy: 0.0 - pad), withAttributes: textFontAttributes)
+        
+        NSGraphicsContext.restoreGraphicsState()
     }
 }

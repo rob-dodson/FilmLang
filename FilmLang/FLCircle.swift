@@ -23,11 +23,19 @@ class FLCircle : Block
         (xoffset,yoffset) = offset()
         
         let ovalPath = NSBezierPath(ovalIn: NSRect(x: x + xoffset, y: y + yoffset, width: width, height: height))
-        fillColor.setFill()
-        ovalPath.fill()
-        strokeColor.setStroke()
-        ovalPath.lineWidth = 1
-        ovalPath.stroke()
+        
+        if fillColor != nil
+        {
+            fillColor!.setFill()
+            ovalPath.fill()
+        }
+        
+        if strokeColor != nil
+        {
+            strokeColor!.setStroke()
+            ovalPath.lineWidth = 1
+            ovalPath.stroke()
+        }
         
         // for debugging
         let rectangleStyle = NSMutableParagraphStyle()

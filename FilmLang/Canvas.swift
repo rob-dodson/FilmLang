@@ -35,12 +35,12 @@ class Canvas: NSView
         let title = FLText(name:"title")
         title.text = "Vision"
         title.x = screenBlock.width / 2
-        title.y = screenBlock.height - 40
-        title.width = 50
-        title.height = 50
-        title.size = 90
+        title.y = screenBlock.height - 340
+        title.width = 350
+        title.height = 75
+        title.size = 40
         title.strokeColor = NSColor.init(calibratedRed: 0.0, green: 0.5, blue: 0.0, alpha: 1.0)
-        
+        title.animators.append(Animator(name: "x", amount: 0.1, min: 0, max: 100, type: .Bounce))
         
         
         for bb in 1...4

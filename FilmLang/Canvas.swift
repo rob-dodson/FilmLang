@@ -53,10 +53,10 @@ class Canvas: NSView
         
         let yaxislabel = FLText(name:"Y Axis")
         yaxislabel.text = "Y Axis"
-        yaxislabel.x = 120
+        yaxislabel.x = 320
         yaxislabel.y = 50
         yaxislabel.size = 15
-        yaxislabel.rotation = 80.0
+        yaxislabel.rotation = 90
         yaxislabel.textColor = NSColor.init(calibratedRed: 0.0, green: 0.9, blue: 0.0, alpha: 1.0)
         yaxislabel.strokeColor = NSColor.init(calibratedRed: 0.0, green: 0.9, blue: 0.0, alpha: 1.0)
         
@@ -96,12 +96,12 @@ class Canvas: NSView
             gridBlock1.fillGradient = NSGradient(starting: NSColor.black, ending: NSColor.init(calibratedRed: 0.0, green: 0.3, blue: 0.0, alpha: 0.5))!
            
             
-            gridBlock1.addChild(block:path1)
-            gridBlock1.addChild(block:r);
-            gridBlock1.addChild(block:r1);
-            gridBlock1.addChild(block:circle)
+           // gridBlock1.addChild(block:path1)
+            //gridBlock1.addChild(block:r);
+           // gridBlock1.addChild(block:r1);
+            //gridBlock1.addChild(block:circle)
             
-            screenBlock.addChild(block:gridBlock1);
+           // screenBlock.addChild(block:gridBlock1);
             
             circle.animators.append(Animator(name: "fillalpha", amount: 0.01, min: 0.1, max: 1.0, type: .Bounce))
             circle.animators.append(Animator(name: "x", amount: 0.2, min: 100, max: 110.0, type: .Bounce))
@@ -114,10 +114,10 @@ class Canvas: NSView
         }
         
         //yaxislabel.animators.append(Animator(name: "x", amount: 1.0, min: 90, max: 210.0, type: .Bounce))
-        yaxislabel.animators.append(Animator(name: "rotation", amount: 1.0, min: 2.0, max: 90, type: .Bounce))
+        yaxislabel.animators.append(Animator(name: "rotation", amount: 1.0, min: 0.0, max: 90, type: .Bounce))
         
-        screenBlock.addChild(block: title)
-        screenBlock.addChild(block: xaxislabel)
+       // screenBlock.addChild(block: title)
+       // screenBlock.addChild(block: xaxislabel)
         screenBlock.addChild(block: yaxislabel)
         
         timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true)
@@ -181,8 +181,14 @@ class Canvas: NSView
         backColor.setFill()
         backPath.fill()
         
+        //
+        // blocks
+        //
+        screenBlock.draw()
+        drawChildren(children: screenBlock.children)
         
         
+        /*
         //
         // settings
         //
@@ -231,13 +237,9 @@ class Canvas: NSView
             yticks.line(to: NSPoint(x: originx + ticklen, y: y))
         }
         yticks.stroke()
+        */
         
-        
-        //
-        // blocks
-        //
-        screenBlock.draw()
-        drawChildren(children: screenBlock.children)
+       
         
         
     }

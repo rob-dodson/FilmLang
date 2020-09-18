@@ -22,14 +22,17 @@ class FLText : Block
     
     override func draw()
     {
+        preDraw()
+        
+        let pad : CGFloat = 5.0
         var ox : Double
         var oy : Double
         (ox,oy) = offset()
         
         let label = "\(text) - \(rotation)"
         
-        let context = NSGraphicsContext.current!.cgContext
-        let pad : CGFloat = 5.0
+       
+      
         
         let textStyle = NSMutableParagraphStyle()
         textStyle.alignment = .left
@@ -39,48 +42,62 @@ class FLText : Block
             .paragraphStyle: textStyle,
         ] as [NSAttributedString.Key: Any]
 
-        NSGraphicsContext.saveGraphicsState()
-        
-        if rotation != 0.0
-        {
-            context.translateBy(x: 0 - CGFloat(x + ox), y:0 - CGFloat(y + oy))
-            context.rotate(by: CGFloat(rotation) * CGFloat.pi/180)
-        }
-        
         
         let boundingRect = label.boundingRect(with: NSSize(width: CGFloat.infinity,
                                                           height: CGFloat.infinity),
                                              options: .usesLineFragmentOrigin,
                                              attributes: textFontAttributes)
         
-        let textTextRect: NSRect = NSRect(x: CGFloat(x + ox) - pad - (boundingRect.width / 2), // center on X 
-                                          y: CGFloat(y + oy) + (boundingRect.height / 2) - pad,
+      
+        
+        let textRect: NSRect = NSRect(x: CGFloat(x + ox) /*- pad - (boundingRect.width / 2)*/, // center on X
+                                          y: CGFloat(y + oy) /*+ (boundingRect.height / 2) - pad*/,
                                           width: boundingRect.width + (pad * 2),
                                           height: boundingRect.height + (pad * 2))
 
         
-        let rectanglePath = NSBezierPath(roundedRect: textTextRect, xRadius: raduis, yRadius: raduis)
+        // orig pos debug
+        var pp = NSBezierPath(roundedRect: textRect, xRadius: 1, yRadius: 1)
+        NSColor.orange.setFill()
+        pp.fill()
+        label.draw(in: textRect.offsetBy(dx: 0 + pad, dy: 0.0 - pad), withAttributes: textFontAttributes)
         
         
+        if rotation > -999
+        {
+            let context = NSGraphicsContext.current!.cgContext
+            
+            context.translateBy(x:textRect.minX, y:textRect.minY)
+            context.rotate(by: CGFloat(rotation) * CGFloat.pi/180)
+        }
+        
+        pp = NSBezierPath(roundedRect: textRect, xRadius: 1, yRadius: 1)
+        NSColor.gray.setFill()
+        pp.fill()
+        label.draw(in: textRect.offsetBy(dx: 0 + pad, dy: 0.0 - pad), withAttributes: textFontAttributes)
+        
+        
+        /*
+        let borderPath = NSBezierPath(roundedRect: textRect, xRadius: raduis, yRadius: raduis)
         if strokeColor != nil
         {
             strokeColor!.setStroke()
-            rectanglePath.lineWidth = strokeWidth
-            rectanglePath.stroke()
+            borderPath.lineWidth = strokeWidth
+            borderPath.stroke()
         }
         
         if fillGradient != nil
         {
-            fillGradient?.draw(in: rectanglePath, angle: -90)
+            fillGradient!.draw(in: borderPath, angle: gradientAngle)
         }
         else if fillColor != nil
         {
             fillColor!.setFill()
-            rectanglePath.fill()
+            borderPath.fill()
         }
         
-        label.draw(in: textTextRect.offsetBy(dx: 0 + pad, dy: 0.0 - pad), withAttributes: textFontAttributes)
-        
-        NSGraphicsContext.restoreGraphicsState()
+        label.draw(in: textRect.offsetBy(dx: 0 + pad, dy: 0.0 - pad), withAttributes: textFontAttributes)
+        */
+        postDraw(rect:nil)
     }
 }

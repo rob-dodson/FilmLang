@@ -18,6 +18,9 @@ class FLCircle : Block
     
     override func draw()
     {
+        preDraw()
+        
+        
         var xoffset : Double
         var yoffset : Double
         (xoffset,yoffset) = offset()
@@ -37,16 +40,8 @@ class FLCircle : Block
             ovalPath.stroke()
         }
         
-        // for debugging
-        let rectangleStyle = NSMutableParagraphStyle()
-        rectangleStyle.alignment = .center
-        let rectangleFontAttributes = [
-            .font: NSFont(name: "Futura", size: 12)!,
-            .foregroundColor: NSColor.white,
-            .paragraphStyle: rectangleStyle,
-        ] as [NSAttributedString.Key: Any]
-        name.draw(in: ovalPath.bounds.offsetBy(dx: 0, dy: -4), withAttributes: rectangleFontAttributes)
         
+        postDraw(rect:NSRect(x: x + xoffset, y: y + yoffset, width: width, height: height))
     }
 
 }

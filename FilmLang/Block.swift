@@ -50,9 +50,11 @@ class Block
     var width : Double = 111.0
     var height : Double = 111.0
     var strokeWidth : CGFloat = 2
-    var rotation : Double = 0.0
-    
+    var rotation : Double = -999
     var raduis : CGFloat = 4.0
+    var debug = true
+    var gradientAngle : CGFloat = -90
+    
     
     init(name:String)
     {
@@ -142,6 +144,32 @@ class Block
     // must override
     //
     func draw() {}
+    
+    //
+    // must call
+    func preDraw()
+    {
+        NSGraphicsContext.saveGraphicsState()
+    }
+    
+    func postDraw(rect:NSRect?)
+    {
+        if debug == true && rect != nil
+        {
+            let rectangleStyle = NSMutableParagraphStyle()
+            rectangleStyle.alignment = .center
+            let rectangleFontAttributes = [
+                .font: NSFont(name: "Futura", size: 12)!,
+                .foregroundColor: NSColor.white,
+                .paragraphStyle: rectangleStyle,
+            ] as [NSAttributedString.Key: Any]
+            name.draw(in: rect!.offsetBy(dx: 0, dy: -4), withAttributes: rectangleFontAttributes)
+        }
+        
+        NSGraphicsContext.restoreGraphicsState()
+    }
+    
+   
     
 }
 

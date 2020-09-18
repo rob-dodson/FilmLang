@@ -28,6 +28,15 @@ class FLRect : Block
         let rect = NSRect(x: x + xoffset, y: y + yoffset, width: width, height: height)
         let rectanglePath = NSBezierPath(roundedRect: rect, xRadius: raduis, yRadius: raduis)
 
+        if rotation > -999
+        {
+            let context = NSGraphicsContext.current!.cgContext
+            
+            context.translateBy(x:rect.origin.x, y:rect.origin.y)
+            context.rotate(by: CGFloat(rotation) * CGFloat.pi/180)
+            context.translateBy(x:-rect.origin.x, y:-rect.origin.y)
+        }
+        
         if fillColor != nil
         {
             fillColor!.setFill()
@@ -39,6 +48,11 @@ class FLRect : Block
             strokeColor!.setStroke()
             rectanglePath.lineWidth = strokeWidth
             rectanglePath.stroke()
+        }
+        
+        if clip == true
+        {
+            rect.clip()
         }
         
         postDraw(rect: rect)

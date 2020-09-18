@@ -54,6 +54,7 @@ class Block
     var raduis : CGFloat = 4.0
     var debug = true
     var gradientAngle : CGFloat = -90
+    var clip : Bool = false
     
     
     init(name:String)
@@ -144,9 +145,11 @@ class Block
     // must override
     //
     func draw() {}
+   
     
     //
     // must call
+    //
     func preDraw()
     {
         NSGraphicsContext.saveGraphicsState()
@@ -164,6 +167,11 @@ class Block
                 .paragraphStyle: rectangleStyle,
             ] as [NSAttributedString.Key: Any]
             name.draw(in: rect!.offsetBy(dx: 0, dy: -4), withAttributes: rectangleFontAttributes)
+        }
+        
+        for block in children
+        {
+            block.draw()
         }
         
         NSGraphicsContext.restoreGraphicsState()

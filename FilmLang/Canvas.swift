@@ -53,8 +53,8 @@ class Canvas: NSView
         
         let yaxislabel = FLText(name:"Y Axis")
         yaxislabel.text = "Y Axis"
-        yaxislabel.x = 320
-        yaxislabel.y = 50
+        yaxislabel.x = 60
+        yaxislabel.y = screenBlock.height / 2
         yaxislabel.size = 15
         yaxislabel.rotation = 90
         yaxislabel.textColor = NSColor.init(calibratedRed: 0.0, green: 0.9, blue: 0.0, alpha: 1.0)
@@ -74,7 +74,7 @@ class Canvas: NSView
             let r1 = FLRect(name:"R1")
             r1.fillColor = NSColor(red: 0.3, green: 0.2, blue: 0.4, alpha: 0.6)
             r1.strokeColor = NSColor(red: 0.3, green: 0.2, blue: 0.6, alpha: 0.8)
-            r1.x = 100
+            r1.x = 400
             r1.y = 60
             r1.width = 20
             r1.height = 20
@@ -93,15 +93,16 @@ class Canvas: NSView
             gridBlock1.y = 110 * Double(bb)
             gridBlock1.width = 400
             gridBlock1.height = 100
+            gridBlock1.clip = true
             gridBlock1.fillGradient = NSGradient(starting: NSColor.black, ending: NSColor.init(calibratedRed: 0.0, green: 0.3, blue: 0.0, alpha: 0.5))!
            
             
-           // gridBlock1.addChild(block:path1)
-            //gridBlock1.addChild(block:r);
-           // gridBlock1.addChild(block:r1);
-            //gridBlock1.addChild(block:circle)
+            gridBlock1.addChild(block:path1)
+            gridBlock1.addChild(block:r);
+            gridBlock1.addChild(block:r1);
+            gridBlock1.addChild(block:circle)
             
-           // screenBlock.addChild(block:gridBlock1);
+            screenBlock.addChild(block:gridBlock1);
             
             circle.animators.append(Animator(name: "fillalpha", amount: 0.01, min: 0.1, max: 1.0, type: .Bounce))
             circle.animators.append(Animator(name: "x", amount: 0.2, min: 100, max: 110.0, type: .Bounce))
@@ -110,15 +111,16 @@ class Canvas: NSView
             r.animators.append(Animator(name: "x", amount: 0.1, min: 10, max: 20.0, type: .Bounce))
             
             r1.animators.append(Animator(name: "fillalpha", amount: 0.01, min: 0.1, max: 1.0, type: .Bounce))
-            r1.animators.append(Animator(name: "x", amount: 1.0, min: 90, max: 210.0, type: .Bounce))
+           // r1.animators.append(Animator(name: "x", amount: 1.0, min: 90, max: 210.0, type: .Bounce))
+            r1.animators.append(Animator(name: "rotation", amount: 1.0, min: 0.0, max: 360, type: .Bounce))
         }
         
         //yaxislabel.animators.append(Animator(name: "x", amount: 1.0, min: 90, max: 210.0, type: .Bounce))
         yaxislabel.animators.append(Animator(name: "rotation", amount: 1.0, min: 0.0, max: 90, type: .Bounce))
         
-       // screenBlock.addChild(block: title)
-       // screenBlock.addChild(block: xaxislabel)
-        screenBlock.addChild(block: yaxislabel)
+       screenBlock.addChild(block: title)
+       screenBlock.addChild(block: xaxislabel)
+       screenBlock.addChild(block: yaxislabel)
         
         timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true)
         { (timer) in
@@ -141,11 +143,6 @@ class Canvas: NSView
         for block in children
         {
             block.draw()
-            
-            if block.children.count > 0
-            {
-                drawChildren(children: block.children)
-            }
         }
     }
     

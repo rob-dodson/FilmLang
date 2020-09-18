@@ -29,10 +29,6 @@ class FLText : Block
         var oy : Double
         (ox,oy) = offset()
         
-        let label = "\(text) - \(Int(rotation))"
-        
-       
-      
         
         let textStyle = NSMutableParagraphStyle()
         textStyle.alignment = .left
@@ -43,7 +39,7 @@ class FLText : Block
         ] as [NSAttributedString.Key: Any]
 
         
-        let boundingRect = label.boundingRect(with: NSSize(width: CGFloat.infinity,
+        let boundingRect = text.boundingRect(with: NSSize(width: CGFloat.infinity,
                                                           height: CGFloat.infinity),
                                              options: .usesLineFragmentOrigin,
                                              attributes: textFontAttributes)
@@ -85,7 +81,7 @@ class FLText : Block
             borderPath.fill()
         }
         
-        label.draw(in: textRect.offsetBy(dx: 0 + pad, dy: 0.0 - pad), withAttributes: textFontAttributes)
+        text.draw(in: textRect.offsetBy(dx: 0 + pad, dy: 0.0 - pad), withAttributes: textFontAttributes)
 
         
         postDraw(rect:nil)

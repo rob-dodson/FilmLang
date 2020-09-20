@@ -28,8 +28,9 @@ class Canvas: NSView
         screenBlock.y = 10
         screenBlock.width = 1000
         screenBlock.height = 700
-        screenBlock.xcount = 50
-        screenBlock.ycount = 50
+        screenBlock.xspacing = 10
+        screenBlock.yspacing = 10
+        screenBlock.gridColor = NSColor.gray
         screenBlock.fillGradient = NSGradient(starting: NSColor.init(calibratedRed: 0.0, green: 0.0, blue: 0.0, alpha: 0.0), ending: NSColor.init(calibratedRed: 0.0, green: 0.4, blue: 0.0, alpha: 5.0))!
         
         let title = FLText(name:"title")
@@ -124,6 +125,9 @@ class Canvas: NSView
         
         timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true)
         { (timer) in
+            
+            self.screenBlock.width = Double(self.frame.width) - 20
+            self.screenBlock.height = Double(self.frame.height) - 20
             
             if self.screenBlock.animators.count > 0
             {

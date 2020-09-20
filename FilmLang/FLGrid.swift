@@ -13,10 +13,10 @@ import Cocoa
 class FLGrid : Block
 {
     
-    var ycount = 10
-    var xcount = 10
-    
-
+    var xspacing = 10
+    var yspacing = 10
+    var gridColor = NSColor.green
+    var gridStrokeWidth : CGFloat = 0.5
     
     override func animate()
     {
@@ -27,7 +27,6 @@ class FLGrid : Block
     override func draw()
     {
         preDraw()
-        
         
         var xoffset : Double
         var yoffset : Double
@@ -47,33 +46,38 @@ class FLGrid : Block
             rectanglePath.fill()
         }
         
-        for yy in 1...ycount - 1
-        {
-            let bezierPath = NSBezierPath()
-            let y = CGFloat((Int(height) / ycount) * yy)
-            
-            bezierPath.move(to: NSPoint(x: rect.origin.x, y: rect.origin.y + y))
-            bezierPath.line(to: NSPoint(x: rect.origin.x + rect.width, y: rect.origin.y + y))
-            
-            NSColor.green.setStroke()
-            bezierPath.lineWidth = 0.5
-            bezierPath.setLineDash([1, 2, 1 , 4], count: 4, phase: 0)
-            bezierPath.stroke()
-        }
         
-        for xx in 1...xcount - 1
+        let xaxiscount = Int(width / Double(xspacing))
+        for xx in 1...xaxiscount
         {
+            let xpos = rect.origin.x + CGFloat(xspacing * xx)
+            
             let bezierPath = NSBezierPath()
-            let x = CGFloat((Int(width) / xcount) * xx)
+            bezierPath.move(to: NSPoint(x: xpos, y: rect.origin.y))
+            bezierPath.line(to: NSPoint(x: xpos, y: rect.origin.y + rect.height))
             
-            bezierPath.move(to: NSPoint(x: rect.origin.x + x, y: rect.origin.y))
-            bezierPath.line(to: NSPoint(x: rect.origin.x + x, y: rect.origin.y + rect.height))
-            
-            NSColor.green.setStroke()
-            bezierPath.lineWidth = 0.5
+            gridColor.setStroke()
+            bezierPath.lineWidth = gridStrokeWidth
             bezierPath.setLineDash([2, 2], count: 2, phase: 0)
             bezierPath.stroke()
         }
+        
+        let yaxiscount = Int(height / Double(yspacing))
+        for yy in 1...yaxiscount
+        {
+            let ypos = rect.origin.y + CGFloat(yspacing * yy)
+            
+            let bezierPath = NSBezierPath()
+            bezierPath.move(to: NSPoint(x: rect.origin.x, y: ypos))
+            bezierPath.line(to: NSPoint(x: rect.origin.x + rect.width, y: ypos))
+            
+            gridColor.setStroke()
+            bezierPath.lineWidth = gridStrokeWidth
+            bezierPath.setLineDash([2, 2], count: 2, phase: 0)
+            bezierPath.stroke()
+        }
+        
+        
         
         if strokeColor != nil
         {

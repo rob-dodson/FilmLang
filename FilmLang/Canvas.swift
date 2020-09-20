@@ -31,6 +31,7 @@ class Canvas: NSView
         screenBlock.xspacing = 10
         screenBlock.yspacing = 10
         screenBlock.gridColor = NSColor.gray
+        screenBlock.gradientAngle = -50
         screenBlock.fillGradient = NSGradient(starting: NSColor.init(calibratedRed: 0.0, green: 0.0, blue: 0.0, alpha: 0.0), ending: NSColor.init(calibratedRed: 0.0, green: 0.4, blue: 0.0, alpha: 5.0))!
         
         let title = FLText(name:"title")
@@ -96,7 +97,7 @@ class Canvas: NSView
             gridBlock1.height = 100
             gridBlock1.clip = true
             gridBlock1.fillGradient = NSGradient(starting: NSColor.black, ending: NSColor.init(calibratedRed: 0.0, green: 0.3, blue: 0.0, alpha: 0.5))!
-           
+            screenBlock.gradientAngle = 50
             
             gridBlock1.addChild(block:path1)
             gridBlock1.addChild(block:r);
@@ -112,7 +113,6 @@ class Canvas: NSView
             r.animators.append(Animator(name: "x", amount: 0.1, min: 10, max: 20.0, type: .Bounce))
             
             r1.animators.append(Animator(name: "fillalpha", amount: 0.01, min: 0.1, max: 1.0, type: .Bounce))
-           // r1.animators.append(Animator(name: "x", amount: 1.0, min: 90, max: 210.0, type: .Bounce))
             r1.animators.append(Animator(name: "rotation", amount: 1.0, min: 0.0, max: 360, type: .Bounce))
         }
         

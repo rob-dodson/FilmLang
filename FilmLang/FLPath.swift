@@ -24,9 +24,9 @@ class FLPath : Block
         let rr3 = Double(arc4random_uniform(25)) + 162
         
         bezierPath.move(to: NSPoint(x: ox + rr1, y: oy + 27.5))
-        bezierPath.curve(to: NSPoint(x: ox + 85.5, y: oy + 63.5),  controlPoint1: NSPoint(x: ox + 70.5, y: oy + 66.5),  controlPoint2: NSPoint(x: ox + 52.5, y: oy + 81.5))
-        bezierPath.curve(to: NSPoint(x: ox + rr3, y: oy + 34.5), controlPoint1: NSPoint(x: ox + 118.5, y: oy + 45.5), controlPoint2: NSPoint(x: ox + 123.5, y: oy + -1.5))
-        bezierPath.curve(to: NSPoint(x: ox + rr2, y: oy + 71.5), controlPoint1: NSPoint(x: ox + 200, y: oy + 70.5), controlPoint2: NSPoint(x: ox + 217.5, y: oy + 88.5))
+        bezierPath.curve(to: NSPoint(x: ox + 85.5, y: oy + 63.5), controlPoint1: NSPoint(x: ox + 70.5, y: oy + 66.5),  controlPoint2: NSPoint(x: ox + 52.5, y: oy + 81.5))
+        bezierPath.curve(to: NSPoint(x: ox + rr3, y: oy + 34.5),  controlPoint1: NSPoint(x: ox + 118.5, y: oy + 45.5), controlPoint2: NSPoint(x: ox + 123.5, y: oy + -1.5))
+        bezierPath.curve(to: NSPoint(x: ox + rr2, y: oy + 71.5),  controlPoint1: NSPoint(x: ox + 200, y: oy + 70.5),   controlPoint2: NSPoint(x: ox + 217.5, y: oy + 88.5))
         
         
         if strokeColor != nil

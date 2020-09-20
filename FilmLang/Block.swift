@@ -56,7 +56,6 @@ class Block
     var gradientAngle : CGFloat = -90
     var clip : Bool = false
     
-    
     init(name:String)
     {
         self.name = name

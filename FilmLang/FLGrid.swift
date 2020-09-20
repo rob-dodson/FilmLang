@@ -38,7 +38,7 @@ class FLGrid : Block
 
         if fillGradient != nil
         {
-            fillGradient?.draw(in: rectanglePath, angle: -90)
+            fillGradient?.draw(in: rectanglePath, angle: gradientAngle)
         }
         else if fillColor != nil
         {

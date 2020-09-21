@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AE183D2F250EB4180017805E /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE183D2E250EB4180017805E /* Block.swift */; };
+		AE1E77F825190BED00CFC143 /* FLArc.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1E77F725190BED00CFC143 /* FLArc.swift */; };
 		AE24CB0F25096A02000F20D7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE24CB0E25096A02000F20D7 /* AppDelegate.swift */; };
 		AE24CB1225096A02000F20D7 /* FilmLang.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AE24CB1025096A02000F20D7 /* FilmLang.xcdatamodeld */; };
 		AE24CB1425096A05000F20D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE24CB1325096A05000F20D7 /* Assets.xcassets */; };
@@ -22,6 +23,7 @@
 
 /* Begin PBXFileReference section */
 		AE183D2E250EB4180017805E /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
+		AE1E77F725190BED00CFC143 /* FLArc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLArc.swift; sourceTree = "<group>"; };
 		AE24CB0B25096A02000F20D7 /* FilmLang.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilmLang.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE24CB0E25096A02000F20D7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AE24CB1125096A02000F20D7 /* GraphToad.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GraphToad.xcdatamodel; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 				AE24CB1925096A06000F20D7 /* FilmLang.entitlements */,
 				AEC3FBEC25101C1B00C32210 /* FLPath.swift */,
 				AEC3FBEA25100A5B00C32210 /* FLCircle.swift */,
+				AE1E77F725190BED00CFC143 /* FLArc.swift */,
 				AEC3FBE825100A3A00C32210 /* FLGrid.swift */,
 				AE8E380B2512B79F0092C187 /* FLText.swift */,
 				AEC3FBE6251009F200C32210 /* FLRect.swift */,
@@ -162,6 +165,7 @@
 				AEC3FBEB25100A5B00C32210 /* FLCircle.swift in Sources */,
 				AE183D2F250EB4180017805E /* Block.swift in Sources */,
 				AEC3FBED25101C1B00C32210 /* FLPath.swift in Sources */,
+				AE1E77F825190BED00CFC143 /* FLArc.swift in Sources */,
 				AEC3FBE925100A3A00C32210 /* FLGrid.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

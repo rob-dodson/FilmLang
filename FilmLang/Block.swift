@@ -55,6 +55,7 @@ class Block
     var debug = true
     var gradientAngle : CGFloat = -90
     var clip : Bool = false
+    var radius : Double = 10.0
     
     init(name:String)
     {
@@ -79,6 +80,10 @@ class Block
             else if animators[index].name == "rotation"
             {
                 adjust(val:&rotation, animator: &animators[index])
+            }
+            else if animators[index].name == "radius"
+            {
+                adjust(val:&radius, animator: &animators[index])
             }
             else if animators[index].name == "fillalpha" && fillColor != nil
             {

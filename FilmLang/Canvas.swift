@@ -62,6 +62,17 @@ class Canvas: NSView
         yaxislabel.textColor = NSColor.init(calibratedRed: 0.0, green: 0.9, blue: 0.0, alpha: 1.0)
         yaxislabel.strokeColor = NSColor.init(calibratedRed: 0.0, green: 0.9, blue: 0.0, alpha: 1.0)
         
+        let arc = FLArc(name:"Arc1")
+        arc.x = 400
+        arc.y = 400
+        arc.radius = 100
+        arc.startAngle = 0
+        arc.endAngle = 90
+        arc.strokeWidth = 10
+        arc.strokeColor = NSColor.init(calibratedRed: 0.0, green: 0.9, blue: 0.0, alpha: 0.8)
+        
+        
+        
         for bb in 1...4
         {
             let gridBlock1 = FLGrid(name:"Grid \(bb)")
@@ -119,9 +130,15 @@ class Canvas: NSView
         //yaxislabel.animators.append(Animator(name: "x", amount: 1.0, min: 90, max: 210.0, type: .Bounce))
         yaxislabel.animators.append(Animator(name: "rotation", amount: 1.0, min: 0.0, max: 90, type: .Bounce))
         
-       screenBlock.addChild(block: title)
-       screenBlock.addChild(block: xaxislabel)
-       screenBlock.addChild(block: yaxislabel)
+        arc.animators.append(Animator(name: "radius", amount: 10, min: 20, max: 90, type: .Bounce))
+        
+        screenBlock.addChild(block: title)
+        screenBlock.addChild(block: xaxislabel)
+        screenBlock.addChild(block: yaxislabel)
+        screenBlock.addChild(block: arc)
+        
+        
+        
         
         timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true)
         { (timer) in

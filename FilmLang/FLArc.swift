@@ -28,7 +28,6 @@ class FLArc : Block
         var yoffset : Double
         (xoffset,yoffset) = offset()
         
-        let rect = NSRect(x: x + xoffset, y: y + yoffset, width: width, height: height)
         
         let startPoint = NSPoint(x: x + xoffset, y: y - yoffset)
         let arcPath = NSBezierPath()
@@ -48,8 +47,7 @@ class FLArc : Block
             arcPath.stroke()
         }
         
-        
-        postDraw(rect:rect)
+        postDraw(rect:NSRect(x: arcPath.bounds.origin.x,y: arcPath.bounds.origin.y,width: arcPath.bounds.width,height: arcPath.bounds.height))
     }
 
 }

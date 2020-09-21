@@ -62,16 +62,6 @@ class Canvas: NSView
         yaxislabel.textColor = NSColor.init(calibratedRed: 0.0, green: 0.9, blue: 0.0, alpha: 1.0)
         yaxislabel.strokeColor = NSColor.init(calibratedRed: 0.0, green: 0.9, blue: 0.0, alpha: 1.0)
         
-        let arc = FLArc(name:"Arc1")
-        arc.x = 400
-        arc.y = 400
-        arc.radius = 100
-        arc.startAngle = 0
-        arc.endAngle = 90
-        arc.strokeWidth = 10
-        arc.strokeColor = NSColor.init(calibratedRed: 0.0, green: 0.9, blue: 0.0, alpha: 0.8)
-        
-        
         
         for bb in 1...4
         {
@@ -130,12 +120,48 @@ class Canvas: NSView
         //yaxislabel.animators.append(Animator(name: "x", amount: 1.0, min: 90, max: 210.0, type: .Bounce))
         yaxislabel.animators.append(Animator(name: "rotation", amount: 1.0, min: 0.0, max: 90, type: .Bounce))
         
-        arc.animators.append(Animator(name: "radius", amount: 10, min: 20, max: 90, type: .Bounce))
+        for i in 0...3
+        {
+            let arc1 = FLArc(name:"Arc \(i)")
+            arc1.x = 700
+            arc1.y = 400
+            arc1.radius = 100
+            arc1.strokeWidth = 10
+            
+            switch i {
+            case 0:
+                arc1.startAngle = 10
+                arc1.endAngle = 90
+                arc1.strokeColor = NSColor.red
+                
+            case 1:
+                arc1.startAngle = 100
+                arc1.endAngle = 180
+                arc1.strokeColor = NSColor.blue
+                
+            case 2:
+                arc1.startAngle = 190
+                arc1.endAngle = 270
+                arc1.strokeColor = NSColor.green
+            case 3:
+                arc1.startAngle = 280
+                arc1.endAngle = 355
+                arc1.strokeColor = NSColor.orange
+            default:
+                arc1.startAngle = 10
+                arc1.endAngle = 90
+            }
+            
+            screenBlock.addChild(block: arc1)
+        }
+        
+      
+        
         
         screenBlock.addChild(block: title)
         screenBlock.addChild(block: xaxislabel)
         screenBlock.addChild(block: yaxislabel)
-        screenBlock.addChild(block: arc)
+        
         
         
         

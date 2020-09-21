@@ -11,9 +11,7 @@ import Cocoa
 class FLArc : Block
 {
     
-    var startAngle : CGFloat = 0
-    var endAngle : CGFloat = 45
-    
+  
     
     override func animate()
     {
@@ -32,7 +30,7 @@ class FLArc : Block
         let startPoint = NSPoint(x: x + xoffset, y: y - yoffset)
         let arcPath = NSBezierPath()
         arcPath.appendArc(withCenter: startPoint, radius: CGFloat(radius),
-                          startAngle: startAngle, endAngle: endAngle)
+                          startAngle: CGFloat(startAngle), endAngle: CGFloat(endAngle))
         
         if fillColor != nil
         {

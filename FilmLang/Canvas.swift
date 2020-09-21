@@ -132,26 +132,43 @@ class Canvas: NSView
             case 0:
                 arc1.startAngle = 10
                 arc1.endAngle = 90
-                arc1.strokeColor = NSColor.red
+                arc1.strokeColor = NSColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.3)
+                arc1.strokeWidth = 10
+                arc1.radius = 100
+                arc1.animators.append(Animator(name: "startangle", amount: 1, min: 10, max: 30, type: .Bounce))
+                arc1.animators.append(Animator(name: "endangle", amount: 2, min: 70, max: 90, type: .Bounce))
                 
             case 1:
                 arc1.startAngle = 100
                 arc1.endAngle = 180
-                arc1.strokeColor = NSColor.blue
+                arc1.strokeColor = NSColor(red: 0.0, green: 1.0, blue: 0.0, alpha: 0.3)
+                arc1.strokeWidth = 10
+                arc1.radius = 100
+                arc1.animators.append(Animator(name: "startangle", amount: 1, min: 100, max: 130, type: .Bounce))
+                arc1.animators.append(Animator(name: "endangle", amount: 1, min: 120, max: 180, type: .Bounce))
                 
             case 2:
-                arc1.startAngle = 190
-                arc1.endAngle = 270
-                arc1.strokeColor = NSColor.green
+                arc1.startAngle = 100
+                arc1.endAngle = 180
+                arc1.strokeColor = NSColor(red: 0.0, green: 1.0, blue: 0.0, alpha: 0.3)
+                arc1.strokeWidth = 5
+                arc1.radius = 100
+                arc1.animators.append(Animator(name: "startangle", amount: 1, min: 100, max: 130, type: .Bounce))
+                arc1.animators.append(Animator(name: "endangle", amount: 1, min: 120, max: 180, type: .Bounce))
+                arc1.radius = 80
+                
             case 3:
                 arc1.startAngle = 280
                 arc1.endAngle = 355
                 arc1.strokeColor = NSColor.orange
+                arc1.strokeWidth = 1
+                arc1.radius = 90
             default:
                 arc1.startAngle = 10
                 arc1.endAngle = 90
             }
-            
+            arc1.animators.append(Animator(name: "radius", amount: 1, min: 90, max: 120, type: .Bounce))
+           
             screenBlock.addChild(block: arc1)
         }
         

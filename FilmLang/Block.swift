@@ -10,17 +10,18 @@ import Foundation
 import Cocoa
 
 
+
 struct Animator
 {
-    let name : String
+    let val : AnimatorVal
     var amount : Double
     let min : Double
     let max : Double
     let type : AnimatorType
     
-    internal init(name: String, amount: Double, min: Double, max: Double, type: Animator.AnimatorType)
+    internal init(val: AnimatorVal, amount: Double, min: Double, max: Double, type: Animator.AnimatorType)
     {
-        self.name = name
+        self.val = val
         self.amount = amount
         self.min = min
         self.max = max
@@ -32,6 +33,17 @@ struct Animator
         case Inc
         case Dec
         case Bounce
+    }
+    
+    enum AnimatorVal
+    {
+        case x
+        case y
+        case rotation
+        case radius
+        case startangle
+        case endangle
+        case fillalpha
     }
 }
     
@@ -52,7 +64,7 @@ class Block
     var strokeWidth : CGFloat = 2
     var rotation : Double = -999
     var raduis : CGFloat = 4.0
-    var debug = true
+    var debug = false
     var gradientAngle : CGFloat = -90
     var clip : Bool = false
     var radius : Double = 10.0
@@ -68,43 +80,35 @@ class Block
         self.strokeColor = NSColor.green
     }
     
+     
+   
+    
+    
     func animate()
     {
         for index in 0..<animators.count
         {
-            if animators[index].name == "x"
+            switch animators[index].val
             {
+            case .x:
                 adjust(val:&x, animator: &animators[index])
-            }
-            else if animators[index].name == "y"
-            {
+            case.y:
                 adjust(val:&y, animator: &animators[index])
-            }
-            else if animators[index].name == "rotation"
-            {
+            case .rotation:
                 adjust(val:&rotation, animator: &animators[index])
-            }
-            else if animators[index].name == "radius"
-            {
+            case .radius:
                 adjust(val:&radius, animator: &animators[index])
-            }
-            else if animators[index].name == "radius"
-            {
-                adjust(val:&radius, animator: &animators[index])
-            }
-            else if animators[index].name == "startangle"
-            {
+            case .startangle:
                 adjust(val:&startAngle, animator: &animators[index])
-            }
-            else if animators[index].name == "endangle"
-            {
+            case .endangle:
                 adjust(val:&endAngle, animator: &animators[index])
-            }
-            else if animators[index].name == "fillalpha" && fillColor != nil
-            {
-                var alpha = Double(fillColor!.alphaComponent)
-                adjust(val:&alpha, animator: &animators[index])
-                fillColor = fillColor!.withAlphaComponent(CGFloat(alpha))
+            case .fillalpha:
+                if fillColor != nil
+                {
+                    var alpha = Double(fillColor!.alphaComponent)
+                    adjust(val:&alpha, animator: &animators[index])
+                    fillColor = fillColor!.withAlphaComponent(CGFloat(alpha))
+                }
             }
         }
     }
@@ -195,9 +199,6 @@ class Block
         
         NSGraphicsContext.restoreGraphicsState()
     }
-    
-   
-    
 }
 
 

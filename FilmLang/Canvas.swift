@@ -32,6 +32,7 @@ class Canvas: NSView
         screenBlock.yspacing = 10
         screenBlock.gridColor = NSColor.gray
         screenBlock.gradientAngle = -50
+        screenBlock.clip = true
         screenBlock.fillGradient = NSGradient(starting: NSColor.init(calibratedRed: 0.0, green: 0.0, blue: 0.0, alpha: 0.0), ending: NSColor.init(calibratedRed: 0.0, green: 0.4, blue: 0.0, alpha: 5.0))!
         
         let title = FLText(name:"title")
@@ -171,14 +172,10 @@ class Canvas: NSView
            
             screenBlock.addChild(block: arc1)
         }
-        
       
-        
-        
         screenBlock.addChild(block: title)
         screenBlock.addChild(block: xaxislabel)
         screenBlock.addChild(block: yaxislabel)
-        
         
         
         
@@ -246,7 +243,6 @@ class Canvas: NSView
         // blocks
         //
         screenBlock.draw()
-        drawChildren(children: screenBlock.children)
         
         
         /*

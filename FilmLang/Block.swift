@@ -50,27 +50,27 @@ struct Animator
 
 class Block
 {
-    var parent : Block?
-    var children : [Block]
-    var name: String
-    var x : Double = 10.0
-    var y : Double = 10.0
-    var fillColor : NSColor?
-    var strokeColor : NSColor?
-    var animators : [Animator]
-    var fillGradient : NSGradient?
-    var width : Double = 111.0
-    var height : Double = 111.0
-    var strokeWidth : CGFloat = 2
-    var rotation : Double = -999
-    var raduis : CGFloat = 4.0
-    var debug = false
+    var parent        : Block?
+    var children      : [Block]
+    var name          : String
+    var x             : Double = 10.0
+    var y             : Double = 10.0
+    var fillColor     : NSColor?
+    var strokeColor   : NSColor?
+    var animators     : [Animator]
+    var fillGradient  : NSGradient?
+    var width         : Double = 111.0
+    var height        : Double = 111.0
+    var strokeWidth   : CGFloat = 2
+    var rotation      : Double = -999
+    var raduis        : CGFloat = 4.0
+    var debug         : Bool = false
     var gradientAngle : CGFloat = -90
-    var clip : Bool = false
-    var radius : Double = 10.0
-    var startAngle : Double = 0
-    var endAngle : Double = 45
-    
+    var clip          : Bool = false
+    var radius        : Double = 10.0
+    var startAngle    : Double = 0
+    var endAngle      : Double = 45
+       
     
     init(name:String)
     {
@@ -79,9 +79,6 @@ class Block
         self.animators = [Animator]()
         self.strokeColor = NSColor.green
     }
-    
-     
-   
     
     
     func animate()
@@ -165,13 +162,13 @@ class Block
     
     
     //
-    // must override
+    // child must override
     //
     func draw() {}
    
     
     //
-    // must call
+    // must be called from child's draw()
     //
     func preDraw()
     {

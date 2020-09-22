@@ -78,7 +78,6 @@ class FLGrid : Block
         }
         
         
-        
         if strokeColor != nil
         {
             strokeColor!.setStroke()

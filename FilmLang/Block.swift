@@ -11,21 +11,23 @@ import Cocoa
 
 
 
-struct Animator
+class Animator
 {
-    let val : AnimatorVal
+    var val : AnimatorVal
     var amount : CGFloat
-    let min : CGFloat
-    let max : CGFloat
-    let type : AnimatorType
+    var min : CGFloat
+    var max : CGFloat
+    var type : AnimatorType
+    var windowChanged   : ((Animator) -> Void)?
     
-    internal init(val: AnimatorVal, amount: CGFloat, min: CGFloat, max: CGFloat, type: Animator.AnimatorType)
+    internal init(val: AnimatorVal, amount: CGFloat, min: CGFloat, max: CGFloat, type: Animator.AnimatorType, windowChanged:((Animator?) -> Void)?)
     {
         self.val = val
         self.amount = amount
         self.min = min
         self.max = max
         self.type = type
+        self.windowChanged = windowChanged
     }
     
     enum AnimatorType
@@ -71,7 +73,7 @@ class Block
     var startAngle    : CGFloat = 0
     var endAngle      : CGFloat = 45
     var view          : NSView?
-    var updateSizes   : ((Block) -> Void)?
+    var windowChanged   : ((Block) -> Void)?
     
     
     init(name:String, view:NSView?)
@@ -89,6 +91,11 @@ class Block
     {
         for index in 0..<animators.count
         {
+            if let winchange = animators[index].windowChanged
+            {
+                winchange(animators[index])
+            }
+            
             switch animators[index].val
             {
             case .x:
@@ -190,9 +197,9 @@ class Block
     {
         NSGraphicsContext.saveGraphicsState()
         
-        if let updater = updateSizes
+        if let winchange = windowChanged
         {
-            updater(self)
+            winchange(self)
         }
     }
     

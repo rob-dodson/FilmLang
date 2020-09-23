@@ -36,7 +36,7 @@ class Canvas: NSView
         screenBlock.clip = true
         screenBlock.fitToView = true
         screenBlock.fillGradient = NSGradient(starting: NSColor.init(calibratedRed: 0.0, green: 0.0, blue: 0.0, alpha: 0.0), ending: NSColor.init(calibratedRed: 0.0, green: 0.4, blue: 0.0, alpha: 5.0))!
-        screenBlock.updateSizes =
+        screenBlock.windowChanged =
         {(block) -> Void in
             block.width = self.frame.width
             block.height = self.frame.height
@@ -49,10 +49,10 @@ class Canvas: NSView
         title.size = 40
         title.strokeColor = NSColor.init(calibratedRed: 0.0, green: 0.5, blue: 0.0, alpha: 1.0)
         title.fillGradient = NSGradient(starting: NSColor.black, ending: NSColor.init(calibratedRed: 0.0, green: 0.3, blue: 0.0, alpha: 0.5))!
-        screenBlock.updateSizes =
+        title.windowChanged =
         {(block) -> Void in
-            title.x = self.frame.width / 2
-            title.y = self.frame.height - 120
+            block.x = self.frame.width / 2
+           block.y = self.frame.height - 120
         }
         
         //
@@ -65,7 +65,7 @@ class Canvas: NSView
         xaxislabel.size = 55
         xaxislabel.textColor = NSColor.init(calibratedRed: 0.0, green: 0.9, blue: 0.0, alpha: 1.0)
         xaxislabel.strokeColor = nil
-        xaxislabel.animators.append(Animator(val: .x, amount: 1, min: 10, max:screenBlock.width, type: .Inc))
+        xaxislabel.animators.append(Animator(val: .x, amount: 1, min: 10, max:screenBlock.width, type: .Inc, windowChanged: {(animator) -> Void in animator?.max = self.frame.width }))
         
         let yaxislabel = FLText(name:"Y Axis",view:self)
         yaxislabel.text = "Y Axis"
@@ -123,18 +123,18 @@ class Canvas: NSView
             
             screenBlock.addChild(block:gridBlock1);
             
-            circle.animators.append(Animator(val: .fillalpha, amount: 0.01, min: 0.1, max: 1.0, type: .Bounce))
-            circle.animators.append(Animator(val: .x, amount: 0.2, min: 100, max: 110.0, type: .Bounce))
+            circle.animators.append(Animator(val: .fillalpha, amount: 0.01, min: 0.1, max: 1.0, type: .Bounce, windowChanged:nil))
+            circle.animators.append(Animator(val: .x, amount: 0.2, min: 100, max: 110.0, type: .Bounce, windowChanged:nil))
             
-            r.animators.append(Animator(val: .fillalpha, amount: 0.01, min: 0.1, max: 1.0, type: .Bounce))
-            r.animators.append(Animator(val: .x, amount: 0.1, min: 10, max: 20.0, type: .Bounce))
+            r.animators.append(Animator(val: .fillalpha, amount: 0.01, min: 0.1, max: 1.0, type: .Bounce, windowChanged:nil))
+            r.animators.append(Animator(val: .x, amount: 0.1, min: 10, max: 20.0, type: .Bounce, windowChanged:nil))
             
-            r1.animators.append(Animator(val: .fillalpha, amount: 0.01, min: 0.1, max: 1.0, type: .Bounce))
-            r1.animators.append(Animator(val: .rotation, amount: 1.0, min: 0.0, max: 360, type: .Bounce))
+            r1.animators.append(Animator(val: .fillalpha, amount: 0.01, min: 0.1, max: 1.0, type: .Bounce, windowChanged:nil))
+            r1.animators.append(Animator(val: .rotation, amount: 1.0, min: 0.0, max: 360, type: .Bounce, windowChanged:nil))
         }
         
         //yaxislabel.animators.append(Animator(val: "x", amount: 1.0, min: 90, max: 210.0, type: .Bounce))
-        yaxislabel.animators.append(Animator(val: .rotation, amount: 1.0, min: 0.0, max: 90, type: .Bounce))
+        yaxislabel.animators.append(Animator(val: .rotation, amount: 1.0, min: 0.0, max: 90, type: .Bounce, windowChanged:nil))
         
         for i in 0...3
         {
@@ -151,8 +151,8 @@ class Canvas: NSView
                 arc1.strokeColor = NSColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.3)
                 arc1.strokeWidth = 10
                 arc1.radius = 100
-                arc1.animators.append(Animator(val: .startangle, amount: 1, min: 10, max: 30, type: .Bounce))
-                arc1.animators.append(Animator(val: .endangle, amount: 2, min: 70, max: 90, type: .Bounce))
+                arc1.animators.append(Animator(val: .startangle, amount: 1, min: 10, max: 30, type: .Bounce, windowChanged:nil))
+                arc1.animators.append(Animator(val: .endangle, amount: 2, min: 70, max: 90, type: .Bounce, windowChanged:nil))
                 
             case 1:
                 arc1.startAngle = 100
@@ -160,16 +160,16 @@ class Canvas: NSView
                 arc1.strokeColor = NSColor(red: 0.0, green: 1.0, blue: 0.0, alpha: 0.3)
                 arc1.strokeWidth = 10
                 arc1.radius = 100
-                arc1.animators.append(Animator(val:.startangle, amount: 1, min: 100, max: 120, type: .Bounce))
-                arc1.animators.append(Animator(val: .endangle, amount: 1, min: 130, max: 180, type: .Bounce))
+                arc1.animators.append(Animator(val:.startangle, amount: 1, min: 100, max: 120, type: .Bounce, windowChanged:nil))
+                arc1.animators.append(Animator(val: .endangle, amount: 1, min: 130, max: 180, type: .Bounce, windowChanged:nil))
                 
             case 2:
                 arc1.startAngle = 100
                 arc1.endAngle = 180
                 arc1.strokeColor = NSColor(red: 0.0, green: 1.0, blue: 0.0, alpha: 0.3)
                 arc1.strokeWidth = 2
-                arc1.animators.append(Animator(val: .startangle, amount: 1, min: 100, max: 120, type: .Bounce))
-                arc1.animators.append(Animator(val: .endangle, amount: 1, min: 130, max: 180, type: .Bounce))
+                arc1.animators.append(Animator(val: .startangle, amount: 1, min: 100, max: 120, type: .Bounce, windowChanged:nil))
+                arc1.animators.append(Animator(val: .endangle, amount: 1, min: 130, max: 180, type: .Bounce, windowChanged:nil))
                 arc1.radius = 90
                 
             case 3:
@@ -178,12 +178,18 @@ class Canvas: NSView
                 arc1.strokeColor = NSColor.orange
                 arc1.strokeWidth = 1
                 arc1.radius = 90
-                arc1.animators.append(Animator(val: .radius, amount: 1, min: 90, max: 94, type: .Bounce))
+                arc1.animators.append(Animator(val: .radius, amount: 1, min: 90, max: 94, type: .Bounce, windowChanged:nil))
             default:
                 arc1.startAngle = 10
                 arc1.endAngle = 90
             }
            
+            arc1.windowChanged =
+            {(block) -> Void in
+                block.x = self.frame.width - 200
+                block.y = self.frame.height - 220
+            }
+            
             screenBlock.addChild(block: arc1)
         }
       

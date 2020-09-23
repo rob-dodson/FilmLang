@@ -22,8 +22,8 @@ class FLRect : Block
     {
         preDraw()
         
-        var xoffset : Double
-        var yoffset : Double
+        var xoffset : CGFloat
+        var yoffset : CGFloat
         (xoffset,yoffset) = offset()
         let rect = NSRect(x: x + xoffset, y: y + yoffset, width: width, height: height)
         let rectanglePath = NSBezierPath(roundedRect: rect, xRadius: raduis, yRadius: raduis)

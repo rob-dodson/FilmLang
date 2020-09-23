@@ -25,8 +25,8 @@ class FLText : Block
         preDraw()
         
         let pad : CGFloat = 5.0
-        var ox : Double
-        var oy : Double
+        var ox : CGFloat
+        var oy : CGFloat
         (ox,oy) = offset()
         
         

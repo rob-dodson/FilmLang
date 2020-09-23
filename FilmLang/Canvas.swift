@@ -13,16 +13,17 @@ class Canvas: NSView
     var timer : Timer? = nil
     let screenBlock : FLGrid
 
-    
+       
     required init?(coder: NSCoder)
     {
-        screenBlock = FLGrid(name:"Screen")
+        screenBlock = FLGrid(name:"Screen",view:nil)
         
         //
         // init
         //
         super.init(coder: coder)
-        
+       
+        screenBlock.view = self
         
         screenBlock.x = 10
         screenBlock.y = 10
@@ -33,20 +34,31 @@ class Canvas: NSView
         screenBlock.gridColor = NSColor.gray
         screenBlock.gradientAngle = -50
         screenBlock.clip = true
+        screenBlock.fitToView = true
         screenBlock.fillGradient = NSGradient(starting: NSColor.init(calibratedRed: 0.0, green: 0.0, blue: 0.0, alpha: 0.0), ending: NSColor.init(calibratedRed: 0.0, green: 0.4, blue: 0.0, alpha: 5.0))!
+        screenBlock.updateSizes =
+        {(block) -> Void in
+            block.width = self.frame.width
+            block.height = self.frame.height
+        }
         
-        let title = FLText(name:"title")
-        title.text = "FilmLang Control Station"
-        title.x = screenBlock.width / 2
-        title.y = screenBlock.height - 100
+        
+        
+        let title = FLText(name:"title",view:self)
+        title.text = "FilmLang"
         title.size = 40
         title.strokeColor = NSColor.init(calibratedRed: 0.0, green: 0.5, blue: 0.0, alpha: 1.0)
         title.fillGradient = NSGradient(starting: NSColor.black, ending: NSColor.init(calibratedRed: 0.0, green: 0.3, blue: 0.0, alpha: 0.5))!
+        screenBlock.updateSizes =
+        {(block) -> Void in
+            title.x = self.frame.width / 2
+            title.y = self.frame.height - 120
+        }
         
         //
         // axis labels
         //
-        let xaxislabel = FLText(name:"X Axis")
+        let xaxislabel = FLText(name:"X Axis",view:self)
         xaxislabel.text = "X Axis"
         xaxislabel.x = screenBlock.width / 2
         xaxislabel.y = 10
@@ -55,7 +67,7 @@ class Canvas: NSView
         xaxislabel.strokeColor = nil
         xaxislabel.animators.append(Animator(val: .x, amount: 1, min: 10, max:screenBlock.width, type: .Inc))
         
-        let yaxislabel = FLText(name:"Y Axis")
+        let yaxislabel = FLText(name:"Y Axis",view:self)
         yaxislabel.text = "Y Axis"
         yaxislabel.x = 60
         yaxislabel.y = screenBlock.height / 2
@@ -67,8 +79,8 @@ class Canvas: NSView
         
         for bb in 1...4
         {
-            let gridBlock1 = FLGrid(name:"Grid \(bb)")
-            let r = FLRect(name:"R")
+            let gridBlock1 = FLGrid(name:"Grid \(bb)",view:self)
+            let r = FLRect(name:"R",view:self)
             r.fillColor = NSColor(red: 0.2, green: 0.2, blue: 0.8, alpha: 0.6)
             r.strokeColor = NSColor(red: 0.2, green: 0.2, blue: 0.8, alpha: 0.8)
             r.x = 10
@@ -76,7 +88,7 @@ class Canvas: NSView
             r.width = 40
             r.height = 30
             
-            let r1 = FLRect(name:"R1")
+            let r1 = FLRect(name:"R1",view:self)
             r1.fillColor = NSColor(red: 0.3, green: 0.2, blue: 0.4, alpha: 0.6)
             r1.strokeColor = NSColor(red: 0.3, green: 0.2, blue: 0.6, alpha: 0.8)
             r1.x = 400
@@ -84,18 +96,20 @@ class Canvas: NSView
             r1.width = 20
             r1.height = 20
             
-            let circle = FLCircle(name:"circle")
+            let circle = FLCircle(name:"circle",view:self)
             circle.x = 100
             circle.y = 40
             circle.width = 30
             circle.height = 30
             circle.fillColor = NSColor(red: 0.5, green: 0.0, blue: 0.0, alpha: 0.6)
             circle.strokeColor = NSColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.8)
+            circle.debug = true
             
-            let path1 = FLPath(name:"Path")
+            
+            let path1 = FLPath(name:"Path",view:self)
 
             gridBlock1.x = 50
-            gridBlock1.y = 110 * Double(bb)
+            gridBlock1.y = 110 * CGFloat(bb)
             gridBlock1.width = 400
             gridBlock1.height = 100
             gridBlock1.clip = true
@@ -124,7 +138,7 @@ class Canvas: NSView
         
         for i in 0...3
         {
-            let arc1 = FLArc(name:"Arc \(i)")
+            let arc1 = FLArc(name:"Arc \(i)",view:self)
             arc1.x = 700
             arc1.y = 400
             arc1.radius = 100
@@ -183,8 +197,8 @@ class Canvas: NSView
         timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true)
         { (timer) in
             
-            self.screenBlock.width = Double(self.frame.width) - 20
-            self.screenBlock.height = Double(self.frame.height) - 20
+            self.screenBlock.width = CGFloat(self.frame.width) - 20
+            self.screenBlock.height = CGFloat(self.frame.height) - 20
             
             if self.screenBlock.animators.count > 0
             {

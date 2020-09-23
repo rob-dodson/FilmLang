@@ -13,15 +13,15 @@ class FLPath : Block
 {
     override func draw()
     {
-        var ox : Double
-        var oy : Double
+        var ox : CGFloat
+        var oy : CGFloat
         (ox,oy) = offset()
 
         let bezierPath = NSBezierPath()
 
-        let rr1 = Double(arc4random_uniform(25))
-        let rr2 = Double(arc4random_uniform(25)) + 380
-        let rr3 = Double(arc4random_uniform(25)) + 162
+        let rr1 = CGFloat(arc4random_uniform(25))
+        let rr2 = CGFloat(arc4random_uniform(25)) + 380
+        let rr3 = CGFloat(arc4random_uniform(25)) + 162
         
         bezierPath.move(to: NSPoint(x: ox + rr1, y: oy + 27.5))
         bezierPath.curve(to: NSPoint(x: ox + 85.5, y: oy + 63.5), controlPoint1: NSPoint(x: ox + 70.5, y: oy + 66.5),  controlPoint2: NSPoint(x: ox + 52.5, y: oy + 81.5))

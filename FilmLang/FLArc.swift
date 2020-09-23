@@ -22,8 +22,8 @@ class FLArc : Block
     {
         preDraw()
         
-        var xoffset : Double
-        var yoffset : Double
+        var xoffset : CGFloat
+        var yoffset : CGFloat
         (xoffset,yoffset) = offset()
         
         

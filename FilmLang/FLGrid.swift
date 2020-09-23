@@ -17,6 +17,8 @@ class FLGrid : Block
     var yspacing = 10
     var gridColor = NSColor.green
     var gridStrokeWidth : CGFloat = 0.5
+    var fitToView : Bool = false
+    
     
     override func animate()
     {
@@ -28,9 +30,16 @@ class FLGrid : Block
     {
         preDraw()
         
-        var xoffset : Double
-        var yoffset : Double
+        var xoffset : CGFloat
+        var yoffset : CGFloat
         (xoffset,yoffset) = offset()
+        
+        if (fitToView)
+        {
+            width = (view?.frame.width)! - 20
+            height = (view?.frame.height)! - 20
+        }
+        
         
         let rect = NSRect(x: x + xoffset, y: y + yoffset, width: width, height: height)
         let rectanglePath = NSBezierPath(roundedRect: rect, xRadius: raduis, yRadius: raduis)
@@ -47,7 +56,7 @@ class FLGrid : Block
         }
         
         
-        let xaxiscount = Int(width / Double(xspacing))
+        let xaxiscount = Int(width / CGFloat(xspacing))
         for xx in 1...xaxiscount
         {
             let xpos = rect.origin.x + CGFloat(xspacing * xx)
@@ -62,7 +71,7 @@ class FLGrid : Block
             bezierPath.stroke()
         }
         
-        let yaxiscount = Int(height / Double(yspacing))
+        let yaxiscount = Int(height / CGFloat(yspacing))
         for yy in 1...yaxiscount
         {
             let ypos = rect.origin.y + CGFloat(yspacing * yy)

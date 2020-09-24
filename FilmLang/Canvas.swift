@@ -19,18 +19,7 @@ class Canvas: NSView
         if dict["type"] as! String == "Rect"
         {
             let rect = FLRect(name: dict["name"] as! String, view: self)
-            
-            //rect.clip = true
-            
-            if let x = dict["x"]                  as? CGFloat { rect.x = x }
-            if let y = dict["y"]                  as? CGFloat { rect.y = y }
-            if let width = dict["width"]          as? CGFloat { rect.width = width }
-            if let height = dict["height"]        as? CGFloat { rect.height = height }
-            if let colorstr = dict["fillColor"]   as? String  { rect.fillColor = colorFromString(colorstr: colorstr) }
-            if let colorstr = dict["strokeColor"]    as? String  { rect.strokeColor = colorFromString(colorstr: colorstr) }
-            if let radius = dict["radius"]           as? CGFloat { rect.radius = radius }
-            if let rotation = dict["rotation"]           as? CGFloat { rect.rotation = rotation }
-            if let strokeWidth = dict["strokeWidth"] as? CGFloat { rect.strokeWidth = strokeWidth }
+            parseBlock(block: rect, dict: dict)
            
             connectParent(block: rect, dict: dict)
         }
@@ -39,16 +28,31 @@ class Canvas: NSView
             let text = FLText(name: dict["name"] as! String, view: self)
             
             text.strokeColor = nil
-            text.clip = true
             
-            if let x = dict["x"]          as? CGFloat { text.x = x }
-            if let y = dict["y"]          as? CGFloat { text.y = y }
+            parseBlock(block: text, dict: dict)
+            
             if let textstr = dict["text"] as? String { text.text = textstr }
             if let colorstr = dict["textColor"]    as? String  { text.textColor = colorFromString(colorstr: colorstr) }
             if let size = dict["size"]          as? CGFloat { text.size = size }
             
             connectParent(block: text, dict: dict)
         }
+    }
+    
+    
+    func parseBlock(block:Block,dict:NSDictionary)
+    {
+        if let x = dict["x"]                  as? CGFloat { block.x = x }
+        if let y = dict["y"]                  as? CGFloat { block.y = y }
+        if let width = dict["width"]          as? CGFloat { block.width = width }
+        if let height = dict["height"]        as? CGFloat { block.height = height }
+        if let colorstr = dict["fillColor"]   as? String  { block.fillColor = colorFromString(colorstr: colorstr) }
+        if let colorstr = dict["strokeColor"]    as? String  { block.strokeColor = colorFromString(colorstr: colorstr) }
+        if let radius = dict["radius"]           as? CGFloat { block.radius = radius }
+        if let rotation = dict["rotation"]           as? CGFloat { block.rotation = rotation }
+        if let strokeWidth = dict["strokeWidth"] as? CGFloat { block.strokeWidth = strokeWidth }
+        
+        connectParent(block: block, dict: dict)
     }
     
     

@@ -33,7 +33,7 @@ class FLText : Block
         let textStyle = NSMutableParagraphStyle()
         textStyle.alignment = .left
         let textFontAttributes = [
-            .font: NSFont(name: "Futura", size: size)!,
+            .font: NSFont(name: "Helvetica", size: size)!,
             .foregroundColor: textColor,
             .paragraphStyle: textStyle,
         ] as [NSAttributedString.Key: Any]

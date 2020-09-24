@@ -20,8 +20,6 @@ class Canvas: NSView
         {
             let rect = FLRect(name: dict["name"] as! String, view: self)
             parseBlock(block: rect, dict: dict)
-           
-            connectParent(block: rect, dict: dict)
         }
         else if dict["type"] as! String == "Text"
         {
@@ -34,16 +32,12 @@ class Canvas: NSView
             if let textstr = dict["text"] as? String { text.text = textstr }
             if let colorstr = dict["textColor"]    as? String  { text.textColor = colorFromString(colorstr: colorstr) }
             if let size = dict["size"]          as? CGFloat { text.size = size }
-            
-            connectParent(block: text, dict: dict)
         }
         else if dict["type"] as! String == "Grid"
         {
             let grid = FLGrid(name: dict["name"] as! String, view: self)
             parseBlock(block: grid, dict: dict)
            
-            connectParent(block: grid, dict: dict)
-            
             if let xspacing = dict["xspacing"]   as? CGFloat { grid.xspacing = xspacing }
             if let yspacing = dict["yspacing"]   as? CGFloat { grid.yspacing = yspacing }
             if let colorstr = dict["gridColor"]  as? String  { grid.gridColor = colorFromString(colorstr: colorstr) }

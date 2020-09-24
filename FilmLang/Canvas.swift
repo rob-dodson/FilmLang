@@ -13,7 +13,11 @@ class Canvas: NSView
     var timer : Timer? = nil
     let screenBlock : FLGrid
 
-       
+    func addRect(rect:FLRect)
+    {
+        screenBlock.addChild(block: rect)
+    }
+    
     required init?(coder: NSCoder)
     {
         screenBlock = FLGrid(name:"Screen",view:nil)
@@ -23,6 +27,9 @@ class Canvas: NSView
         //
         super.init(coder: coder)
        
+      
+        
+        
         screenBlock.view = self
         
         screenBlock.x = 10
@@ -198,6 +205,8 @@ class Canvas: NSView
         screenBlock.addChild(block: yaxislabel)
         
         
+        let js = Javascript(canvas: self)
+        js.execScript()
         
         
         timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true)

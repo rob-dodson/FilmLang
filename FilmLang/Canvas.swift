@@ -64,27 +64,31 @@ class Canvas: NSView
         if let rotation = dict["rotation"]           as? CGFloat { block.rotation = rotation }
         if let strokeWidth = dict["strokeWidth"] as? CGFloat { block.strokeWidth = strokeWidth }
         
-        if let animatorstr = dict["animator"] as? String
+        for i in 0...10
         {
-            let p = animatorstr.split(separator: ",", maxSplits: 5, omittingEmptySubsequences: false)
-            
-            let val = p[0]
-            let amount = CGFloat(Double.init(p[1]) ?? 1.0)
-            let min = CGFloat(Double.init(p[2]) ?? 1.0)
-            let max = CGFloat(Double.init(p[3]) ?? 10.0)
-            let type = p[4]
-            
-            var value = Animator.AnimatorVal.rotation
-            if (val == "rotation") { value = Animator.AnimatorVal.rotation }
-            if (val == "x") { value = Animator.AnimatorVal.x }
-            if (val == "y") { value = Animator.AnimatorVal.y }
-            
-            var anitype = Animator.AnimatorType.Bounce
-            if (type == "bounce") { anitype = Animator.AnimatorType.Bounce }
-            if (type == "inc") { anitype = Animator.AnimatorType.Inc }
-            if (type == "dec") { anitype = Animator.AnimatorType.Dec }
-            
-            block.animators.append(Animator(val: value, amount: amount, min: min, max: max, type: anitype, windowChanged:nil))
+            let key = "animator\(i)"
+            if let animatorstr = dict[key] as? String
+            {
+                let p = animatorstr.split(separator: ",", maxSplits: 5, omittingEmptySubsequences: false)
+                
+                let val = p[0]
+                let amount = CGFloat(Double.init(p[1]) ?? 1.0)
+                let min = CGFloat(Double.init(p[2]) ?? 1.0)
+                let max = CGFloat(Double.init(p[3]) ?? 10.0)
+                let type = p[4]
+                
+                var value = Animator.AnimatorVal.rotation
+                if (val == "rotation") { value = Animator.AnimatorVal.rotation }
+                if (val == "x")        { value = Animator.AnimatorVal.x }
+                if (val == "y")        { value = Animator.AnimatorVal.y }
+                
+                var anitype = Animator.AnimatorType.Bounce
+                if (type == "bounce") { anitype = Animator.AnimatorType.Bounce }
+                if (type == "inc")    { anitype = Animator.AnimatorType.Inc }
+                if (type == "dec")    { anitype = Animator.AnimatorType.Dec }
+                
+                block.animators.append(Animator(val: value, amount: amount, min: min, max: max, type: anitype, windowChanged:nil))
+            }
         }
 
         connectParent(block: block, dict: dict)

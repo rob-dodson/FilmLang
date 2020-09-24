@@ -28,7 +28,9 @@ for (i = 1; i < 10 ; i++)
 		radius:4,
 		strokeColor:green,
 		rotation:10,
-		animator:"rotation,1.0,0.0,360,Bounce",
+		animator0:"rotation,1.0,0.0,360,Bounce",
+		animator1:"x,1.0,0.0,300,Bounce",
+		animator2:"y,1.0,150,160,Inc",
 	}
 	addBlock(rect1)
 

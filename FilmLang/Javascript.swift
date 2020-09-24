@@ -62,27 +62,13 @@ class Javascript
             print(exception!.toString()!)
         }
         
-        context!.setObject(Rect.self,forKeyedSubscript: "Rect" as NSString)
-        
-        let addRect: @convention(block) (Rect) -> Void =
-        { jsrect in
-            
-            let r1 = FLRect(name:jsrect.name,view:nil)
-            r1.fillColor = NSColor(red: 0.0, green: 0.0, blue: 1.0, alpha: 1.0)
-            r1.strokeColor = NSColor(red: 0.9, green: 0.0, blue: 0.0, alpha: 1.0)
-            r1.x = CGFloat(jsrect.x)
-            r1.y = CGFloat(jsrect.y)
-            r1.width = CGFloat(jsrect.width)
-            r1.height = CGFloat(jsrect.height)
-            
-            canvas.addRect(rect: r1)
+        let addBlock: @convention(block) (NSDictionary) -> Void =
+        { dict in
+            canvas.addBlockFromDictionary(dict:dict)
         }
-
-        context!.setObject(addRect,
-                          forKeyedSubscript: "addRect" as NSString)
-
-        
+        context!.setObject(addBlock, forKeyedSubscript: "addBlock" as NSString)
     }
+
     
     func execScript()
     {

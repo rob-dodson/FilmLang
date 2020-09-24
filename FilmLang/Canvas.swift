@@ -13,24 +13,30 @@ class Canvas: NSView
     var timer : Timer? = nil
     let screenBlock : FLGrid
 
-    func addRect(rect:FLRect)
+    func addBlockFromDictionary(dict:NSDictionary)
     {
-        screenBlock.addChild(block: rect)
+        if dict["type"] as! String == "Rect"
+        {
+            let rect = FLRect(name: dict["type"] as! String, view: self)
+            
+            if let x = dict["x"]           as? CGFloat { rect.x = x }
+            if let y = dict["y"]           as? CGFloat { rect.y = y }
+            if let width = dict["width"]   as? CGFloat { rect.width = width }
+            if let height = dict["height"] as? CGFloat { rect.height = height }
+                
+            screenBlock.addChild(block:rect)
+        }
     }
     
     required init?(coder: NSCoder)
     {
-        screenBlock = FLGrid(name:"Screen",view:nil)
-        
         //
         // init
         //
+        screenBlock = FLGrid(name:"Screen",view:nil)
         super.init(coder: coder)
-       
-      
-        
-        
         screenBlock.view = self
+        
         
         screenBlock.x = 10
         screenBlock.y = 10

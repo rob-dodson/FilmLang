@@ -37,6 +37,18 @@ class Canvas: NSView
             
             connectParent(block: text, dict: dict)
         }
+        else if dict["type"] as! String == "Grid"
+        {
+            let grid = FLGrid(name: dict["name"] as! String, view: self)
+            parseBlock(block: grid, dict: dict)
+           
+            connectParent(block: grid, dict: dict)
+            
+            if let xspacing = dict["xspacing"]   as? CGFloat { grid.xspacing = xspacing }
+            if let yspacing = dict["yspacing"]   as? CGFloat { grid.yspacing = yspacing }
+            if let colorstr = dict["gridColor"]  as? String  { grid.gridColor = colorFromString(colorstr: colorstr) }
+            if let gridStrokeWidth = dict["gridStrokeWidth"]   as? CGFloat { grid.gridStrokeWidth = gridStrokeWidth }
+        }
     }
     
     
@@ -211,8 +223,8 @@ class Canvas: NSView
             gridBlock1.height = 100
             gridBlock1.clip = true
             gridBlock1.fillGradient = NSGradient(starting: NSColor.black, ending: NSColor.init(calibratedRed: 0.0, green: 0.3, blue: 0.0, alpha: 0.5))!
-            screenBlock.gradientAngle = 50
-            
+
+         
             gridBlock1.addChild(block:path1)
             gridBlock1.addChild(block:r);
             gridBlock1.addChild(block:r1);

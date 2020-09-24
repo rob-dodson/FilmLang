@@ -13,8 +13,8 @@ import Cocoa
 class FLGrid : Block
 {
     
-    var xspacing = 10
-    var yspacing = 10
+    var xspacing : CGFloat = 10
+    var yspacing : CGFloat = 10
     var gridColor = NSColor.green
     var gridStrokeWidth : CGFloat = 0.5
     var fitToView : Bool = false
@@ -59,7 +59,7 @@ class FLGrid : Block
         let xaxiscount = Int(width / CGFloat(xspacing))
         for xx in 1...xaxiscount
         {
-            let xpos = rect.origin.x + CGFloat(xspacing * xx)
+            let xpos = rect.origin.x + (xspacing * CGFloat(xx))
             
             let bezierPath = NSBezierPath()
             bezierPath.move(to: NSPoint(x: xpos, y: rect.origin.y))
@@ -74,7 +74,7 @@ class FLGrid : Block
         let yaxiscount = Int(height / CGFloat(yspacing))
         for yy in 1...yaxiscount
         {
-            let ypos = rect.origin.y + CGFloat(yspacing * yy)
+            let ypos = rect.origin.y + (yspacing * CGFloat(yy))
             
             let bezierPath = NSBezierPath()
             bezierPath.move(to: NSPoint(x: rect.origin.x, y: ypos))

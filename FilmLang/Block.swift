@@ -26,11 +26,10 @@ class Block
     var height        : CGFloat = 111.0
     var strokeWidth   : CGFloat = 2
     var rotation      : CGFloat = -999
-    var raduis        : CGFloat = 4.0
     var debug         : Bool = false
     var gradientAngle : CGFloat = -90
     var clip          : Bool = false
-    var radius        : CGFloat = 10.0
+    var radius        : CGFloat = 4.0
     var startAngle    : CGFloat = 0
     var endAngle      : CGFloat = 45
     var view          : NSView?

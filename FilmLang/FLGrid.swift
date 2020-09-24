@@ -42,7 +42,7 @@ class FLGrid : Block
         
         
         let rect = NSRect(x: x + xoffset, y: y + yoffset, width: width, height: height)
-        let rectanglePath = NSBezierPath(roundedRect: rect, xRadius: raduis, yRadius: raduis)
+        let rectanglePath = NSBezierPath(roundedRect: rect, xRadius: radius, yRadius: radius)
 
 
         if fillGradient != nil

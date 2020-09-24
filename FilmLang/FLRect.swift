@@ -25,8 +25,9 @@ class FLRect : Block
         var xoffset : CGFloat
         var yoffset : CGFloat
         (xoffset,yoffset) = offset()
+        
         let rect = NSRect(x: x + xoffset, y: y + yoffset, width: width, height: height)
-        let rectanglePath = NSBezierPath(roundedRect: rect, xRadius: raduis, yRadius: raduis)
+        let rectanglePath = NSBezierPath(roundedRect: rect, xRadius: radius, yRadius: radius)
 
         if rotation > -999
         {

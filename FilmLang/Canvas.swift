@@ -13,34 +13,61 @@ class Canvas: NSView
     var timer : Timer? = nil
     let screenBlock : FLGrid
 
+    
     func addBlockFromDictionary(dict:NSDictionary)
     {
         if dict["type"] as! String == "Rect"
         {
             let rect = FLRect(name: dict["name"] as! String, view: self)
             
+            //rect.clip = true
+            
             if let x = dict["x"]                  as? CGFloat { rect.x = x }
             if let y = dict["y"]                  as? CGFloat { rect.y = y }
             if let width = dict["width"]          as? CGFloat { rect.width = width }
             if let height = dict["height"]        as? CGFloat { rect.height = height }
             if let colorstr = dict["fillColor"]   as? String  { rect.fillColor = colorFromString(colorstr: colorstr) }
-            if let colorstr = dict["strokeColor"] as? String  { rect.strokeColor = colorFromString(colorstr: colorstr) }
-            rect.debug = true
-            if let parent = dict["parent"] as? String
+            if let colorstr = dict["strokeColor"]    as? String  { rect.strokeColor = colorFromString(colorstr: colorstr) }
+            if let radius = dict["radius"]           as? CGFloat { rect.radius = radius }
+            if let rotation = dict["rotation"]           as? CGFloat { rect.rotation = rotation }
+            if let strokeWidth = dict["strokeWidth"] as? CGFloat { rect.strokeWidth = strokeWidth }
+           
+            connectParent(block: rect, dict: dict)
+        }
+        else if dict["type"] as! String == "Text"
+        {
+            let text = FLText(name: dict["name"] as! String, view: self)
+            
+            text.strokeColor = nil
+            text.clip = true
+            
+            if let x = dict["x"]          as? CGFloat { text.x = x }
+            if let y = dict["y"]          as? CGFloat { text.y = y }
+            if let textstr = dict["text"] as? String { text.text = textstr }
+            if let colorstr = dict["textColor"]    as? String  { text.textColor = colorFromString(colorstr: colorstr) }
+            if let size = dict["size"]          as? CGFloat { text.size = size }
+            
+            connectParent(block: text, dict: dict)
+        }
+    }
+    
+    
+    func connectParent(block:Block,dict:NSDictionary)
+    {
+        if let parent = dict["parent"] as? String
+        {
+            if let parentblock = findBlock(nametofind: parent, block: screenBlock)
             {
-                if let parentblock = findBlock(nametofind: parent, block: screenBlock)
-                {
-                    parentblock.addChild(block: rect)
-                }
-                else
-                {
-                    screenBlock.addChild(block:rect)
-                }
+                parentblock.addChild(block: block)
             }
             else
             {
-                screenBlock.addChild(block:rect)
+                screenBlock.addChild(block:block)
             }
+        }
+        else
+        {
+            screenBlock.addChild(block:block)
         }
     }
     
@@ -117,7 +144,10 @@ class Canvas: NSView
             block.x = self.frame.width / 2
            block.y = self.frame.height - 120
         }
+        screenBlock.addChild(block: title)
         
+        
+        /*
         //
         // axis labels
         //
@@ -259,7 +289,7 @@ class Canvas: NSView
         screenBlock.addChild(block: title)
         screenBlock.addChild(block: xaxislabel)
         screenBlock.addChild(block: yaxislabel)
-        
+        */
         
         let js = Javascript(canvas: self)
         js.execScript()

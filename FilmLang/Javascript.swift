@@ -10,6 +10,7 @@ import Foundation
 import JavaScriptCore
 import Cocoa
 
+/*
 @objc protocol RectExport: JSExport
 {
     var name   : String { get set }
@@ -44,7 +45,7 @@ import Cocoa
     }
 }
 
-
+*/
 
 class Javascript
 {

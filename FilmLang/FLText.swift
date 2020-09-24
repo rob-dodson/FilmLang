@@ -63,7 +63,7 @@ class FLText : Block
         }
         
         
-        let borderPath = NSBezierPath(roundedRect: textRect, xRadius: raduis, yRadius: raduis)
+        let borderPath = NSBezierPath(roundedRect: textRect, xRadius: radius, yRadius: radius)
         if strokeColor != nil
         {
             strokeColor!.setStroke()

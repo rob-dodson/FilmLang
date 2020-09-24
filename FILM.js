@@ -1,3 +1,6 @@
+//
+// constants
+//
 let RECT = "Rect"
 let TEXT = "Text"
 let GRID = "Grid"
@@ -5,6 +8,10 @@ let green = ".0,.9,.0,0.9"
 let darkgreen = ".0,.5,.0,0.9"
 let red = ".9,.9,.0,1.0"
 
+
+//
+// rect loop
+//
 for (i = 1; i < 10 ; i++)
 {
 	let rectname = "rect".concat(i.toString())
@@ -20,7 +27,8 @@ for (i = 1; i < 10 ; i++)
 		fillColor:".5,.5,.5,0.5", 
 		radius:4,
 		strokeColor:green,
-		rotation:10
+		rotation:10,
+		animator:"rotation,1.0,0.0,360,Bounce",
 	}
 	addBlock(rect1)
 

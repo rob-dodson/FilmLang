@@ -4,6 +4,7 @@
 let RECT = "Rect"
 let TEXT = "Text"
 let GRID = "Grid"
+let IMAGE = "Image"
 let green = ".0,.9,.0,0.9"
 let darkgreen = ".0,.5,.0,0.9"
 let red = ".9,.9,.0,1.0"
@@ -103,4 +104,20 @@ for (i = 0;i <= 2; i++)
 	}
 	addBlock(grid)
 }
+
+//
+// image
+//
+let image =
+{
+	type:IMAGE,
+	name:"Image1",
+	url:"https://frogradio.net/images/icon_128x128.png",
+	x: 450,
+	y: 350,
+	width:100,
+	height:100,
+	animator0:"rotation,-1.0,1,50,Bounce",
+}
+addBlock(image)
 

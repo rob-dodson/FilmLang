@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AE0F7871251D3BA200BCE3AD /* FLImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0F7870251D3BA200BCE3AD /* FLImage.swift */; };
 		AE183D2F250EB4180017805E /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE183D2E250EB4180017805E /* Block.swift */; };
 		AE1E77F825190BED00CFC143 /* FLArc.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1E77F725190BED00CFC143 /* FLArc.swift */; };
 		AE24CB0F25096A02000F20D7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE24CB0E25096A02000F20D7 /* AppDelegate.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AE0F7870251D3BA200BCE3AD /* FLImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLImage.swift; sourceTree = "<group>"; };
 		AE183D2E250EB4180017805E /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		AE1E77F725190BED00CFC143 /* FLArc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLArc.swift; sourceTree = "<group>"; };
 		AE24CB0B25096A02000F20D7 /* FilmLang.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilmLang.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -89,6 +91,7 @@
 				AEC3FBE6251009F200C32210 /* FLRect.swift */,
 				AE93A96A251BCFF700F3D559 /* Animator.swift */,
 				AE93A981251BDDBA00F3D559 /* Javascript.swift */,
+				AE0F7870251D3BA200BCE3AD /* FLImage.swift */,
 			);
 			path = FilmLang;
 			sourceTree = "<group>";
@@ -172,6 +175,7 @@
 				AEC3FBEB25100A5B00C32210 /* FLCircle.swift in Sources */,
 				AE183D2F250EB4180017805E /* Block.swift in Sources */,
 				AEC3FBED25101C1B00C32210 /* FLPath.swift in Sources */,
+				AE0F7871251D3BA200BCE3AD /* FLImage.swift in Sources */,
 				AE1E77F825190BED00CFC143 /* FLArc.swift in Sources */,
 				AE93A96B251BCFF700F3D559 /* Animator.swift in Sources */,
 				AEC3FBE925100A3A00C32210 /* FLGrid.swift in Sources */,

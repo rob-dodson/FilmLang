@@ -43,6 +43,16 @@ class Canvas: NSView
             if let colorstr = dict["gridColor"]  as? String  { grid.gridColor = colorFromString(colorstr: colorstr) }
             if let gridStrokeWidth = dict["gridStrokeWidth"]   as? CGFloat { grid.gridStrokeWidth = gridStrokeWidth }
         }
+        else if dict["type"] as! String == "Image"
+        {
+            let image = FLImage(name: dict["name"] as! String, view: self)
+            parseBlock(block: image, dict: dict)
+            
+            if let urlstr = dict["url"]   as? String
+            {
+                image.url = URL(string: urlstr)
+            }
+        }
     }
     
     

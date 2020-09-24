@@ -17,7 +17,7 @@ class Canvas: NSView
     {
         if dict["type"] as! String == "Rect"
         {
-            let rect = FLRect(name: dict["type"] as! String, view: self)
+            let rect = FLRect(name: dict["name"] as! String, view: self)
             
             if let x = dict["x"]                  as? CGFloat { rect.x = x }
             if let y = dict["y"]                  as? CGFloat { rect.y = y }
@@ -25,7 +25,7 @@ class Canvas: NSView
             if let height = dict["height"]        as? CGFloat { rect.height = height }
             if let colorstr = dict["fillColor"]   as? String  { rect.fillColor = colorFromString(colorstr: colorstr) }
             if let colorstr = dict["strokeColor"] as? String  { rect.strokeColor = colorFromString(colorstr: colorstr) }
-            
+            rect.debug = true
             if let parent = dict["parent"] as? String
             {
                 if let parentblock = findBlock(nametofind: parent, block: screenBlock)
@@ -53,7 +53,10 @@ class Canvas: NSView
             {
                 return block
             }
-            
+        }
+        
+        for block in block.children
+        {
             if block.children.count > 0
             {
                 return findBlock(nametofind: nametofind, block: block)

@@ -19,15 +19,62 @@ class Canvas: NSView
         {
             let rect = FLRect(name: dict["type"] as! String, view: self)
             
-            if let x = dict["x"]           as? CGFloat { rect.x = x }
-            if let y = dict["y"]           as? CGFloat { rect.y = y }
-            if let width = dict["width"]   as? CGFloat { rect.width = width }
-            if let height = dict["height"] as? CGFloat { rect.height = height }
-                
-            screenBlock.addChild(block:rect)
+            if let x = dict["x"]                  as? CGFloat { rect.x = x }
+            if let y = dict["y"]                  as? CGFloat { rect.y = y }
+            if let width = dict["width"]          as? CGFloat { rect.width = width }
+            if let height = dict["height"]        as? CGFloat { rect.height = height }
+            if let colorstr = dict["fillColor"]   as? String  { rect.fillColor = colorFromString(colorstr: colorstr) }
+            if let colorstr = dict["strokeColor"] as? String  { rect.strokeColor = colorFromString(colorstr: colorstr) }
+            
+            if let parent = dict["parent"] as? String
+            {
+                if let parentblock = findBlock(nametofind: parent, block: screenBlock)
+                {
+                    parentblock.addChild(block: rect)
+                }
+                else
+                {
+                    screenBlock.addChild(block:rect)
+                }
+            }
+            else
+            {
+                screenBlock.addChild(block:rect)
+            }
         }
     }
     
+    
+    func findBlock(nametofind:String,block:Block) -> Block?
+    {
+        for block in block.children
+        {
+            if block.name == nametofind
+            {
+                return block
+            }
+            
+            if block.children.count > 0
+            {
+                return findBlock(nametofind: nametofind, block: block)
+            }
+        }
+        
+        return nil
+    }
+    
+    func colorFromString(colorstr:String) -> NSColor
+    {
+        let p = colorstr.split(separator: ",", maxSplits: 4, omittingEmptySubsequences: false)
+        
+        let red = CGFloat(Double.init(p[0]) ?? 1.0)
+        let green = CGFloat(Double.init(p[1]) ?? 1.0)
+        let blue = CGFloat(Double.init(p[2]) ?? 1.0)
+        let alpha = CGFloat(Double.init(p[3]) ?? 1.0)
+        
+        return NSColor.init(calibratedRed: red, green: green, blue: blue, alpha: alpha)
+    }
+ 
     required init?(coder: NSCoder)
     {
         //

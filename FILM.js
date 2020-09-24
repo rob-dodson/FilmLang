@@ -117,7 +117,6 @@ let image =
 	y: 350,
 	width:100,
 	height:100,
-	animator0:"rotation,-1.0,1,50,Bounce",
 }
 addBlock(image)
 

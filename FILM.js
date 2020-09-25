@@ -5,9 +5,12 @@ let RECT = "Rect"
 let TEXT = "Text"
 let GRID = "Grid"
 let IMAGE = "Image"
+let ARC = "Arc"
+let CIRCLE = "Circle"
+
 let green = ".0,.9,.0,0.9"
 let darkgreen = ".0,.5,.0,0.9"
-let red = ".9,.9,.0,1.0"
+let red = ".9,.0,.0,1.0"
 
 
 //
@@ -88,10 +91,11 @@ addBlock(text1)
 //
 for (i = 0;i <= 2; i++)
 {
+	let	name = "Grid - ".concat(i.toString())
 	let grid =
 	{
 		type:GRID,
-		name:"Grid1",
+		name:name,
 		x: 50 ,
 		y: 290 + (i * 105),
 		width:400,
@@ -100,23 +104,85 @@ for (i = 0;i <= 2; i++)
 		gridColor:".0,.0,.9,0.9",
 		yspacing:20,
 		xspacing:20,
-		radius:4
+		radius:4,
+		debug:true,
+		clip:true,
 	}
 	addBlock(grid)
+
+	//
+	// image
+	//
+	let image =
+	{
+		type:IMAGE,
+		name:"Image1",
+		url:"https://frogradio.net/images/icon_128x128.png",
+		x: 40,
+		y: 20,
+		width:100,
+		height:100,
+		rotation:10,
+		parent:name
+	}
+	addBlock(image)
+
 }
 
-//
-// image
-//
-let image =
+let arc = 
 {
-	type:IMAGE,
-	name:"Image1",
-	url:"https://frogradio.net/images/icon_128x128.png",
-	x: 450,
-	y: 350,
-	width:100,
-	height:100,
+	type:ARC,
+	name:"ARC",
+	x: 700,
+	y: 400,
+	radius:60,
+	strokeWidth:10,
+	startAngle:10,
+	endAngle:90,
+	strokeColor:".8,.0,.8,.9",
+	animator0:"startangle,1,10,30,Inc",
+	animator1:"endangle,1,90,110,Inc",
+	animator3:"strokewidth,1,1,10,Bounce",
 }
-addBlock(image)
+addBlock(arc)
+
+let arc2 = 
+{
+	type:ARC,
+	name:"ARC",
+	x: 700,
+	y: 400,
+	radius:80,
+	strokeWidth:10,
+	startAngle:10,
+	endAngle:90,
+	strokeColor:".0,.0,.8,.9",
+	animator0:"startangle,.1,10,90,Dec",
+	animator1:"endangle,.1,20,100,Dec",
+}
+addBlock(arc2)
+
+let circle = 
+{
+	type:CIRCLE,
+	name:"Circle",
+	x: 700,
+	y: 400,
+	radius:105,
+	fillColor:".8,.8,.8,.4",
+}
+addBlock(circle)
+
+let circle2 = 
+{
+	type:CIRCLE,
+	name:"Circle2",
+	x: 700,
+	y: 400,
+	radius:110,
+	strokeWidth:2,
+	windowOffset:"450,450",
+	strokeColor:".9,.9,.9,1.0",
+}
+addBlock(circle2)
 

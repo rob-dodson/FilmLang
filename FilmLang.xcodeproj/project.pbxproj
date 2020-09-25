@@ -77,21 +77,21 @@
 			children = (
 				AE24CB0E25096A02000F20D7 /* AppDelegate.swift */,
 				AE24CB1325096A05000F20D7 /* Assets.xcassets */,
+				AE24CB1925096A06000F20D7 /* FilmLang.entitlements */,
 				AE24CB1525096A06000F20D7 /* MainMenu.xib */,
 				AE24CB1825096A06000F20D7 /* Info.plist */,
 				AE24CB1025096A02000F20D7 /* FilmLang.xcdatamodeld */,
 				AE24CB2925096DC7000F20D7 /* Canvas.swift */,
 				AE183D2E250EB4180017805E /* Block.swift */,
-				AE24CB1925096A06000F20D7 /* FilmLang.entitlements */,
 				AEC3FBEC25101C1B00C32210 /* FLPath.swift */,
 				AEC3FBEA25100A5B00C32210 /* FLCircle.swift */,
 				AE1E77F725190BED00CFC143 /* FLArc.swift */,
 				AEC3FBE825100A3A00C32210 /* FLGrid.swift */,
 				AE8E380B2512B79F0092C187 /* FLText.swift */,
 				AEC3FBE6251009F200C32210 /* FLRect.swift */,
+				AE0F7870251D3BA200BCE3AD /* FLImage.swift */,
 				AE93A96A251BCFF700F3D559 /* Animator.swift */,
 				AE93A981251BDDBA00F3D559 /* Javascript.swift */,
-				AE0F7870251D3BA200BCE3AD /* FLImage.swift */,
 			);
 			path = FilmLang;
 			sourceTree = "<group>";

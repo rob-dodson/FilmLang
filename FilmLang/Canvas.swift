@@ -29,8 +29,8 @@ class Canvas: NSView
             
             parseBlock(block: text, dict: dict)
             
-            if let textstr = dict["text"] as? String { text.text = textstr }
-            if let colorstr = dict["textColor"]    as? String  { text.textColor = colorFromString(colorstr: colorstr) }
+            if let textstr = dict["text"]       as? String { text.text = textstr }
+            if let colorstr = dict["textColor"] as? String  { text.textColor = colorFromString(colorstr: colorstr) }
             if let size = dict["size"]          as? CGFloat { text.size = size }
         }
         else if dict["type"] as! String == "Grid"
@@ -53,19 +53,34 @@ class Canvas: NSView
                 image.url = URL(string: urlstr)
             }
         }
+        else if dict["type"] as! String == "Arc"
+        {
+            let arc = FLArc(name: dict["name"] as! String, view: self)
+            parseBlock(block: arc, dict: dict)
+
+            if let startAngle = dict["startAngle"] as? CGFloat { arc.startAngle = startAngle }
+            if let endAngle = dict["endAngle"]     as? CGFloat { arc.endAngle = endAngle }
+        }
+        else if dict["type"] as! String == "Circle"
+        {
+            let circle = FLCircle(name: dict["name"] as! String, view: self)
+            parseBlock(block: circle, dict: dict)
+        }
     }
     
     
     func parseBlock(block:Block,dict:NSDictionary)
     {
-        if let x = dict["x"]                  as? CGFloat { block.x = x }
-        if let y = dict["y"]                  as? CGFloat { block.y = y }
-        if let width = dict["width"]          as? CGFloat { block.width = width }
-        if let height = dict["height"]        as? CGFloat { block.height = height }
-        if let colorstr = dict["fillColor"]   as? String  { block.fillColor = colorFromString(colorstr: colorstr) }
+        if let debug = dict["debug"]             as? Bool    { block.debug = debug }
+        if let clip = dict["clip"]               as? Bool    { block.clip = clip }
+        if let x = dict["x"]                     as? CGFloat { block.x = x }
+        if let y = dict["y"]                     as? CGFloat { block.y = y }
+        if let width = dict["width"]             as? CGFloat { block.width = width }
+        if let height = dict["height"]           as? CGFloat { block.height = height }
+        if let colorstr = dict["fillColor"]      as? String  { block.fillColor = colorFromString(colorstr: colorstr) }
         if let colorstr = dict["strokeColor"]    as? String  { block.strokeColor = colorFromString(colorstr: colorstr) }
         if let radius = dict["radius"]           as? CGFloat { block.radius = radius }
-        if let rotation = dict["rotation"]           as? CGFloat { block.rotation = rotation }
+        if let rotation = dict["rotation"]       as? CGFloat { block.rotation = rotation }
         if let strokeWidth = dict["strokeWidth"] as? CGFloat { block.strokeWidth = strokeWidth }
         
         for i in 0...10
@@ -82,10 +97,13 @@ class Canvas: NSView
                 let type = p[4]
                 
                 var value = Animator.AnimatorVal.rotation
-                if (val == "rotation") { value = Animator.AnimatorVal.rotation }
-                if (val == "x")        { value = Animator.AnimatorVal.x }
-                if (val == "y")        { value = Animator.AnimatorVal.y }
-                
+                if (val == "rotation")    { value = Animator.AnimatorVal.rotation }
+                if (val == "x")           { value = Animator.AnimatorVal.x }
+                if (val == "y")           { value = Animator.AnimatorVal.y }
+                if (val == "startangle")  { value = Animator.AnimatorVal.startangle }
+                if (val == "endangle")    { value = Animator.AnimatorVal.endangle }
+                if (val == "strokewidth") { value = Animator.AnimatorVal.strokewidth }
+
                 var anitype = Animator.AnimatorType.Bounce
                 if (type == "bounce") { anitype = Animator.AnimatorType.Bounce }
                 if (type == "inc")    { anitype = Animator.AnimatorType.Inc }
@@ -284,7 +302,8 @@ class Canvas: NSView
             arc1.radius = 100
             arc1.strokeWidth = 10
             
-            switch i {
+            switch i
+            {
             case 0:
                 arc1.startAngle = 10
                 arc1.endAngle = 90
@@ -301,7 +320,7 @@ class Canvas: NSView
                 arc1.strokeWidth = 10
                 arc1.radius = 100
                 arc1.animators.append(Animator(val:.startangle, amount: 1, min: 100, max: 120, type: .Bounce, windowChanged:nil))
-                arc1.animators.append(Animator(val: .endangle, amount: 1, min: 130, max: 180, type: .Bounce, windowChanged:nil))
+                arc1.animators.append(Animator(val:.endangle, amount: 1, min: 130, max: 180, type: .Bounce, windowChanged:nil))
                 
             case 2:
                 arc1.startAngle = 100

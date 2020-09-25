@@ -10,42 +10,6 @@ import Foundation
 import JavaScriptCore
 import Cocoa
 
-/*
-@objc protocol RectExport: JSExport
-{
-    var name   : String { get set }
-    var x      : Double { get set }
-    var y      : Double { get set }
-    var width  : Double { get set }
-    var height : Double { get set }
-
-    static func createWith(name:String,x:Double,y:Double,width:Double,height:Double) -> Rect
-}
-
-@objc public class Rect : NSObject,RectExport
-{
-    dynamic var name   : String
-    dynamic var x      : Double
-    dynamic var y      : Double
-    dynamic var width  : Double
-    dynamic var height : Double
-
-    required init(name:String,x:Double,y:Double,width:Double,height:Double)
-    {
-        self.name = name
-        self.x = x
-        self.y = y
-        self.width = width
-        self.height = height
-    }
-
-    class func createWith(name:String,x:Double,y:Double,width:Double,height:Double) -> Rect
-    {
-        return Rect(name:name,x:x,y:y,width:width,height:height)
-    }
-}
-
-*/
 
 class Javascript
 {
@@ -87,62 +51,3 @@ class Javascript
 }
 
 
-/*
-- (void) setup
-{
- JSContext* context;
-    context = [JSContext new];
-    KillNow = NO;
-    __weak FRGJavascript *wSelf = self;
-    FRGJavascript *sSelf = wSelf;
-    
-    
-    [context setExceptionHandler:^(JSContext *context, JSValue *exception)
-    {
-        [FRGLog msg:@"Javascript error: %@",exception];
-        [sSelf->theApp showMessage:[exception toString]];
-    }];
-    
-    
-    context[@"playStation"]       = ^(NSString* path,NSString* stationname) { [sSelf playStationAtPath:path withStation:stationname]; };
-    context[@"getCurrentStation"] = ^ JSStation* ()             { return [sSelf getCurrentStation]; };
-    context[@"sleepInMinutes"]    = ^(double minutes)           { [sSelf sleepInMinutes:minutes];   };
-    context[@"waitUntilTime"]     = ^(NSString* timestr)        { [sSelf waitUntilTime:timestr];    };
-    context[@"volume"]            = ^(double volume)            { [sSelf volume:volume];            };
-    context[@"waitMillis"]        = ^(int millis)               { [sSelf waitMillis:millis];        };
-    context[@"volumeMove"]        = ^(double toVol, double inc) { [sSelf volmove:toVol inc:inc];    };
-    context[@"play"]              = ^()                         { [sSelf play];                     };
-    context[@"pause"]             = ^()                         { [sSelf pause];                    };
-    context[@"stop"]              = ^()                         { [sSelf stop];                     };
-    context[@"prevStation"]       = ^()                         { [sSelf prevStation];              };
-    context[@"nextStation"]       = ^()                         { [sSelf nextStation];              };
-}
-
-
-- (NSError*) runScript:(NSString*)scriptname
-{
-    NSString* execpath = [NSString stringWithFormat:@"%@/%@",scriptspath,scriptname];
-    [FRGLog msg:@"Running script: %@",execpath];
-    
-    NSURL* url = [NSURL fileURLWithPath:execpath];
-    NSError* error = nil;
-    NSString* scripttorun = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:&error];
-    KillNow = NO;
-    
-    if (error == nil)
-    {
-        running = YES;
-        
-        [context evaluateScript:scripttorun]; // executes the script
-        
-        running = NO;
-        return nil;
-    }
-    else
-    {
-        [FRGLog msg:error.localizedDescription];
-        scripterror = [error copy];
-        return scripterror;
-    }
-}
-*/

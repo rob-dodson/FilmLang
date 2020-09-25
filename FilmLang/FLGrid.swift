@@ -30,10 +30,6 @@ class FLGrid : Block
     {
         preDraw()
         
-        var xoffset : CGFloat
-        var yoffset : CGFloat
-        (xoffset,yoffset) = offset()
-        
         if (fitToView)
         {
             width = (view?.frame.width)! - 20

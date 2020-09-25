@@ -29,7 +29,7 @@ class Block
     var debug         : Bool = false
     var gradientAngle : CGFloat = -90
     var clip          : Bool = false
-    var radius        : CGFloat = 4.0
+    var radius        : CGFloat = 0.0
     var startAngle    : CGFloat = 0
     var endAngle      : CGFloat = 45
     var view          : NSView?
@@ -46,7 +46,6 @@ class Block
         
         self.children = [Block]()
         self.animators = [Animator]()
-        self.strokeColor = NSColor.green
     }
     
     
@@ -86,6 +85,8 @@ class Block
                     adjust(val:&alpha, animator: &animators[index])
                     fillColor = fillColor!.withAlphaComponent(CGFloat(alpha))
                 }
+            case .strokewidth:
+                adjust(val:&strokeWidth, animator: &animators[index])
             }
         }
     }

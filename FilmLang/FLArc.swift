@@ -19,12 +19,7 @@ class FLArc : Block
     {
         preDraw()
         
-        var xoffset : CGFloat
-        var yoffset : CGFloat
-        (xoffset,yoffset) = offset()
-        
-        
-        let startPoint = NSPoint(x: x + xoffset, y: y - yoffset)
+        let startPoint = NSPoint(x: x + xoffset, y: y + yoffset)
         let arcPath = NSBezierPath()
         arcPath.appendArc(withCenter: startPoint, radius: CGFloat(radius),
                           startAngle: CGFloat(startAngle), endAngle: CGFloat(endAngle))

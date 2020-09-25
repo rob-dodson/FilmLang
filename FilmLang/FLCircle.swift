@@ -20,13 +20,17 @@ class FLCircle : Block
     {
         preDraw()
         
-        var xoffset : CGFloat
-        var yoffset : CGFloat
-        (xoffset,yoffset) = offset()
+        var rect : NSRect?
+        if radius > 0.0
+        {
+            rect = NSRect(x: (x + xoffset) - radius, y: (y + yoffset) - radius, width: radius * 2, height: radius * 2)
+        }
+        else
+        {
+            rect = NSRect(x: x + xoffset - (width / 2), y: y + yoffset - (height / 2), width:width, height: width)
+        }
         
-        let rect = NSRect(x: x + xoffset, y: y + yoffset, width: width, height: height)
-        
-        let ovalPath = NSBezierPath(ovalIn: rect)
+        let ovalPath = NSBezierPath(ovalIn: rect!)
         
         if fillColor != nil
         {

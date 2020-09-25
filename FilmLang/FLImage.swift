@@ -34,15 +34,6 @@ class FLImage : Block
             image = NSImage.init(byReferencing: url!)
         }
         
-        if rotation > -999
-        {
-            let context = NSGraphicsContext.current!.cgContext
-            
-            context.translateBy(x:rect.origin.x, y:rect.origin.y)
-            context.rotate(by: CGFloat(rotation) * CGFloat.pi/180)
-            context.translateBy(x:-rect.origin.x, y:-rect.origin.y)
-        }
-        
         image?.draw(in: rect)
         
         postDraw(rect:nil)

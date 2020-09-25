@@ -25,9 +25,6 @@ class FLText : Block
         preDraw()
         
         let pad : CGFloat = 5.0
-        var ox : CGFloat
-        var oy : CGFloat
-        (ox,oy) = offset()
         
         
         let textStyle = NSMutableParagraphStyle()
@@ -46,8 +43,8 @@ class FLText : Block
         
       
         
-        let textRect: NSRect = NSRect(x: CGFloat(x + ox) - pad - (boundingRect.width / 2),
-                                          y: CGFloat(y + oy) + (boundingRect.height / 2) - pad,
+        let textRect: NSRect = NSRect(x: CGFloat(x + xoffset) - pad - (boundingRect.width / 2),
+                                          y: CGFloat(y + yoffset) + (boundingRect.height / 2) - pad,
                                           width: boundingRect.width + (pad * 2),
                                           height: boundingRect.height + (pad * 2))
 

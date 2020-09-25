@@ -66,6 +66,11 @@ class Canvas: NSView
             let circle = FLCircle(name: dict["name"] as! String, view: self)
             parseBlock(block: circle, dict: dict)
         }
+        else if dict["type"] as! String == "Line"
+        {
+            let line = FLLine(name: dict["name"] as! String, view: self)
+            parseBlock(block: line, dict: dict)
+        }
     }
     
     
@@ -82,6 +87,9 @@ class Canvas: NSView
         if let radius = dict["radius"]           as? CGFloat { block.radius = radius }
         if let rotation = dict["rotation"]       as? CGFloat { block.rotation = rotation }
         if let strokeWidth = dict["strokeWidth"] as? CGFloat { block.strokeWidth = strokeWidth }
+        if let endX = dict["endX"]               as? CGFloat { block.endX = endX }
+        if let endY = dict["endY"]               as? CGFloat { block.endY = endY }
+        
         
         if let windowOffset = dict["windowOffset"] as? String
         {

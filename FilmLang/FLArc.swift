@@ -10,11 +10,6 @@ import Cocoa
 
 class FLArc : Block
 {
-    override func animate()
-    {
-        super.animate()
-    }
-    
     override func draw()
     {
         preDraw()

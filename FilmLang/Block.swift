@@ -39,7 +39,10 @@ class Block
     var yoffset       : CGFloat = 0.0
     var windowWidthOffset  : CGFloat = 0.0
     var windowHeightOffset : CGFloat = 0.0
-
+    var fitToView          : Bool = false
+    var endX               : CGFloat = 1.0
+    var endY               : CGFloat = 1.0
+    
     
     init(name:String, view:NSView?)
     {

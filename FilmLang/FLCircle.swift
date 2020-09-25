@@ -11,10 +11,6 @@ import Cocoa
 
 class FLCircle : Block
 {
-    override func animate()
-    {
-        super.animate()
-    }
     
     override func draw()
     {

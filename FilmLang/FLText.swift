@@ -15,10 +15,6 @@ class FLText : Block
     var size : CGFloat = 24.0
     var textColor = NSColor.green
     
-    override func animate()
-    {
-        super.animate()
-    }
     
     override func draw()
     {

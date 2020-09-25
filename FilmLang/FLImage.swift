@@ -14,11 +14,6 @@ class FLImage : Block
     var url : URL?
     var image : NSImage?
     
-    override func animate()
-    {
-        super.animate()
-    }
-    
     override func draw()
     {
         preDraw()

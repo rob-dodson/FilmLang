@@ -17,13 +17,6 @@ class FLGrid : Block
     var yspacing : CGFloat = 10
     var gridColor = NSColor.green
     var gridStrokeWidth : CGFloat = 0.5
-    var fitToView : Bool = false
-    
-    
-    override func animate()
-    {
-        super.animate()
-    }
     
     
     override func draw()

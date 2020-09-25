@@ -22,6 +22,7 @@
 		AEC3FBE925100A3A00C32210 /* FLGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC3FBE825100A3A00C32210 /* FLGrid.swift */; };
 		AEC3FBEB25100A5B00C32210 /* FLCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC3FBEA25100A5B00C32210 /* FLCircle.swift */; };
 		AEC3FBED25101C1B00C32210 /* FLPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC3FBEC25101C1B00C32210 /* FLPath.swift */; };
+		AED96885251E96D7007B2CE6 /* FLLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED96884251E96D7007B2CE6 /* FLLine.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		AEC3FBE825100A3A00C32210 /* FLGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLGrid.swift; sourceTree = "<group>"; };
 		AEC3FBEA25100A5B00C32210 /* FLCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLCircle.swift; sourceTree = "<group>"; };
 		AEC3FBEC25101C1B00C32210 /* FLPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLPath.swift; sourceTree = "<group>"; };
+		AED96884251E96D7007B2CE6 /* FLLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLLine.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 				AE8E380B2512B79F0092C187 /* FLText.swift */,
 				AEC3FBE6251009F200C32210 /* FLRect.swift */,
 				AE0F7870251D3BA200BCE3AD /* FLImage.swift */,
+				AED96884251E96D7007B2CE6 /* FLLine.swift */,
 				AE93A96A251BCFF700F3D559 /* Animator.swift */,
 				AE93A981251BDDBA00F3D559 /* Javascript.swift */,
 			);
@@ -177,6 +180,7 @@
 				AEC3FBED25101C1B00C32210 /* FLPath.swift in Sources */,
 				AE0F7871251D3BA200BCE3AD /* FLImage.swift in Sources */,
 				AE1E77F825190BED00CFC143 /* FLArc.swift in Sources */,
+				AED96885251E96D7007B2CE6 /* FLLine.swift in Sources */,
 				AE93A96B251BCFF700F3D559 /* Animator.swift in Sources */,
 				AEC3FBE925100A3A00C32210 /* FLGrid.swift in Sources */,
 			);

@@ -7,6 +7,7 @@ let GRID = "Grid"
 let IMAGE = "Image"
 let ARC = "Arc"
 let CIRCLE = "Circle"
+let LINE = "Line"
 
 let green = ".0,.9,.0,0.9"
 let darkgreen = ".0,.5,.0,0.9"
@@ -186,3 +187,16 @@ let circle2 =
 }
 addBlock(circle2)
 
+
+let line1 = 
+{
+	type:LINE,
+	name:"Line1",
+	x: 10,
+	y: 50,
+	endX: 1000,
+	endY: 50,
+	strokeWidth:2,
+	strokeColor:green,
+}
+addBlock(line1)

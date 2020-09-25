@@ -12,15 +12,15 @@ import Cocoa
 
 class FLRect : Block
 {
-    override func animate()
-    {
-        super.animate()
-    }
-    
-    
     override func draw()
     {
         preDraw()
+        
+        if (fitToView)
+        {
+            width = (view?.frame.width)! - 20
+            height = (view?.frame.height)! - 20
+        }
         
         if boundingRect != nil
         {

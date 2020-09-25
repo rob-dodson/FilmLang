@@ -83,6 +83,19 @@ class Canvas: NSView
         if let rotation = dict["rotation"]       as? CGFloat { block.rotation = rotation }
         if let strokeWidth = dict["strokeWidth"] as? CGFloat { block.strokeWidth = strokeWidth }
         
+        if let windowOffset = dict["windowOffset"] as? String
+        {
+            let p = windowOffset.split(separator: ",", maxSplits: 2, omittingEmptySubsequences: false)
+            block.windowWidthOffset = CGFloat(Double.init(p[0]) ?? 0.0)
+            block.windowHeightOffset = CGFloat(Double.init(p[1]) ?? 0.0)
+            block.windowChanged =
+                {(block) -> Void in
+                    block.x = self.frame.width - block.windowWidthOffset
+                    block.y = self.frame.height - block.windowHeightOffset
+                }
+        }
+        
+        
         for i in 0...10
         {
             let key = "animator\(i)"

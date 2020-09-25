@@ -37,7 +37,9 @@ class Block
     var boundingRect  : NSRect? = nil
     var xoffset       : CGFloat = 0.0
     var yoffset       : CGFloat = 0.0
-    
+    var windowWidthOffset  : CGFloat = 0.0
+    var windowHeightOffset : CGFloat = 0.0
+
     
     init(name:String, view:NSView?)
     {

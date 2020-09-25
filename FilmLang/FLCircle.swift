@@ -45,7 +45,6 @@ class FLCircle : Block
             ovalPath.stroke()
         }
         
-        
         postDraw(rect:rect)
     }
 

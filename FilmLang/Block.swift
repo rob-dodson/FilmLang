@@ -33,7 +33,10 @@ class Block
     var startAngle    : CGFloat = 0
     var endAngle      : CGFloat = 45
     var view          : NSView?
-    var windowChanged   : ((Block) -> Void)?
+    var windowChanged : ((Block) -> Void)?
+    var boundingRect  : NSRect? = nil
+    var xoffset       : CGFloat = 0.0
+    var yoffset       : CGFloat = 0.0
     
     
     init(name:String, view:NSView?)
@@ -161,6 +164,22 @@ class Block
         {
             winchange(self)
         }
+
+        (xoffset,yoffset) = offset()
+        boundingRect = NSRect(x: x + xoffset, y: y + yoffset, width: width, height: height)
+        
+        if rotation > -999
+        {
+            let context = NSGraphicsContext.current!.cgContext
+            
+            if let rect = boundingRect
+            {
+                context.translateBy(x:rect.origin.x, y:rect.origin.y)
+                context.rotate(by: CGFloat(rotation) * CGFloat.pi/180)
+                context.translateBy(x:-rect.origin.x, y:-rect.origin.y)
+            }
+        }
+
     }
     
     func postDraw(rect:NSRect?)

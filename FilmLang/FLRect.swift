@@ -22,41 +22,30 @@ class FLRect : Block
     {
         preDraw()
         
-        var xoffset : CGFloat
-        var yoffset : CGFloat
-        (xoffset,yoffset) = offset()
-        
-        let rect = NSRect(x: x + xoffset, y: y + yoffset, width: width, height: height)
-        let rectanglePath = NSBezierPath(roundedRect: rect, xRadius: radius, yRadius: radius)
-
-        if rotation > -999
+        if boundingRect != nil
         {
-            let context = NSGraphicsContext.current!.cgContext
+            let rectanglePath = NSBezierPath(roundedRect: boundingRect!, xRadius: radius, yRadius: radius)
+        
+            if fillColor != nil
+            {
+                fillColor!.setFill()
+                rectanglePath.fill()
+            }
             
-            context.translateBy(x:rect.origin.x, y:rect.origin.y)
-            context.rotate(by: CGFloat(rotation) * CGFloat.pi/180)
-            context.translateBy(x:-rect.origin.x, y:-rect.origin.y)
+            if strokeColor != nil
+            {
+                strokeColor!.setStroke()
+                rectanglePath.lineWidth = strokeWidth
+                rectanglePath.stroke()
+            }
+            
+            if clip == true
+            {
+                boundingRect!.clip()
+            }
         }
         
-        if fillColor != nil
-        {
-            fillColor!.setFill()
-            rectanglePath.fill()
-        }
-        
-        if strokeColor != nil
-        {
-            strokeColor!.setStroke()
-            rectanglePath.lineWidth = strokeWidth
-            rectanglePath.stroke()
-        }
-        
-        if clip == true
-        {
-            rect.clip()
-        }
-        
-        postDraw(rect: rect)
+        postDraw(rect: boundingRect)
         
     }
 }

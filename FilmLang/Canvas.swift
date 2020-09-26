@@ -30,7 +30,7 @@ class Canvas: NSView
             parseBlock(block: text, dict: dict)
             
             if let textstr = dict["text"]       as? String { text.text = textstr }
-            if let colorstr = dict["textColor"] as? String  { text.textColor = colorFromString(colorstr: colorstr) }
+            if let colordict = dict["textColor"] as? NSDictionary  { text.textColor = colorFromDict(dict: colordict) }
             if let size = dict["size"]          as? CGFloat { text.size = size }
         }
         else if dict["type"] as! String == "Grid"
@@ -40,7 +40,7 @@ class Canvas: NSView
            
             if let xspacing = dict["xspacing"]   as? CGFloat { grid.xspacing = xspacing }
             if let yspacing = dict["yspacing"]   as? CGFloat { grid.yspacing = yspacing }
-            if let colorstr = dict["gridColor"]  as? String  { grid.gridColor = colorFromString(colorstr: colorstr) }
+            if let colordict = dict["gridColor"] as? NSDictionary  { grid.gridColor = colorFromDict(dict: colordict) }
             if let gridStrokeWidth = dict["gridStrokeWidth"]   as? CGFloat { grid.gridStrokeWidth = gridStrokeWidth }
         }
         else if dict["type"] as! String == "Image"
@@ -100,13 +100,19 @@ class Canvas: NSView
         if let y = dict["y"]                     as? CGFloat { block.y = y }
         if let width = dict["width"]             as? CGFloat { block.width = width }
         if let height = dict["height"]           as? CGFloat { block.height = height }
-        if let colorstr = dict["fillColor"]      as? String  { block.fillColor = colorFromString(colorstr: colorstr) }
-        if let colorstr = dict["strokeColor"]    as? String  { block.strokeColor = colorFromString(colorstr: colorstr) }
+        if let fillcolordict = dict["fillColor"]     as? NSDictionary { block.fillColor = colorFromDict(dict: fillcolordict) }
+        if let strokecolordict = dict["strokeColor"] as? NSDictionary { block.strokeColor = colorFromDict(dict: strokecolordict) }
         if let radius = dict["radius"]           as? CGFloat { block.radius = radius }
         if let rotation = dict["rotation"]       as? CGFloat { block.rotation = rotation }
         if let strokeWidth = dict["strokeWidth"] as? CGFloat { block.strokeWidth = strokeWidth }
        
-        
+        if let fillGradient = dict["fillGradient"] as? NSDictionary
+        {
+            let fromColor = colorFromDict(dict: fillGradient["startColor"] as! NSDictionary)
+            let toColor = colorFromDict(dict: fillGradient["endColor"] as! NSDictionary)
+            
+            block.fillGradient = NSGradient(starting: fromColor, ending: toColor)
+        }
         
         if let windowOffset = dict["windowOffset"] as? String
         {
@@ -197,17 +203,16 @@ class Canvas: NSView
         return nil
     }
     
-    func colorFromString(colorstr:String) -> NSColor
+    func colorFromDict(dict:NSDictionary) -> NSColor
     {
-        let p = colorstr.split(separator: ",", maxSplits: 4, omittingEmptySubsequences: false)
-        
-        let red = CGFloat(Double.init(p[0]) ?? 1.0)
-        let green = CGFloat(Double.init(p[1]) ?? 1.0)
-        let blue = CGFloat(Double.init(p[2]) ?? 1.0)
-        let alpha = CGFloat(Double.init(p[3]) ?? 1.0)
+        let red = CGFloat.init(dict["red"] as! Double)
+        let green = CGFloat.init(dict["green"] as! Double)
+        let blue = CGFloat.init(dict["blue"] as! Double)
+        let alpha = CGFloat.init(dict["alpha"] as! Double)
         
         return NSColor.init(calibratedRed: red, green: green, blue: blue, alpha: alpha)
     }
+    
  
     required init?(coder: NSCoder)
     {

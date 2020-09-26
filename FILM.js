@@ -10,10 +10,11 @@ let CIRCLE = "Circle"
 let LINE = "Line"
 let PATH = "Path"
 
-let green = ".0,.9,.0,0.9"
-let darkgreen = ".0,.5,.0,0.9"
-let red = ".9,.0,.0,1.0"
-let blue = ".0,.0,.9,1.0"
+let red	      = {red:1.0, green:0.0, blue:0.0, alpha:1.0}
+let blue      = {red:0.0, green:0.0, blue:0.9, alpha:1.0}
+let green     = {red:0.0, green:0.9, blue:0.0, alpha:1.0}
+let darkgreen = {red:0.0, green:0.5, blue:0.0, alpha:0.4}
+let gray      = {red:0.7, green:0.7, blue:0.7, alpha:1.0}
 
 
 //
@@ -31,7 +32,7 @@ for (i = 1; i < 10 ; i++)
 		width:50, 
 		height:50, 
 		strokeWidth:2,
-		fillColor:".5,.5,.5,0.5", 
+		fillColor:darkgreen,
 		radius:4,
 		strokeColor:green,
 		rotation:10,
@@ -68,7 +69,7 @@ let rect1 =
 	height:50, 
 	radius:1,
 	strokeWidth:1,
-	fillColor:".5,.5,.5,0.5", 
+	fillColor:gray,
 	radius:4,
 	strokeColor:green,
 }
@@ -104,12 +105,14 @@ for (i = 0;i <= 2; i++)
 		width:400,
 		height:100,
 		fillColor:darkgreen,
-		gridColor:".0,.0,.9,0.9",
+		gridColor:gray,
 		yspacing:20,
 		xspacing:20,
 		radius:4,
 		debug:true,
 		clip:true,
+		strokeColor:red,
+		animator0:"strokealpha,.1,0.0,.9,Bounce",
 	}
 	addBlock(grid)
 
@@ -142,7 +145,7 @@ let arc =
 	strokeWidth:10,
 	startAngle:10,
 	endAngle:90,
-	strokeColor:".8,.0,.8,.9",
+	strokeColor:green,
 	animator0:"startangle,1,10,30,Inc",
 	animator1:"endangle,1,90,110,Inc",
 	animator3:"strokewidth,1,1,10,Bounce",
@@ -159,7 +162,7 @@ let arc2 =
 	strokeWidth:10,
 	startAngle:10,
 	endAngle:90,
-	strokeColor:".0,.0,.8,.9",
+	strokeColor:darkgreen,
 	animator0:"startangle,.1,10,90,Dec",
 	animator1:"endangle,.1,20,100,Dec",
 	animator4:"strokealpha,.1,.1,1.0,Bounce",
@@ -169,11 +172,12 @@ addBlock(arc2)
 let circle = 
 {
 	type:CIRCLE,
+	debug:true,
 	name:"Circle",
 	x: 700,
 	y: 400,
 	radius:105,
-	fillColor:".8,.8,.8,.4",
+	fillGradient:{startColor: green, endColor: darkgreen } ,
 }
 addBlock(circle)
 
@@ -186,7 +190,8 @@ let circle2 =
 	radius:110,
 	strokeWidth:2,
 	windowOffset:"450,450",
-	strokeColor:".9,.9,.9,1.0",
+	strokeColor:gray,
+	fillGradient:{startColor: red, endColor: darkgreen } ,
 }
 addBlock(circle2)
 
@@ -214,7 +219,8 @@ let rect33 =
 	y: 80,
 	width: 200,
 	height: 200,
-	strokeColor:green,
+	strokeColor:red,
+	fillGradient:{startColor: green, endColor: darkgreen } ,
 	animator0:"x,1,10,12,Bounce",
 	animator3:"strokewidth,1,1,5,Bounce",
 	animator4:"strokealpha,.1,.1,1.0,Bounce",
@@ -234,6 +240,6 @@ let path1 =
 	point2:"65,120",
 	parent:"RECT33",
 	animator0:"x,1,40,100,Bounce",
-	animator0:"strokewidth,1,1,10,Bounce",
+	animator0:"strokewidth,1,1,4,Bounce",
 }
 addBlock(path1)

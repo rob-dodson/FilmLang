@@ -26,7 +26,11 @@ class FLRect : Block
         {
             let rectanglePath = NSBezierPath(roundedRect: boundingRect!, xRadius: radius, yRadius: radius)
         
-            if fillColor != nil
+            if fillGradient != nil
+            {
+                fillGradient!.draw(in: rectanglePath, angle: gradientAngle)
+            }
+            else if fillColor != nil
             {
                 fillColor!.setFill()
                 rectanglePath.fill()
@@ -34,7 +38,6 @@ class FLRect : Block
             
             if strokeColor != nil
             {
-                
                 strokeColor!.setStroke()
                 rectanglePath.lineWidth = strokeWidth
                 rectanglePath.stroke()

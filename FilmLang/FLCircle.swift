@@ -28,7 +28,11 @@ class FLCircle : Block
         
         let ovalPath = NSBezierPath(ovalIn: rect!)
         
-        if fillColor != nil
+        if fillGradient != nil
+        {
+            fillGradient!.draw(in: ovalPath, angle: gradientAngle)
+        }
+        else if fillColor != nil
         {
             fillColor!.setFill()
             ovalPath.fill()

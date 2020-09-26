@@ -12,21 +12,19 @@ import Cocoa
 class FLText : Block
 {
     var text : String = "???"
+    var font : String = "Helvetica"
     var size : CGFloat = 24.0
     var textColor = NSColor.green
-    
+    var padding : CGFloat = 0.0
     
     override func draw()
     {
         preDraw()
         
-        let pad : CGFloat = 5.0
-        
-        
         let textStyle = NSMutableParagraphStyle()
         textStyle.alignment = .left
         let textFontAttributes = [
-            .font: NSFont(name: "Helvetica", size: size)!,
+            .font: NSFont(name: font, size: size)!,
             .foregroundColor: textColor,
             .paragraphStyle: textStyle,
         ] as [NSAttributedString.Key: Any]
@@ -39,10 +37,10 @@ class FLText : Block
         
       
         
-        let textRect: NSRect = NSRect(x: CGFloat(x + xoffset) - pad - (boundingRect.width / 2),
-                                          y: CGFloat(y + yoffset) + (boundingRect.height / 2) - pad,
-                                          width: boundingRect.width + (pad * 2),
-                                          height: boundingRect.height + (pad * 2))
+        let textRect: NSRect = NSRect(x: CGFloat(x + xoffset) - padding - (boundingRect.width / 2),
+                                          y: CGFloat(y + yoffset) + (boundingRect.height / 2) - padding,
+                                          width: boundingRect.width + (padding * 2),
+                                          height: boundingRect.height + (padding * 2))
 
         
              
@@ -74,7 +72,7 @@ class FLText : Block
             borderPath.fill()
         }
         
-        text.draw(in: textRect.offsetBy(dx: 0 + pad, dy: 0.0 - pad), withAttributes: textFontAttributes)
+        text.draw(in: textRect.offsetBy(dx: 0 + padding, dy: 0.0 - padding), withAttributes: textFontAttributes)
 
         
         postDraw(rect:nil)

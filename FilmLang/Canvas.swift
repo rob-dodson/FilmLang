@@ -30,9 +30,11 @@ class Canvas: NSView
             
             parseBlock(block: text, dict: dict)
             
-            if let textstr = dict["text"]       as? String { text.text = textstr }
+            if let textstr = dict["text"]        as? String { text.text = textstr }
+            if let fontstr = dict["font"]        as? String { text.font = fontstr }
             if let colordict = dict["textColor"] as? NSDictionary  { text.textColor = colorFromDict(dict: colordict) }
-            if let size = dict["size"]          as? CGFloat { text.size = size }
+            if let size = dict["size"]           as? CGFloat { text.size = size }
+            if let padding = dict["padding"]     as? CGFloat { text.padding = padding }
         }
         else if dict["type"] as! String == "Grid"
         {
@@ -91,7 +93,6 @@ class Canvas: NSView
             }
         }
         
-      
     }
     
     
@@ -108,7 +109,9 @@ class Canvas: NSView
         if let radius = dict["radius"]               as? CGFloat { block.radius = radius }
         if let rotation = dict["rotation"]           as? CGFloat { block.rotation = rotation }
         if let strokeWidth = dict["strokeWidth"]     as? CGFloat { block.strokeWidth = strokeWidth }
+        if let gradientAngle = dict["gradientAngle"] as? CGFloat { block.gradientAngle = gradientAngle }
        
+        
         if let fillGradient = dict["fillGradient"]   as? NSDictionary
         {
             let fromColor = colorFromDict(dict: fillGradient["startColor"] as! NSDictionary)
@@ -159,7 +162,9 @@ class Canvas: NSView
         }
 
         connectParent(block: block, dict: dict)
+        print("Add block: \(block.name) - \(block.x) \(block.y)")
         
+
         for i in 0...10
         {
             if let childblockdict = dict["childBlock\(i)"] as? NSDictionary

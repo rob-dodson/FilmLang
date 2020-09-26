@@ -36,9 +36,15 @@ class FLText : Block
                                              attributes: textFontAttributes)
         
       
-        
+        /*
         let textRect: NSRect = NSRect(x: CGFloat(x + xoffset) - padding - (boundingRect.width / 2),
                                           y: CGFloat(y + yoffset) + (boundingRect.height / 2) - padding,
+                                          width: boundingRect.width + (padding * 2),
+                                          height: boundingRect.height + (padding * 2))
+        */
+        
+        let textRect: NSRect = NSRect(x: CGFloat(x + xoffset) - padding,
+                                          y: CGFloat(y + yoffset) - padding,
                                           width: boundingRect.width + (padding * 2),
                                           height: boundingRect.height + (padding * 2))
 

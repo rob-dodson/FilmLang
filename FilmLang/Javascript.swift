@@ -39,7 +39,7 @@ class Javascript
     {
         do
         {
-            let url = NSURL.fileURL(withPath: "/Users/robertdodson/Desktop/FILM00.js")
+            let url = NSURL.fileURL(withPath: "/Users/robertdodson/Desktop/FILM/FILM.js")
             let scripttorun = try String(contentsOf: url, encoding:.utf8)
             context?.evaluateScript(scripttorun)
         }

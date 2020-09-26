@@ -11,7 +11,7 @@ import Cocoa
 class Canvas: NSView
 {
     var timer : Timer? = nil
-    let screenBlock : FLGrid
+    let screenBlock : FLRect
 
     
     func addBlockFromDictionary(dict:NSDictionary)
@@ -233,7 +233,7 @@ class Canvas: NSView
         //
         // init
         //
-        screenBlock = FLGrid(name:"Screen",view:nil)
+        screenBlock = FLRect(name:"Screen",view:nil)
         super.init(coder: coder)
         screenBlock.view = self
         
@@ -242,9 +242,6 @@ class Canvas: NSView
         screenBlock.y = 10
         screenBlock.width = 1000
         screenBlock.height = 700
-        screenBlock.xspacing = 10
-        screenBlock.yspacing = 10
-        screenBlock.gridColor = NSColor.gray
         screenBlock.gradientAngle = -50
         screenBlock.clip = true
         screenBlock.fitToView = true

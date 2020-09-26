@@ -8,10 +8,12 @@ let IMAGE = "Image"
 let ARC = "Arc"
 let CIRCLE = "Circle"
 let LINE = "Line"
+let PATH = "Path"
 
 let green = ".0,.9,.0,0.9"
 let darkgreen = ".0,.5,.0,0.9"
 let red = ".9,.0,.0,1.0"
+let blue = ".0,.0,.9,1.0"
 
 
 //
@@ -160,6 +162,7 @@ let arc2 =
 	strokeColor:".0,.0,.8,.9",
 	animator0:"startangle,.1,10,90,Dec",
 	animator1:"endangle,.1,20,100,Dec",
+	animator4:"strokealpha,.1,.1,1.0,Bounce",
 }
 addBlock(arc2)
 
@@ -193,10 +196,44 @@ let line1 =
 	type:LINE,
 	name:"Line1",
 	x: 10,
-	y: 50,
+	y: 80,
 	endX: 1000,
-	endY: 50,
-	strokeWidth:2,
-	strokeColor:green,
+	endY: 80,
+	strokeWidth:5,
+	strokeColor:red,
+	windowOffset:"50,50",
 }
 addBlock(line1)
+
+
+let rect33 = 
+{
+	type:RECT,
+	name:"RECT33",
+	x: 10,
+	y: 80,
+	width: 200,
+	height: 200,
+	strokeColor:green,
+	animator0:"x,1,10,12,Bounce",
+	animator3:"strokewidth,1,1,5,Bounce",
+	animator4:"strokealpha,.1,.1,1.0,Bounce",
+}
+addBlock(rect33)
+
+let path1 = 
+{
+	type:PATH,
+	name:"Path1",
+	x: 40,
+	y: 40,
+	strokeWidth:1,
+	strokeColor:blue,
+	point1:"40,140",
+	point2:"45,143",
+	point2:"65,120",
+	parent:"RECT33",
+	animator0:"x,1,40,100,Bounce",
+	animator0:"strokewidth,1,1,10,Bounce",
+}
+addBlock(path1)

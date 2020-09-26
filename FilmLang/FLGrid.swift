@@ -83,11 +83,6 @@ class FLGrid : Block
             rectanglePath.stroke()
         }
         
-        if clip == true
-        {
-            rect.clip()
-        }
-        
         postDraw(rect: rect)
     }
 }

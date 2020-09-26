@@ -210,6 +210,11 @@ class Block
             name.draw(in: rect!.offsetBy(dx: 0, dy: -4), withAttributes: rectangleFontAttributes)
         }
         
+        if clip == true && rect != nil
+        {
+            rect!.clip()
+        }
+        
         for block in children
         {
             block.draw()

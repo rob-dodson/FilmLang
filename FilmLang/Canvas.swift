@@ -14,16 +14,13 @@ class Canvas: NSView
     let screenBlock : FLGrid
 
     
-    func addBlockFromDictionary(dict:NSDictionary) -> Block?
+    func addBlockFromDictionary(dict:NSDictionary)
     {
-        var returnBlock : Block? = nil
         
         if dict["type"] as! String == "Rect"
         {
             let rect = FLRect(name: dict["name"] as! String, view: self)
             parseBlock(block: rect, dict: dict)
-            
-            returnBlock = rect;
         }
         else if dict["type"] as! String == "Text"
         {
@@ -36,8 +33,6 @@ class Canvas: NSView
             if let textstr = dict["text"]       as? String { text.text = textstr }
             if let colordict = dict["textColor"] as? NSDictionary  { text.textColor = colorFromDict(dict: colordict) }
             if let size = dict["size"]          as? CGFloat { text.size = size }
-            
-            returnBlock = text
         }
         else if dict["type"] as! String == "Grid"
         {
@@ -48,8 +43,6 @@ class Canvas: NSView
             if let yspacing = dict["yspacing"]   as? CGFloat { grid.yspacing = yspacing }
             if let colordict = dict["gridColor"] as? NSDictionary  { grid.gridColor = colorFromDict(dict: colordict) }
             if let gridStrokeWidth = dict["gridStrokeWidth"]   as? CGFloat { grid.gridStrokeWidth = gridStrokeWidth }
-            
-            returnBlock = grid
         }
         else if dict["type"] as! String == "Image"
         {
@@ -60,8 +53,6 @@ class Canvas: NSView
             {
                 image.url = URL(string: urlstr)
             }
-            
-            returnBlock = image
         }
         else if dict["type"] as! String == "Arc"
         {
@@ -70,15 +61,11 @@ class Canvas: NSView
 
             if let startAngle = dict["startAngle"] as? CGFloat { arc.startAngle = startAngle }
             if let endAngle = dict["endAngle"]     as? CGFloat { arc.endAngle = endAngle }
-            
-            returnBlock = arc
         }
         else if dict["type"] as! String == "Circle"
         {
             let circle = FLCircle(name: dict["name"] as! String, view: self)
             parseBlock(block: circle, dict: dict)
-            
-            returnBlock = circle
         }
         else if dict["type"] as! String == "Line"
         {
@@ -87,8 +74,6 @@ class Canvas: NSView
             
             if let endX = dict["endX"]               as? CGFloat { line.endX = endX }
             if let endY = dict["endY"]               as? CGFloat { line.endY = endY }
-            
-            returnBlock = line
         }
         else if dict["type"] as! String == "Path"
         {
@@ -104,11 +89,9 @@ class Canvas: NSView
                     path.points.append(NSPoint(x: CGFloat(Double.init(p[0]) ?? 1.0), y: CGFloat(Double.init(p[1]) ?? 1.0)))
                 }
             }
-            
-            returnBlock = path
         }
         
-        return returnBlock
+      
     }
     
     
@@ -146,17 +129,6 @@ class Canvas: NSView
                 }
         }
         
-        for i in 0...10
-        {
-            if let childblockdict = dict["childBlock\(i)"] as? NSDictionary
-            {
-                if let childblock = addBlockFromDictionary(dict: childblockdict)
-                {
-                    block.addChild(block: childblock)
-                }
-            }
-        }
-        
         
         for i in 0...10
         {
@@ -187,6 +159,15 @@ class Canvas: NSView
         }
 
         connectParent(block: block, dict: dict)
+        
+        for i in 0...10
+        {
+            if let childblockdict = dict["childBlock\(i)"] as? NSDictionary
+            {
+                childblockdict.setValue(block.name, forKey:"parent")
+                addBlockFromDictionary(dict: childblockdict)
+            }
+        }
     }
     
     

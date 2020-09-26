@@ -122,6 +122,21 @@ addBlock(text1)
 //
 // grid
 //
+	//
+	// image
+	//
+	let frog0 =
+	{
+		type:IMAGE,
+		name:"Image0",
+		url:"https://frogradio.net/images/icon_128x128.png",
+		x: 60,
+		y: 20,
+		width:100,
+		height:100,
+		rotation:10,
+	}
+
 for (i = 0;i <= 2; i++)
 {
 	let	name = "Grid - ".concat(i.toString())
@@ -129,7 +144,7 @@ for (i = 0;i <= 2; i++)
 	{
 		type:GRID,
 		name:name,
-		x: 50 ,
+		x: 50 + (i * 10) ,
 		y: 290 + (i * 105),
 		width:400,
 		height:100,
@@ -141,27 +156,10 @@ for (i = 0;i <= 2; i++)
 		debug:true,
 		clip:true,
 		strokeColor:red,
+		childBlock0:frog0,
 		animator0:{value:STROKEALPHA,amount:0.1,min:0,max:.9,type:BOUNCE},
 	}
 	addBlock(grid)
-
-	//
-	// image
-	//
-	let image =
-	{
-		type:IMAGE,
-		name:"Image1",
-		url:"https://frogradio.net/images/icon_128x128.png",
-		x: 40,
-		y: 20,
-		width:100,
-		height:100,
-		rotation:10,
-		parent:name
-	}
-	addBlock(image)
-
 }
 
 let arc = 
@@ -253,8 +251,8 @@ let rect33 =
 	strokeWidth:6,
 	clip:true,
 	fillGradient:{startColor: green, endColor: darkgreen } ,
-	childBlock0: { name:"l0",type:RECT, x: 40, y: 80, width: 100, height: 80, strokeWidth:5, fillColor:red },
-	childBlock1: { name:"l1",type:RECT, x: 60, y: 90, width: 100, height: 80, strokeWidth:5, fillColor:blue },
+	childBlock0: { debug:true,name:"l0",type:RECT, x: 40, y: 80, width: 300, height: 80, strokeWidth:5, fillColor:red },
+	childBlock1: { debug:true,name:"l1",type:RECT, x: 60, y: 90, width: 300, height: 80, strokeWidth:5, fillColor:blue },
 	animator0:{value:X,amount:1.0,min:10,max:12,type:BOUNCE},
 	animator3:{value:STROKEWIDTH,amount:1.0,min:1,max:5,type:BOUNCE},
 	animator4:{value:STROKEALPHA,amount:0.1,min:.1,max:1.0,type:BOUNCE},

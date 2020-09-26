@@ -32,11 +32,11 @@ let DEC         = "dec"
 //
 // Colors
 //
-let red	      = {red:1.0, green:0.0, blue:0.0, alpha:1.0}
-let blue      = {red:0.0, green:0.0, blue:0.9, alpha:1.0}
-let green     = {red:0.0, green:0.9, blue:0.0, alpha:1.0}
+let red	      = {red:1.0, green:0.0, blue:0.0, alpha:0.8}
+let blue      = {red:0.0, green:0.0, blue:0.9, alpha:0.8}
+let green     = {red:0.0, green:0.9, blue:0.0, alpha:0.8}
 let darkgreen = {red:0.0, green:0.5, blue:0.0, alpha:0.4}
-let gray      = {red:0.7, green:0.7, blue:0.7, alpha:1.0}
+let gray      = {red:0.7, green:0.7, blue:0.7, alpha:0.8}
 
 //
 // gradients
@@ -244,12 +244,17 @@ let rect33 =
 {
 	type:RECT,
 	name:"RECT33",
-	x: 10,
+	x: 30,
 	y: 80,
 	width: 200,
 	height: 200,
 	strokeColor:red,
+	debug:true,
+	strokeWidth:6,
+	clip:true,
 	fillGradient:{startColor: green, endColor: darkgreen } ,
+	childBlock0: { name:"l0",type:RECT, x: 40, y: 80, width: 100, height: 80, strokeWidth:5, fillColor:red },
+	childBlock1: { name:"l1",type:RECT, x: 60, y: 90, width: 100, height: 80, strokeWidth:5, fillColor:blue },
 	animator0:{value:X,amount:1.0,min:10,max:12,type:BOUNCE},
 	animator3:{value:STROKEWIDTH,amount:1.0,min:1,max:5,type:BOUNCE},
 	animator4:{value:STROKEALPHA,amount:0.1,min:.1,max:1.0,type:BOUNCE},

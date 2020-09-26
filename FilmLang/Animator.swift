@@ -44,6 +44,7 @@ class Animator
         case endangle
         case fillalpha
         case strokewidth
+        case strokealpha
     }
 }
     

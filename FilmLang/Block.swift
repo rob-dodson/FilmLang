@@ -20,6 +20,7 @@ class Block
     var y             : CGFloat = 10.0
     var fillColor     : NSColor?
     var strokeColor   : NSColor?
+    var strokeAlpha   : CGFloat = -1.0
     var animators     : [Animator]
     var fillGradient  : NSGradient?
     var width         : CGFloat = 111.0
@@ -40,8 +41,7 @@ class Block
     var windowWidthOffset  : CGFloat = 0.0
     var windowHeightOffset : CGFloat = 0.0
     var fitToView          : Bool = false
-    var endX               : CGFloat = 1.0
-    var endY               : CGFloat = 1.0
+    
     
     
     init(name:String, view:NSView?)
@@ -92,6 +92,9 @@ class Block
                 }
             case .strokewidth:
                 adjust(val:&strokeWidth, animator: &animators[index])
+                
+            case .strokealpha:
+                adjust(val:&strokeAlpha, animator: &animators[index])
             }
         }
     }
@@ -184,6 +187,11 @@ class Block
                 context.rotate(by: CGFloat(rotation) * CGFloat.pi/180)
                 context.translateBy(x:-rect.origin.x, y:-rect.origin.y)
             }
+        }
+        
+        if strokeAlpha > 0.0
+        {
+            strokeColor = strokeColor?.withAlphaComponent(strokeAlpha)
         }
 
     }

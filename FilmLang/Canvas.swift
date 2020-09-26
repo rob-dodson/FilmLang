@@ -70,6 +70,24 @@ class Canvas: NSView
         {
             let line = FLLine(name: dict["name"] as! String, view: self)
             parseBlock(block: line, dict: dict)
+            
+            if let endX = dict["endX"]               as? CGFloat { line.endX = endX }
+            if let endY = dict["endY"]               as? CGFloat { line.endY = endY }
+        }
+        else if dict["type"] as! String == "Path"
+        {
+            let path = FLPath(name: dict["name"] as! String, view: self)
+            parseBlock(block: path, dict: dict)
+            
+            for i in 0...100
+            {
+                let key = "point\(i)"
+                if let pointstr = dict[key] as? String
+                {
+                    let p = pointstr.split(separator: ",", maxSplits: 2, omittingEmptySubsequences: false)
+                    path.points.append(NSPoint(x: CGFloat(Double.init(p[0]) ?? 1.0), y: CGFloat(Double.init(p[1]) ?? 1.0)))
+                }
+            }
         }
     }
     
@@ -87,8 +105,7 @@ class Canvas: NSView
         if let radius = dict["radius"]           as? CGFloat { block.radius = radius }
         if let rotation = dict["rotation"]       as? CGFloat { block.rotation = rotation }
         if let strokeWidth = dict["strokeWidth"] as? CGFloat { block.strokeWidth = strokeWidth }
-        if let endX = dict["endX"]               as? CGFloat { block.endX = endX }
-        if let endY = dict["endY"]               as? CGFloat { block.endY = endY }
+       
         
         
         if let windowOffset = dict["windowOffset"] as? String
@@ -124,6 +141,7 @@ class Canvas: NSView
                 if (val == "startangle")  { value = Animator.AnimatorVal.startangle }
                 if (val == "endangle")    { value = Animator.AnimatorVal.endangle }
                 if (val == "strokewidth") { value = Animator.AnimatorVal.strokewidth }
+                if (val == "strokealpha") { value = Animator.AnimatorVal.strokealpha }
 
                 var anitype = Animator.AnimatorType.Bounce
                 if (type == "bounce") { anitype = Animator.AnimatorType.Bounce }

@@ -34,6 +34,7 @@ class FLRect : Block
             
             if strokeColor != nil
             {
+                
                 strokeColor!.setStroke()
                 rectanglePath.lineWidth = strokeWidth
                 rectanglePath.stroke()

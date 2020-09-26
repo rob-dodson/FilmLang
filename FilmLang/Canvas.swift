@@ -94,19 +94,19 @@ class Canvas: NSView
     
     func parseBlock(block:Block,dict:NSDictionary)
     {
-        if let debug = dict["debug"]             as? Bool    { block.debug = debug }
-        if let clip = dict["clip"]               as? Bool    { block.clip = clip }
-        if let x = dict["x"]                     as? CGFloat { block.x = x }
-        if let y = dict["y"]                     as? CGFloat { block.y = y }
-        if let width = dict["width"]             as? CGFloat { block.width = width }
-        if let height = dict["height"]           as? CGFloat { block.height = height }
+        if let debug = dict["debug"]                 as? Bool    { block.debug = debug }
+        if let clip = dict["clip"]                   as? Bool    { block.clip = clip }
+        if let x = dict["x"]                         as? CGFloat { block.x = x }
+        if let y = dict["y"]                         as? CGFloat { block.y = y }
+        if let width = dict["width"]                 as? CGFloat { block.width = width }
+        if let height = dict["height"]               as? CGFloat { block.height = height }
         if let fillcolordict = dict["fillColor"]     as? NSDictionary { block.fillColor = colorFromDict(dict: fillcolordict) }
         if let strokecolordict = dict["strokeColor"] as? NSDictionary { block.strokeColor = colorFromDict(dict: strokecolordict) }
-        if let radius = dict["radius"]           as? CGFloat { block.radius = radius }
-        if let rotation = dict["rotation"]       as? CGFloat { block.rotation = rotation }
-        if let strokeWidth = dict["strokeWidth"] as? CGFloat { block.strokeWidth = strokeWidth }
+        if let radius = dict["radius"]               as? CGFloat { block.radius = radius }
+        if let rotation = dict["rotation"]           as? CGFloat { block.rotation = rotation }
+        if let strokeWidth = dict["strokeWidth"]     as? CGFloat { block.strokeWidth = strokeWidth }
        
-        if let fillGradient = dict["fillGradient"] as? NSDictionary
+        if let fillGradient = dict["fillGradient"]   as? NSDictionary
         {
             let fromColor = colorFromDict(dict: fillGradient["startColor"] as! NSDictionary)
             let toColor = colorFromDict(dict: fillGradient["endColor"] as! NSDictionary)
@@ -114,7 +114,7 @@ class Canvas: NSView
             block.fillGradient = NSGradient(starting: fromColor, ending: toColor)
         }
         
-        if let windowOffset = dict["windowOffset"] as? String
+        if let windowOffset = dict["windowOffset"]    as? String
         {
             let p = windowOffset.split(separator: ",", maxSplits: 2, omittingEmptySubsequences: false)
             block.windowWidthOffset = CGFloat(Double.init(p[0]) ?? 0.0)
@@ -130,15 +130,14 @@ class Canvas: NSView
         for i in 0...10
         {
             let key = "animator\(i)"
-            if let animatorstr = dict[key] as? String
+            
+            if let animatordict = dict[key] as? NSDictionary
             {
-                let p = animatorstr.split(separator: ",", maxSplits: 5, omittingEmptySubsequences: false)
-                
-                let val = p[0]
-                let amount = CGFloat(Double.init(p[1]) ?? 1.0)
-                let min = CGFloat(Double.init(p[2]) ?? 1.0)
-                let max = CGFloat(Double.init(p[3]) ?? 10.0)
-                let type = p[4]
+                let val    = animatordict["value"] as! String
+                let amount = CGFloat.init(animatordict["amount"] as! Double)
+                let min    = CGFloat.init(animatordict["min"] as! Double)
+                let max    = CGFloat.init(animatordict["max"] as! Double)
+                let type   = animatordict["type"] as! String
                 
                 var value = Animator.AnimatorVal.rotation
                 if (val == "rotation")    { value = Animator.AnimatorVal.rotation }

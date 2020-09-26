@@ -1,4 +1,9 @@
 //
+// FilmLang 1.0 - test
+//
+
+
+//
 // constants
 //
 let RECT = "Rect"
@@ -10,11 +15,34 @@ let CIRCLE = "Circle"
 let LINE = "Line"
 let PATH = "Path"
 
+//
+// animation constants
+//
+let ROTATION    = "rotation"
+let X           = "x"
+let Y           = "y"
+let STARTANGLE  = "startangle"
+let ENDANGLE    = "endangle"
+let STROKEWIDTH = "strokewidth"
+let STROKEALPHA = "strokealpha"
+let BOUNCE      = "bounce"
+let INC         = "inc"
+let DEC         = "dec"
+
+//
+// Colors
+//
 let red	      = {red:1.0, green:0.0, blue:0.0, alpha:1.0}
 let blue      = {red:0.0, green:0.0, blue:0.9, alpha:1.0}
 let green     = {red:0.0, green:0.9, blue:0.0, alpha:1.0}
 let darkgreen = {red:0.0, green:0.5, blue:0.0, alpha:0.4}
 let gray      = {red:0.7, green:0.7, blue:0.7, alpha:1.0}
+
+//
+// gradients
+//
+let grad1     = {startColor: {red:0.0, green:0.8, blue:0.0, alpha:0.6}, endColor: darkgreen }
+
 
 
 //
@@ -36,9 +64,9 @@ for (i = 1; i < 10 ; i++)
 		radius:4,
 		strokeColor:green,
 		rotation:10,
-		animator0:"rotation,1.0,0.0,360,Bounce",
-		animator1:"x,1.0,0.0,300,Bounce",
-		animator2:"y,1.0,150,160,Inc",
+		animator0:{value:ROTATION,amount:1.0,min:0.0,max:360,type:BOUNCE},
+		animator1:{value:X,amount:1.0,min:0.0,max:300,type:BOUNCE},
+		animator2:{value:Y,amount:1.0,min:150,max:169,type:INC},
 	}
 	addBlock(rect1)
 
@@ -90,6 +118,7 @@ let text1 =
 }
 addBlock(text1)
 
+
 //
 // grid
 //
@@ -104,7 +133,7 @@ for (i = 0;i <= 2; i++)
 		y: 290 + (i * 105),
 		width:400,
 		height:100,
-		fillColor:darkgreen,
+		fillGradient:grad1,
 		gridColor:gray,
 		yspacing:20,
 		xspacing:20,
@@ -112,7 +141,7 @@ for (i = 0;i <= 2; i++)
 		debug:true,
 		clip:true,
 		strokeColor:red,
-		animator0:"strokealpha,.1,0.0,.9,Bounce",
+		animator0:{value:STROKEALPHA,amount:0.1,min:0,max:.9,type:BOUNCE},
 	}
 	addBlock(grid)
 
@@ -138,7 +167,7 @@ for (i = 0;i <= 2; i++)
 let arc = 
 {
 	type:ARC,
-	name:"ARC",
+	name:"ARC1",
 	x: 700,
 	y: 400,
 	radius:60,
@@ -146,26 +175,26 @@ let arc =
 	startAngle:10,
 	endAngle:90,
 	strokeColor:green,
-	animator0:"startangle,1,10,30,Inc",
-	animator1:"endangle,1,90,110,Inc",
-	animator3:"strokewidth,1,1,10,Bounce",
+	animator0:{value:STARTANGLE,amount:1,min:10,max:30,type:INC},
+	animator1:{value:ENDANGLE,amount:1,min:90,max:110,type:INC},
+	animator3:{value:STROKEWIDTH,amount:1,min:1,max:10,type:BOUNCE},
 }
 addBlock(arc)
 
 let arc2 = 
 {
 	type:ARC,
-	name:"ARC",
+	name:"ARC2",
 	x: 700,
 	y: 400,
 	radius:80,
 	strokeWidth:10,
 	startAngle:10,
 	endAngle:90,
-	strokeColor:darkgreen,
-	animator0:"startangle,.1,10,90,Dec",
-	animator1:"endangle,.1,20,100,Dec",
-	animator4:"strokealpha,.1,.1,1.0,Bounce",
+	strokeColor:red,
+	animator0:{value:STARTANGLE,amount:.1,min:10,max:90,type:DEC},
+	animator1:{value:ENDANGLE,amount:.1,min:20,max:100,type:DEC},
+	//animator4:{value:STROKEALPHA,amount:.1,min:.1,max:1.0,type:BOUNCE},
 }
 addBlock(arc2)
 
@@ -221,9 +250,9 @@ let rect33 =
 	height: 200,
 	strokeColor:red,
 	fillGradient:{startColor: green, endColor: darkgreen } ,
-	animator0:"x,1,10,12,Bounce",
-	animator3:"strokewidth,1,1,5,Bounce",
-	animator4:"strokealpha,.1,.1,1.0,Bounce",
+	animator0:{value:X,amount:1.0,min:10,max:12,type:BOUNCE},
+	animator3:{value:STROKEWIDTH,amount:1.0,min:1,max:5,type:BOUNCE},
+	animator4:{value:STROKEALPHA,amount:0.1,min:.1,max:1.0,type:BOUNCE},
 }
 addBlock(rect33)
 
@@ -239,7 +268,7 @@ let path1 =
 	point2:"45,143",
 	point2:"65,120",
 	parent:"RECT33",
-	animator0:"x,1,40,100,Bounce",
-	animator0:"strokewidth,1,1,4,Bounce",
+	animator0:{value:X,amount:1,min:40,max:100,type:BOUNCE},
+	animator0:{value:STROKEWIDTH,amount:1,min:1,max:4,type:BOUNCE},
 }
 addBlock(path1)

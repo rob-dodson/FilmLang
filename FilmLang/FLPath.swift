@@ -34,12 +34,20 @@ class FLPath : Block
             path.line(to: NSPoint(x: point.x + xoffset, y: point.y + yoffset))
         }
         
+        if fillColor != nil
+        {
+            fillColor!.setFill()
+            path.fill()
+        }
+        
         if strokeColor != nil
         {
             strokeColor!.setStroke()
             path.lineWidth = strokeWidth
             path.stroke()
         }
+        
+       
         
         postDraw(rect: nil)
     }

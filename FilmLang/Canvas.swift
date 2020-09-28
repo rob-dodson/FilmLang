@@ -91,6 +91,33 @@ class Canvas: NSView
                 }
             }
         }
+        else if dict["type"] as! String == "Bezier"
+        {
+            let bez = FLBezier(name: dict["name"] as! String, view: self)
+            parseBlock(block: bez, dict: dict)
+            
+            for i in 0...100
+            {
+                if let bdict = dict["point\(i)"] as? NSDictionary
+                {
+                    if bdict["point"] != nil
+                    {
+                        let point = pointFromDict(dict: bdict["point"] as! NSDictionary)
+                        let controlpoint1 = pointFromDict(dict: bdict["controlpoint1"] as! NSDictionary)
+                        let controlpoint2 = pointFromDict(dict: bdict["controlpoint2"] as! NSDictionary)
+                        let bezpoint = BezPoint(point: point, controlPoint1: controlpoint1, controlPoint2:controlpoint2)
+                        bez.bezpoints.append(bezpoint)
+                    }
+                    else if bdict["x"] != nil
+                    {
+                        let point = pointFromDict(dict: bdict)
+                        let bezpoint = BezPoint(point: point, controlPoint1: nil, controlPoint2:nil)
+                        bez.bezpoints.append(bezpoint)
+                    }
+                    
+                }
+            }
+        }
         
     }
     

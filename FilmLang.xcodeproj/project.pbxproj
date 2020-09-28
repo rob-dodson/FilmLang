@@ -23,6 +23,7 @@
 		AEC3FBEB25100A5B00C32210 /* FLCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC3FBEA25100A5B00C32210 /* FLCircle.swift */; };
 		AEC3FBED25101C1B00C32210 /* FLPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC3FBEC25101C1B00C32210 /* FLPath.swift */; };
 		AED96885251E96D7007B2CE6 /* FLLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED96884251E96D7007B2CE6 /* FLLine.swift */; };
+		AED9688A25223188007B2CE6 /* FLBezier.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED9688925223188007B2CE6 /* FLBezier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		AEC3FBEA25100A5B00C32210 /* FLCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLCircle.swift; sourceTree = "<group>"; };
 		AEC3FBEC25101C1B00C32210 /* FLPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLPath.swift; sourceTree = "<group>"; };
 		AED96884251E96D7007B2CE6 /* FLLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLLine.swift; sourceTree = "<group>"; };
+		AED9688925223188007B2CE6 /* FLBezier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLBezier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 				AE24CB2925096DC7000F20D7 /* Canvas.swift */,
 				AE183D2E250EB4180017805E /* Block.swift */,
 				AEC3FBEC25101C1B00C32210 /* FLPath.swift */,
+				AED9688925223188007B2CE6 /* FLBezier.swift */,
 				AEC3FBEA25100A5B00C32210 /* FLCircle.swift */,
 				AE1E77F725190BED00CFC143 /* FLArc.swift */,
 				AEC3FBE825100A3A00C32210 /* FLGrid.swift */,
@@ -172,6 +175,7 @@
 				AEC3FBE7251009F200C32210 /* FLRect.swift in Sources */,
 				AE24CB1225096A02000F20D7 /* FilmLang.xcdatamodeld in Sources */,
 				AE93A982251BDDBA00F3D559 /* Javascript.swift in Sources */,
+				AED9688A25223188007B2CE6 /* FLBezier.swift in Sources */,
 				AE8E380C2512B79F0092C187 /* FLText.swift in Sources */,
 				AE24CB0F25096A02000F20D7 /* AppDelegate.swift in Sources */,
 				AE24CB2A25096DC7000F20D7 /* Canvas.swift in Sources */,

@@ -208,7 +208,7 @@ class Canvas: NSView
     {
         if let parent = dict["parent"] as? String
         {
-            if let parentblock = findBlock(nametofind: parent, block: screenBlock)
+            if let parentblock = findBlock(nametofind: parent, startblock: screenBlock)
             {
                 parentblock.addChild(block: block)
             }
@@ -224,26 +224,30 @@ class Canvas: NSView
     }
     
     
-    func findBlock(nametofind:String,block:Block) -> Block?
+    func findBlock(nametofind:String,startblock:Block) -> Block?
     {
-        for block in block.children
+        for childblock in startblock.children
         {
-            if block.name == nametofind
+            if childblock.name == nametofind
             {
-                return block
+                return childblock
             }
         }
         
-        for block in block.children
+        for childblock in startblock.children
         {
-            if block.children.count > 0
+            if childblock.children.count > 0
             {
-                return findBlock(nametofind: nametofind, block: block)
+                if let block = findBlock(nametofind: nametofind, startblock: childblock)
+                {
+                    return block
+                }
             }
         }
         
         return nil
     }
+    
     
     func pointFromDict(dict:NSDictionary) -> NSPoint
     {

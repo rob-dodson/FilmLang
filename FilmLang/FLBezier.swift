@@ -55,12 +55,14 @@ class FLBezier : Block
         
         let context = NSGraphicsContext.current!.cgContext
         context.translateBy(x:x + xoffset, y:y + yoffset)
+        
         if strokeColor != nil
         {
             strokeColor!.setStroke()
             path.lineWidth = strokeWidth
             path.stroke()
         }
+        
         context.translateBy(x:-(x + xoffset), y:-(y + yoffset))
         
         postDraw(rect: nil)

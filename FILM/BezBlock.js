@@ -11,7 +11,7 @@ let bezblock =
 	height:400,
 	fillGradient:blockbackgrad,
 	radius:4,
-	childBlock0: {type:TEXT,name:"beztitle",text:"BEZ-1",size:20,x:30,y:380,textColor:gray,font:MainFont,fillColor:gray,textColor:black,strokeColor:gray,radius:4 },
+	childBlock0: {type:TEXT,name:"beztitle",text:"BEZ-1",size:20,x:30,y:360,textColor:gray,font:MainFont,fillColor:gray,textColor:black,strokeColor:gray,radius:4 },
 }
 addBlock(bezblock)
 
@@ -68,3 +68,24 @@ for (i = 0; i < 5; i++)
 	}
 	addBlock(testbez)
 }
+
+
+let bigbez =
+{
+	name:"bigbez",
+	type:BEZIER,
+	x:27,
+	y:50,
+	strokeWidth:10,
+
+	debug:false,
+	point1:{ x: 45,  y: 200 },
+	point2:{ point:{ x: 90,  y: 190 }, controlpoint1:{ x: 45, y: 200  }, controlpoint2:{ x: 80, y: 200 }},
+	point3:{ point:{ x: 145, y: 15  }, controlpoint1:{ x: 100, y: 180 }, controlpoint2:{ x: 135,  y: 20 }},
+	point4:{ point:{ x: 190, y: 0   }, controlpoint1:{ x: 155, y: -10 }, controlpoint2:{ x: 190, y: 0 }},
+
+	strokeColor:cyan,
+	parent:"bezblock"
+}
+addBlock(bigbez)
+

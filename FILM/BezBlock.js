@@ -8,10 +8,10 @@ let bezblock =
 	x:850,
 	y:450,
 	width:400,
-	height:300,
+	height:400,
 	fillGradient:blockbackgrad,
 	radius:4,
-	childBlock0: {type:TEXT,name:"beztitle",text:"BEZ-1",size:20,x:30,y:290,textColor:gray,font:MainFont,fillColor:gray,textColor:black,strokeColor:gray,radius:4 },
+	childBlock0: {type:TEXT,name:"beztitle",text:"BEZ-1",size:20,x:30,y:380,textColor:gray,font:MainFont,fillColor:gray,textColor:black,strokeColor:gray,radius:4 },
 }
 addBlock(bezblock)
 
@@ -47,20 +47,24 @@ for (i = 0; i < 5; i++)
 		textColor:gray,font:MainFont,textColor:gray,parent:"bezblock" }
 	addBlock(text)
 
+	let text2 =  {type:TEXT,name:"tab",text:"CAT-".concat(i.toString()),size:15,x:20,y:240 + (i * yoffset),
+		textColor:gray,font:MainFont,textColor:gray,parent:"bezblock" }
+	addBlock(text2)
+
 	let testbez =
 	{
 		name:"testbez",
 		type:BEZIER,
 		x:10,
-		y:15 + (i * yoffset),
+		y:45 + (i * yoffset),
 		strokeWidth:3,
-		point0:{x: 57.5, y: 110.5},
-		point1:{point:{x: 71.5, y: 110.5}, controlpoint1:{x: 57.5, y: 110.5}, controlpoint2:{x: 67.5, y: 110.5}},
-		point2:{point:{x: 71.5, y: 41.5}, controlpoint1:{x: 75.5, y: 69.5}, controlpoint2:{x: 74.5, y: 49.5}},
-		point3:{point:{x: 59.9, y: 30.5}, controlpoint1:{x: 68.5, y: 33.5}, controlpoint2:{x: 59.9, y:31.5}},
-		strokeColor:gray,
+
+		point1:{ x: 60, y: 200 },
+		point2:{ point:{ x: 90, y: 100 }, controlpoint1:{ x: 60, y:200 }, controlpoint2:{ x: 90, y:170 }},
+		point3:{ point:{ x: 60, y: 0  },  controlpoint1:{ x: 90, y:30  }, controlpoint2:{ x: 60, y:0 }},
+
+		strokeColor:cyan,
 		parent:"bezblock"
 	}
-
 	addBlock(testbez)
 }

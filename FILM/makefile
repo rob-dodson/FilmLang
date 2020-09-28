@@ -1,4 +1,5 @@
 all:
-	rm FILM.js
+	rm -f FILM.js
 	cat *.js > tmp.txt
 	cat Constants tmp.txt > FILM.js
+	rm tmp.txt

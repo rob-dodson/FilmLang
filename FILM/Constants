@@ -9,6 +9,8 @@ let ARC = "Arc"
 let CIRCLE = "Circle"
 let LINE = "Line"
 let PATH = "Path"
+let BEZIER = "Bezier"
+let MainFont = "Courier"
 
 //
 // animation constants
@@ -33,6 +35,7 @@ let green     = { red:0.0, green:0.9, blue:0.0, alpha:0.8}
 let darkgreen = { red:0.0, green:0.5, blue:0.0, alpha:0.4}
 let gray      = { red:0.7, green:0.7, blue:0.7, alpha:0.6}
 let orange    = { red: 0.76, green: 0.38, blue: 0.05, alpha: 1.00 }
+let black     = { red: 0.0, green: 0.0, blue: 0.0, alpha: 1.00 }
 
 let camborder = {red:0.5, green:0.5, blue:0.5, alpha:0.7}
 let camback   = {red:0.0, green:0.0, blue:0.4, alpha:0.6}

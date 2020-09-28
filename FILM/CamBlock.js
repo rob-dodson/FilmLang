@@ -10,9 +10,10 @@ let CamBlock =
 	y:420,
 	width:340,
 	height:330,
+	radius:4,
 	fillGradient:blockbackgrad,
 	gradientAngle:-50,
-	childBlock0: {type:TEXT,name:"title",text:"cameras",size:20,x:130,y:305,textColor:gray,font:"Futura" },
+	childBlock0: {type:TEXT,name:"title",text:"cameras",size:20,x:130,y:305,textColor:gray,font:MainFont },
 }
 addBlock(CamBlock)
 
@@ -43,16 +44,16 @@ for (x = 0; x <= 4; x++)
 			fillColor:camback,
 			childBlock0: {type:RECT,name:"icon", x:5,y:20,width:30,height:15,fillColor:iconcolor },
 			childBlock1: {type:TEXT,name:"text",text:camname,size:10,x:5,y:5,textColor:darkgreen },
-			childBlock2: {type:TEXT,name:"textbig",text:camnum,size:15,x:40,y:20,textColor:gray,font:"Futura" },
+			childBlock2: {type:TEXT,name:"textbig",text:camnum,size:15,x:40,y:20,textColor:gray,font:MainFont },
 			parent:"CamBlock",
 		}
 		addBlock(Cam)
 	}
 }
 
-let label1 = { type:TEXT,name:"label1",text:"723778-8293*9",    rotation:45,size:10,x:20,y:550,textColor:orange,font:"Futura" }
-let label2 = { type:TEXT,name:"label2",text:"xxc - 903939",     rotation:45,size:0,x:20,y:350,textColor:orange,font:"Futura" }
-let label3 = { type:TEXT,name:"label2",text:"spec-9023 ** 324A",rotation:45,size:10,x:20,y:150,textColor:orange,font:"Futura" }
+let label1 = { type:TEXT,name:"label1",text:"723778-8293*9",    rotation:45,size:10,x:20,y:550,textColor:orange,font:MainFont }
+let label2 = { type:TEXT,name:"label2",text:"xxc - 903939",     rotation:45,size:0,x:20,y:350,textColor:orange,font:MainFont }
+let label3 = { type:TEXT,name:"label2",text:"spec-9023 ** 324A",rotation:45,size:10,x:20,y:150,textColor:orange,font:MainFont }
 addBlock(label1)
 addBlock(label2)
 addBlock(label3)
@@ -69,9 +70,9 @@ let cambracket =
 	x: 80,
     y: 410,
     strokeWidth:10,
-    point1:"50,410",
-    point2:"50,760",
-    point3:"80,760",
+    point1:{x:50,y:410},
+    point2:{x:50,y:760},
+    point3:{x:80,y:760},
 	strokeColor:blue,
 }
 addBlock(cambracket)

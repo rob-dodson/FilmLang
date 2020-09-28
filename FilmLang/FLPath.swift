@@ -11,7 +11,7 @@ import Cocoa
 
 class FLPath : Block
 {
-    var points             : [NSPoint]
+    var points : [NSPoint]
     
     override init(name:String, view:NSView?)
     {
@@ -26,7 +26,8 @@ class FLPath : Block
         preDraw()
         
         let path = NSBezierPath()
-        path.lineJoinStyle = .bevel
+        path.lineJoinStyle = .round
+        
         path.move(to: NSPoint(x: xoffset + x, y: yoffset + y))
         for point in points
         {

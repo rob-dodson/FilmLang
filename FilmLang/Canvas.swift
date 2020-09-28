@@ -12,7 +12,7 @@ class Canvas: NSView
 {
     var timer : Timer? = nil
     let screenBlock : FLRect
-
+    var thereAreAnimators : Bool = false
     
     func addBlockFromDictionary(dict:NSDictionary)
     {
@@ -85,10 +85,9 @@ class Canvas: NSView
             for i in 0...100
             {
                 let key = "point\(i)"
-                if let pointstr = dict[key] as? String
+                if let dict = dict[key]
                 {
-                    let p = pointstr.split(separator: ",", maxSplits: 2, omittingEmptySubsequences: false)
-                    path.points.append(NSPoint(x: CGFloat(Double.init(p[0]) ?? 1.0), y: CGFloat(Double.init(p[1]) ?? 1.0)))
+                    path.points.append(pointFromDict(dict:dict as! NSDictionary))
                 }
             }
         }
@@ -158,6 +157,8 @@ class Canvas: NSView
                 if (type == "dec")    { anitype = Animator.AnimatorType.Dec }
                 
                 block.animators.append(Animator(val: value, amount: amount, min: min, max: max, type: anitype, windowChanged:nil))
+                
+                thereAreAnimators = true
             }
         }
 
@@ -217,6 +218,14 @@ class Canvas: NSView
         return nil
     }
     
+    func pointFromDict(dict:NSDictionary) -> NSPoint
+    {
+        let x = CGFloat.init(dict["x"] as! Double)
+        let y = CGFloat.init(dict["y"] as! Double)
+        
+        return NSPoint(x: x, y: y)
+    }
+    
     func colorFromDict(dict:NSDictionary) -> NSColor
     {
         let red = CGFloat.init(dict["red"] as! Double)
@@ -252,7 +261,7 @@ class Canvas: NSView
             block.height = self.frame.height
         }
         
-        
+        /*
         
         let title = FLText(name:"title",view:self)
         title.text = "FilmLang"
@@ -265,7 +274,7 @@ class Canvas: NSView
            block.y = self.frame.height - 120
         }
         screenBlock.addChild(block: title)
-        
+        */
         
         /*
         //
@@ -416,20 +425,23 @@ class Canvas: NSView
         js.execScript()
         
         
-        timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true)
-        { (timer) in
-            
-            self.screenBlock.width = CGFloat(self.frame.width) - 20
-            self.screenBlock.height = CGFloat(self.frame.height) - 20
-            
-            if self.screenBlock.animators.count > 0
-            {
-                self.screenBlock.animate()
+        if thereAreAnimators
+        {
+            timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true)
+            { (timer) in
+                
+                self.screenBlock.width = CGFloat(self.frame.width) - 20
+                self.screenBlock.height = CGFloat(self.frame.height) - 20
+                
+                if self.screenBlock.animators.count > 0
+                {
+                    self.screenBlock.animate()
+                }
+                
+                self.animateChildren(children: self.screenBlock.children)
+                
+                self.needsDisplay = true
             }
-            
-            self.animateChildren(children: self.screenBlock.children)
-            
-            self.needsDisplay = true
         }
         
     }

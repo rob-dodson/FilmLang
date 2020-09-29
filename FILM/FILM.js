@@ -30,7 +30,7 @@ let DEC         = "dec"
 // Colors
 //
 let red       = { red:.7, green:0.0, blue:0.0, alpha:0.8}
-let blue      = { red:0.0, green:0.0, blue:0.9, alpha:0.8}
+let blue      = { red: 0.27, green: 0.29, blue: 0.61, alpha: .7}
 let cyan      = { red: 0.07, green: 0.61, blue: 0.65, alpha: .5}
 let green     = { red:0.0, green:0.9, blue:0.0, alpha:0.8}
 let darkgreen = { red:0.0, green:0.5, blue:0.0, alpha:0.4}
@@ -69,12 +69,20 @@ addBlock(bezblock)
 
 for (i = 0; i < 3; i++)
 {
-	let yoffset = 14 
+	let yoffset = 18 
 
+	if (i == 0)
+	{
+		let text =  {type:TEXT,name:"dtx",text:"DTX".concat(i.toString()),size:15,x:222,y:42 + (i * yoffset),
+		textColor:gray,fillColor:cyan,font:MainFont,textColor:gray,parent:"bezblock" }
+		addBlock(text)
+	}
+	else
+	{
 	let text =  {type:TEXT,name:"dtx",text:"DTX".concat(i.toString()),size:15,x:222,y:42 + (i * yoffset),
 		textColor:gray,font:MainFont,textColor:gray,parent:"bezblock" }
-
 	addBlock(text)
+	}
 }
 
 let dtxblock = 
@@ -84,8 +92,8 @@ let dtxblock =
 	fillColor:gray,
 	point0:{x: 260, y: 42},
 	point1:{x: 270, y: 44},
-	point2:{x: 270, y: 82},
-	point3:{x: 260, y: 84},
+	point2:{x: 270, y: 92},
+	point3:{x: 260, y: 94},
 	point4:{x: 260, y: 42},
 	parent:"bezblock"
 }
@@ -99,9 +107,18 @@ for (i = 0; i < 5; i++)
 		textColor:gray,font:MainFont,textColor:gray,parent:"bezblock" }
 	addBlock(text)
 
+	if (i == 0)
+	{
+	let text2 =  {type:TEXT,name:"tab",text:"CAT-".concat(i.toString()),size:15,x:20,y:240 + (i * yoffset),
+		textColor:gray,fillColor:cyan,font:MainFont,textColor:gray,parent:"bezblock" }
+	addBlock(text2)
+	}
+	else
+	{
 	let text2 =  {type:TEXT,name:"tab",text:"CAT-".concat(i.toString()),size:15,x:20,y:240 + (i * yoffset),
 		textColor:gray,font:MainFont,textColor:gray,parent:"bezblock" }
 	addBlock(text2)
+	}
 
 	let testbez =
 	{
@@ -130,10 +147,10 @@ let bigbez =
 	y:50,
 	strokeWidth:10,
 
-	debug:false,
+	debug:true,
 	point1:{ x: 45,  y: 200 },
-	point2:{ point:{ x: 90,  y: 190 }, controlpoint1:{ x: 45, y: 200  }, controlpoint2:{ x: 80, y: 200 }},
-	point3:{ point:{ x: 145, y: 15  }, controlpoint1:{ x: 100, y: 180 }, controlpoint2:{ x: 135,  y: 20 }},
+	point2:{ point:{ x: 100,  y: 190 }, controlpoint1:{ x: 45, y: 200  }, controlpoint2:{ x: 80, y: 220 }},
+	point3:{ point:{ x: 145, y: 15  }, controlpoint1:{ x: 120, y: 180 }, controlpoint2:{ x: 135,  y: 20 }},
 	point4:{ point:{ x: 190, y: 0   }, controlpoint1:{ x: 155, y: -10 }, controlpoint2:{ x: 190, y: 0 }},
 
 	strokeColor:cyan,

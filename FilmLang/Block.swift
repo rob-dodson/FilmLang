@@ -274,6 +274,11 @@ class Block
             let bez = FLBezier(name: dict["name"] as! String, view: view)
             bez.parseBlock(dict: dict)
         }
+        else if dict["type"] as! String == "Axis"
+        {
+            let bez = FLAxis(name: dict["name"] as! String, view: view)
+            bez.parseBlock(dict: dict)
+        }
         
     }
     

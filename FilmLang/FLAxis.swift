@@ -7,45 +7,58 @@
 //
 
 import Foundation
-
-/*
-
-//
-// axis
-//
-let axisColor = NSColor(red: 0.0, green: 0.8, blue: 0.0, alpha: 1.0)
-axisColor.setStroke()
-let axis = NSBezierPath()
-axis.lineWidth = CGFloat(axiswidth)
-axis.lineCapStyle = .square
-axis.move(to: NSPoint(x: originx, y: originy))
-axis.line(to: NSPoint(x: width - padding, y: originy))
-axis.move(to: NSPoint(x: originx, y: originy))
-axis.line(to: NSPoint(x: originx, y: height - padding))
-axis.stroke()
+import Cocoa
 
 
-//
-// ticks
-//
-let xticks = NSBezierPath()
-xticks.lineWidth = CGFloat(axiswidth)
-let inc = 20
-let ticklen = 5
-for x in stride(from: originx + inc, to: width - padding, by: inc)
+class FLAxis : Block
 {
-    xticks.move(to: NSPoint(x: x, y: originy - ticklen))
-    xticks.line(to: NSPoint(x: x, y: originy + ticklen))
-}
-xticks.stroke()
+    override func parseBlock(dict:NSDictionary)
+    {
+        super.parseBlock(dict: dict)
+    }
+    
+    
+    override func draw()
+    {
+        preDraw()
 
-let yticks = NSBezierPath()
-yticks.lineWidth = CGFloat(axiswidth)
-for y in stride(from: originx + inc, to: height - padding, by: inc)
-{
-    yticks.move(to: NSPoint(x: originx - ticklen, y: y))
-    yticks.line(to: NSPoint(x: originx + ticklen, y: y))
-}
-yticks.stroke()
-*/
+        //
+        // axis
+        //
+        strokeColor?.setStroke()
+        let axis = NSBezierPath()
+        axis.lineWidth = strokeWidth
+        axis.lineCapStyle = .square
+        axis.move(to: NSPoint(x: x + xoffset, y: y + yoffset))
+        axis.line(to: NSPoint(x: x + width + xoffset, y: y + yoffset))
+        axis.move(to: NSPoint(x: x + xoffset, y: y + yoffset))
+        axis.line(to: NSPoint(x: x + xoffset, y: y + height + yoffset))
+        axis.stroke()
 
+
+        //
+        // ticks
+        //
+        let xticks = NSBezierPath()
+        xticks.lineWidth = strokeWidth
+        let inc : CGFloat = 20
+        let ticklen : CGFloat = 5
+        for xtick in stride(from: x, to: x + width, by: inc)
+        {
+            xticks.move(to: NSPoint(x: xtick + xoffset, y: y - ticklen + yoffset))
+            xticks.line(to: NSPoint(x: xtick + xoffset, y: y + ticklen + yoffset))
+        }
+        xticks.stroke()
+
+        let yticks = NSBezierPath()
+        yticks.lineWidth = strokeWidth
+        for ytick in stride(from: y, to: y + height, by: inc)
+        {
+            yticks.move(to: NSPoint(x: x - ticklen + xoffset, y: ytick + yoffset))
+            yticks.line(to: NSPoint(x: x + ticklen + xoffset, y: ytick + yoffset))
+        }
+        yticks.stroke()
+            
+        postDraw(rect: boundingRect)
+    }
+}

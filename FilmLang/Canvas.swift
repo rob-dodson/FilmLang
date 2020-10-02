@@ -11,269 +11,16 @@ import Cocoa
 class Canvas: NSView
 {
     var timer : Timer? = nil
-    let screenBlock : FLRect
-    var thereAreAnimators : Bool = false
-    
-    func addBlockFromDictionary(dict:NSDictionary)
-    {
-        
-        if dict["type"] as! String == "Rect"
-        {
-            let rect = FLRect(name: dict["name"] as! String, view: self)
-            parseBlock(block: rect, dict: dict)
-        }
-        else if dict["type"] as! String == "Text"
-        {
-            let text = FLText(name: dict["name"] as! String, view: self)
-            
-            text.strokeColor = nil
-            
-            parseBlock(block: text, dict: dict)
-            
-            if let textstr = dict["text"]        as? String { text.text = textstr }
-            if let fontstr = dict["font"]        as? String { text.font = fontstr }
-            if let colordict = dict["textColor"] as? NSDictionary  { text.textColor = colorFromDict(dict: colordict) }
-            if let size = dict["size"]           as? CGFloat { text.size = size }
-            if let padding = dict["padding"]     as? CGFloat { text.padding = padding }
-        }
-        else if dict["type"] as! String == "Grid"
-        {
-            let grid = FLGrid(name: dict["name"] as! String, view: self)
-            parseBlock(block: grid, dict: dict)
-           
-            if let xspacing = dict["xspacing"]   as? CGFloat { grid.xspacing = xspacing }
-            if let yspacing = dict["yspacing"]   as? CGFloat { grid.yspacing = yspacing }
-            if let colordict = dict["gridColor"] as? NSDictionary  { grid.gridColor = colorFromDict(dict: colordict) }
-            if let gridStrokeWidth = dict["gridStrokeWidth"]   as? CGFloat { grid.gridStrokeWidth = gridStrokeWidth }
-        }
-        else if dict["type"] as! String == "Image"
-        {
-            let image = FLImage(name: dict["name"] as! String, view: self)
-            parseBlock(block: image, dict: dict)
-            
-            if let urlstr = dict["url"]   as? String
-            {
-                image.url = URL(string: urlstr)
-            }
-        }
-        else if dict["type"] as! String == "Arc"
-        {
-            let arc = FLArc(name: dict["name"] as! String, view: self)
-            parseBlock(block: arc, dict: dict)
-
-            if let startAngle = dict["startAngle"] as? CGFloat { arc.startAngle = startAngle }
-            if let endAngle = dict["endAngle"]     as? CGFloat { arc.endAngle = endAngle }
-        }
-        else if dict["type"] as! String == "Circle"
-        {
-            let circle = FLCircle(name: dict["name"] as! String, view: self)
-            parseBlock(block: circle, dict: dict)
-        }
-        else if dict["type"] as! String == "Line"
-        {
-            let line = FLLine(name: dict["name"] as! String, view: self)
-            parseBlock(block: line, dict: dict)
-            
-            if let endX = dict["endX"]               as? CGFloat { line.endX = endX }
-            if let endY = dict["endY"]               as? CGFloat { line.endY = endY }
-        }
-        else if dict["type"] as! String == "Path"
-        {
-            let path = FLPath(name: dict["name"] as! String, view: self)
-            parseBlock(block: path, dict: dict)
-            
-            for i in 0...100
-            {
-                let key = "point\(i)"
-                if let dict = dict[key]
-                {
-                    path.points.append(pointFromDict(dict:dict as! NSDictionary))
-                }
-            }
-        }
-        else if dict["type"] as! String == "Bezier"
-        {
-            let bez = FLBezier(name: dict["name"] as! String, view: self)
-            parseBlock(block: bez, dict: dict)
-            
-            for i in 0...100
-            {
-                if let bdict = dict["point\(i)"] as? NSDictionary
-                {
-                    if bdict["point"] != nil
-                    {
-                        let point = pointFromDict(dict: bdict["point"] as! NSDictionary)
-                        let controlpoint1 = pointFromDict(dict: bdict["controlpoint1"] as! NSDictionary)
-                        let controlpoint2 = pointFromDict(dict: bdict["controlpoint2"] as! NSDictionary)
-                        let bezpoint = BezPoint(point: point, controlPoint1: controlpoint1, controlPoint2:controlpoint2)
-                        bez.bezpoints.append(bezpoint)
-                    }
-                    else if bdict["x"] != nil
-                    {
-                        let point = pointFromDict(dict: bdict)
-                        let bezpoint = BezPoint(point: point, controlPoint1: nil, controlPoint2:nil)
-                        bez.bezpoints.append(bezpoint)
-                    }
-                    
-                }
-            }
-        }
-        
-    }
-    
-    
-    func parseBlock(block:Block,dict:NSDictionary)
-    {
-        if let debug = dict["debug"]                 as? Bool    { block.debug = debug }
-        if let clip = dict["clip"]                   as? Bool    { block.clip = clip }
-        if let x = dict["x"]                         as? CGFloat { block.x = x }
-        if let y = dict["y"]                         as? CGFloat { block.y = y }
-        if let width = dict["width"]                 as? CGFloat { block.width = width }
-        if let height = dict["height"]               as? CGFloat { block.height = height }
-        if let fillcolordict = dict["fillColor"]     as? NSDictionary { block.fillColor = colorFromDict(dict: fillcolordict) }
-        if let strokecolordict = dict["strokeColor"] as? NSDictionary { block.strokeColor = colorFromDict(dict: strokecolordict) }
-        if let radius = dict["radius"]               as? CGFloat { block.radius = radius }
-        if let rotation = dict["rotation"]           as? CGFloat { block.rotation = rotation }
-        if let strokeWidth = dict["strokeWidth"]     as? CGFloat { block.strokeWidth = strokeWidth }
-        if let gradientAngle = dict["gradientAngle"] as? CGFloat { block.gradientAngle = gradientAngle }
-       
-        
-        if let fillGradient = dict["fillGradient"]   as? NSDictionary
-        {
-            let fromColor = colorFromDict(dict: fillGradient["startColor"] as! NSDictionary)
-            let toColor = colorFromDict(dict: fillGradient["endColor"] as! NSDictionary)
-            
-            block.fillGradient = NSGradient(starting: fromColor, ending: toColor)
-        }
-        
-        if let windowOffset = dict["windowOffset"]    as? String
-        {
-            let p = windowOffset.split(separator: ",", maxSplits: 2, omittingEmptySubsequences: false)
-            block.windowWidthOffset = CGFloat(Double.init(p[0]) ?? 0.0)
-            block.windowHeightOffset = CGFloat(Double.init(p[1]) ?? 0.0)
-            block.windowChanged =
-                {(block) -> Void in
-                    block.x = self.frame.width - block.windowWidthOffset
-                    block.y = self.frame.height - block.windowHeightOffset
-                }
-        }
-        
-        
-        for i in 0...10
-        {
-            if let animatordict = dict["animator\(i)"] as? NSDictionary
-            {
-                let val    = animatordict["value"] as! String
-                let amount = CGFloat.init(animatordict["amount"] as! Double)
-                let min    = CGFloat.init(animatordict["min"] as! Double)
-                let max    = CGFloat.init(animatordict["max"] as! Double)
-                let type   = animatordict["type"] as! String
-                
-                var value = Animator.AnimatorVal.rotation
-                if (val == "rotation")    { value = Animator.AnimatorVal.rotation }
-                if (val == "x")           { value = Animator.AnimatorVal.x }
-                if (val == "y")           { value = Animator.AnimatorVal.y }
-                if (val == "startangle")  { value = Animator.AnimatorVal.startangle }
-                if (val == "endangle")    { value = Animator.AnimatorVal.endangle }
-                if (val == "strokewidth") { value = Animator.AnimatorVal.strokewidth }
-                if (val == "strokealpha") { value = Animator.AnimatorVal.strokealpha }
-
-                var anitype = Animator.AnimatorType.Bounce
-                if (type == "bounce") { anitype = Animator.AnimatorType.Bounce }
-                if (type == "inc")    { anitype = Animator.AnimatorType.Inc }
-                if (type == "dec")    { anitype = Animator.AnimatorType.Dec }
-                
-                block.animators.append(Animator(val: value, amount: amount, min: min, max: max, type: anitype, windowChanged:nil))
-                
-                thereAreAnimators = true
-            }
-        }
-
-        connectParent(block: block, dict: dict)
-        print("Add block: \(block.name) - \(block.x) \(block.y)")
-        
-
-        for i in 0...10
-        {
-            if let childblockdict = dict["childBlock\(i)"] as? NSDictionary
-            {
-                childblockdict.setValue(block.name, forKey:"parent")
-                addBlockFromDictionary(dict: childblockdict)
-            }
-        }
-    }
-    
-    
-    func connectParent(block:Block,dict:NSDictionary)
-    {
-        if let parent = dict["parent"] as? String
-        {
-            if let parentblock = findBlock(nametofind: parent, startblock: screenBlock)
-            {
-                parentblock.addChild(block: block)
-            }
-            else
-            {
-                screenBlock.addChild(block:block)
-            }
-        }
-        else
-        {
-            screenBlock.addChild(block:block)
-        }
-    }
-    
-    
-    func findBlock(nametofind:String,startblock:Block) -> Block?
-    {
-        for childblock in startblock.children
-        {
-            if childblock.name == nametofind
-            {
-                return childblock
-            }
-        }
-        
-        for childblock in startblock.children
-        {
-            if childblock.children.count > 0
-            {
-                if let block = findBlock(nametofind: nametofind, startblock: childblock)
-                {
-                    return block
-                }
-            }
-        }
-        
-        return nil
-    }
-    
-    
-    func pointFromDict(dict:NSDictionary) -> NSPoint
-    {
-        let x = CGFloat.init(dict["x"] as! Double)
-        let y = CGFloat.init(dict["y"] as! Double)
-        
-        return NSPoint(x: x, y: y)
-    }
-    
-    func colorFromDict(dict:NSDictionary) -> NSColor
-    {
-        let red = CGFloat.init(dict["red"] as! Double)
-        let green = CGFloat.init(dict["green"] as! Double)
-        let blue = CGFloat.init(dict["blue"] as! Double)
-        let alpha = CGFloat.init(dict["alpha"] as! Double)
-        
-        return NSColor.init(calibratedRed: red, green: green, blue: blue, alpha: alpha)
-    }
-    
+    var screenBlock : Block!
  
+    
     required init?(coder: NSCoder)
     {
         //
         // init
         //
         screenBlock = FLRect(name:"Screen",view:nil)
+        Block.topBlock = screenBlock
         super.init(coder: coder)
         screenBlock.view = self
         
@@ -292,171 +39,12 @@ class Canvas: NSView
             block.height = self.frame.height
         }
         
-        /*
-        
-        let title = FLText(name:"title",view:self)
-        title.text = "FilmLang"
-        title.size = 40
-        title.strokeColor = NSColor.init(calibratedRed: 0.0, green: 0.5, blue: 0.0, alpha: 1.0)
-        title.fillGradient = NSGradient(starting: NSColor.black, ending: NSColor.init(calibratedRed: 0.0, green: 0.3, blue: 0.0, alpha: 0.5))!
-        title.windowChanged =
-        {(block) -> Void in
-            block.x = self.frame.width / 2
-           block.y = self.frame.height - 120
-        }
-        screenBlock.addChild(block: title)
-        */
-        
-        /*
-        //
-        // axis labels
-        //
-        let xaxislabel = FLText(name:"X Axis",view:self)
-        xaxislabel.text = "X Axis"
-        xaxislabel.x = screenBlock.width / 2
-        xaxislabel.y = 10
-        xaxislabel.size = 55
-        xaxislabel.textColor = NSColor.init(calibratedRed: 0.0, green: 0.9, blue: 0.0, alpha: 1.0)
-        xaxislabel.strokeColor = nil
-        xaxislabel.animators.append(Animator(val: .x, amount: 1, min: 10, max:screenBlock.width, type: .Inc, windowChanged: {(animator) -> Void in animator?.max = self.frame.width }))
-        
-        let yaxislabel = FLText(name:"Y Axis",view:self)
-        yaxislabel.text = "Y Axis"
-        yaxislabel.x = 60
-        yaxislabel.y = screenBlock.height / 2
-        yaxislabel.size = 15
-        yaxislabel.rotation = 90
-        yaxislabel.textColor = NSColor.init(calibratedRed: 0.0, green: 0.9, blue: 0.0, alpha: 1.0)
-        yaxislabel.strokeColor = NSColor.init(calibratedRed: 0.0, green: 0.9, blue: 0.0, alpha: 1.0)
-        
-        
-        for bb in 1...4
-        {
-            let gridBlock1 = FLGrid(name:"Grid \(bb)",view:self)
-            let r = FLRect(name:"R",view:self)
-            r.fillColor = NSColor(red: 0.2, green: 0.2, blue: 0.8, alpha: 0.6)
-            r.strokeColor = NSColor(red: 0.2, green: 0.2, blue: 0.8, alpha: 0.8)
-            r.x = 10
-            r.y = 10
-            r.width = 40
-            r.height = 30
-            
-            let r1 = FLRect(name:"R1",view:self)
-            r1.fillColor = NSColor(red: 0.3, green: 0.2, blue: 0.4, alpha: 0.6)
-            r1.strokeColor = NSColor(red: 0.3, green: 0.2, blue: 0.6, alpha: 0.8)
-            r1.x = 400
-            r1.y = 60
-            r1.width = 20
-            r1.height = 20
-            
-            let circle = FLCircle(name:"circle",view:self)
-            circle.x = 100
-            circle.y = 40
-            circle.width = 30
-            circle.height = 30
-            circle.fillColor = NSColor(red: 0.5, green: 0.0, blue: 0.0, alpha: 0.6)
-            circle.strokeColor = NSColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.8)
-            circle.debug = true
-            
-            
-            let path1 = FLPath(name:"Path",view:self)
-
-            gridBlock1.x = 50
-            gridBlock1.y = 110 * CGFloat(bb)
-            gridBlock1.width = 400
-            gridBlock1.height = 100
-            gridBlock1.clip = true
-            gridBlock1.fillGradient = NSGradient(starting: NSColor.black, ending: NSColor.init(calibratedRed: 0.0, green: 0.3, blue: 0.0, alpha: 0.5))!
-
-         
-            gridBlock1.addChild(block:path1)
-            gridBlock1.addChild(block:r);
-            gridBlock1.addChild(block:r1);
-            gridBlock1.addChild(block:circle)
-            
-            screenBlock.addChild(block:gridBlock1);
-            
-            circle.animators.append(Animator(val: .fillalpha, amount: 0.01, min: 0.1, max: 1.0, type: .Bounce, windowChanged:nil))
-            circle.animators.append(Animator(val: .x, amount: 0.2, min: 100, max: 110.0, type: .Bounce, windowChanged:nil))
-            
-            r.animators.append(Animator(val: .fillalpha, amount: 0.01, min: 0.1, max: 1.0, type: .Bounce, windowChanged:nil))
-            r.animators.append(Animator(val: .x, amount: 0.1, min: 10, max: 20.0, type: .Bounce, windowChanged:nil))
-            
-            r1.animators.append(Animator(val: .fillalpha, amount: 0.01, min: 0.1, max: 1.0, type: .Bounce, windowChanged:nil))
-            r1.animators.append(Animator(val: .rotation, amount: 1.0, min: 0.0, max: 360, type: .Bounce, windowChanged:nil))
-        }
-        
-        //yaxislabel.animators.append(Animator(val: "x", amount: 1.0, min: 90, max: 210.0, type: .Bounce))
-        yaxislabel.animators.append(Animator(val: .rotation, amount: 1.0, min: 0.0, max: 90, type: .Bounce, windowChanged:nil))
-        
-        for i in 0...3
-        {
-            let arc1 = FLArc(name:"Arc \(i)",view:self)
-            arc1.x = 700
-            arc1.y = 400
-            arc1.radius = 100
-            arc1.strokeWidth = 10
-            
-            switch i
-            {
-            case 0:
-                arc1.startAngle = 10
-                arc1.endAngle = 90
-                arc1.strokeColor = NSColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.3)
-                arc1.strokeWidth = 10
-                arc1.radius = 100
-                arc1.animators.append(Animator(val: .startangle, amount: 1, min: 10, max: 30, type: .Bounce, windowChanged:nil))
-                arc1.animators.append(Animator(val: .endangle, amount: 2, min: 70, max: 90, type: .Bounce, windowChanged:nil))
-                
-            case 1:
-                arc1.startAngle = 100
-                arc1.endAngle = 180
-                arc1.strokeColor = NSColor(red: 0.0, green: 1.0, blue: 0.0, alpha: 0.3)
-                arc1.strokeWidth = 10
-                arc1.radius = 100
-                arc1.animators.append(Animator(val:.startangle, amount: 1, min: 100, max: 120, type: .Bounce, windowChanged:nil))
-                arc1.animators.append(Animator(val:.endangle, amount: 1, min: 130, max: 180, type: .Bounce, windowChanged:nil))
-                
-            case 2:
-                arc1.startAngle = 100
-                arc1.endAngle = 180
-                arc1.strokeColor = NSColor(red: 0.0, green: 1.0, blue: 0.0, alpha: 0.3)
-                arc1.strokeWidth = 2
-                arc1.animators.append(Animator(val: .startangle, amount: 1, min: 100, max: 120, type: .Bounce, windowChanged:nil))
-                arc1.animators.append(Animator(val: .endangle, amount: 1, min: 130, max: 180, type: .Bounce, windowChanged:nil))
-                arc1.radius = 90
-                
-            case 3:
-                arc1.startAngle = 280
-                arc1.endAngle = 355
-                arc1.strokeColor = NSColor.orange
-                arc1.strokeWidth = 1
-                arc1.radius = 90
-                arc1.animators.append(Animator(val: .radius, amount: 1, min: 90, max: 94, type: .Bounce, windowChanged:nil))
-            default:
-                arc1.startAngle = 10
-                arc1.endAngle = 90
-            }
-           
-            arc1.windowChanged =
-            {(block) -> Void in
-                block.x = self.frame.width - 200
-                block.y = self.frame.height - 220
-            }
-            
-            screenBlock.addChild(block: arc1)
-        }
-      
-        screenBlock.addChild(block: title)
-        screenBlock.addChild(block: xaxislabel)
-        screenBlock.addChild(block: yaxislabel)
-        */
         
         let js = Javascript(canvas: self)
         js.execScript()
         
         
-        if thereAreAnimators
+        if Block.thereAreAnimators
         {
             timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true)
             { (timer) in
@@ -478,6 +66,12 @@ class Canvas: NSView
     }
     
     
+    func addBlockFromDictionary(dict:NSDictionary)
+    {
+        Block.addBlockFromDictionary(dict: dict, view:self)
+    }
+    
+    
     func drawChildren(children:[Block])
     {
         for block in children
@@ -485,6 +79,7 @@ class Canvas: NSView
             block.draw()
         }
     }
+    
     
     func animateChildren(children:[Block])
     {
@@ -505,6 +100,7 @@ class Canvas: NSView
         }
     }
     
+    
     override func draw(_ dirtyRect: NSRect)
     {
         super.draw(dirtyRect)
@@ -522,61 +118,6 @@ class Canvas: NSView
         // blocks
         //
         screenBlock.draw()
-        
-        
-        /*
-        //
-        // settings
-        //
-        let width : Int = Int(dirtyRect.size.width)
-        let height : Int = Int(dirtyRect.size.height)
-        let padding : Int = 40
-        let originx : Int = padding
-        let originy : Int = padding
-        let axiswidth : Int = 2
-        
-        
-        //
-        // axis
-        //
-        let axisColor = NSColor(red: 0.0, green: 0.8, blue: 0.0, alpha: 1.0)
-        axisColor.setStroke()
-        let axis = NSBezierPath()
-        axis.lineWidth = CGFloat(axiswidth)
-        axis.lineCapStyle = .square
-        axis.move(to: NSPoint(x: originx, y: originy))
-        axis.line(to: NSPoint(x: width - padding, y: originy))
-        axis.move(to: NSPoint(x: originx, y: originy))
-        axis.line(to: NSPoint(x: originx, y: height - padding))
-        axis.stroke()
-        
-        
-        //
-        // ticks
-        //
-        let xticks = NSBezierPath()
-        xticks.lineWidth = CGFloat(axiswidth)
-        let inc = 20
-        let ticklen = 5
-        for x in stride(from: originx + inc, to: width - padding, by: inc)
-        {
-            xticks.move(to: NSPoint(x: x, y: originy - ticklen))
-            xticks.line(to: NSPoint(x: x, y: originy + ticklen))
-        }
-        xticks.stroke()
-        
-        let yticks = NSBezierPath()
-        yticks.lineWidth = CGFloat(axiswidth)
-        for y in stride(from: originx + inc, to: height - padding, by: inc)
-        {
-            yticks.move(to: NSPoint(x: originx - ticklen, y: y))
-            yticks.line(to: NSPoint(x: originx + ticklen, y: y))
-        }
-        yticks.stroke()
-        */
-        
-       
-        
         
     }
     

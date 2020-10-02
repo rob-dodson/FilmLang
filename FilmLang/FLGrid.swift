@@ -19,6 +19,17 @@ class FLGrid : Block
     var gridStrokeWidth : CGFloat = 0.5
     
     
+    override func parseBlock(dict:NSDictionary)
+    {
+        super.parseBlock(dict: dict)
+        
+        if let xspacing = dict["xspacing"]   as? CGFloat { self.xspacing = xspacing }
+        if let yspacing = dict["yspacing"]   as? CGFloat { self.yspacing = yspacing }
+        if let colordict = dict["gridColor"] as? NSDictionary  { self.gridColor = Block.colorFromDict(dict: colordict) }
+        if let gridStrokeWidth = dict["gridStrokeWidth"]   as? CGFloat { self.gridStrokeWidth = gridStrokeWidth }
+    }
+    
+    
     override func draw()
     {
         preDraw()

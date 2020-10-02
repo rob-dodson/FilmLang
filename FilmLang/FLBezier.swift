@@ -34,6 +34,34 @@ class FLBezier : Block
         super.init(name: name, view: view)
     }
     
+    override func parseBlock(dict:NSDictionary)
+    {
+        super.parseBlock(dict: dict)
+        
+        
+        for i in 0...100
+        {
+            if let bdict = dict["point\(i)"] as? NSDictionary
+            {
+                if bdict["point"] != nil
+                {
+                    let point = Block.pointFromDict(dict: bdict["point"] as! NSDictionary)
+                    let controlpoint1 = Block.pointFromDict(dict: bdict["controlpoint1"] as! NSDictionary)
+                    let controlpoint2 = Block.pointFromDict(dict: bdict["controlpoint2"] as! NSDictionary)
+                    let bezpoint = BezPoint(point: point, controlPoint1: controlpoint1, controlPoint2:controlpoint2)
+                    bezpoints.append(bezpoint)
+                }
+                else if bdict["x"] != nil
+                {
+                    let point = Block.pointFromDict(dict: bdict)
+                    let bezpoint = BezPoint(point: point, controlPoint1: nil, controlPoint2:nil)
+                    bezpoints.append(bezpoint)
+                }
+                
+            }
+        }
+    }
+    
     
     override func draw()
     {

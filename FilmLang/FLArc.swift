@@ -10,6 +10,15 @@ import Cocoa
 
 class FLArc : Block
 {
+    override func parseBlock(dict:NSDictionary)
+    {
+        super.parseBlock(dict: dict)
+        
+        if let startAngle = dict["startAngle"] as? CGFloat { self.startAngle = startAngle }
+        if let endAngle = dict["endAngle"]     as? CGFloat { self.endAngle = endAngle }
+    }
+    
+    
     override func draw()
     {
         preDraw()

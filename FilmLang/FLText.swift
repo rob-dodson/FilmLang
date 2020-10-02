@@ -17,6 +17,20 @@ class FLText : Block
     var textColor = NSColor.green
     var padding : CGFloat = 0.0
     
+    override func parseBlock(dict:NSDictionary)
+    {
+        super.parseBlock(dict: dict)
+        
+        strokeColor = nil
+        
+        if let textstr = dict["text"]        as? String { text = textstr }
+        if let fontstr = dict["font"]        as? String { font = fontstr }
+        if let colordict = dict["textColor"] as? NSDictionary  { textColor = Block.colorFromDict(dict: colordict) }
+        if let size = dict["size"]           as? CGFloat { self.size = size }
+        if let padding = dict["padding"]     as? CGFloat { self.padding = padding }
+    }
+    
+    
     override func draw()
     {
         preDraw()

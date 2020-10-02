@@ -13,6 +13,9 @@ import Cocoa
 
 class Block
 {
+    static var thereAreAnimators : Bool = false
+    static var topBlock          : Block!
+
     var parent        : Block?
     var children      : [Block]
     var name          : String
@@ -163,7 +166,7 @@ class Block
     
     //
     // must be called from subclass's draw().
-    // postDraw will daw children
+    // postDraw will draw children
     //
     func preDraw()
     {
@@ -222,6 +225,207 @@ class Block
         
         NSGraphicsContext.restoreGraphicsState()
     }
+    
+    
+    static func addBlockFromDictionary(dict:NSDictionary, view:NSView)
+    {
+        if dict["type"] as! String == "Rect"
+        {
+            let rect = FLRect(name: dict["name"] as! String, view: view)
+            rect.parseBlock(dict: dict)
+        }
+        else if dict["type"] as! String == "Text"
+        {
+            let text = FLText(name: dict["name"] as! String, view: view)
+            text.parseBlock(dict: dict)
+        }
+        else if dict["type"] as! String == "Grid"
+        {
+            let grid = FLGrid(name: dict["name"] as! String, view: view)
+            grid.parseBlock(dict: dict)
+        }
+        else if dict["type"] as! String == "Image"
+        {
+            let image = FLImage(name: dict["name"] as! String, view: view)
+            image.parseBlock(dict: dict)
+        }
+        else if dict["type"] as! String == "Arc"
+        {
+            let arc = FLArc(name: dict["name"] as! String, view: view)
+            arc.parseBlock(dict: dict)
+        }
+        else if dict["type"] as! String == "Circle"
+        {
+            let circle = FLCircle(name: dict["name"] as! String, view: view)
+            circle.parseBlock(dict: dict)
+        }
+        else if dict["type"] as! String == "Line"
+        {
+            let line = FLLine(name: dict["name"] as! String, view: view)
+            line.parseBlock(dict: dict)
+        }
+        else if dict["type"] as! String == "Path"
+        {
+            let path = FLPath(name: dict["name"] as! String, view: view)
+            path.parseBlock(dict: dict)
+        }
+        else if dict["type"] as! String == "Bezier"
+        {
+            let bez = FLBezier(name: dict["name"] as! String, view: view)
+            bez.parseBlock(dict: dict)
+        }
+        
+    }
+    
+    //
+    // override in child and call super.parseBlock() there
+    //
+    func parseBlock(dict:NSDictionary)
+    {
+        if let debug = dict["debug"]                 as? Bool    { self.debug = debug }
+        if let clip = dict["clip"]                   as? Bool    { self.clip = clip }
+        if let x = dict["x"]                         as? CGFloat { self.x = x }
+        if let y = dict["y"]                         as? CGFloat { self.y = y }
+        if let width = dict["width"]                 as? CGFloat { self.width = width }
+        if let height = dict["height"]               as? CGFloat { self.height = height }
+        if let fillcolordict = dict["fillColor"]     as? NSDictionary { self.fillColor = Block.colorFromDict(dict: fillcolordict) }
+        if let strokecolordict = dict["strokeColor"] as? NSDictionary { self.strokeColor = Block.colorFromDict(dict: strokecolordict) }
+        if let radius = dict["radius"]               as? CGFloat { self.radius = radius }
+        if let rotation = dict["rotation"]           as? CGFloat { self.rotation = rotation }
+        if let strokeWidth = dict["strokeWidth"]     as? CGFloat { self.strokeWidth = strokeWidth }
+        if let gradientAngle = dict["gradientAngle"] as? CGFloat { self.gradientAngle = gradientAngle }
+       
+        
+        if let fillGradient = dict["fillGradient"]   as? NSDictionary
+        {
+            let fromColor = Block.colorFromDict(dict: fillGradient["startColor"] as! NSDictionary)
+            let toColor = Block.colorFromDict(dict: fillGradient["endColor"] as! NSDictionary)
+            
+            self.fillGradient = NSGradient(starting: fromColor, ending: toColor)
+        }
+        
+        if let windowOffset = dict["windowOffset"]    as? String
+        {
+            let p = windowOffset.split(separator: ",", maxSplits: 2, omittingEmptySubsequences: false)
+            self.windowWidthOffset = CGFloat(Double.init(p[0]) ?? 0.0)
+            self.windowHeightOffset = CGFloat(Double.init(p[1]) ?? 0.0)
+            self.windowChanged =
+                {(block) -> Void in
+                    block.x = self.view!.frame.width - block.windowWidthOffset
+                    block.y = self.view!.frame.height - block.windowHeightOffset
+                }
+        }
+        
+        
+        for i in 0...10
+        {
+            if let animatordict = dict["animator\(i)"] as? NSDictionary
+            {
+                let val    = animatordict["value"] as! String
+                let amount = CGFloat.init(animatordict["amount"] as! Double)
+                let min    = CGFloat.init(animatordict["min"] as! Double)
+                let max    = CGFloat.init(animatordict["max"] as! Double)
+                let type   = animatordict["type"] as! String
+                
+                var value = Animator.AnimatorVal.rotation
+                if (val == "rotation")    { value = Animator.AnimatorVal.rotation }
+                if (val == "x")           { value = Animator.AnimatorVal.x }
+                if (val == "y")           { value = Animator.AnimatorVal.y }
+                if (val == "startangle")  { value = Animator.AnimatorVal.startangle }
+                if (val == "endangle")    { value = Animator.AnimatorVal.endangle }
+                if (val == "strokewidth") { value = Animator.AnimatorVal.strokewidth }
+                if (val == "strokealpha") { value = Animator.AnimatorVal.strokealpha }
+
+                var anitype = Animator.AnimatorType.Bounce
+                if (type == "bounce") { anitype = Animator.AnimatorType.Bounce }
+                if (type == "inc")    { anitype = Animator.AnimatorType.Inc }
+                if (type == "dec")    { anitype = Animator.AnimatorType.Dec }
+                
+                self.animators.append(Animator(val: value, amount: amount, min: min, max: max, type: anitype, windowChanged:nil))
+                
+                Block.thereAreAnimators = true
+            }
+        }
+
+        Block.connectParent(block:self,dict: dict)
+
+        print("Add block: \(name) - \(x) \(y)")
+        
+
+        for i in 0...10
+        {
+            if let childblockdict = dict["childBlock\(i)"] as? NSDictionary
+            {
+                childblockdict.setValue(self.name, forKey:"parent")
+                Block.addBlockFromDictionary(dict: childblockdict,view: view!)
+            }
+        }
+    }
+    
+    
+    static func connectParent(block:Block,dict:NSDictionary)
+    {
+        if let parent = dict["parent"] as? String
+        {
+            if let parentblock = findBlock(nametofind: parent, startblock: topBlock)
+            {
+                parentblock.addChild(block:block)
+            }
+            else
+            {
+                topBlock.addChild(block:block)
+            }
+        }
+        else
+        {
+            topBlock.addChild(block:block)
+        }
+    }
+    
+    
+    static func findBlock(nametofind:String,startblock:Block) -> Block?
+    {
+        for childblock in startblock.children
+        {
+            if childblock.name == nametofind
+            {
+                return childblock
+            }
+        }
+        
+        for childblock in startblock.children
+        {
+            if childblock.children.count > 0
+            {
+                if let block = findBlock(nametofind: nametofind, startblock: childblock)
+                {
+                    return block
+                }
+            }
+        }
+        
+        return nil
+    }
+    
+    
+    static func pointFromDict(dict:NSDictionary) -> NSPoint
+    {
+        let x = CGFloat.init(dict["x"] as! Double)
+        let y = CGFloat.init(dict["y"] as! Double)
+        
+        return NSPoint(x: x, y: y)
+    }
+    
+    static func colorFromDict(dict:NSDictionary) -> NSColor
+    {
+        let red = CGFloat.init(dict["red"] as! Double)
+        let green = CGFloat.init(dict["green"] as! Double)
+        let blue = CGFloat.init(dict["blue"] as! Double)
+        let alpha = CGFloat.init(dict["alpha"] as! Double)
+        
+        return NSColor.init(calibratedRed: red, green: green, blue: blue, alpha: alpha)
+    }
+    
 }
 
 

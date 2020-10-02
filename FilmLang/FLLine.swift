@@ -15,6 +15,16 @@ class FLLine : Block
     var endX               : CGFloat = 1.0
     var endY               : CGFloat = 1.0
     
+    
+    override func parseBlock(dict:NSDictionary)
+    {
+        super.parseBlock(dict: dict)
+        
+        if let endX = dict["endX"]               as? CGFloat { self.endX = endX }
+        if let endY = dict["endY"]               as? CGFloat { self.endY = endY }
+    }
+    
+    
     override func draw()
     {
         preDraw()

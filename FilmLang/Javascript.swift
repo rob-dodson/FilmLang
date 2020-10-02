@@ -29,7 +29,7 @@ class Javascript
         
         let addBlock: @convention(block) (NSDictionary) -> Void =
         { dict in
-            canvas.addBlockFromDictionary(dict:dict)
+            canvas.addBlockFromDictionary(dict: dict)
         }
         context!.setObject(addBlock, forKeyedSubscript: "addBlock" as NSString)
     }

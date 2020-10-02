@@ -20,6 +20,19 @@ class FLPath : Block
         super.init(name: name, view: view)
     }
     
+    override func parseBlock(dict:NSDictionary)
+    {
+        super.parseBlock(dict: dict)
+        
+        for i in 0...100
+        {
+            let key = "point\(i)"
+            if let dict = dict[key]
+            {
+                self.points.append(Block.pointFromDict(dict:dict as! NSDictionary))
+            }
+        }
+    }
     
     override func draw()
     {

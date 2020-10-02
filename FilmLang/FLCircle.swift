@@ -11,6 +11,11 @@ import Cocoa
 
 class FLCircle : Block
 {
+    override func parseBlock(dict:NSDictionary)
+    {
+        super.parseBlock(dict: dict)
+    }
+    
     
     override func draw()
     {

@@ -20,8 +20,8 @@ class FLLine : Block
     {
         super.parseBlock(dict: dict)
         
-        if let endX = dict["endX"]               as? CGFloat { self.endX = endX }
-        if let endY = dict["endY"]               as? CGFloat { self.endY = endY }
+        if let endX = dict["endX"] as? CGFloat { self.endX = endX }
+        if let endY = dict["endY"] as? CGFloat { self.endY = endY }
     }
     
     
@@ -35,14 +35,13 @@ class FLLine : Block
         linePath.line(to: NSPoint(x: endX, y: endY))
         
             
-        if strokeColor != nil
+        if let strokecolor = strokeColor
         {
-            strokeColor!.setStroke()
+            strokecolor.setStroke()
             linePath.lineWidth = strokeWidth
             linePath.stroke()
         }
             
         postDraw(rect: nil)
-        
     }
 }

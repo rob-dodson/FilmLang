@@ -33,20 +33,20 @@ class FLCircle : Block
         
         let ovalPath = NSBezierPath(ovalIn: rect!)
         
-        if fillGradient != nil
+        if let fillgradient = fillGradient
         {
-            fillGradient!.draw(in: ovalPath, angle: gradientAngle)
+            fillgradient.draw(in: ovalPath, angle: gradientAngle)
         }
-        else if fillColor != nil
+        else if let fillcolor = fillColor
         {
-            fillColor!.setFill()
+            fillcolor.setFill()
             ovalPath.fill()
         }
         
-        if strokeColor != nil
+        if let strokecolor = strokeColor
         {
-            strokeColor!.setStroke()
-            ovalPath.lineWidth = 1
+            strokecolor.setStroke()
+            ovalPath.lineWidth = strokeWidth
             ovalPath.stroke()
         }
         

@@ -81,7 +81,11 @@ class FLAxis : Block
             yticks.line(to: NSPoint(x: x + ticklen + xoffset, y: ytick + yoffset))
         }
         yticks.stroke()
-            
+           
+        
+        //
+        // data points
+        //
         if points.count > 0
         {
             let path = NSBezierPath()
@@ -92,9 +96,9 @@ class FLAxis : Block
                 path.line(to: NSPoint(x: point.x + xoffset + x, y: point.y + yoffset + y))
             }
             
-            if strokeColor != nil
+            if let strokecolor = strokeColor
             {
-                strokeColor!.setStroke()
+                strokecolor.setStroke()
                 path.lineWidth = strokeWidth
                 path.stroke()
             }

@@ -114,9 +114,9 @@ class FLBezier : Block
         }
         
         
-        if strokeColor != nil
+        if let strokecolor = strokeColor
         {
-            strokeColor!.setStroke()
+            strokecolor.setStroke()
             path.lineWidth = strokeWidth
             path.stroke()
         }

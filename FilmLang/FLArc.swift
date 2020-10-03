@@ -28,15 +28,15 @@ class FLArc : Block
         arcPath.appendArc(withCenter: startPoint, radius: CGFloat(radius),
                           startAngle: CGFloat(startAngle), endAngle: CGFloat(endAngle))
         
-        if fillColor != nil
+        if let fillcolor = fillColor
         {
-            fillColor!.setFill()
+            fillcolor.setFill()
             arcPath.fill()
         }
         
-        if strokeColor != nil
+        if let strokecolor = strokeColor
         {
-            strokeColor!.setStroke()
+            strokecolor.setStroke()
             arcPath.lineWidth = strokeWidth
             arcPath.stroke()
         }

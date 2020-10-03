@@ -75,20 +75,20 @@ class FLText : Block
         
         
         let borderPath = NSBezierPath(roundedRect: textRect, xRadius: radius, yRadius: radius)
-        if strokeColor != nil
+        if let strokecolor = strokeColor
         {
-            strokeColor!.setStroke()
+            strokecolor.setStroke()
             borderPath.lineWidth = strokeWidth
             borderPath.stroke()
         }
         
-        if fillGradient != nil
+        if let fillgradient = fillGradient
         {
-            fillGradient!.draw(in: borderPath, angle: gradientAngle)
+            fillgradient.draw(in: borderPath, angle: gradientAngle)
         }
-        else if fillColor != nil
+        else if let fillcolor = fillColor
         {
-            fillColor!.setFill()
+            fillcolor.setFill()
             borderPath.fill()
         }
         

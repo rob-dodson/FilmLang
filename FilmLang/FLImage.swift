@@ -28,10 +28,6 @@ class FLImage : Block
     {
         preDraw()
         
-        var xoffset : CGFloat
-        var yoffset : CGFloat
-        (xoffset,yoffset) = offset()
-        
         let rect = NSRect(x: x + xoffset, y: y + yoffset, width: width, height: height)
 
         if image == nil && url != nil

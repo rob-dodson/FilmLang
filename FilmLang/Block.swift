@@ -149,6 +149,7 @@ class Block
             y = y + p!.y
             p = p?.parent
         }
+        
         return (x,y)
     }
     
@@ -172,9 +173,9 @@ class Block
     {
         NSGraphicsContext.saveGraphicsState()
         
-        if let winchange = windowChanged
+        if let windowchanged = windowChanged
         {
-            winchange(self)
+            windowchanged(self)
         }
 
         (xoffset,yoffset) = offset()
@@ -282,6 +283,7 @@ class Block
         
     }
     
+    
     //
     // override in child and call super.parseBlock() there
     //
@@ -354,8 +356,6 @@ class Block
 
         Block.connectParent(block:self,dict: dict)
 
-        print("Add block: \(name) - \(x) \(y)")
-        
 
         for i in 0...10
         {

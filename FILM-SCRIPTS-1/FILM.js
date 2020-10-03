@@ -56,7 +56,7 @@ let axis =
 {
     name:"axis",
     type:AXIS,
-	axisColor: { red: 0.76, green: 0.38, blue: 0.05, alpha: 1.00 },
+	axisColor: { red: 0.76, green: 0.38, blue: 0.00, alpha: 1.00 },
     x:500,
     y:200,
     width:400,

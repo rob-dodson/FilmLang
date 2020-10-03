@@ -63,6 +63,7 @@ let axis =
     height:300,
     strokeWidth:2,
     strokeColor:cyan,
+    windowOffset:{x:600,y:600},
 	point0:{x: 0, y: 0},
     point1:{x: 27, y: 44},
     point2:{x: 37, y: 92},

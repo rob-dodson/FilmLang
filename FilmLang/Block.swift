@@ -303,7 +303,7 @@ class Block
         if let gradientAngle = dict["gradientAngle"] as? CGFloat { self.gradientAngle = gradientAngle }
        
         
-        if let fillGradient = dict["fillGradient"]   as? NSDictionary
+        if let fillGradient = dict["fillGradient"] as? NSDictionary
         {
             let fromColor = Block.colorFromDict(dict: fillGradient["startColor"] as! NSDictionary)
             let toColor = Block.colorFromDict(dict: fillGradient["endColor"] as! NSDictionary)
@@ -311,11 +311,11 @@ class Block
             self.fillGradient = NSGradient(starting: fromColor, ending: toColor)
         }
         
-        if let windowOffset = dict["windowOffset"]    as? String
+        if let windowOffset = dict["windowOffset"] as? NSDictionary
         {
-            let p = windowOffset.split(separator: ",", maxSplits: 2, omittingEmptySubsequences: false)
-            self.windowWidthOffset = CGFloat(Double.init(p[0]) ?? 0.0)
-            self.windowHeightOffset = CGFloat(Double.init(p[1]) ?? 0.0)
+            let point = Block.pointFromDict(dict: windowOffset)
+            self.windowWidthOffset = point.x
+            self.windowHeightOffset = point.y
             self.windowChanged =
                 {(block) -> Void in
                     block.x = self.view!.frame.width - block.windowWidthOffset

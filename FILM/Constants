@@ -10,6 +10,8 @@ let CIRCLE = "Circle"
 let LINE = "Line"
 let PATH = "Path"
 let BEZIER = "Bezier"
+let AXIS = "Axis"
+
 let MainFont = "Courier"
 
 //

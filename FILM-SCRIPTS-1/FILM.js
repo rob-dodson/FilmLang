@@ -11,6 +11,7 @@ let LINE = "Line"
 let PATH = "Path"
 let BEZIER = "Bezier"
 let AXIS = "Axis"
+let LAYOUT = "Layout"
 
 let MainFont = "Courier"
 
@@ -52,6 +53,17 @@ let blockbackgrad =
     startColor: {red:0.0, green:0.5, blue:0.5, alpha:0.6},
     endColor: {red:0.9, green:0.2, blue:0.2, alpha:0.4},
 }
+
+let layout = 
+{
+    type:LAYOUT,
+    name:"layout",
+    xcount:4,
+    ycount:4,
+    debug:true,
+}
+addBlock(layout)
+
 let axis =
 {
     name:"axis",

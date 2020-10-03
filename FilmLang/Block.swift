@@ -280,6 +280,11 @@ class Block
             let bez = FLAxis(name: dict["name"] as! String, view: view)
             bez.parseBlock(dict: dict)
         }
+        else if dict["type"] as! String == "Layout"
+        {
+            let layout = FLLayout(name: dict["name"] as! String, view: view)
+            layout.parseBlock(dict: dict)
+        }
         
     }
     

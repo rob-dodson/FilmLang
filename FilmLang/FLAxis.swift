@@ -12,9 +12,32 @@ import Cocoa
 
 class FLAxis : Block
 {
+    var points : [NSPoint]
+    var axisColor : NSColor
+    
+    override init(name:String, view:NSView?)
+    {
+        points = [NSPoint]()
+        axisColor = NSColor.green
+        
+        super.init(name: name, view: view)
+    }
+    
+    
     override func parseBlock(dict:NSDictionary)
     {
         super.parseBlock(dict: dict)
+        
+        if let colorDict = dict["axisColor"] as? NSDictionary { self.axisColor = Block.colorFromDict(dict: colorDict) }
+        
+        for i in 0...100
+        {
+            let key = "point\(i)"
+            if let dict = dict[key]
+            {
+                self.points.append(Block.pointFromDict(dict:dict as! NSDictionary))
+            }
+        }
     }
     
     
@@ -25,7 +48,7 @@ class FLAxis : Block
         //
         // axis
         //
-        strokeColor?.setStroke()
+        axisColor.setStroke()
         let axis = NSBezierPath()
         axis.lineWidth = strokeWidth
         axis.lineCapStyle = .square
@@ -59,6 +82,24 @@ class FLAxis : Block
         }
         yticks.stroke()
             
+        if points.count > 0
+        {
+            let path = NSBezierPath()
+            path.lineJoinStyle = .round
+            path.move(to: NSPoint(x: xoffset + x, y: yoffset + y))
+            for point in points
+            {
+                path.line(to: NSPoint(x: point.x + xoffset + x, y: point.y + yoffset + y))
+            }
+            
+            if strokeColor != nil
+            {
+                strokeColor!.setStroke()
+                path.lineWidth = strokeWidth
+                path.stroke()
+            }
+        }
+        
         postDraw(rect: boundingRect)
     }
 }

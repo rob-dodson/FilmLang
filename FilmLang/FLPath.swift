@@ -40,7 +40,6 @@ class FLPath : Block
         
         let path = NSBezierPath()
         path.lineJoinStyle = .round
-        
         path.move(to: NSPoint(x: xoffset + x, y: yoffset + y))
         for point in points
         {

@@ -36,8 +36,8 @@ class FLGrid : Block
         
         if (fitToView)
         {
-            width = (view?.frame.width)! - 20
-            height = (view?.frame.height)! - 20
+            width = (view?.frame.width)! - viewPadding
+            height = (view?.frame.height)! - viewPadding
         }
         
         

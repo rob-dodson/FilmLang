@@ -6,7 +6,7 @@ let CamBlock =
 {
 	name:"CamBlock",
 	type:RECT,
-	x:20,
+	x:40,
 	y:20,
 	layoutSpec:{x:1,y:3,fit:true},
 	width:340,

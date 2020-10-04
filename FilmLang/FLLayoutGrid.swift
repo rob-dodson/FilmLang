@@ -45,8 +45,8 @@ class FLLayoutGrid : Block
         children.removeAll()
         cache?.removeAllObjects()
         
-        let rectwidth : CGFloat = view!.frame.width / CGFloat(xcount)
-        let rectheight : CGFloat = view!.frame.height / CGFloat(ycount)
+        let rectwidth : CGFloat = (view!.frame.width - 20) / CGFloat(xcount)
+        let rectheight : CGFloat = (view!.frame.height - 20) / CGFloat(ycount)
         
         for x in 1...xcount
         {

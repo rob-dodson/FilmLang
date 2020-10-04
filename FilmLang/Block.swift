@@ -59,7 +59,7 @@ class Block
     var windowHeightOffset : CGFloat = 0.0
     var fitToView          : Bool = false
     var layoutSpec         : LayoutSpec?
-    
+    var viewPadding        : CGFloat = 20
     
     init(name:String, view:NSView?)
     {

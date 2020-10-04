@@ -115,6 +115,14 @@ class Canvas: NSView
         backPath.fill()
         
         //
+        // grid
+        //
+        if let layoutgrid = Block.layoutGrid
+        {
+            layoutgrid.draw()
+        }
+        
+        //
         // blocks
         //
         screenBlock.draw()

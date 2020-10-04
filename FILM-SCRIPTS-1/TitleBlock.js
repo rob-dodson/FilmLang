@@ -3,8 +3,9 @@ let titleblock =
 {
 	name:"titleblock",
 	type:RECT,
-	x:500,
-	y:750,
+	layoutSpec:{x:2,y:2,fit:true},
+	x:30,
+	y:30,
 	width:200,
 	height:100,
 	fillGradient:blockbackgrad,

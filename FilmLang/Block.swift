@@ -192,9 +192,11 @@ class Block
             windowchanged(self)
         }
 
-        if let layoutgrid = Block.layoutGrid
+        if self.layoutSpec != nil && Block.layoutGrid != nil
         {
-            
+            let gridrect = Block.layoutGrid.getGridRect(x: Int(self.layoutSpec!.x), y:Int(self.layoutSpec!.y))
+            xoffset = gridrect.x
+            yoffset = gridrect.y
         }
         else
         {
@@ -305,7 +307,6 @@ class Block
         {
             let layoutgrid = FLLayoutGrid(name: dict["name"] as! String, view: view)
             layoutgrid.parseBlock(dict: dict)
-           
         }
         
     }
@@ -329,7 +330,7 @@ class Block
         if let strokeWidth = dict["strokeWidth"]     as? CGFloat { self.strokeWidth = strokeWidth }
         if let gradientAngle = dict["gradientAngle"] as? CGFloat { self.gradientAngle = gradientAngle }
        
-        if let layout = dict["layout"] as? NSDictionary
+        if let layout = dict["layoutSpec"] as? NSDictionary
         {
             let x = layout["x"] as! Int
             let y = layout["y"] as! Int

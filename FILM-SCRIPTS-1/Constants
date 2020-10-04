@@ -11,7 +11,7 @@ let LINE = "Line"
 let PATH = "Path"
 let BEZIER = "Bezier"
 let AXIS = "Axis"
-let LAYOUT = "Layout"
+let LAYOUT = "LayoutGrid"
 
 let MainFont = "Courier"
 

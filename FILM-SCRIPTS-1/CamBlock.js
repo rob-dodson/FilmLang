@@ -73,7 +73,7 @@ let cambracket =
     point1:{x:-10,y:-10},
     point2:{x:-10,y:340},
     point3:{x:20,y:340},
-	strokeColor:blue,
+	strokeColor:cyan,
 	parent:"CamBlock",
 }
 addBlock(cambracket)

@@ -31,8 +31,8 @@ class FLLine : Block
         
         let linePath = NSBezierPath()
         linePath.lineCapStyle = .square
-        linePath.move(to: NSPoint(x: x, y: y))
-        linePath.line(to: NSPoint(x: endX, y: endY))
+        linePath.move(to: NSPoint(x: x + xoffset, y: y + yoffset))
+        linePath.line(to: NSPoint(x: endX + xoffset, y: endY + yoffset))
         
             
         if let strokecolor = strokeColor

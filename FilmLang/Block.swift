@@ -10,12 +10,26 @@ import Foundation
 import Cocoa
 
 
+struct LayoutSpec
+{
+    internal init(x: Int, y: Int, fit: Bool)
+    {
+        self.x = x
+        self.y = y
+        self.fit = fit
+    }
+    
+    let x : Int
+    let y : Int
+    let fit : Bool
+}
 
 class Block
 {
     static var thereAreAnimators : Bool = false
     static var topBlock          : Block!
-
+    static var layoutGrid        : FLLayoutGrid!
+    
     var parent        : Block?
     var children      : [Block]
     var name          : String
@@ -44,7 +58,7 @@ class Block
     var windowWidthOffset  : CGFloat = 0.0
     var windowHeightOffset : CGFloat = 0.0
     var fitToView          : Bool = false
-    
+    var layoutSpec         : LayoutSpec?
     
     
     init(name:String, view:NSView?)
@@ -178,7 +192,14 @@ class Block
             windowchanged(self)
         }
 
-        (xoffset,yoffset) = offset()
+        if let layoutgrid = Block.layoutGrid
+        {
+            
+        }
+        else
+        {
+            (xoffset,yoffset) = offset()
+        }
         boundingRect = NSRect(x: x + xoffset, y: y + yoffset, width: width, height: height)
         
         if rotation > -999
@@ -280,10 +301,11 @@ class Block
             let bez = FLAxis(name: dict["name"] as! String, view: view)
             bez.parseBlock(dict: dict)
         }
-        else if dict["type"] as! String == "Layout"
+        else if dict["type"] as! String == "LayoutGrid"
         {
-            let layout = FLLayout(name: dict["name"] as! String, view: view)
-            layout.parseBlock(dict: dict)
+            let layoutgrid = FLLayoutGrid(name: dict["name"] as! String, view: view)
+            layoutgrid.parseBlock(dict: dict)
+           
         }
         
     }
@@ -307,6 +329,14 @@ class Block
         if let strokeWidth = dict["strokeWidth"]     as? CGFloat { self.strokeWidth = strokeWidth }
         if let gradientAngle = dict["gradientAngle"] as? CGFloat { self.gradientAngle = gradientAngle }
        
+        if let layout = dict["layout"] as? NSDictionary
+        {
+            let x = layout["x"] as! Int
+            let y = layout["y"] as! Int
+            let fit = layout["fit"] as! Bool
+            self.layoutSpec = LayoutSpec(x: x, y: y, fit: fit)
+        }
+        
         
         if let fillGradient = dict["fillGradient"] as? NSDictionary
         {
@@ -359,8 +389,14 @@ class Block
             }
         }
 
-        Block.connectParent(block:self,dict: dict)
-
+        if let thistype = self as? FLLayoutGrid
+        {
+            Block.layoutGrid = thistype
+        }
+        else
+        {
+            Block.connectParent(block:self,dict: dict)
+        }
 
         for i in 0...10
         {

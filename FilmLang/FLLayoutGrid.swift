@@ -1,5 +1,5 @@
 //
-//  FLLayout.swift
+//  FLLayoutGrid.swift
 //  FilmLang
 //
 //  Created by Robert Dodson on 10/3/20.
@@ -10,7 +10,7 @@ import Foundation
 import Cocoa
 
 
-class FLLayout : Block
+class FLLayoutGrid : Block
 {
     var xcount : Int = 1
     var ycount : Int = 1

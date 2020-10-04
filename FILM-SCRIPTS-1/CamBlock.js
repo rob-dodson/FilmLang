@@ -6,8 +6,9 @@ let CamBlock =
 {
 	name:"CamBlock",
 	type:RECT,
-	x:60,
-	y:420,
+	x:20,
+	y:20,
+	layoutSpec:{x:1,y:3,fit:true},
 	width:340,
 	height:330,
 	radius:4,
@@ -67,12 +68,13 @@ let cambracket =
 {
 	name:"cambracket",
 	type:PATH,
-	x: 80,
-    y: 410,
+	x: 20,
+    y: -10,
     strokeWidth:10,
-    point1:{x:50,y:410},
-    point2:{x:50,y:760},
-    point3:{x:80,y:760},
+    point1:{x:-10,y:-10},
+    point2:{x:-10,y:340},
+    point3:{x:20,y:340},
 	strokeColor:blue,
+	parent:"CamBlock",
 }
 addBlock(cambracket)

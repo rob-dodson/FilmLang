@@ -5,8 +5,9 @@ let bezblock =
 {
 	name:"bezblock",
 	type:RECT,
-	x:850,
-	y:450,
+	x:20,
+	y:20,
+	layoutSpec:{x:3,y:3,fit:true},
 	width:400,
 	height:400,
 	fillGradient:blockbackgrad,

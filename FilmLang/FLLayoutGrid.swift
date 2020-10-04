@@ -62,7 +62,7 @@ class FLLayoutGrid : Block
                     rect.debug = debug
                     rect.strokeColor = NSColor.red
                 }
-                addChild(block: rect)
+                addChild(childblock: rect)
                 
                 cache?.setValue(rect, forKey: "\(x)-\(y)")
                 

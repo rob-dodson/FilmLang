@@ -144,10 +144,14 @@ class Block
     }
     
     
-    func addChild(block:Block)
+    func addChild(childblock:Block)
     {
-        children.append(block);
-        block.parent = self;
+        if let layoutspec = layoutSpec
+        {
+            childblock.layoutSpec = layoutspec
+        }
+        children.append(childblock);
+        childblock.parent = self;
     }
     
     
@@ -195,8 +199,9 @@ class Block
         if self.layoutSpec != nil && Block.layoutGrid != nil
         {
             let gridrect = Block.layoutGrid.getGridRect(x: Int(self.layoutSpec!.x), y:Int(self.layoutSpec!.y))
-            xoffset = gridrect.x
-            yoffset = gridrect.y
+            (xoffset,yoffset) = offset()
+            xoffset = gridrect.x + xoffset
+            yoffset = gridrect.y + yoffset
         }
         else
         {
@@ -416,16 +421,16 @@ class Block
         {
             if let parentblock = findBlock(nametofind: parent, startblock: topBlock)
             {
-                parentblock.addChild(block:block)
+                parentblock.addChild(childblock:block)
             }
             else
             {
-                topBlock.addChild(block:block)
+                topBlock.addChild(childblock:block)
             }
         }
         else
         {
-            topBlock.addChild(block:block)
+            topBlock.addChild(childblock:block)
         }
     }
     

@@ -7,7 +7,7 @@ let bezblock =
 	type:RECT,
 	x:20,
 	y:20,
-	layoutSpec:{x:3,y:3,fit:true},
+	layoutSpec:{x:3,y:3,fit:false},
 	width:400,
 	height:400,
 	fillGradient:blockbackgrad,

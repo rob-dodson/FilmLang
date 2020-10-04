@@ -45,16 +45,16 @@ class FLLayoutGrid : Block
         children.removeAll()
         cache?.removeAllObjects()
         
-        let rectwidth : CGFloat = (view!.frame.width - 20) / CGFloat(xcount)
-        let rectheight : CGFloat = (view!.frame.height - 20) / CGFloat(ycount)
+        let rectwidth : CGFloat = (view!.frame.width - (viewPadding * 2)) / CGFloat(xcount)
+        let rectheight : CGFloat = (view!.frame.height - (viewPadding * 2)) / CGFloat(ycount)
         
         for x in 1...xcount
         {
             for y in 1...ycount
             {
                 let rect = FLRect(name: "\(name):\(x)-\(y)", view: view)
-                rect.x = rectwidth * CGFloat(x - 1)
-                rect.y = rectheight * CGFloat(y - 1)
+                rect.x = rectwidth * CGFloat(x - 1) + (viewPadding / 2)
+                rect.y = rectheight * CGFloat(y - 1) + (viewPadding / 2)
                 rect.width = rectwidth
                 rect.height = rectheight
                 if debug == true

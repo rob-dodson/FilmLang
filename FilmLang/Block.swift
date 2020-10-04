@@ -202,12 +202,21 @@ class Block
             (xoffset,yoffset) = offset()
             xoffset = gridrect.x + xoffset
             yoffset = gridrect.y + yoffset
+            
+            if layoutSpec?.fit == true
+            {
+             //   let context = NSGraphicsContext.current!.cgContext
+             //   context.scaleBy(x: gridrect.width / width, y: gridrect.height / height)
+                //boundingRect = NSRect(x: x + xoffset, y: y + yoffset, width: min(width,gridrect.width), height: min(height,gridrect.height))
+            }
+            
+            boundingRect = NSRect(x: x + xoffset, y: y + yoffset, width: width, height: height)
         }
         else
         {
             (xoffset,yoffset) = offset()
+            boundingRect = NSRect(x: x + xoffset, y: y + yoffset, width: width, height: height)
         }
-        boundingRect = NSRect(x: x + xoffset, y: y + yoffset, width: width, height: height)
         
         if rotation > -999
         {

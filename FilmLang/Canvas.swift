@@ -25,8 +25,8 @@ class Canvas: NSView
         screenBlock.view = self
         
         
-        screenBlock.x = screenBlock.viewPadding / 2
-        screenBlock.y = screenBlock.viewPadding / 2
+        screenBlock.x = screenBlock.viewPadding
+        screenBlock.y = screenBlock.viewPadding
         screenBlock.width = 1000
         screenBlock.height = 700
         screenBlock.gradientAngle = -50
@@ -35,8 +35,8 @@ class Canvas: NSView
         screenBlock.fillGradient = NSGradient(starting: NSColor.init(calibratedRed: 0.0, green: 0.0, blue: 0.0, alpha: 0.0), ending: NSColor.init(calibratedRed: 0.0, green: 0.4, blue: 0.0, alpha: 5.0))!
         screenBlock.windowChanged =
         {(block) -> Void in
-            block.width = self.frame.width - self.screenBlock.viewPadding
-            block.height = self.frame.height - self.screenBlock.viewPadding
+            block.width = self.frame.width - (self.screenBlock.viewPadding * 2)
+            block.height = self.frame.height - (self.screenBlock.viewPadding * 2)
         }
         
         

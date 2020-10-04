@@ -52,18 +52,17 @@ for (x = 0; x <= 4; x++)
 	}
 }
 
-let label1 = { type:TEXT,name:"label1",text:"723778-8293*9",    rotation:45,size:10,x:20,y:550,textColor:orange,font:MainFont }
-let label2 = { type:TEXT,name:"label2",text:"xxc - 903939",     rotation:45,size:0,x:20,y:350,textColor:orange,font:MainFont }
-let label3 = { type:TEXT,name:"label2",text:"spec-9023 ** 324A",rotation:45,size:10,x:20,y:150,textColor:orange,font:MainFont }
+let label1 = { type:TEXT,name:"label1",text:"723778-8293*9",    layoutSpec:{x:1,y:1,fit:false},rotation:45,size:10,x:10,y:50,textColor:orange,font:MainFont }
+let label2 = { type:TEXT,name:"label2",text:"xxc - 903939",     layoutSpec:{x:1,y:2,fit:false},rotation:45,size:10,x:10,y:50,textColor:orange,font:MainFont }
+let label3 = { type:TEXT,name:"label2",text:"spec-9023 ** 324A",layoutSpec:{x:1,y:3,fit:false},rotation:45,size:10,x:10,y:50,textColor:orange,font:MainFont }
 addBlock(label1)
 addBlock(label2)
 addBlock(label3)
 
 
-//x:40,
-//	y:420,
-//	width:340,
-//	height:330,
+//
+// bracket
+//
 let cambracket = 
 {
 	name:"cambracket",

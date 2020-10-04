@@ -146,10 +146,6 @@ class Block
     
     func addChild(childblock:Block)
     {
-        if let layoutspec = layoutSpec
-        {
-            childblock.layoutSpec = layoutspec
-        }
         children.append(childblock);
         childblock.parent = self;
     }
@@ -163,8 +159,16 @@ class Block
         var p = parent
         while p != nil
         {
+            if let layout = p?.layoutSpec
+            {
+                let gridrect = Block.layoutGrid.getGridRect(x: layout.x,y:layout.y)
+                x = x + gridrect.x
+                y = y + gridrect.y
+            }
+            
             x = x + p!.x
             y = y + p!.y
+            
             p = p?.parent
         }
         
@@ -413,7 +417,7 @@ class Block
             Block.connectParent(block:self,dict: dict)
         }
 
-        for i in 0...10
+        for i in 0...100
         {
             if let childblockdict = dict["childBlock\(i)"] as? NSDictionary
             {

@@ -61,7 +61,7 @@ let layout =
     name:"layout",
     xcount:4,
     ycount:4,
-    debug:false,
+    debug:true,
 }
 addBlock(layout)
 
@@ -329,8 +329,8 @@ let titleblock =
 	name:"titleblock",
 	type:RECT,
 	layoutSpec:{x:2,y:4,fit:false},
-	x:50,
-	y:100,
+	x:40,
+	y:70,
 	width:200,
 	height:100,
 	fillGradient:blockbackgrad,

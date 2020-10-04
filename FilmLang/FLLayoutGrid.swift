@@ -16,12 +16,14 @@ class FLLayoutGrid : Block
     var ycount : Int = 1
     var cache  : NSMutableDictionary?
     
+    
     override init(name:String, view:NSView?)
     {
         cache = NSMutableDictionary()
         
         super.init(name: name, view: view)
     }
+    
     
     override func parseBlock(dict:NSDictionary)
     {
@@ -30,7 +32,6 @@ class FLLayoutGrid : Block
         strokeColor = NSColor.red
         if let xcount = dict["xcount"] as? Int { self.xcount = xcount }
         if let ycount = dict["ycount"] as? Int { self.ycount = ycount }
-        
         
         calcGrid()
         
@@ -45,27 +46,31 @@ class FLLayoutGrid : Block
         children.removeAll()
         cache?.removeAllObjects()
         
-        let rectwidth : CGFloat = (view!.frame.width - (viewPadding * 2)) / CGFloat(xcount)
-        let rectheight : CGFloat = (view!.frame.height - (viewPadding * 2)) / CGFloat(ycount)
+        let paddingplus = viewPadding / 2
+        let paddingminus = viewPadding * 2
+        let rectwidth : CGFloat = (view!.frame.width - paddingminus) / CGFloat(xcount)
+        let rectheight : CGFloat = (view!.frame.height - paddingminus) / CGFloat(ycount)
         
+
         for x in 1...xcount
         {
             for y in 1...ycount
             {
-                let rect = FLRect(name: "\(name):\(x)-\(y)", view: view)
-                rect.x = rectwidth * CGFloat(x - 1) + (viewPadding / 2)
-                rect.y = rectheight * CGFloat(y - 1) + (viewPadding / 2)
+                let key = "\(x)-\(y)"
+                let rect = FLRect(name: "\(name):\(key)", view: view)
+                rect.x = rectwidth * CGFloat(x - 1) + paddingplus
+                rect.y = rectheight * CGFloat(y - 1) + paddingplus
                 rect.width = rectwidth
                 rect.height = rectheight
+                
                 if debug == true
                 {
                     rect.debug = debug
                     rect.strokeColor = NSColor.red
                 }
+                
                 addChild(childblock: rect)
-                
-                cache?.setValue(rect, forKey: "\(x)-\(y)")
-                
+                cache?.setValue(rect, forKey: key)
             }
         }
     }

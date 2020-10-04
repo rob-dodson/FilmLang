@@ -125,7 +125,7 @@ let dot1 = {type:CIRCLE,debug:false,name:"dot1",x:250,y:200,radius:15,strokeColo
 addBlock(dot1)
 let arc1 = {type:ARC,name:"arc1",startAngle:10,endAngle:90,x:250,y:200,radius:10,strokeWidth:5,strokeColor:blue,parent:"bezblock"}
 addBlock(arc1)
-let text1 = {type:TEXT,name:"text1",x:0,y:-40,text:"/// 432",textColor:cyan,size:10,parent:"dot1"}
+let text1 = {type:TEXT,name:"text1",x:0,y:-38,text:"/// 432",textColor:cyan,size:10,parent:"dot1"}
 addBlock(text1)
 
 
@@ -140,7 +140,7 @@ let dot2 = {type:CIRCLE,debug:false,name:"dot2",x:330,y:200,radius:15,strokeColo
 addBlock(dot2)
 let arc2 = {type:ARC,name:"arc2",startAngle:20,endAngle:190,x:330,y:200,radius:10,strokeWidth:5,strokeColor:red,parent:"bezblock"}
 addBlock(arc2)
-let text2 = {type:TEXT,name:"text2",x:0,y:-40,text:"/// 673",textColor:cyan,size:10,parent:"dot2"}
+let text2 = {type:TEXT,name:"text2",x:0,y:-38,text:"/// 673",textColor:cyan,size:10,parent:"dot2"}
 addBlock(text2)
 
 rad = 25

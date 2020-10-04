@@ -30,6 +30,7 @@ class FLLayoutGrid : Block
         super.parseBlock(dict: dict)
         
         strokeColor = NSColor.red
+        
         if let xcount = dict["xcount"] as? Int { self.xcount = xcount }
         if let ycount = dict["ycount"] as? Int { self.ycount = ycount }
         
@@ -50,7 +51,6 @@ class FLLayoutGrid : Block
         let paddingminus = viewPadding * 2
         let rectwidth : CGFloat = (view!.frame.width - paddingminus) / CGFloat(xcount)
         let rectheight : CGFloat = (view!.frame.height - paddingminus) / CGFloat(ycount)
-        
 
         for x in 1...xcount
         {
@@ -78,7 +78,9 @@ class FLLayoutGrid : Block
     
     func getGridRect(x:Int,y:Int) -> FLRect
     {
-        return cache?.value(forKey: "\(x)-\(y)") as! FLRect
+        let key = "\(x)-\(y)"
+        
+        return cache?.value(forKey: key) as! FLRect
     }
     
     

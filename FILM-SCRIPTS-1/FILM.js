@@ -60,7 +60,7 @@ let layout =
     name:"layout",
     xcount:4,
     ycount:4,
-    debug:true,
+    debug:false,
 }
 addBlock(layout)
 

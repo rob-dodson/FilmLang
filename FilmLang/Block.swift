@@ -205,9 +205,9 @@ class Block
             
             if layoutSpec?.fit == true
             {
-             //   let context = NSGraphicsContext.current!.cgContext
-             //   context.scaleBy(x: gridrect.width / width, y: gridrect.height / height)
-                //boundingRect = NSRect(x: x + xoffset, y: y + yoffset, width: min(width,gridrect.width), height: min(height,gridrect.height))
+                //let context = NSGraphicsContext.current!.cgContext
+               // context.scaleBy(x: gridrect.width / width, y: gridrect.height / height)
+               // boundingRect = NSRect(x: x + xoffset, y: y + yoffset, width: min(width,gridrect.width), height: min(height,gridrect.height))
             }
             
             boundingRect = NSRect(x: x + xoffset, y: y + yoffset, width: width, height: height)

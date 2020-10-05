@@ -21,11 +21,11 @@ class FLImage : Block
         
         super.init(name: name, view: view)
         
-        let filters = CIFilter.filterNames(inCategory: kCICategoryBuiltIn)
-        for filter in filters
-        {
-            print(filter.description)
-        }
+       // let filters = CIFilter.filterNames(inCategory: kCICategoryBuiltIn)
+       // for filter in filters
+       // {
+        //    print(filter.description)
+       // }
 
     }
     
@@ -35,15 +35,25 @@ class FLImage : Block
         
         if let urlstr = dict["url"]   as? String
         {
-            url = URL(string: urlstr)
             
-            let filter = CIFilter(name: "CITwirlDistortion")!                         // 2
-            //filter.setValue(0.8, forKey: kCIInputIntensityKey)
-            let ciimage = CIImage(contentsOf: url!)                           // 3
-            filter.setValue(ciimage, forKey: kCIInputImageKey)
-            let result = filter.outputImage!                                    // 4
-            let cgImage = context!.createCGImage(result, from: result.extent)    // 5
-            image = NSImage(cgImage: cgImage!, size: NSSize(width: width, height: height))
+            
+            //let filter = CIFilter(name: "CIZoomBlur")!                         // 2
+          //  let atts = filter.attributes;
+           // for att in atts
+           // {
+           //     print(" att: \(att)")
+           // }
+            //filter.setValue(CIVector(x: width / 2, y: height / 2), forKey: "inputCenter")
+           // filter.setValue(15.0, forKey: "inputAmount")
+           // let ciimage = CIImage(contentsOf: url!)                           // 3
+            //filter.setValue(ciimage, forKey: kCIInputImageKey)
+           // let result = filter.outputImage!                                    // 4
+           // let cgImage = context!.createCGImage(result, from: result.extent)    // 5
+           // image = NSImage(cgImage: cgImage!, size: NSSize(width: width, height: height))
+            if let url = URL(string: urlstr)
+            {
+                image = NSImage(byReferencing: url)
+            }
         }
     }
     

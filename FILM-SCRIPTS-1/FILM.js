@@ -38,7 +38,7 @@ let cyan      = { red: 0.07, green: 0.61, blue: 0.65, alpha: .5}
 let green     = { red:0.0, green:0.9, blue:0.0, alpha:0.8}
 let darkgreen = { red:0.0, green:0.5, blue:0.0, alpha:0.4}
 let gray      = { red:0.7, green:0.7, blue:0.7, alpha:0.6}
-let orange    = { red: 0.76, green: 0.38, blue: 0.05, alpha: 1.00 }
+let orange    = { red: 0.76, green: 0.38, blue: 0.05, alpha: .8 }
 let black     = { red: 0.0, green: 0.0, blue: 0.0, alpha: 1.00 }
 let white     = { red: 1.0, green: 1.0, blue: 1.0, alpha: 1.00 }
 
@@ -61,7 +61,7 @@ let layout =
     name:"layout",
     xcount:4,
     ycount:4,
-    debug:true,
+    debug:false,
 }
 addBlock(layout)
 
@@ -98,7 +98,7 @@ let bezblock =
 	height:400,
 	fillGradient:blockbackgrad,
 	radius:4,
-	childBlock0: {type:TEXT,name:"beztitle",text:"BEZ-1",size:20,x:30,y:360,textColor:gray,font:MainFont,fillColor:gray,textColor:black,strokeColor:gray,radius:4 },
+	childBlock0: {type:TEXT,name:"beztitle",text:"BEZ-1",size:20,x:10,y:360,textColor:gray,font:MainFont,fillColor:gray,textColor:black,strokeColor:gray,radius:4 },
 }
 addBlock(bezblock)
 
@@ -323,7 +323,89 @@ let cambracket =
 	parent:"CamBlock",
 }
 addBlock(cambracket)
-let mapgrid =
+//
+// color block
+//
+let colorblock  =
+{
+	name:"colorblock",
+	type:RECT,
+	x:20,
+	y:20,
+	layoutSpec:{x:1,y:1,fit:false},
+	width:400,
+	height:240,
+	fillGradient:blockbackgrad,
+	radius:4,
+	childBlock0: {type:TEXT,name:"beztitle",text:"primary",size:20,x:10,y:210,textColor:gray,font:MainFont,fillColor:gray,textColor:black,strokeColor:gray,radius:4 },
+}
+addBlock(colorblock)
+
+for (g = 0; g < 3; g++)
+{
+	for (i = 0; i < 3; i++)
+	{
+		let label = "?"
+		if (i == 0) { label = "R" }
+		if (i == 1) { label = "G" }
+		if (i == 2) { label = "B" }
+		
+		let name = "slider".concat(i.toString()).concat(g.toString())
+		
+		let slider = 
+		{
+			name:name,
+			type:RECT,
+			x:(28 * i) + (110 * g) + 10,
+			y:30,
+			width:20,
+			height:160,
+			radius:2,	
+			strokeColor:cyan,
+			strokeWidth:3,
+			parent:"colorblock",
+			
+		 }
+		 addBlock(slider)
+		 
+		 let slidername= "slidertitle".concat(i.toString())
+		 let sliderlabel =  { type:TEXT,name:slidername,text:label,size:15,x:6,y:140,textColor:cyan,font:MainFont,parent: name}
+		 addBlock(sliderlabel)
+		 
+		 let posblock = 
+		 {
+			 name:"posblock",
+			 type:RECT,
+			 x:1,
+			 y:Math.floor((Math.random() * 60) + 10),
+			 width:19,
+			 height:Math.floor((Math.random() * 15) + 3),
+			 fillColor:orange,
+			 radius:2,
+			 parent: name
+		  }
+		  addBlock(posblock)
+	}
+	 
+	 
+	let glabel = "?"
+	if (g == 0) { glabel = "gamma" }
+	if (g == 1) { glabel = "gain" }
+	if (g == 2) { glabel = "black" }
+	let grouplabel =  
+	{
+		 type:TEXT,
+		 name:"grouplabel",
+		 text:glabel,
+		 size:15,
+		 x:(25 * g * 5) + 10,
+		 y:5,
+		 textColor:cyan,
+		 parent:"colorblock",
+		 font:MainFont,fillColor:gray,textColor:black,strokeColor:gray,radius:4
+	 }
+	 addBlock(grouplabel)
+}let mapgrid =
 {
 	type:GRID,
 	name:"mapgrid",

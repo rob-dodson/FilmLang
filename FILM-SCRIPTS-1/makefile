@@ -6,3 +6,4 @@ all:
 	cat Constants tmp.txt > FILM.js
 	rm tmp.txt
 	cp FILM.js ~/Desktop/FILM
+	cp map.png ~/Desktop/FILM

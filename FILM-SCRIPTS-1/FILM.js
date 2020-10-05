@@ -405,7 +405,25 @@ for (g = 0; g < 3; g++)
 		 font:MainFont,fillColor:gray,textColor:black,strokeColor:gray,radius:4
 	 }
 	 addBlock(grouplabel)
-}let mapgrid =
+}
+
+let colorcube = 
+{
+	name:"posblock",
+	type:RECT,
+	x:330,
+	y:90,
+	width:40,
+	height:40,
+	gradientAngle:-50,
+	strokeColor:cyan,
+	strokeWidth:1,
+	fillGradient:{ startColor: {red:1.0, green:0.0, blue:0.0, alpha:0.8},endColor: {red:0.0, green:0.9, blue:0.9, alpha:0.8}},
+	radius:2,
+	parent: "colorblock",	
+}
+addBlock(colorcube)
+let mapgrid =
 {
 	type:GRID,
 	name:"mapgrid",

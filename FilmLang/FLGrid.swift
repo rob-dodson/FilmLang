@@ -67,7 +67,7 @@ class FLGrid : Block
             
             gridColor.setStroke()
             bezierPath.lineWidth = gridStrokeWidth
-            bezierPath.setLineDash([2, 2], count: 2, phase: 0)
+            //bezierPath.setLineDash([2, 2], count: 2, phase: 0)
             bezierPath.stroke()
         }
         
@@ -82,7 +82,7 @@ class FLGrid : Block
             
             gridColor.setStroke()
             bezierPath.lineWidth = gridStrokeWidth
-            bezierPath.setLineDash([2, 2], count: 2, phase: 0)
+           // bezierPath.setLineDash([2, 2], count: 2, phase: 0)
             bezierPath.stroke()
         }
         

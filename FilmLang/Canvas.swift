@@ -11,7 +11,7 @@ import Cocoa
 class Canvas: NSView
 {
     var timer : Timer? = nil
-    var screenBlock : Block!
+   //var screenBlock : Block!
  
     
     required init?(coder: NSCoder)
@@ -19,27 +19,9 @@ class Canvas: NSView
         //
         // init
         //
-        screenBlock = FLRect(name:"Screen",view:nil)
-        Block.topBlock = screenBlock
         super.init(coder: coder)
-        screenBlock.view = self
         
-        
-        screenBlock.x = screenBlock.viewPadding
-        screenBlock.y = screenBlock.viewPadding
-        screenBlock.width = 1000
-        screenBlock.height = 700
-        screenBlock.gradientAngle = -50
-        screenBlock.clip = true
-        screenBlock.fitToView = true
-        screenBlock.fillGradient = NSGradient(starting: NSColor.init(calibratedRed: 0.0, green: 0.0, blue: 0.0, alpha: 0.0), ending: NSColor.init(calibratedRed: 0.0, green: 0.4, blue: 0.0, alpha: 5.0))!
-        screenBlock.windowChanged =
-        {(block) -> Void in
-            block.width = self.frame.width - (self.screenBlock.viewPadding * 2)
-            block.height = self.frame.height - (self.screenBlock.viewPadding * 2)
-        }
-        
-        
+      
         let js = Javascript(canvas: self)
         js.execScript()
         
@@ -49,12 +31,12 @@ class Canvas: NSView
             timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true)
             { (timer) in
                 
-                if self.screenBlock.animators.count > 0
+                if Block.topBlock.animators.count > 0
                 {
-                    self.screenBlock.animate()
+                    Block.topBlock.animate()
                 }
                 
-                self.animateChildren(children: self.screenBlock.children)
+                self.animateChildren(children: Block.topBlock.children)
                 
                 self.needsDisplay = true
             }
@@ -101,7 +83,6 @@ class Canvas: NSView
     override func draw(_ dirtyRect: NSRect)
     {
         super.draw(dirtyRect)
-       
         
         //
         // background
@@ -122,7 +103,7 @@ class Canvas: NSView
         //
         // blocks
         //
-        screenBlock.draw()
+        Block.topBlock.draw()
         
     }
     

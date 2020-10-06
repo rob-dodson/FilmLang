@@ -55,6 +55,21 @@ let blockbackgrad =
     endColor: {red:0.9, green:0.2, blue:0.2, alpha:0.4},
 }
 
+let screen = 
+{
+	type:RECT,
+	name:"Screen",
+	x:20,
+	y:20,
+	width:1000,
+	height:700,
+	gradientAngle:-50,
+	clip:true,
+	fitToView:true,
+	fillGradient:blockbackgrad,
+}
+addBlock(screen)
+
 let layout = 
 {
     type:LAYOUT,

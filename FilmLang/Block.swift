@@ -275,6 +275,17 @@ class Block
         {
             let rect = FLRect(name: dict["name"] as! String, view: view)
             rect.parseBlock(dict: dict)
+            
+            if rect.name == "Screen"
+            {
+                Block.topBlock = rect
+                Block.topBlock.windowChanged =
+                {(block) -> Void in
+                    block.width = (block.view?.frame.width)! - (block.viewPadding * 2)
+                    block.height = (block.view?.frame.height)! - (block.viewPadding * 2)
+                }
+                
+            }
         }
         else if dict["type"] as! String == "Text"
         {
@@ -443,7 +454,14 @@ class Block
         }
         else
         {
-            topBlock.addChild(childblock:block)
+            if topBlock == nil && block.name == "Screen"
+            {
+                topBlock = block
+            }
+            else
+            {
+                topBlock.addChild(childblock:block)
+            }
         }
     }
     

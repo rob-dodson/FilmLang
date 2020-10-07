@@ -29,6 +29,7 @@ class Block
     static var thereAreAnimators : Bool = false
     static var topBlock          : Block!
     static var layoutGrid        : FLLayoutGrid!
+    static var view              : NSView!
     
     var parent        : Block?
     var children      : [Block]
@@ -50,7 +51,6 @@ class Block
     var radius        : CGFloat = 0.0
     var startAngle    : CGFloat = 0
     var endAngle      : CGFloat = 45
-    var view          : NSView?
     var windowChanged : ((Block) -> Void)?
     var boundingRect  : NSRect? = nil
     var xoffset       : CGFloat = 0.0
@@ -61,11 +61,9 @@ class Block
     var layoutSpec         : LayoutSpec?
     var viewPadding        : CGFloat = 20
     
-    init(name:String, view:NSView?)
+    init(name:String)
     {
         self.name = name
-        self.view = view
-        
         self.children = [Block]()
         self.animators = [Animator]()
     }
@@ -269,11 +267,11 @@ class Block
     }
     
     
-    static func addBlockFromDictionary(dict:NSDictionary, view:NSView)
+    static func addBlockFromDictionary(dict:NSDictionary)
     {
         if dict["type"] as! String == "Rect"
         {
-            let rect = FLRect(name: dict["name"] as! String, view: view)
+            let rect = FLRect(name: dict["name"] as! String)
             rect.parseBlock(dict: dict)
             
             if rect.name == "Screen"
@@ -281,63 +279,62 @@ class Block
                 Block.topBlock = rect
                 Block.topBlock.windowChanged =
                 {(block) -> Void in
-                    block.width = (block.view?.frame.width)! - (block.viewPadding * 2)
-                    block.height = (block.view?.frame.height)! - (block.viewPadding * 2)
+                    block.width = (Block.view?.frame.width)! - (block.viewPadding * 2)
+                    block.height = (Block.view?.frame.height)! - (block.viewPadding * 2)
                 }
                 
             }
         }
         else if dict["type"] as! String == "Text"
         {
-            let text = FLText(name: dict["name"] as! String, view: view)
+            let text = FLText(name: dict["name"] as! String)
             text.parseBlock(dict: dict)
         }
         else if dict["type"] as! String == "Grid"
         {
-            let grid = FLGrid(name: dict["name"] as! String, view: view)
+            let grid = FLGrid(name: dict["name"] as! String)
             grid.parseBlock(dict: dict)
         }
         else if dict["type"] as! String == "Image"
         {
-            let image = FLImage(name: dict["name"] as! String, view: view)
+            let image = FLImage(name: dict["name"] as! String)
             image.parseBlock(dict: dict)
         }
         else if dict["type"] as! String == "Arc"
         {
-            let arc = FLArc(name: dict["name"] as! String, view: view)
+            let arc = FLArc(name: dict["name"] as! String)
             arc.parseBlock(dict: dict)
         }
         else if dict["type"] as! String == "Circle"
         {
-            let circle = FLCircle(name: dict["name"] as! String, view: view)
+            let circle = FLCircle(name: dict["name"] as! String)
             circle.parseBlock(dict: dict)
         }
         else if dict["type"] as! String == "Line"
         {
-            let line = FLLine(name: dict["name"] as! String, view: view)
+            let line = FLLine(name: dict["name"] as! String)
             line.parseBlock(dict: dict)
         }
         else if dict["type"] as! String == "Path"
         {
-            let path = FLPath(name: dict["name"] as! String, view: view)
+            let path = FLPath(name: dict["name"] as! String)
             path.parseBlock(dict: dict)
         }
         else if dict["type"] as! String == "Bezier"
         {
-            let bez = FLBezier(name: dict["name"] as! String, view: view)
+            let bez = FLBezier(name: dict["name"] as! String)
             bez.parseBlock(dict: dict)
         }
         else if dict["type"] as! String == "Axis"
         {
-            let bez = FLAxis(name: dict["name"] as! String, view: view)
+            let bez = FLAxis(name: dict["name"] as! String)
             bez.parseBlock(dict: dict)
         }
         else if dict["type"] as! String == "LayoutGrid"
         {
-            let layoutgrid = FLLayoutGrid(name: dict["name"] as! String, view: view)
+            let layoutgrid = FLLayoutGrid(name: dict["name"] as! String)
             layoutgrid.parseBlock(dict: dict)
         }
-        
     }
     
     
@@ -376,6 +373,7 @@ class Block
             self.fillGradient = NSGradient(starting: fromColor, ending: toColor)
         }
         
+        
         if let windowOffset = dict["windowOffset"] as? NSDictionary
         {
             let point = Block.pointFromDict(dict: windowOffset)
@@ -383,8 +381,8 @@ class Block
             self.windowHeightOffset = point.y
             self.windowChanged =
                 {(block) -> Void in
-                    block.x = self.view!.frame.width - block.windowWidthOffset
-                    block.y = self.view!.frame.height - block.windowHeightOffset
+                    block.x = Block.view.frame.width - block.windowWidthOffset
+                    block.y = Block.view.frame.height - block.windowHeightOffset
                 }
         }
         
@@ -433,7 +431,7 @@ class Block
             if let childblockdict = dict["childBlock\(i)"] as? NSDictionary
             {
                 childblockdict.setValue(self.name, forKey:"parent")
-                Block.addBlockFromDictionary(dict: childblockdict,view: view!)
+                Block.addBlockFromDictionary(dict: childblockdict)
             }
         }
     }
@@ -454,7 +452,7 @@ class Block
         }
         else
         {
-            if topBlock == nil && block.name == "Screen"
+            if block.name == "Screen"
             {
                 topBlock = block
             }

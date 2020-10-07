@@ -17,11 +17,11 @@ class FLLayoutGrid : Block
     var cache  : NSMutableDictionary?
     
     
-    override init(name:String, view:NSView?)
+    override init(name:String)
     {
         cache = NSMutableDictionary()
         
-        super.init(name: name, view: view)
+        super.init(name: name)
     }
     
     
@@ -49,15 +49,15 @@ class FLLayoutGrid : Block
         
         let paddingplus = viewPadding / 2
         let paddingminus = viewPadding * 2
-        let rectwidth : CGFloat = (view!.frame.width - paddingminus) / CGFloat(xcount)
-        let rectheight : CGFloat = (view!.frame.height - paddingminus) / CGFloat(ycount)
+        let rectwidth : CGFloat = (Block.view.frame.width - paddingminus) / CGFloat(xcount)
+        let rectheight : CGFloat = (Block.view.frame.height - paddingminus) / CGFloat(ycount)
 
         for x in 1...xcount
         {
             for y in 1...ycount
             {
                 let key = "\(x)-\(y)"
-                let rect = FLRect(name: "\(name):\(key)", view: view)
+                let rect = FLRect(name: "\(name):\(key)")
                 rect.x = rectwidth * CGFloat(x - 1) + paddingplus
                 rect.y = rectheight * CGFloat(y - 1) + paddingplus
                 rect.width = rectwidth

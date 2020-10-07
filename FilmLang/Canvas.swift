@@ -11,7 +11,6 @@ import Cocoa
 class Canvas: NSView
 {
     var timer : Timer? = nil
-   //var screenBlock : Block!
  
     
     required init?(coder: NSCoder)
@@ -20,12 +19,18 @@ class Canvas: NSView
         // init
         //
         super.init(coder: coder)
+        Block.view = self
         
-      
+        //
+        // parse javascript
+        //
         let js = Javascript(canvas: self)
         js.execScript()
         
         
+        //
+        // Animation loop
+        //
         if Block.thereAreAnimators
         {
             timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true)
@@ -44,11 +49,6 @@ class Canvas: NSView
         
     }
     
-    
-    func addBlockFromDictionary(dict:NSDictionary)
-    {
-        Block.addBlockFromDictionary(dict: dict, view:self)
-    }
     
     
     func drawChildren(children:[Block])

@@ -61,12 +61,14 @@ let screen =
 	name:"Screen",
 	x:20,
 	y:20,
-	width:1000,
-	height:700,
+	width:300,
+	height:400,
 	gradientAngle:-50,
 	clip:true,
 	fitToView:true,
-	fillGradient:blockbackgrad,
+	fillGradient: {
+    startColor: {red:0.0, green:0.5, blue:0.5, alpha:0.6},
+    endColor: {red:0.0, green:0.8, blue:0.1, alpha:0.4}, },
 }
 addBlock(screen)
 

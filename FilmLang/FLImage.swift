@@ -15,11 +15,11 @@ class FLImage : Block
     var image : NSImage?
     var context : CIContext?
     
-    init(name: String, view: NSView)
+    override init(name: String)
     {
         context = CIContext()
         
-        super.init(name: name, view: view)
+        super.init(name: name)
         
        // let filters = CIFilter.filterNames(inCategory: kCICategoryBuiltIn)
        // for filter in filters

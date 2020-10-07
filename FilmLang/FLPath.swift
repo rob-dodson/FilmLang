@@ -13,11 +13,11 @@ class FLPath : Block
 {
     var points : [NSPoint]
     
-    override init(name:String, view:NSView?)
+    override init(name:String)
     {
         points = [NSPoint]()
         
-        super.init(name: name, view: view)
+        super.init(name: name)
     }
     
     override func parseBlock(dict:NSDictionary)

@@ -12,6 +12,7 @@ let PATH = "Path"
 let BEZIER = "Bezier"
 let AXIS = "Axis"
 let LAYOUT = "LayoutGrid"
+let METALVIEW = "MetalView"
 
 let MainFont = "Courier"
 
@@ -82,6 +83,18 @@ let layout =
 }
 addBlock(layout)
 
+
+let metal =
+{
+	type:METALVIEW,
+	name:"metalview",
+	x:10,
+	y:10,
+	width:350,
+	height:250,
+	layoutSpec:{x:2,y:1,fit:false},
+}
+addBlock(metal)
 let axis =
 {
     name:"axis",
@@ -444,7 +457,7 @@ let mapgrid =
 {
 	type:GRID,
 	name:"mapgrid",
-	layoutSpec:{x:2,y:1,fit:false},
+	layoutSpec:{x:3,y:1,fit:false},
 	xspacing:10,
 	yspacing:10,
 	width:350,

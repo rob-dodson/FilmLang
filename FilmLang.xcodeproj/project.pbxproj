@@ -20,6 +20,17 @@
 		AE93A96B251BCFF700F3D559 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE93A96A251BCFF700F3D559 /* Animator.swift */; };
 		AE93A982251BDDBA00F3D559 /* Javascript.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE93A981251BDDBA00F3D559 /* Javascript.swift */; };
 		AEB8651E2527A5C6005CFEDF /* FLAxis.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8651D2527A5C6005CFEDF /* FLAxis.swift */; };
+		AEB8652F252E16D8005CFEDF /* FL3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8652E252E16D8005CFEDF /* FL3D.swift */; };
+		AEB8656E252E43BC005CFEDF /* Shaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = AEB8656A252E43BC005CFEDF /* Shaders.metal */; };
+		AEB8656F252E43BC005CFEDF /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8656B252E43BC005CFEDF /* Renderer.swift */; };
+		AEB86570252E43BC005CFEDF /* ModelIOExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8656C252E43BC005CFEDF /* ModelIOExtensions.swift */; };
+		AEB86571252E43BC005CFEDF /* MathUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8656D252E43BC005CFEDF /* MathUtilities.swift */; };
+		AEB8657A252E4785005CFEDF /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB86574252E4785005CFEDF /* Scene.swift */; };
+		AEB8657B252E4785005CFEDF /* Ray.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB86575252E4785005CFEDF /* Ray.swift */; };
+		AEB8657C252E4785005CFEDF /* HitResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB86576252E4785005CFEDF /* HitResult.swift */; };
+		AEB8657D252E4785005CFEDF /* BoundingSphere.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB86577252E4785005CFEDF /* BoundingSphere.swift */; };
+		AEB8657E252E4785005CFEDF /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB86578252E4785005CFEDF /* Camera.swift */; };
+		AEB8657F252E4785005CFEDF /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB86579252E4785005CFEDF /* Node.swift */; };
 		AEC3FBE7251009F200C32210 /* FLRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC3FBE6251009F200C32210 /* FLRect.swift */; };
 		AEC3FBE925100A3A00C32210 /* FLGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC3FBE825100A3A00C32210 /* FLGrid.swift */; };
 		AEC3FBEB25100A5B00C32210 /* FLCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC3FBEA25100A5B00C32210 /* FLCircle.swift */; };
@@ -45,6 +56,17 @@
 		AE93A96A251BCFF700F3D559 /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
 		AE93A981251BDDBA00F3D559 /* Javascript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Javascript.swift; sourceTree = "<group>"; };
 		AEB8651D2527A5C6005CFEDF /* FLAxis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLAxis.swift; sourceTree = "<group>"; };
+		AEB8652E252E16D8005CFEDF /* FL3D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FL3D.swift; sourceTree = "<group>"; };
+		AEB8656A252E43BC005CFEDF /* Shaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Shaders.metal; sourceTree = "<group>"; };
+		AEB8656B252E43BC005CFEDF /* Renderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
+		AEB8656C252E43BC005CFEDF /* ModelIOExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelIOExtensions.swift; sourceTree = "<group>"; };
+		AEB8656D252E43BC005CFEDF /* MathUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathUtilities.swift; sourceTree = "<group>"; };
+		AEB86574252E4785005CFEDF /* Scene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
+		AEB86575252E4785005CFEDF /* Ray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ray.swift; sourceTree = "<group>"; };
+		AEB86576252E4785005CFEDF /* HitResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HitResult.swift; sourceTree = "<group>"; };
+		AEB86577252E4785005CFEDF /* BoundingSphere.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoundingSphere.swift; sourceTree = "<group>"; };
+		AEB86578252E4785005CFEDF /* Camera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
+		AEB86579252E4785005CFEDF /* Node.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		AEC3FBE6251009F200C32210 /* FLRect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLRect.swift; sourceTree = "<group>"; };
 		AEC3FBE825100A3A00C32210 /* FLGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLGrid.swift; sourceTree = "<group>"; };
 		AEC3FBEA25100A5B00C32210 /* FLCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLCircle.swift; sourceTree = "<group>"; };
@@ -104,8 +126,35 @@
 				AED96884251E96D7007B2CE6 /* FLLine.swift */,
 				AE93A96A251BCFF700F3D559 /* Animator.swift */,
 				AE93A981251BDDBA00F3D559 /* Javascript.swift */,
+				AEB8652E252E16D8005CFEDF /* FL3D.swift */,
+				AEB86549252E4191005CFEDF /* MetalStuff */,
 			);
 			path = FilmLang;
+			sourceTree = "<group>";
+		};
+		AEB86549252E4191005CFEDF /* MetalStuff */ = {
+			isa = PBXGroup;
+			children = (
+				AEB86573252E4785005CFEDF /* Scene */,
+				AEB8656D252E43BC005CFEDF /* MathUtilities.swift */,
+				AEB8656C252E43BC005CFEDF /* ModelIOExtensions.swift */,
+				AEB8656B252E43BC005CFEDF /* Renderer.swift */,
+				AEB8656A252E43BC005CFEDF /* Shaders.metal */,
+			);
+			path = MetalStuff;
+			sourceTree = "<group>";
+		};
+		AEB86573252E4785005CFEDF /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				AEB86574252E4785005CFEDF /* Scene.swift */,
+				AEB86575252E4785005CFEDF /* Ray.swift */,
+				AEB86576252E4785005CFEDF /* HitResult.swift */,
+				AEB86577252E4785005CFEDF /* BoundingSphere.swift */,
+				AEB86578252E4785005CFEDF /* Camera.swift */,
+				AEB86579252E4785005CFEDF /* Node.swift */,
+			);
+			path = Scene;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -178,6 +227,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEB86571252E43BC005CFEDF /* MathUtilities.swift in Sources */,
 				AEC3FBE7251009F200C32210 /* FLRect.swift in Sources */,
 				AE24CB1225096A02000F20D7 /* FilmLang.xcdatamodeld in Sources */,
 				AE93A982251BDDBA00F3D559 /* Javascript.swift in Sources */,
@@ -185,16 +235,26 @@
 				AE8E380C2512B79F0092C187 /* FLText.swift in Sources */,
 				AE24CB0F25096A02000F20D7 /* AppDelegate.swift in Sources */,
 				AE24CB2A25096DC7000F20D7 /* Canvas.swift in Sources */,
+				AEB8657B252E4785005CFEDF /* Ray.swift in Sources */,
 				AEC3FBEB25100A5B00C32210 /* FLCircle.swift in Sources */,
 				AE183D2F250EB4180017805E /* Block.swift in Sources */,
 				AEC3FBED25101C1B00C32210 /* FLPath.swift in Sources */,
 				AE0F7871251D3BA200BCE3AD /* FLImage.swift in Sources */,
 				AE1E77F825190BED00CFC143 /* FLArc.swift in Sources */,
+				AEB8652F252E16D8005CFEDF /* FL3D.swift in Sources */,
 				AED96885251E96D7007B2CE6 /* FLLine.swift in Sources */,
+				AEB8656F252E43BC005CFEDF /* Renderer.swift in Sources */,
+				AEB8657E252E4785005CFEDF /* Camera.swift in Sources */,
 				AE3DDD7C252939C2003691A8 /* FLLayoutGrid.swift in Sources */,
+				AEB8657C252E4785005CFEDF /* HitResult.swift in Sources */,
+				AEB86570252E43BC005CFEDF /* ModelIOExtensions.swift in Sources */,
 				AE93A96B251BCFF700F3D559 /* Animator.swift in Sources */,
 				AEB8651E2527A5C6005CFEDF /* FLAxis.swift in Sources */,
+				AEB8657D252E4785005CFEDF /* BoundingSphere.swift in Sources */,
+				AEB8657A252E4785005CFEDF /* Scene.swift in Sources */,
 				AEC3FBE925100A3A00C32210 /* FLGrid.swift in Sources */,
+				AEB8656E252E43BC005CFEDF /* Shaders.metal in Sources */,
+				AEB8657F252E4785005CFEDF /* Node.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

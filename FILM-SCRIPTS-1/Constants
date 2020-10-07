@@ -12,6 +12,7 @@ let PATH = "Path"
 let BEZIER = "Bezier"
 let AXIS = "Axis"
 let LAYOUT = "LayoutGrid"
+let METALVIEW = "MetalView"
 
 let MainFont = "Courier"
 

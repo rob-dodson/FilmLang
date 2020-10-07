@@ -15,6 +15,7 @@ class FLScene : Block
 {
     var scene:SCNScene!
     var sceneView : SCNView!
+    var cameraNode : SCNNode!
     
     override func parseBlock(dict:NSDictionary)
     {
@@ -56,7 +57,7 @@ class FLScene : Block
         //
         // create and add a camera to the scene
         //
-        let cameraNode = SCNNode()
+        cameraNode = SCNNode()
         cameraNode.camera = SCNCamera()
         scene?.rootNode.addChildNode(cameraNode)
         let xcam = width / 2
@@ -103,14 +104,16 @@ class FLScene : Block
         //
         // time wait action
         //
-        let actionwait = SCNAction.wait(duration:0.001)
+        let actionwait = SCNAction.wait(duration:0.1)
 
         //
         // run action: colorwar animation is done in this action
         //
         let run = SCNAction.run
         { _ in
+            
             self.draw()
+            
         }
 
         //

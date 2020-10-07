@@ -7,3 +7,5 @@ all:
 	rm tmp.txt
 	cp FILM.js ~/Desktop/FILM
 	cp map.png ~/Desktop/FILM
+	cp teapot.obj ~/Desktop/FILM
+	cp teapot.mtl ~/Desktop/FILM

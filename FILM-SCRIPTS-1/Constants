@@ -13,6 +13,8 @@ let BEZIER = "Bezier"
 let AXIS = "Axis"
 let LAYOUT = "LayoutGrid"
 let METALVIEW = "MetalView"
+let SCENEVIEW = "SceneView"
+
 
 let MainFont = "Courier"
 

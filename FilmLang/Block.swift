@@ -340,6 +340,11 @@ class Block : NSObject
             let metalview = FL3D(name: dict["name"] as! String)
             metalview.parseBlock(dict: dict)
         }
+        else if dict["type"] as! String == "SceneView"
+        {
+            let sceneview = FLScene(name: dict["name"] as! String)
+            sceneview.parseBlock(dict: dict)
+        }
     }
     
     

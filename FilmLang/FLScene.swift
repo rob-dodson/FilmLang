@@ -14,15 +14,25 @@ import SceneKit.ModelIO
 class FLScene : Block
 {
     var scene:SCNScene!
-    var sceneView : SCNView!
-    var cameraNode : SCNNode!
-    var objFilePath : String!
+    var sceneView      : SCNView!
+    var cameraNode     : SCNNode!
+    var objFilePath    : String!
+    var objectPosition : SCNVector3!
+    var objectScale    : SCNVector3!
+    var cameraPosition : SCNVector3!
+    var lightPosition  : SCNVector3!
+    var objectColor    : NSColor!
     
     override func parseBlock(dict:NSDictionary)
     {
         super.parseBlock(dict: dict)
         
-        if let objfilepath = dict["filePath"] as? String { self.objFilePath = objfilepath }
+        if let objfilepath    = dict["objectFilePath"] as? String { self.objFilePath = objfilepath }
+        if let objectscale    = dict["objectScale"]    as? NSDictionary { self.objectScale = vectorFromDict(dict: objectscale) }
+        if let objectposition = dict["objectPosition"] as? NSDictionary { self.objectPosition = vectorFromDict(dict: objectposition) }
+        if let objectcolor    = dict["objectColor"]    as? NSDictionary { self.objectColor = Block.colorFromDict(dict: objectcolor) }
+        if let cameraposition = dict["cameraPosition"] as? NSDictionary { self.cameraPosition = vectorFromDict(dict: cameraposition) }
+        if let lightposition  = dict["lightPosition"]  as? NSDictionary { self.lightPosition = vectorFromDict(dict: lightposition) }
     }
     
     
@@ -49,6 +59,15 @@ class FLScene : Block
         
     }
     
+    func vectorFromDict(dict:NSDictionary) -> SCNVector3
+    {
+        let x = CGFloat.init(dict["x"] as! Double)
+        let y = CGFloat.init(dict["y"] as! Double)
+        let z = CGFloat.init(dict["z"] as! Double)
+        
+        return SCNVector3(x:x,y:y,z:z)
+    }
+    
     func buildscene()
     {
         //
@@ -63,9 +82,7 @@ class FLScene : Block
         cameraNode = SCNNode()
         cameraNode.camera = SCNCamera()
         scene?.rootNode.addChildNode(cameraNode)
-        let xcam = width / 2
-        let ycam = height / 2
-        cameraNode.position = SCNVector3(x: CGFloat(xcam), y: CGFloat(ycam), z: 250)
+        cameraNode.position = cameraPosition
         cameraNode.camera?.automaticallyAdjustsZRange = true
 
 
@@ -75,7 +92,7 @@ class FLScene : Block
         let lightNode = SCNNode()
         lightNode.light = SCNLight()
         lightNode.light!.type = .omni
-        lightNode.position = SCNVector3(x: 50, y: height, z: 100)
+        lightNode.position = lightPosition
         scene?.rootNode.addChildNode(lightNode)
 
         //
@@ -87,15 +104,15 @@ class FLScene : Block
         ambientLightNode.light!.color = NSColor.darkGray
         scene?.rootNode.addChildNode(ambientLightNode)
         
-        let url = NSURL.fileURL(withPath: "/Users/robertdodson/Desktop/FILM/ship.obj")
+        let url = NSURL.fileURL(withPath: objFilePath)
         let asset = MDLAsset(url: url)
         let object = asset.object(at: 0)
         let node = SCNNode(mdlObject: object)
-        node.position = SCNVector3(x:CGFloat(width / 2), y:CGFloat(height / 3), z:0)
-        node.scale = SCNVector3(x:0.5, y:0.5, z:0.5)
+        node.position = objectPosition
+        node.scale = objectScale
 
         let mat = SCNMaterial()
-        mat.diffuse.contents =  NSColor.red
+        mat.diffuse.contents =  objectColor
         node.geometry?.materials = [mat]
         scene?.rootNode.addChildNode(node)
         

@@ -24,7 +24,7 @@ struct LayoutSpec
     let fit : Bool
 }
 
-class Block : NSObject
+class Block// : NSObject
 {
     static var thereAreAnimators : Bool = false
     static var topBlock          : Block!
@@ -334,11 +334,6 @@ class Block : NSObject
         {
             let layoutgrid = FLLayoutGrid(name: dict["name"] as! String)
             layoutgrid.parseBlock(dict: dict)
-        }
-        else if dict["type"] as! String == "MetalView"
-        {
-            let metalview = FL3D(name: dict["name"] as! String)
-            metalview.parseBlock(dict: dict)
         }
         else if dict["type"] as! String == "SceneView"
         {

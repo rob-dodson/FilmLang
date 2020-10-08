@@ -16,10 +16,13 @@ class FLScene : Block
     var scene:SCNScene!
     var sceneView : SCNView!
     var cameraNode : SCNNode!
+    var objFilePath : String!
     
     override func parseBlock(dict:NSDictionary)
     {
         super.parseBlock(dict: dict)
+        
+        if let objfilepath = dict["filePath"] as? String { self.objFilePath = objfilepath }
     }
     
     
@@ -84,12 +87,12 @@ class FLScene : Block
         ambientLightNode.light!.color = NSColor.darkGray
         scene?.rootNode.addChildNode(ambientLightNode)
         
-        let url = NSURL.fileURL(withPath: "/Users/robertdodson/Desktop/FILM/teapot.obj")
+        let url = NSURL.fileURL(withPath: "/Users/robertdodson/Desktop/FILM/ship.obj")
         let asset = MDLAsset(url: url)
         let object = asset.object(at: 0)
         let node = SCNNode(mdlObject: object)
         node.position = SCNVector3(x:CGFloat(width / 2), y:CGFloat(height / 3), z:0)
-        node.scale = SCNVector3(x:50, y:50, z:50)
+        node.scale = SCNVector3(x:0.5, y:0.5, z:0.5)
 
         let mat = SCNMaterial()
         mat.diffuse.contents =  NSColor.red

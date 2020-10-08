@@ -27,7 +27,6 @@ class Canvas: NSView
         let js = Javascript(canvas: self)
         js.execScript()
         
-        
         //
         // Animation loop
         //

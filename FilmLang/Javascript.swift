@@ -25,6 +25,7 @@ class Javascript
         context?.exceptionHandler =
         { context, exception in
             print(exception!.toString()!)
+            print(context!)
         }
         
         let addBlock: @convention(block) (NSDictionary) -> Void =

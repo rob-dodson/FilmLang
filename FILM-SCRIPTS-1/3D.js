@@ -13,7 +13,7 @@ let scene =
 	objectFilePath:"/Users/robertdodson/Desktop/FILM/teapot.obj",
     objectScale:{x:50,y:50,z:50},
     objectPosition:{x:width/2,y:height/3,z:50},
-	objectColor:cyan,
+	objectColor:{red:.5,green:.5,blue:.5,alpha:1.0},
     cameraPosition:{x:width/2,y:height/2,z:350},
     lightPosition:{x:50,y:height,z:100},
 }

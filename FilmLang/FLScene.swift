@@ -49,6 +49,7 @@ class FLScene : Block
             sceneView.allowsCameraControl = true
            //sceneView.showsStatistics = true
             sceneView.backgroundColor = NSColor.black
+            
             Block.view.addSubview(sceneView)
         }
         
@@ -93,6 +94,7 @@ class FLScene : Block
         lightNode.light = SCNLight()
         lightNode.light!.type = .omni
         lightNode.position = lightPosition
+        lightNode.light!.color = NSColor.orange
         scene?.rootNode.addChildNode(lightNode)
 
         //
@@ -104,18 +106,20 @@ class FLScene : Block
         ambientLightNode.light!.color = NSColor.darkGray
         scene?.rootNode.addChildNode(ambientLightNode)
         
+        
+        //
+        // load object
+        //
         let url = NSURL.fileURL(withPath: objFilePath)
         let asset = MDLAsset(url: url)
         let object = asset.object(at: 0)
         let node = SCNNode(mdlObject: object)
         node.position = objectPosition
         node.scale = objectScale
-
         let mat = SCNMaterial()
         mat.diffuse.contents =  objectColor
         node.geometry?.materials = [mat]
         scene?.rootNode.addChildNode(node)
-        
           
     }
     

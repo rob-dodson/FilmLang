@@ -60,6 +60,8 @@ class Block// : NSObject
     var fitToView          : Bool = false
     var layoutSpec         : LayoutSpec?
     var viewPadding        : CGFloat = 20
+    var scrollAmount       : CGFloat = 0.0
+    
     
     init(name:String)
     {
@@ -80,6 +82,8 @@ class Block// : NSObject
             
             switch animators[index].val
             {
+            case .NOTSET:
+                print("NOTSET")
             case .x:
                 adjust(val:&x, animator: &animators[index])
                 
@@ -110,6 +114,9 @@ class Block// : NSObject
                 
             case .strokealpha:
                 adjust(val:&strokeAlpha, animator: &animators[index])
+                
+            case .scrollamount:
+                adjust(val:&scrollAmount, animator: &animators[index])
             }
         }
     }
@@ -340,6 +347,11 @@ class Block// : NSObject
             let sceneview = FLScene(name: dict["name"] as! String)
             sceneview.parseBlock(dict: dict)
         }
+        else if dict["type"] as! String == "ScrollText"
+        {
+            let scrolltext = FLScrollText(name: dict["name"] as! String)
+            scrolltext.parseBlock(dict: dict)
+        }
     }
     
     
@@ -360,6 +372,7 @@ class Block// : NSObject
         if let rotation = dict["rotation"]           as? CGFloat { self.rotation = rotation }
         if let strokeWidth = dict["strokeWidth"]     as? CGFloat { self.strokeWidth = strokeWidth }
         if let gradientAngle = dict["gradientAngle"] as? CGFloat { self.gradientAngle = gradientAngle }
+        if let scrollamount = dict["scrollAmount"]   as? CGFloat { self.scrollAmount = scrollamount }
        
         if let layout = dict["layoutSpec"] as? NSDictionary
         {
@@ -402,7 +415,7 @@ class Block// : NSObject
                 let max    = CGFloat.init(animatordict["max"] as! Double)
                 let type   = animatordict["type"] as! String
                 
-                var value = Animator.AnimatorVal.rotation
+                var value = Animator.AnimatorVal.NOTSET
                 if (val == "rotation")    { value = Animator.AnimatorVal.rotation }
                 if (val == "x")           { value = Animator.AnimatorVal.x }
                 if (val == "y")           { value = Animator.AnimatorVal.y }
@@ -410,8 +423,9 @@ class Block// : NSObject
                 if (val == "endangle")    { value = Animator.AnimatorVal.endangle }
                 if (val == "strokewidth") { value = Animator.AnimatorVal.strokewidth }
                 if (val == "strokealpha") { value = Animator.AnimatorVal.strokealpha }
+                if (val == "scrollamount"){ value = Animator.AnimatorVal.scrollamount }
 
-                var anitype = Animator.AnimatorType.Bounce
+                var anitype = Animator.AnimatorType.NOTSET
                 if (type == "bounce") { anitype = Animator.AnimatorType.Bounce }
                 if (type == "inc")    { anitype = Animator.AnimatorType.Inc }
                 if (type == "dec")    { anitype = Animator.AnimatorType.Dec }

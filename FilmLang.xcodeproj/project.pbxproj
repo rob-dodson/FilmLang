@@ -21,6 +21,7 @@
 		AE93A982251BDDBA00F3D559 /* Javascript.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE93A981251BDDBA00F3D559 /* Javascript.swift */; };
 		AEB8651E2527A5C6005CFEDF /* FLAxis.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB8651D2527A5C6005CFEDF /* FLAxis.swift */; };
 		AEB86583252E5DA1005CFEDF /* FLScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB86582252E5DA1005CFEDF /* FLScene.swift */; };
+		AEB8658A252FB18F005CFEDF /* FLScrollText.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB86589252FB18F005CFEDF /* FLScrollText.swift */; };
 		AEC3FBE7251009F200C32210 /* FLRect.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC3FBE6251009F200C32210 /* FLRect.swift */; };
 		AEC3FBE925100A3A00C32210 /* FLGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC3FBE825100A3A00C32210 /* FLGrid.swift */; };
 		AEC3FBEB25100A5B00C32210 /* FLCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC3FBEA25100A5B00C32210 /* FLCircle.swift */; };
@@ -47,6 +48,7 @@
 		AE93A981251BDDBA00F3D559 /* Javascript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Javascript.swift; sourceTree = "<group>"; };
 		AEB8651D2527A5C6005CFEDF /* FLAxis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLAxis.swift; sourceTree = "<group>"; };
 		AEB86582252E5DA1005CFEDF /* FLScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLScene.swift; sourceTree = "<group>"; };
+		AEB86589252FB18F005CFEDF /* FLScrollText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLScrollText.swift; sourceTree = "<group>"; };
 		AEC3FBE6251009F200C32210 /* FLRect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLRect.swift; sourceTree = "<group>"; };
 		AEC3FBE825100A3A00C32210 /* FLGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLGrid.swift; sourceTree = "<group>"; };
 		AEC3FBEA25100A5B00C32210 /* FLCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLCircle.swift; sourceTree = "<group>"; };
@@ -104,9 +106,10 @@
 				AE3DDD7B252939C2003691A8 /* FLLayoutGrid.swift */,
 				AE0F7870251D3BA200BCE3AD /* FLImage.swift */,
 				AED96884251E96D7007B2CE6 /* FLLine.swift */,
+				AEB86582252E5DA1005CFEDF /* FLScene.swift */,
+				AEB86589252FB18F005CFEDF /* FLScrollText.swift */,
 				AE93A96A251BCFF700F3D559 /* Animator.swift */,
 				AE93A981251BDDBA00F3D559 /* Javascript.swift */,
-				AEB86582252E5DA1005CFEDF /* FLScene.swift */,
 			);
 			path = FilmLang;
 			sourceTree = "<group>";
@@ -193,6 +196,7 @@
 				AE183D2F250EB4180017805E /* Block.swift in Sources */,
 				AEC3FBED25101C1B00C32210 /* FLPath.swift in Sources */,
 				AE0F7871251D3BA200BCE3AD /* FLImage.swift in Sources */,
+				AEB8658A252FB18F005CFEDF /* FLScrollText.swift in Sources */,
 				AE1E77F825190BED00CFC143 /* FLArc.swift in Sources */,
 				AED96885251E96D7007B2CE6 /* FLLine.swift in Sources */,
 				AE3DDD7C252939C2003691A8 /* FLLayoutGrid.swift in Sources */,

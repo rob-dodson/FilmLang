@@ -29,6 +29,7 @@ class Animator
     
     enum AnimatorType
     {
+        case NOTSET
         case Inc
         case Dec
         case Bounce
@@ -36,6 +37,7 @@ class Animator
     
     enum AnimatorVal
     {
+        case NOTSET
         case x
         case y
         case rotation
@@ -45,6 +47,7 @@ class Animator
         case fillalpha
         case strokewidth
         case strokealpha
+        case scrollamount
     }
 }
     

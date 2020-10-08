@@ -1,0 +1,20 @@
+let scrollblock =
+{
+    name:"scrollblock",
+    type:SCROLLTEXT,
+    x:20,
+    y:20,
+    layoutSpec:{x:4,y:1,fit:false},
+    width:400,
+    height:400,
+    radius:4,
+	clip:true,
+	textURL:"/Users/robertdodson/Desktop/FILM/FILM.js",
+	size:20,
+	textColor:gray,
+	font:MainFont,
+	fillColor:gray,
+	textColor:black,
+	animator0:{value:"scrollamount",amount:-1,min:-500.0,max:0.0,type:BOUNCE},
+}
+addBlock(scrollblock)

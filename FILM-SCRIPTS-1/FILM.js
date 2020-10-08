@@ -14,6 +14,7 @@ let AXIS = "Axis"
 let LAYOUT = "LayoutGrid"
 let METALVIEW = "MetalView"
 let SCENEVIEW = "SceneView"
+let SCROLLTEXT = "ScrollText"
 
 
 let MainFont = "Courier"
@@ -69,9 +70,7 @@ let screen =
 	gradientAngle:-50,
 	clip:true,
 	fitToView:true,
-	fillGradient: {
-    startColor: {red:0.0, green:0.5, blue:0.5, alpha:0.6},
-    endColor: {red:0.0, green:0.8, blue:0.1, alpha:0.4}, },
+	fillGradient: { startColor: {red:0.0, green:0.5, blue:0.5, alpha:0.6},endColor: {red:0.0, green:0.0, blue:0.0, alpha:0.4}},
 }
 addBlock(screen)
 
@@ -100,7 +99,7 @@ let scene =
 	objectFilePath:"/Users/robertdodson/Desktop/FILM/teapot.obj",
     objectScale:{x:50,y:50,z:50},
     objectPosition:{x:width/2,y:height/3,z:50},
-	objectColor:cyan,
+	objectColor:{red:.5,green:.5,blue:.5,alpha:1.0},
     cameraPosition:{x:width/2,y:height/2,z:350},
     lightPosition:{x:50,y:height,z:100},
 }
@@ -489,7 +488,27 @@ let map =
 	parent:"mapgrid"
 }
 addBlock(map)
-	
+	let scrollblock =
+{
+    name:"scrollblock",
+    type:SCROLLTEXT,
+    x:20,
+    y:20,
+    layoutSpec:{x:4,y:1,fit:false},
+    width:400,
+    height:400,
+    radius:4,
+	clip:true,
+	textURL:"/Users/robertdodson/Desktop/FILM/FILM.js",
+	size:20,
+	textColor:gray,
+	font:MainFont,
+	fillColor:gray,
+	textColor:black,
+	animator0:{value:"scrollamount",amount:-1,min:-500.0,max:0.0,type:BOUNCE},
+}
+addBlock(scrollblock)
+
 let titleblock =
 {
 	name:"titleblock",

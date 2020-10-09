@@ -503,9 +503,10 @@ addBlock(map)
 	size:10,
 	textColor:gray,
 	font:MainFont,
-	fillColor:gray,
-	textColor:black,
-	animator0:{value:"scrollamount",amount:-1,min:-500.0,max:0.0,type:BOUNCE},
+	//fillColor:gray,
+	strokeColor:orange,
+	textColor:cyan,
+	animator0:{value:"scrollamount",amount:-5,min:-5000.0,max:0.0,type:INC},
 }
 addBlock(scrollblock)
 

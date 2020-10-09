@@ -17,13 +17,14 @@ class FLScrollText : Block
     var size : CGFloat = 24.0
     var textColor = NSColor.green
     var padding : CGFloat = 0.0
+    var boundingtextRect : NSRect!
     
     
     override func parseBlock(dict:NSDictionary)
     {
         super.parseBlock(dict: dict)
         
-        strokeColor = nil
+        //strokeColor = nil
         
         if let textstr = dict["text"]        as? String { text = textstr }
         if let texturl = dict["textURL"]        as? String { textURL = texturl }
@@ -47,22 +48,58 @@ class FLScrollText : Block
         ] as [NSAttributedString.Key: Any]
 
         
-        let textRect: NSRect = NSRect(x: CGFloat(x + xoffset) - padding,
-                                          y: CGFloat(y + yoffset) - padding,
+        
+        let cliptextRect = NSRect(x: CGFloat(x + xoffset),
+                                          y: CGFloat(y + yoffset),
                                           width: width,
                                           height: height)
-
-        if clip
-        {
-        //   textRect.clip()
+        
+        let borderPath = NSBezierPath(roundedRect: cliptextRect, xRadius: radius, yRadius: radius)
+        
+        
+        if text == nil
+         {
+             if let url = textURL
+             {
+                 do
+                 {
+                     text = try String(contentsOf: URL(fileURLWithPath: url))
+                 }
+                 catch
+                 {
+                     print("Error: \(error)")
+                     text = "error: url not working"
+                 }
+             }
+             else
+             {
+                 text = "error: text not set"
+             }
+        
+            boundingtextRect = text!.boundingRect(with: NSSize(width: CGFloat.infinity,
+                                                          height: CGFloat.infinity),
+                                             options: .usesLineFragmentOrigin,
+                                             attributes: textFontAttributes)
         }
         
-        let borderPath = NSBezierPath(roundedRect: textRect, xRadius: radius, yRadius: radius)
+       
+       
+        
+        let textRect: NSRect = NSRect(x: CGFloat(x + xoffset),
+                                          y: CGFloat(y + yoffset) - (boundingtextRect.height - height) - scrollAmount,
+                                          width: boundingtextRect.width,
+                                          height: boundingtextRect.height)
+        
+        
         if let strokecolor = strokeColor
         {
             strokecolor.setStroke()
             borderPath.lineWidth = strokeWidth
             borderPath.stroke()
+        }
+        if clip
+        {
+          cliptextRect.clip()
         }
         
         if let fillgradient = fillGradient
@@ -75,28 +112,7 @@ class FLScrollText : Block
             borderPath.fill()
         }
         
-       if text == nil
-        {
-            if let url = textURL
-            {
-                do
-                {
-                    text = try String(contentsOf: URL(fileURLWithPath: url))
-                }
-                catch
-                {
-                    print("Error: \(error)")
-                    text = "error: url not working"
-                }
-            }
-            else
-            {
-                text = "error: text not set"
-            }
-        }
-        
-        text!.draw(in: textRect.offsetBy(dx: 0 + padding, dy: 0.0 - padding - scrollAmount), withAttributes: textFontAttributes)
-
+        text!.draw(in: textRect, withAttributes: textFontAttributes)
         
         postDraw(rect:nil)
     }

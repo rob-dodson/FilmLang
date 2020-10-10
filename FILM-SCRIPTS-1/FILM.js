@@ -504,7 +504,7 @@ addBlock(map)
 	font:MainFont,
 	strokeColor:cyan,
 	textColor:cyan,
-	animator0:{value:"scrollamount",amount:-5,min:-5000.0,max:0.0,type:INC},
+	animator0:{value:"scrollamount",amount:-1,min:-5000.0,max:0.0,type:INC},
 }
 addBlock(scrollblock)
 
@@ -524,7 +524,7 @@ let scrollblock1 =
 	font:MainFont,
 	strokeColor:cyan,
 	textColor:blue,
-	animator0:{value:"scrollamount",amount:-7,min:-5000.0,max:0.0,type:INC},
+	animator0:{value:"scrollamount",amount:-.5,min:-5000.0,max:0.0,type:INC},
 }
 addBlock(scrollblock1)
 

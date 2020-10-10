@@ -99,7 +99,7 @@ class FLScrollText : Block
         }
         if clip
         {
-          cliptextRect.clip()
+            cliptextRect.clip()
         }
         
         if let fillgradient = fillGradient

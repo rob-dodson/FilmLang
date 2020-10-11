@@ -24,7 +24,7 @@ struct LayoutSpec
     let fit : Bool
 }
 
-class Block// : NSObject
+class Block
 {
     static var thereAreAnimators : Bool = false
     static var topBlock          : Block!
@@ -41,8 +41,8 @@ class Block// : NSObject
     var strokeAlpha   : CGFloat = -1.0
     var animators     : [Animator]
     var fillGradient  : NSGradient?
-    var width         : CGFloat = 111.0
-    var height        : CGFloat = 111.0
+    var width         : CGFloat = 0.0
+    var height        : CGFloat = 0.0
     var strokeWidth   : CGFloat = 2
     var rotation      : CGFloat = -999
     var debug         : Bool = false
@@ -52,7 +52,7 @@ class Block// : NSObject
     var startAngle    : CGFloat = 0
     var endAngle      : CGFloat = 45
     var windowChanged : ((Block) -> Void)?
-    var boundingRect  : NSRect? = nil
+    var boundingRect  : NSRect!
     var xoffset       : CGFloat = 0.0
     var yoffset       : CGFloat = 0.0
     var windowWidthOffset  : CGFloat = 0.0
@@ -362,6 +362,7 @@ class Block// : NSObject
     {
         if let debug = dict["debug"]                 as? Bool    { self.debug = debug }
         if let clip = dict["clip"]                   as? Bool    { self.clip = clip }
+        if let fit = dict["fitToView"]               as? Bool    { self.fitToView = fit }
         if let x = dict["x"]                         as? CGFloat { self.x = x }
         if let y = dict["y"]                         as? CGFloat { self.y = y }
         if let width = dict["width"]                 as? CGFloat { self.width = width }

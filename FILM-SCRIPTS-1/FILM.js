@@ -136,6 +136,8 @@ let bezblock =
 	width:400,
 	height:400,
 	fillGradient:blockbackgrad,
+	strokeColor:orange,
+	strokeWidth:5,
 	radius:4,
 	childBlock0: {type:TEXT,name:"beztitle",text:"BEZ-1",size:20,x:10,y:360,textColor:gray,font:MainFont,fillColor:gray,textColor:black,strokeColor:gray,radius:4 },
 }

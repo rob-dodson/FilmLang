@@ -24,8 +24,6 @@ class FLScrollText : Block
     {
         super.parseBlock(dict: dict)
         
-        //strokeColor = nil
-        
         if let textstr = dict["text"]        as? String { text = textstr }
         if let texturl = dict["textURL"]        as? String { textURL = texturl }
         if let fontstr = dict["font"]        as? String { font = fontstr }

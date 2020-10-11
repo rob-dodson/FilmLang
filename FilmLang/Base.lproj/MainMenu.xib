@@ -691,7 +691,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="1020" height="720"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e4K-ty-ewq" customClass="Canvas" customModule="FilmLang" customModuleProvider="target">
+                    <customView wantsLayer="YES" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="e4K-ty-ewq" customClass="Canvas" customModule="FilmLang" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="1020" height="720"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     </customView>

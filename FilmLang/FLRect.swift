@@ -12,6 +12,9 @@ import Cocoa
 
 class FLRect : Block
 {
+    var layer : CALayer!
+    var gradientLayer : CAGradientLayer?
+    
     override func parseBlock(dict:NSDictionary)
     {
         super.parseBlock(dict: dict)
@@ -28,32 +31,61 @@ class FLRect : Block
             height = (Block.view?.frame.height)! - (viewPadding * 2)
         }
         
-        if boundingRect != nil
+        if layer == nil
         {
-            let rectanglePath = NSBezierPath(roundedRect: boundingRect!, xRadius: radius, yRadius: radius)
-        
-            if let fillgradient = fillGradient
-            {
-                fillgradient.draw(in: rectanglePath, angle: gradientAngle)
-            }
-            else if let fillcolor = fillColor
-            {
-                fillcolor.setFill()
-                rectanglePath.fill()
-            }
+            layer = CALayer()
+            layer.masksToBounds = clip
+            layer.bounds = CGRect(x: 0, y: 0,width: width, height: height)
             
             if let strokecolor = strokeColor
             {
-                strokecolor.setStroke()
-                rectanglePath.lineWidth = strokeWidth
-                rectanglePath.stroke()
+                layer.borderColor = strokecolor.cgColor
+                layer.borderWidth = strokeWidth
+                layer.cornerRadius = radius
             }
             
-            if clip == true
+            if let fillcolor = fillColor
             {
-                boundingRect!.clip()
+                layer.backgroundColor = fillcolor.cgColor
             }
+            
+            if let fillgradient = fillGradient
+            {
+                gradientLayer = CAGradientLayer()
+                
+                if let gradlayer = gradientLayer
+                {
+                    gradlayer.bounds = CGRect(x: 0, y: 0, width: width, height: height)
+                    
+                    gradlayer.cornerRadius = radius
+                    var color0 = NSColor()
+                    var color1 = NSColor()
+                    fillgradient.getColor(&color0, location: nil, at: 0)
+                    fillgradient.getColor(&color1, location: nil, at: 1)
+                    gradlayer.colors = [color0.cgColor,color1.cgColor]
+                    
+                    Block.view.layer?.insertSublayer(gradlayer, below: layer)
+                }
+            }
+            
+            Block.view.layer?.addSublayer(layer)
+       }
+        
+        let bounds = CGRect(x: 0, y: 0,width: width, height: height)
+        let center = CGPoint(x:boundingRect.origin.x + (width / 2),y:boundingRect.origin.y + (height / 2))
+        
+        layer.bounds = bounds
+        layer.position = center
+        if let gradlayer = gradientLayer
+        {
+            gradlayer.bounds = bounds
+            gradlayer.position = center
         }
+        
+        
+        
+        
+        
         
         postDraw(rect: boundingRect)
         

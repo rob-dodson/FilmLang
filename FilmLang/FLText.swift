@@ -16,11 +16,12 @@ class FLText : Block
     var size : CGFloat = 24.0
     var textColor = NSColor.green
     var padding : CGFloat = 0.0
-    var layer : CATextLayer!
-    var gradientLayer : CAGradientLayer?
-    var backLayer : CALayer?
-    var rect : CGRect!
-    var backRect : CGRect!
+    
+    var baseLayer  : CALayer!
+    var gradLayer  : CAGradientLayer!
+    var frameLayer : CALayer!
+    var textLayer  : CATextLayer!
+    var frameRect  : CGRect!
     
     override func parseBlock(dict:NSDictionary)
     {
@@ -39,9 +40,9 @@ class FLText : Block
         preDraw()
         
         
-        if layer == nil
+        if textLayer == nil
         {
-            layer = CATextLayer()
+            textLayer = CATextLayer()
             
             let textStyle = NSMutableParagraphStyle()
             textStyle.alignment = .center
@@ -54,83 +55,78 @@ class FLText : Block
                                                                   height: CGFloat.infinity),
                                                      options: .usesLineFragmentOrigin,
                                                      attributes: textFontAttributes)
-            rect = CGRect(x: 0,
-                          y: 0,
-                          width: textBoundingRect.width,
-                          height: textBoundingRect.height)
             
-            layer.bounds = rect
-            layer.fontSize = size
-            layer.font = CGFont(font as CFString)
-            layer.foregroundColor = textColor.cgColor
-            layer.string = NSAttributedString(string: text, attributes: textFontAttributes)
+            textLayer.bounds = CGRect(x: 0, y: 0, width: textBoundingRect.width.rounded(),height: textBoundingRect.height.rounded())
+            textLayer.fontSize = size
+            textLayer.font = CGFont(font as CFString)
+            textLayer.foregroundColor = textColor.cgColor
+            textLayer.string = NSAttributedString(string: text, attributes: textFontAttributes)
             
-            backRect = CGRect(x: 0 - padding,
+            
+            frameRect = CGRect(x: 0 - padding,
                                        y: 0 - padding,
                                       width: textBoundingRect.width + (padding * 2),
                                       height: textBoundingRect.height + (padding * 2))
             
             if let fillgradient = fillGradient
             {
-                gradientLayer = CAGradientLayer()
+                gradLayer = CAGradientLayer()
                 
-                if let gradlayer = gradientLayer
-                {
-                    gradlayer.bounds = backRect
-                    
-                    gradlayer.cornerRadius = radius
-                    var color0 = NSColor()
-                    var color1 = NSColor()
-                    fillgradient.getColor(&color0, location: nil, at: 0)
-                    fillgradient.getColor(&color1, location: nil, at: 1)
-                    gradlayer.colors = [color0.cgColor,color1.cgColor]
-                    
-                    Block.view.layer?.addSublayer(gradlayer)
-                }
+                gradLayer.bounds = frameRect
+                gradLayer.cornerRadius = radius
+                var color0 = NSColor()
+                var color1 = NSColor()
+                fillgradient.getColor(&color0, location: nil, at: 0)
+                fillgradient.getColor(&color1, location: nil, at: 1)
+                gradLayer.colors = [color0.cgColor,color1.cgColor]
             }
             
             if strokeColor != nil || fillColor != nil
             {
-                backLayer = CALayer()
+                frameLayer = CALayer()
                 
-                if let backlayer = backLayer
+                frameLayer.bounds = frameRect
+                if let strokecolor = strokeColor
                 {
-                    backlayer.bounds = backRect
-                    
-                    if let strokecolor = strokeColor
-                    {
-                        backlayer.borderColor = strokecolor.cgColor
-                        backlayer.borderWidth = strokeWidth
-                        backlayer.cornerRadius = radius
-                    }
-                    if let fillcolor = fillColor
-                    {
-                        backlayer.backgroundColor = fillcolor.cgColor
-                    }
-                    Block.view.layer?.addSublayer(backlayer)
+                    frameLayer.borderColor = strokecolor.cgColor
+                    frameLayer.borderWidth = strokeWidth
+                    frameLayer.cornerRadius = radius
+                }
+                if let fillcolor = fillColor
+                {
+                    frameLayer.backgroundColor = fillcolor.cgColor
                 }
             }
             
-            Block.view.layer?.addSublayer(layer)
+            
+            baseLayer = CALayer()
+            baseLayer.bounds = frameRect
+            
+            if let gradlayer = gradLayer
+            {
+                baseLayer.addSublayer(gradlayer)
+            }
+            baseLayer.addSublayer(frameLayer)
+            baseLayer.addSublayer(textLayer)
+            
+            Block.view.layer?.addSublayer(baseLayer)
         }
         
-        let center = CGPoint(x: x + xoffset + (rect.width / 2),
-                             y: y + yoffset + (rect.height / 2))
         
-        let backcenter = CGPoint(x: x + backRect.origin.x + xoffset + (backRect.width / 2),
-                                 y: y + backRect.origin.y + yoffset + (backRect.height / 2))
+        //
+        // update attributes each draw cycle
+        //
+        let center = CGPoint(x: x + frameRect.origin.x + xoffset + (frameRect.width / 2),
+                                 y: y + frameRect.origin.y + yoffset + (frameRect.height / 2))
         
-        layer.position = center
-        if let gradlayer = gradientLayer
+        baseLayer.position = center
+        
+        if rotation > 0.0
         {
-            gradlayer.position = backcenter
+            let transform = CATransform3DMakeRotation(CGFloat(rotation * CGFloat.pi / 180), 0.0, 0.0, 1.0)
+            baseLayer.transform = transform
         }
-        if let backlayer = backLayer
-        {
-            backlayer.position = backcenter
-        }
-  
-        
+            
         
         postDraw(rect:nil)
     }

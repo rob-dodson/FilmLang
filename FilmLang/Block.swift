@@ -61,7 +61,7 @@ class Block
     var layoutSpec         : LayoutSpec?
     var viewPadding        : CGFloat = 20
     var scrollAmount       : CGFloat = 0.0
-    
+    var baseLayer          : CALayer!
     
     init(name:String)
     {
@@ -257,6 +257,7 @@ class Block
                 .foregroundColor: NSColor.white,
                 .paragraphStyle: rectangleStyle,
             ] as [NSAttributedString.Key: Any]
+            
             name.draw(in: rect!.offsetBy(dx: 0, dy: -4), withAttributes: rectangleFontAttributes)
         }
         
@@ -284,6 +285,8 @@ class Block
             if rect.name == "Screen"
             {
                 Block.topBlock = rect
+                Block.topBlock.fitToView = true
+                
                 Block.topBlock.windowChanged =
                 {(block) -> Void in
                     block.width = (Block.view?.frame.width)! - (block.viewPadding * 2)

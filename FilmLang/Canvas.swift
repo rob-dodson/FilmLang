@@ -20,8 +20,7 @@ class Canvas: NSView
         //
         super.init(coder: coder)
         Block.view = self
-       // layer = CALayer()
-       // wantsLayer = true
+
         
         //
         // parse javascript

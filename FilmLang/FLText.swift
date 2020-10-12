@@ -17,7 +17,6 @@ class FLText : Block
     var textColor = NSColor.green
     var padding : CGFloat = 0.0
     
-    var baseLayer  : CALayer!
     var gradLayer  : CAGradientLayer!
     var frameLayer : CALayer!
     var textLayer  : CATextLayer!
@@ -62,11 +61,7 @@ class FLText : Block
             textLayer.foregroundColor = textColor.cgColor
             textLayer.string = NSAttributedString(string: text, attributes: textFontAttributes)
             
-            
-            frameRect = CGRect(x: 0 - padding,
-                                       y: 0 - padding,
-                                      width: textBoundingRect.width + (padding * 2),
-                                      height: textBoundingRect.height + (padding * 2))
+            frameRect = CGRect(x: 0, y: 0, width: textBoundingRect.width + (padding * 2), height: textBoundingRect.height + (padding * 2))
             
             if let fillgradient = fillGradient
             {
@@ -106,18 +101,21 @@ class FLText : Block
             {
                 baseLayer.addSublayer(gradlayer)
             }
-            baseLayer.addSublayer(frameLayer)
+            if frameLayer != nil
+            {
+                baseLayer.addSublayer(frameLayer)
+            }
             baseLayer.addSublayer(textLayer)
             
-            Block.view.layer?.addSublayer(baseLayer)
+            parent!.baseLayer.addSublayer(baseLayer)
         }
         
         
         //
         // update attributes each draw cycle
         //
-        let center = CGPoint(x: x + frameRect.origin.x + xoffset + (frameRect.width / 2),
-                                 y: y + frameRect.origin.y + yoffset + (frameRect.height / 2))
+        let center = CGPoint(x: x + xoffset + (frameRect.width / 2),
+                             y: y + yoffset + (frameRect.height / 2))
         
         baseLayer.position = center
         

@@ -33,7 +33,7 @@ class Canvas: NSView
         //
         if Block.thereAreAnimators
         {
-            timer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true)
+            timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true)
             { (timer) in
                 
                 if Block.topBlock.animators.count > 0

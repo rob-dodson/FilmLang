@@ -34,10 +34,11 @@ class FLRect : Block
         if rectLayer == nil
         {
             rectLayer = CALayer()
-            rectLayer.masksToBounds = clip
             
             let rect = CGRect(x: 0, y: 0,width: width, height: height)
             rectLayer.bounds = rect
+            
+           // rectLayer.masksToBounds = clip
             
             if let strokecolor = strokeColor
             {
@@ -68,34 +69,33 @@ class FLRect : Block
             }
             
             
-            baseLayer = CALayer()
             baseLayer.bounds = rect
             
             if let gradlayer = gradLayer
             {
+                addLayerConstraints(layer:gradlayer)
                 baseLayer.addSublayer(gradlayer)
             }
+            
+            addLayerConstraints(layer:rectLayer)
             baseLayer.addSublayer(rectLayer)
             
-            if parent != nil && parent!.baseLayer != nil
-            {
-                parent!.baseLayer.addSublayer(baseLayer)
-            }
-            else
-            {
-                Block.view.layer?.addSublayer(baseLayer)
-            }
+            Block.addLayerToParent(block: self, layer: baseLayer)
+ 
         }
         
         let rect = CGRect(x: 0, y: 0,width: width, height: height)
         baseLayer.bounds = rect
-        gradLayer?.bounds = rect
-        rectLayer.bounds = rect
-            
-        let center = CGPoint(x: x + xoffset + (width / 2), y: y + yoffset + (height / 2))
+
+       // let center = CGPoint(x: x + xoffset + (width / 2), y: y + yoffset + (height / 2))
+        let center = CGPoint(x: x + (width / 2), y: y  + (height / 2))
         baseLayer.position = center
-        gradLayer?.position = center
-        rectLayer.position = center
+        
+        if rotation > -999
+        {
+            let transform = CATransform3DMakeRotation(CGFloat(rotation * CGFloat.pi / 180), 0.0, 0.0, 1.0)
+            baseLayer.transform = transform
+        }
         
         postDraw(rect: boundingRect)
     }

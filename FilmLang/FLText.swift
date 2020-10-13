@@ -55,7 +55,8 @@ class FLText : Block
                                                      options: .usesLineFragmentOrigin,
                                                      attributes: textFontAttributes)
             
-            textLayer.bounds = CGRect(x: 0, y: 0, width: textBoundingRect.width.rounded(),height: textBoundingRect.height.rounded())
+            frameRect = CGRect(x: 0 - padding, y: 0 + padding, width: textBoundingRect.width + (padding * 2), height: textBoundingRect.height + (padding * 2))
+            textLayer.bounds = frameRect
             textLayer.fontSize = size
             textLayer.font = CGFont(font as CFString)
             textLayer.foregroundColor = textColor.cgColor
@@ -93,33 +94,35 @@ class FLText : Block
                 }
             }
             
-            
-            baseLayer = CALayer()
             baseLayer.bounds = frameRect
             
             if let gradlayer = gradLayer
             {
+                addLayerConstraints(layer:gradlayer)
                 baseLayer.addSublayer(gradlayer)
             }
-            if frameLayer != nil
+            
+            if let framelayer = frameLayer
             {
-                baseLayer.addSublayer(frameLayer)
+                addLayerConstraints(layer:framelayer)
+                baseLayer.addSublayer(framelayer)
             }
+            
+            addLayerConstraints(layer:textLayer)
             baseLayer.addSublayer(textLayer)
             
-            parent!.baseLayer.addSublayer(baseLayer)
+            Block.addLayerToParent(block: self, layer: baseLayer)
         }
         
         
         //
         // update attributes each draw cycle
         //
-        let center = CGPoint(x: x + xoffset + (frameRect.width / 2),
-                             y: y + yoffset + (frameRect.height / 2))
-        
+        //let center = CGPoint(x: x + xoffset + (frameRect.width / 2), y: y + yoffset + (frameRect.height / 2))
+        let center = CGPoint(x: x +  (frameRect.width / 2), y: y + (frameRect.height / 2))
         baseLayer.position = center
         
-        if rotation > 0.0
+        if rotation > -999
         {
             let transform = CATransform3DMakeRotation(CGFloat(rotation * CGFloat.pi / 180), 0.0, 0.0, 1.0)
             baseLayer.transform = transform

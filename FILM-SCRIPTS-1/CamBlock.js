@@ -14,6 +14,7 @@ let CamBlock =
 	radius:4,
 	fillGradient:blockbackgrad,
 	gradientAngle:-50,
+	//animator0:{value:"x",amount:5,min:0,max:200.0,type:BOUNCE},
 	childBlock0: {type:TEXT,name:"title",text:"cameras",size:20,x:130,y:305,textColor:gray,font:MainFont },
 }
 addBlock(CamBlock)
@@ -52,9 +53,9 @@ for (x = 0; x <= 4; x++)
 	}
 }
 
-let label1 = { type:TEXT,name:"label1",text:"723778-8293*9",    layoutSpec:{x:1,y:1,fit:false},rotation:45,size:10,x:10,y:50,textColor:orange,font:MainFont }
-let label2 = { type:TEXT,name:"label2",text:"xxc - 903939",     layoutSpec:{x:1,y:2,fit:false},rotation:45,size:10,x:10,y:50,textColor:orange,font:MainFont }
-let label3 = { type:TEXT,name:"label2",text:"spec-9023 ** 324A",layoutSpec:{x:1,y:3,fit:false},rotation:45,size:10,x:10,y:50,textColor:orange,font:MainFont }
+let label1 = { type:TEXT,name:"label1",text:"723778-8293*9", layoutSpec:{x:1,y:1,fit:false},rotation:90,size:15,x:0,y:50,textColor:orange,font:MainFont }
+let label2 = { type:TEXT,name:"label2",text:"723778-8293*9", layoutSpec:{x:1,y:2,fit:false},rotation:90,size:15,x:0,y:50,textColor:orange,font:MainFont }
+let label3 = { type:TEXT,name:"label3",text:"723778-8293*9", layoutSpec:{x:1,y:3,fit:false},rotation:0,size:15,x:0,y:50,textColor:orange,font:MainFont }
 addBlock(label1)
 addBlock(label2)
 addBlock(label3)

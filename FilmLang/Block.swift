@@ -68,6 +68,9 @@ class Block
         self.name = name
         self.children = [Block]()
         self.animators = [Animator]()
+        
+        baseLayer = CALayer()
+        baseLayer.layoutManager = CAConstraintLayoutManager()
     }
     
     
@@ -80,71 +83,31 @@ class Block
                 winchange(animators[index])
             }
             
-            switch animators[index].val
-            {
-            case .NOTSET:
-                print("NOTSET")
-            case .x:
-                adjust(val:&x, animator: &animators[index])
-                
-            case.y:
-                adjust(val:&y, animator: &animators[index])
-                
-            case .rotation:
-                adjust(val:&rotation, animator: &animators[index])
-                
-            case .radius:
-                adjust(val:&radius, animator: &animators[index])
-                
-            case .startangle:
-                adjust(val:&startAngle, animator: &animators[index])
-                
-            case .endangle:
-                adjust(val:&endAngle, animator: &animators[index])
-                
-            case .fillalpha:
-                if fillColor != nil
-                {
-                    var alpha = CGFloat(fillColor!.alphaComponent)
-                    adjust(val:&alpha, animator: &animators[index])
-                    fillColor = fillColor!.withAlphaComponent(CGFloat(alpha))
-                }
-            case .strokewidth:
-                adjust(val:&strokeWidth, animator: &animators[index])
-                
-            case .strokealpha:
-                adjust(val:&strokeAlpha, animator: &animators[index])
-                
-            case .scrollamount:
-                adjust(val:&scrollAmount, animator: &animators[index])
-            }
+            Animator.adjustBlockForAnimation(animator: &animators[index], block: self)
+           
         }
     }
 
-    
-    func adjust(val:inout CGFloat,animator:inout Animator)
+    func addLayerConstraints(layer:CALayer)
     {
-        if animator.type == .Inc
+        layer.addConstraint(CAConstraint(attribute: .midX, relativeTo: "superlayer", attribute:.midX))
+        layer.addConstraint(CAConstraint(attribute: .midY, relativeTo: "superlayer", attribute:.midY))
+        layer.addConstraint(CAConstraint(attribute: .width, relativeTo: "superlayer", attribute:.width))
+        layer.addConstraint(CAConstraint(attribute: .height, relativeTo: "superlayer", attribute:.height))
+    }
+    
+    
+    
+    
+    static func addLayerToParent(block:Block, layer:CALayer)
+    {
+        if let parent = block.parent
         {
-            val = val + animator.amount
-            if val > animator.max { val = animator.min }
+            parent.baseLayer.addSublayer(layer)
         }
-        else if animator.type == .Dec
+        else
         {
-            val = val - animator.amount
-            if val < animator.min { val = animator.max }
-        }
-        else if animator.type == .Bounce
-        {
-            val = val + animator.amount
-            if val > animator.max
-            {
-                animator.amount = -animator.amount
-            }
-            else if val < animator.min
-            {
-                animator.amount = abs(animator.amount)
-            }
+            Block.view.layer?.addSublayer(layer)
         }
     }
     
@@ -158,26 +121,34 @@ class Block
     
     func offset() -> (CGFloat,CGFloat)
     {
-        var x : CGFloat = 0
-        var y : CGFloat = 0
+        if let layout = layoutSpec
+        {
+            let gridrect = Block.layoutGrid.getGridRect(x: layout.x,y:layout.y)
+            return (gridrect.x,gridrect.y)
+        }
         
+        var xx : CGFloat = 0
+        var yy : CGFloat = 0
+           
         var p = parent
         while p != nil
         {
-            if let layout = p?.layoutSpec
+            if let layout = p!.layoutSpec
             {
                 let gridrect = Block.layoutGrid.getGridRect(x: layout.x,y:layout.y)
-                x = x + gridrect.x
-                y = y + gridrect.y
+                xx = xx + gridrect.x
+                yy = yy + gridrect.y
+            }
+            else
+            {
+                xx = xx + p!.x
+                yy = yy + p!.y
             }
             
-            x = x + p!.x
-            y = y + p!.y
-            
-            p = p?.parent
+            p = p!.parent
         }
         
-        return (x,y)
+        return (xx,yy)
     }
     
     
@@ -205,9 +176,12 @@ class Block
             windowchanged(self)
         }
 
-        if self.layoutSpec != nil && Block.layoutGrid != nil
+        xoffset = 0.0
+        yoffset = 0.0
+        /*
+        if let layoutspec = layoutSpec
         {
-            let gridrect = Block.layoutGrid.getGridRect(x: Int(self.layoutSpec!.x), y:Int(self.layoutSpec!.y))
+            let gridrect = Block.layoutGrid.getGridRect(x: layoutspec.x, y:layoutspec.y)
             (xoffset,yoffset) = offset()
             xoffset = gridrect.x + xoffset
             yoffset = gridrect.y + yoffset
@@ -223,10 +197,12 @@ class Block
         }
         else
         {
+         */
             (xoffset,yoffset) = offset()
             boundingRect = NSRect(x: x + xoffset, y: y + yoffset, width: width, height: height)
-        }
+       // }
         
+        /*
         if rotation > -999
         {
             let context = NSGraphicsContext.current!.cgContext
@@ -238,6 +214,7 @@ class Block
                 context.translateBy(x:-rect.origin.x, y:-rect.origin.y)
             }
         }
+        */
         
         if strokeAlpha > 0.0
         {
@@ -413,29 +390,8 @@ class Block
         {
             if let animatordict = dict["animator\(i)"] as? NSDictionary
             {
-                let val    = animatordict["value"] as! String
-                let amount = CGFloat.init(animatordict["amount"] as! Double)
-                let min    = CGFloat.init(animatordict["min"] as! Double)
-                let max    = CGFloat.init(animatordict["max"] as! Double)
-                let type   = animatordict["type"] as! String
-                
-                var value = Animator.AnimatorVal.NOTSET
-                if (val == "rotation")    { value = Animator.AnimatorVal.rotation }
-                if (val == "x")           { value = Animator.AnimatorVal.x }
-                if (val == "y")           { value = Animator.AnimatorVal.y }
-                if (val == "startangle")  { value = Animator.AnimatorVal.startangle }
-                if (val == "endangle")    { value = Animator.AnimatorVal.endangle }
-                if (val == "strokewidth") { value = Animator.AnimatorVal.strokewidth }
-                if (val == "strokealpha") { value = Animator.AnimatorVal.strokealpha }
-                if (val == "scrollamount"){ value = Animator.AnimatorVal.scrollamount }
-
-                var anitype = Animator.AnimatorType.NOTSET
-                if (type == "bounce") { anitype = Animator.AnimatorType.Bounce }
-                if (type == "inc")    { anitype = Animator.AnimatorType.Inc }
-                if (type == "dec")    { anitype = Animator.AnimatorType.Dec }
-                
-                self.animators.append(Animator(val: value, amount: amount, min: min, max: max, type: anitype, windowChanged:nil))
-                
+                let animator = Animator.animatorFromDict(dict:animatordict)
+                self.animators.append(animator)
                 Block.thereAreAnimators = true
             }
         }

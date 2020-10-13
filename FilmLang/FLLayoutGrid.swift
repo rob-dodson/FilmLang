@@ -65,8 +65,8 @@ class FLLayoutGrid : Block
                 rect.y = yy
                 rect.width = rectwidth
                 rect.height = rectheight
-                rect.strokeWidth = 1
-                rect.strokeColor = NSColor.red
+                rect.strokeWidth = 0.5
+                rect.strokeColor = NSColor(deviceRed: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
                 rect.debug = true
                
                 addChild(childblock: rect)

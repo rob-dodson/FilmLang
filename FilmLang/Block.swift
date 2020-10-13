@@ -187,7 +187,7 @@ class Block
             rectangleStyle.alignment = .center
             let rectangleFontAttributes = [
                 .font: NSFont(name: "Futura", size: 12)!,
-                .foregroundColor: NSColor.white,
+                .foregroundColor: NSColor.gray,
                 .paragraphStyle: rectangleStyle,
             ] as [NSAttributedString.Key: Any]
             

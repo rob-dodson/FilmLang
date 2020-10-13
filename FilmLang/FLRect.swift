@@ -84,18 +84,8 @@ class FLRect : Block
  
         }
         
-        let rect = CGRect(x: 0, y: 0,width: width, height: height)
-        baseLayer.bounds = rect
-
-       // let center = CGPoint(x: x + xoffset + (width / 2), y: y + yoffset + (height / 2))
-        let center = CGPoint(x: x + (width / 2), y: y  + (height / 2))
-        baseLayer.position = center
-        
-        if rotation > -999
-        {
-            let transform = CATransform3DMakeRotation(CGFloat(rotation * CGFloat.pi / 180), 0.0, 0.0, 1.0)
-            baseLayer.transform = transform
-        }
+        baseLayer.bounds = CGRect(x: 0, y: 0,width: width, height: height)
+        baseLayer.position =  CGPoint(x: x + (width / 2), y: y  + (height / 2))
         
         postDraw(rect: boundingRect)
     }

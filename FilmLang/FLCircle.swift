@@ -11,6 +11,9 @@ import Cocoa
 
 class FLCircle : Block
 {
+    var circleLayer : CAShapeLayer!
+    var rect : NSRect!
+    
     override func parseBlock(dict:NSDictionary)
     {
         super.parseBlock(dict: dict)
@@ -21,34 +24,42 @@ class FLCircle : Block
     {
         preDraw()
         
-        var rect : NSRect?
-        if radius > 0.0
+        if circleLayer == nil
         {
-            rect = NSRect(x: (x + xoffset) - radius, y: (y + yoffset) - radius, width: radius * 2, height: radius * 2)
-        }
-        else
-        {
-            rect = NSRect(x: x + xoffset - (width / 2), y: y + yoffset - (height / 2), width:width, height: width)
+            circleLayer = CAShapeLayer()
+            
+            if radius > 0.0
+            {
+                rect = NSRect(x: (x + xoffset) - radius, y: (y + yoffset) - radius, width: radius * 2, height: radius * 2)
+            }
+            else
+            {
+                rect = NSRect(x: x + xoffset - (width / 2), y: y + yoffset - (height / 2), width:width, height: width)
+            }
+            circleLayer.bounds = rect!
+            
+            
+            let ovalPath = CGPath(ellipseIn: rect!, transform: nil)
+            circleLayer.path = ovalPath
+            
+            if let fillcolor = fillColor
+            {
+                circleLayer.fillColor = fillcolor.cgColor
+            }
+            
+            if let strokecolor = strokeColor
+            {
+                circleLayer.strokeColor = strokecolor.cgColor
+                circleLayer.lineWidth = strokeWidth
+            }
+            
+            addLayerConstraints(layer:circleLayer)
+            baseLayer.addSublayer(circleLayer)
+            
+            Block.addLayerToParent(block: self, layer: baseLayer)
         }
         
-        let ovalPath = NSBezierPath(ovalIn: rect!)
-        
-        if let fillgradient = fillGradient
-        {
-            fillgradient.draw(in: ovalPath, angle: gradientAngle)
-        }
-        else if let fillcolor = fillColor
-        {
-            fillcolor.setFill()
-            ovalPath.fill()
-        }
-        
-        if let strokecolor = strokeColor
-        {
-            strokecolor.setStroke()
-            ovalPath.lineWidth = strokeWidth
-            ovalPath.stroke()
-        }
+        baseLayer.position =  CGPoint(x: x + (rect.width / 2), y: y  + (rect.height / 2))
         
         postDraw(rect:rect)
     }

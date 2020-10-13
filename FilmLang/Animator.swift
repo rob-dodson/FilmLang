@@ -85,7 +85,7 @@ class Animator
         switch animator.val
         {
         case .NOTSET:
-            print("NOTSET")
+            print("Animator NOTSET")
             
         case .x:
             adjust(val:&block.x, animator: &animator)

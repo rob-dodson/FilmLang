@@ -105,7 +105,7 @@ class Block
         {
             parent.baseLayer.addSublayer(layer)
         }
-        else
+        else // No parent? Add this layer to the main view's layer.
         {
             Block.view.layer?.addSublayer(layer)
         }
@@ -176,45 +176,9 @@ class Block
             windowchanged(self)
         }
 
-        xoffset = 0.0
-        yoffset = 0.0
-        /*
-        if let layoutspec = layoutSpec
-        {
-            let gridrect = Block.layoutGrid.getGridRect(x: layoutspec.x, y:layoutspec.y)
-            (xoffset,yoffset) = offset()
-            xoffset = gridrect.x + xoffset
-            yoffset = gridrect.y + yoffset
-            
-            if layoutSpec?.fit == true
-            {
-                //let context = NSGraphicsContext.current!.cgContext
-               // context.scaleBy(x: gridrect.width / width, y: gridrect.height / height)
-               // boundingRect = NSRect(x: x + xoffset, y: y + yoffset, width: min(width,gridrect.width), height: min(height,gridrect.height))
-            }
-            
-            boundingRect = NSRect(x: x + xoffset, y: y + yoffset, width: width, height: height)
-        }
-        else
-        {
-         */
-            (xoffset,yoffset) = offset()
-            boundingRect = NSRect(x: x + xoffset, y: y + yoffset, width: width, height: height)
-       // }
-        
-        /*
-        if rotation > -999
-        {
-            let context = NSGraphicsContext.current!.cgContext
-            
-            if let rect = boundingRect
-            {
-                context.translateBy(x:rect.origin.x, y:rect.origin.y)
-                context.rotate(by: CGFloat(rotation) * CGFloat.pi/180)
-                context.translateBy(x:-rect.origin.x, y:-rect.origin.y)
-            }
-        }
-        */
+        (xoffset,yoffset) = offset()
+        boundingRect = NSRect(x: x + xoffset, y: y + yoffset, width: width, height: height)
+      
         
         if strokeAlpha > 0.0
         {
@@ -225,6 +189,12 @@ class Block
     
     func postDraw(rect:NSRect?)
     {
+        if rotation > -999
+        {
+            let transform = CATransform3DMakeRotation(CGFloat(rotation * CGFloat.pi / 180), 0.0, 0.0, 1.0)
+            baseLayer.transform = transform
+        }
+        
         if debug == true && rect != nil
         {
             let rectangleStyle = NSMutableParagraphStyle()
@@ -263,6 +233,10 @@ class Block
             {
                 Block.topBlock = rect
                 Block.topBlock.fitToView = true
+                rect.x = (Block.view?.frame.origin.x)! + rect.viewPadding
+                rect.y = (Block.view?.frame.origin.y)! + rect.viewPadding
+                rect.width = (Block.view?.frame.width)! - (rect.viewPadding * 2)
+                rect.height = (Block.view?.frame.height)! - (rect.viewPadding * 2)
                 
                 Block.topBlock.windowChanged =
                 {(block) -> Void in

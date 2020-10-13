@@ -114,20 +114,9 @@ class FLText : Block
             Block.addLayerToParent(block: self, layer: baseLayer)
         }
         
-        
-        //
-        // update attributes each draw cycle
-        //
-        //let center = CGPoint(x: x + xoffset + (frameRect.width / 2), y: y + yoffset + (frameRect.height / 2))
         let center = CGPoint(x: x +  (frameRect.width / 2), y: y + (frameRect.height / 2))
         baseLayer.position = center
         
-        if rotation > -999
-        {
-            let transform = CATransform3DMakeRotation(CGFloat(rotation * CGFloat.pi / 180), 0.0, 0.0, 1.0)
-            baseLayer.transform = transform
-        }
-            
         
         postDraw(rect:nil)
     }

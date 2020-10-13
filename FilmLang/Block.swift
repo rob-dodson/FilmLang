@@ -123,8 +123,10 @@ class Block
     {
         if let layout = layoutSpec
         {
-            let gridrect = Block.layoutGrid.getGridRect(x: layout.x,y:layout.y)
-            return (gridrect.x,gridrect.y)
+            if let gridrect = Block.layoutGrid.getGridRect(x: layout.x,y:layout.y)
+            {
+                return (gridrect.x,gridrect.y)
+            }
         }
         
         return (0,0)
@@ -358,7 +360,7 @@ class Block
             Block.connectParent(block:self,dict: dict)
         }
 
-        for i in 0...100
+        for i in 0...10
         {
             if let childblockdict = dict["childBlock\(i)"] as? NSDictionary
             {

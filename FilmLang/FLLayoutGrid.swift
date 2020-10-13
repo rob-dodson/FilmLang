@@ -14,13 +14,11 @@ class FLLayoutGrid : Block
 {
     var xcount : Int = 1
     var ycount : Int = 1
-    var cache  : NSMutableDictionary?
+    var cache  : NSMutableDictionary = NSMutableDictionary()
     
     
     override init(name:String)
     {
-        cache = NSMutableDictionary()
-        
         super.init(name: name)
     }
     
@@ -45,50 +43,65 @@ class FLLayoutGrid : Block
     func calcGrid()
     {
         children.removeAll()
-        cache?.removeAllObjects()
+        cache.removeAllObjects()
         
-        let paddingplus = viewPadding / 2
-        let paddingminus = viewPadding * 2
-        let rectwidth : CGFloat = (Block.view.frame.width - paddingminus) / CGFloat(xcount)
-        let rectheight : CGFloat = (Block.view.frame.height - paddingminus) / CGFloat(ycount)
-
+        baseLayer.removeFromSuperlayer()
+        baseLayer = CALayer()
+        
+        let rectwidth : CGFloat = (Block.view.frame.width - (viewPadding * 2)) / CGFloat(xcount)
+        let rectheight : CGFloat = (Block.view.frame.height - (viewPadding * 2)) / CGFloat(ycount)
+        
         for x in 0..<xcount
         {
             for y in 0..<ycount
             {
                 let key = "\(x)-\(y)"
-                let rect = FLRect(name: "\(name):\(key)")
-                rect.x = rectwidth * CGFloat(x) + paddingplus
-                rect.y = rectheight * CGFloat(y) + paddingplus
+                
+                let xx = rectwidth * CGFloat(x) + viewPadding
+                let yy = rectheight * CGFloat(y) + viewPadding
+                
+                let rect = FLRect(name: key)
+                rect.x = xx
+                rect.y = yy
                 rect.width = rectwidth
                 rect.height = rectheight
-                
-                if debug == true
-                {
-                    rect.debug = debug
-                    rect.strokeColor = NSColor.red
-                    rect.strokeWidth = 1
-                    rect.fillColor = NSColor.gray
-                }
-                
+                rect.strokeWidth = 1
+                rect.strokeColor = NSColor.red
+                rect.debug = true
+               
                 addChild(childblock: rect)
-                cache?.setValue(rect, forKey: key)
+                cache.setValue(rect, forKey: key)
+                
+                Block.addLayerToParent(block: self, layer: baseLayer)
             }
         }
     }
     
     
-    func getGridRect(x:Int,y:Int) -> FLRect
+    func getGridRect(x:Int,y:Int) -> FLRect?
     {
         let key = "\(x)-\(y)"
         
-        return cache?.value(forKey: key) as! FLRect
+        let rect = cache.value(forKey: key)
+        
+        if let r = rect
+        {
+            return r as? FLRect
+        }
+        
+        return nil
     }
     
     
     override func draw()
     {
         preDraw()
+        
+        let width = Block.view.frame.width - (viewPadding * 2)
+        let height = Block.view.frame.height - (viewPadding * 2)
+        
+        baseLayer.bounds = CGRect(x: viewPadding, y: viewPadding,width:width, height: height )
+        baseLayer.position = CGPoint(x:viewPadding + (width / 2), y: viewPadding + (height / 2))
         
         postDraw(rect: boundingRect)
     }

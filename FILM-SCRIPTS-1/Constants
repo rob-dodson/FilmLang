@@ -55,8 +55,8 @@ let camiconcolor = {red:0.09, green:0.09, blue:0.09, alpha:0.7}
 //
 let blockbackgrad =
 {
-    startColor: {red:0.0, green:0.5, blue:0.5, alpha:0.6},
-    endColor: {red:0.9, green:0.2, blue:0.2, alpha:0.4},
+    startColor: {red:0.0, green:0.5, blue:0., alpha:0.4},
+    endColor: {red:0.0, green:0.0, blue:0.0, alpha:0.1},
 }
 
 let screen = 

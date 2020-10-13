@@ -2,7 +2,7 @@ let mapgrid =
 {
 	type:GRID,
 	name:"mapgrid",
-	layoutSpec:{x:3,y:1,fit:false},
+	layoutSpec:{x:1,y:0,fit:false},
 	xspacing:10,
 	yspacing:10,
 	width:350,

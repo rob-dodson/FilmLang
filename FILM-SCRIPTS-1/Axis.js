@@ -7,7 +7,7 @@ let axis =
     y:30,
     width:400,
     height:300,
-    layoutSpec:{x:3,y:2,fit:false},
+    layoutSpec:{x:2,y:1,fit:false},
     strokeWidth:2,
     strokeColor:cyan,
 	point0:{x: 0, y: 0},

@@ -3,7 +3,7 @@ let titleblock =
 {
 	name:"titleblock",
 	type:RECT,
-	layoutSpec:{x:2,y:4,fit:false},
+	layoutSpec:{x:1,y:3,fit:false},
 	x:40,
 	y:70,
 	width:200,

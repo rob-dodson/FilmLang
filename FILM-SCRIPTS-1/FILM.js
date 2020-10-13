@@ -55,8 +55,8 @@ let camiconcolor = {red:0.09, green:0.09, blue:0.09, alpha:0.7}
 //
 let blockbackgrad =
 {
-    startColor: {red:0.0, green:0.5, blue:0.5, alpha:0.6},
-    endColor: {red:0.9, green:0.2, blue:0.2, alpha:0.4},
+    startColor: {red:0.0, green:0.5, blue:0., alpha:0.4},
+    endColor: {red:0.0, green:0.0, blue:0.0, alpha:0.1},
 }
 
 let screen = 
@@ -113,7 +113,7 @@ let axis =
     y:30,
     width:400,
     height:300,
-    layoutSpec:{x:3,y:2,fit:false},
+    layoutSpec:{x:2,y:1,fit:false},
     strokeWidth:2,
     strokeColor:cyan,
 	point0:{x: 0, y: 0},
@@ -132,7 +132,7 @@ let bezblock =
 	type:RECT,
 	x:20,
 	y:20,
-	layoutSpec:{x:3,y:3,fit:false},
+	layoutSpec:{x:3,y:2,fit:false},
 	width:400,
 	height:400,
 	fillGradient:blockbackgrad,
@@ -295,7 +295,7 @@ let CamBlock =
 	type:RECT,
 	x:40,
 	y:20,
-	layoutSpec:{x:1,y:3,fit:true},
+	layoutSpec:{x:0,y:2,fit:true},
 	width:340,
 	height:330,
 	radius:4,
@@ -340,9 +340,9 @@ for (x = 0; x <= 4; x++)
 	}
 }
 
-let label1 = { type:TEXT,name:"label1",text:"723778-8293*9", layoutSpec:{x:1,y:1,fit:false},rotation:90,size:15,x:0,y:50,textColor:orange,font:MainFont }
-let label2 = { type:TEXT,name:"label2",text:"723778-8293*9", layoutSpec:{x:1,y:2,fit:false},rotation:90,size:15,x:0,y:50,textColor:orange,font:MainFont }
-let label3 = { type:TEXT,name:"label3",text:"723778-8293*9", layoutSpec:{x:1,y:3,fit:false},rotation:0,size:15,x:0,y:50,textColor:orange,font:MainFont }
+let label1 = { type:TEXT,name:"label1",text:"723778-8293*9", layoutSpec:{x:0,y:1,fit:false},rotation:90,size:-15,x:0,y:50,textColor:orange,font:MainFont }
+let label2 = { type:TEXT,name:"label2",text:"723778-8293*9", layoutSpec:{x:0,y:2,fit:false},rotation:90,size:-15,x:0,y:50,textColor:orange,font:MainFont }
+let label3 = { type:TEXT,name:"label3",text:"723778-8293*9", layoutSpec:{x:0,y:3,fit:false},rotation:90,size:-15,x:0,y:50,textColor:orange,font:MainFont }
 addBlock(label1)
 addBlock(label2)
 addBlock(label3)
@@ -469,7 +469,7 @@ let mapgrid =
 {
 	type:GRID,
 	name:"mapgrid",
-	layoutSpec:{x:3,y:1,fit:false},
+	layoutSpec:{x:1,y:0,fit:false},
 	xspacing:10,
 	yspacing:10,
 	width:350,
@@ -497,7 +497,7 @@ addBlock(map)
     type:SCROLLTEXT,
     x:20,
     y:20,
-    layoutSpec:{x:4,y:1,fit:false},
+    layoutSpec:{x:3,y:0,fit:false},
     width:400,
     height:200,
     radius:4,
@@ -517,7 +517,7 @@ let scrollblock1 =
 	type:SCROLLTEXT,
 	x:20,
 	y:20,
-	layoutSpec:{x:4,y:2,fit:false},
+	layoutSpec:{x:3,y:1,fit:false},
 	width:400,
 	height:200,
 	radius:4,
@@ -535,7 +535,7 @@ let titleblock =
 {
 	name:"titleblock",
 	type:RECT,
-	layoutSpec:{x:2,y:4,fit:false},
+	layoutSpec:{x:1,y:3,fit:false},
 	x:40,
 	y:70,
 	width:200,

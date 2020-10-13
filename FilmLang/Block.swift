@@ -179,6 +179,7 @@ class Block
         }
     }
     
+    
     func postDraw(rect:NSRect?)
     {
         if debug == true && rect != nil

@@ -46,7 +46,7 @@ class FLLayoutGrid : Block
         cache.removeAllObjects()
         
         baseLayer.removeFromSuperlayer()
-        baseLayer = CALayer()
+        createBaseLayer()
         
         let rectwidth : CGFloat = (Block.view.frame.width - (viewPadding * 2)) / CGFloat(xcount)
         let rectheight : CGFloat = (Block.view.frame.height - (viewPadding * 2)) / CGFloat(ycount)
@@ -97,11 +97,14 @@ class FLLayoutGrid : Block
     {
         preDraw()
         
-        let width = Block.view.frame.width - (viewPadding * 2)
-        let height = Block.view.frame.height - (viewPadding * 2)
-        
-        baseLayer.bounds = CGRect(x: viewPadding, y: viewPadding,width:width, height: height )
-        baseLayer.position = CGPoint(x:viewPadding + (width / 2), y: viewPadding + (height / 2))
+        if baseLayer.bounds.width != Block.view.frame.width || baseLayer.bounds.height != Block.view.frame.height
+        {
+            let width = Block.view.frame.width - (viewPadding * 2)
+            let height = Block.view.frame.height - (viewPadding * 2)
+            
+            baseLayer.bounds = CGRect(x: viewPadding, y: viewPadding,width:width, height: height )
+            baseLayer.position = CGPoint(x:viewPadding + (width / 2), y: viewPadding + (height / 2))
+        }
         
         postDraw(rect: boundingRect)
     }

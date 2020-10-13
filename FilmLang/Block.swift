@@ -62,6 +62,8 @@ class Block
     var viewPadding        : CGFloat = 20
     var scrollAmount       : CGFloat = 0.0
     var baseLayer          : CALayer!
+    var hidden             : Bool = false
+    
     
     init(name:String)
     {
@@ -69,8 +71,15 @@ class Block
         self.children = [Block]()
         self.animators = [Animator]()
         
+        createBaseLayer()
+    }
+    
+    
+    func createBaseLayer()
+    {
         baseLayer = CALayer()
         baseLayer.layoutManager = CAConstraintLayoutManager()
+        baseLayer.isHidden = hidden
     }
     
     
@@ -150,8 +159,6 @@ class Block
     //
     func preDraw()
     {
-        NSGraphicsContext.saveGraphicsState()
-        
         if let windowchanged = windowChanged
         {
             windowchanged(self)
@@ -159,23 +166,21 @@ class Block
 
         (xoffset,yoffset) = offset()
         boundingRect = NSRect(x: x + xoffset, y: y + yoffset, width: width, height: height)
-      
         
         if strokeAlpha > 0.0
         {
             strokeColor = strokeColor?.withAlphaComponent(strokeAlpha)
         }
-
-    }
-    
-    func postDraw(rect:NSRect?)
-    {
+        
         if rotation > -999
         {
             let transform = CATransform3DMakeRotation(CGFloat(rotation * CGFloat.pi / 180), 0.0, 0.0, 1.0)
             baseLayer.transform = transform
         }
-        
+    }
+    
+    func postDraw(rect:NSRect?)
+    {
         if debug == true && rect != nil
         {
             let rectangleStyle = NSMutableParagraphStyle()
@@ -189,17 +194,15 @@ class Block
             name.draw(in: rect!.offsetBy(dx: 0, dy: -4), withAttributes: rectangleFontAttributes)
         }
         
-        if clip == true && rect != nil
+        if clip == true
         {
-            rect!.clip()
+            baseLayer.masksToBounds = true
         }
         
         for block in children
         {
             block.draw()
         }
-        
-        NSGraphicsContext.restoreGraphicsState()
     }
     
     
@@ -309,7 +312,10 @@ class Block
         if let strokeWidth = dict["strokeWidth"]     as? CGFloat { self.strokeWidth = strokeWidth }
         if let gradientAngle = dict["gradientAngle"] as? CGFloat { self.gradientAngle = gradientAngle }
         if let scrollamount = dict["scrollAmount"]   as? CGFloat { self.scrollAmount = scrollamount }
-       
+        if let hidden = dict["hidden"]               as? Bool    { self.hidden = hidden }
+        
+        baseLayer.isHidden = hidden
+        
         if let layout = dict["layoutSpec"] as? NSDictionary
         {
             let x = layout["x"] as! Int

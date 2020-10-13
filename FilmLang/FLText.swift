@@ -104,9 +104,11 @@ class FLText : Block
             built = true
         }
         
-        let center = CGPoint(x: x + xoffset +  (frameRect.width / 2), y: y + yoffset + (frameRect.height / 2))
-        baseLayer.position = center
-        
+        if baseLayer.bounds.width != frameRect.width || baseLayer.bounds.height != frameRect.height || baseLayer.position.x != x || baseLayer.position.y != y
+        {
+            let center = CGPoint(x: x + xoffset +  (frameRect.width / 2), y: y + yoffset + (frameRect.height / 2))
+            baseLayer.position = center
+        }
         
         postDraw(rect:nil)
     }

@@ -127,28 +127,7 @@ class Block
             return (gridrect.x,gridrect.y)
         }
         
-        var xx : CGFloat = 0
-        var yy : CGFloat = 0
-           
-        var p = parent
-        while p != nil
-        {
-            if let layout = p!.layoutSpec
-            {
-                let gridrect = Block.layoutGrid.getGridRect(x: layout.x,y:layout.y)
-                xx = xx + gridrect.x
-                yy = yy + gridrect.y
-            }
-            else
-            {
-                xx = xx + p!.x
-                yy = yy + p!.y
-            }
-            
-            p = p!.parent
-        }
-        
-        return (xx,yy)
+        return (0,0)
     }
     
     

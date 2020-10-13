@@ -59,7 +59,7 @@ class FLCircle : Block
             Block.addLayerToParent(block: self, layer: baseLayer)
         }
         
-        baseLayer.position =  CGPoint(x: x + (rect.width / 2), y: y  + (rect.height / 2))
+        baseLayer.position =  CGPoint(x: x + xoffset, y: y + yoffset)
         
         postDraw(rect:rect)
     }

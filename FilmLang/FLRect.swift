@@ -12,8 +12,8 @@ import Cocoa
 
 class FLRect : Block
 {
-    var rectLayer : CALayer!
-    var gradLayer : CAGradientLayer?
+    var built : Bool = false
+    
     
     override func parseBlock(dict:NSDictionary)
     {
@@ -31,9 +31,9 @@ class FLRect : Block
             height = (Block.view?.bounds.height)! - (viewPadding * 2)
         }
         
-        if rectLayer == nil
+        if built == false
         {
-            rectLayer = CALayer()
+            let rectLayer = CALayer()
             
             let rect = CGRect(x: 0, y: 0,width: width, height: height)
             rectLayer.bounds = rect
@@ -52,40 +52,31 @@ class FLRect : Block
                 rectLayer.backgroundColor = fillcolor.cgColor
             }
             
+           
             if let fillgradient = fillGradient
             {
-                gradLayer = CAGradientLayer()
-                
-                if let gradlayer = gradLayer
-                {
-                    gradlayer.bounds = rect
-                    gradlayer.cornerRadius = radius
-                    var color0 = NSColor()
-                    var color1 = NSColor()
-                    fillgradient.getColor(&color0, location: nil, at: 0)
-                    fillgradient.getColor(&color1, location: nil, at: 1)
-                    gradlayer.colors = [color0.cgColor,color1.cgColor]
-                }
-            }
-            
-            
-            baseLayer.bounds = rect
-            
-            if let gradlayer = gradLayer
-            {
+                let gradlayer = CAGradientLayer()
+                gradlayer.bounds = rect
+                gradlayer.cornerRadius = radius
+                var color0 = NSColor()
+                var color1 = NSColor()
+                fillgradient.getColor(&color0, location: nil, at: 0)
+                fillgradient.getColor(&color1, location: nil, at: 1)
+                gradlayer.colors = [color0.cgColor,color1.cgColor]
                 addLayerConstraints(layer:gradlayer)
                 baseLayer.addSublayer(gradlayer)
             }
             
+            baseLayer.bounds = rect
             addLayerConstraints(layer:rectLayer)
             baseLayer.addSublayer(rectLayer)
-            
             Block.addLayerToParent(block: self, layer: baseLayer)
- 
+            
+            built = true
         }
-        
+
         baseLayer.bounds = CGRect(x: 0, y: 0,width: width, height: height)
-        baseLayer.position =  CGPoint(x: x + (width / 2), y: y  + (height / 2))
+        baseLayer.position = CGPoint(x: x + xoffset + (width / 2), y: y + yoffset + (height / 2))
         
         postDraw(rect: boundingRect)
     }

@@ -29,7 +29,7 @@ class Canvas: NSView
         js.execScript()
         
         //
-        // Animation loop
+        // Animation loop  MAKE THIS MULTI-THREADED!
         //
         if Block.thereAreAnimators
         {

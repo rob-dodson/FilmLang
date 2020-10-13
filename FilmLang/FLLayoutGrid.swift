@@ -52,14 +52,14 @@ class FLLayoutGrid : Block
         let rectwidth : CGFloat = (Block.view.frame.width - paddingminus) / CGFloat(xcount)
         let rectheight : CGFloat = (Block.view.frame.height - paddingminus) / CGFloat(ycount)
 
-        for x in 1...xcount
+        for x in 0..<xcount
         {
-            for y in 1...ycount
+            for y in 0..<ycount
             {
                 let key = "\(x)-\(y)"
                 let rect = FLRect(name: "\(name):\(key)")
-                rect.x = rectwidth * CGFloat(x - 1) + paddingplus
-                rect.y = rectheight * CGFloat(y - 1) + paddingplus
+                rect.x = rectwidth * CGFloat(x) + paddingplus
+                rect.y = rectheight * CGFloat(y) + paddingplus
                 rect.width = rectwidth
                 rect.height = rectheight
                 
@@ -67,6 +67,8 @@ class FLLayoutGrid : Block
                 {
                     rect.debug = debug
                     rect.strokeColor = NSColor.red
+                    rect.strokeWidth = 1
+                    rect.fillColor = NSColor.gray
                 }
                 
                 addChild(childblock: rect)

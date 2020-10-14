@@ -244,6 +244,7 @@ class Block
         baseLayer.bounds = rect
         addLayerConstraints(layer:rectLayer)
         baseLayer.addSublayer(rectLayer)
+        
         Block.addLayerToParent(block: self, layer: baseLayer)
     }
         

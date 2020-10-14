@@ -13,20 +13,11 @@ class FLImage : Block
 {
     var url : URL?
     var image : NSImage?
-    var context : CIContext?
+    var built : Bool = false
     
     override init(name: String)
     {
-        context = CIContext()
-        
         super.init(name: name)
-        
-       // let filters = CIFilter.filterNames(inCategory: kCICategoryBuiltIn)
-       // for filter in filters
-       // {
-        //    print(filter.description)
-       // }
-
     }
     
     override func parseBlock(dict:NSDictionary)
@@ -35,21 +26,6 @@ class FLImage : Block
         
         if let urlstr = dict["url"]   as? String
         {
-            
-            
-            //let filter = CIFilter(name: "CIZoomBlur")!                         // 2
-          //  let atts = filter.attributes;
-           // for att in atts
-           // {
-           //     print(" att: \(att)")
-           // }
-            //filter.setValue(CIVector(x: width / 2, y: height / 2), forKey: "inputCenter")
-           // filter.setValue(15.0, forKey: "inputAmount")
-           // let ciimage = CIImage(contentsOf: url!)                           // 3
-            //filter.setValue(ciimage, forKey: kCIInputImageKey)
-           // let result = filter.outputImage!                                    // 4
-           // let cgImage = context!.createCGImage(result, from: result.extent)    // 5
-           // image = NSImage(cgImage: cgImage!, size: NSSize(width: width, height: height))
             if let url = URL(string: urlstr)
             {
                 image = NSImage(byReferencing: url)
@@ -61,14 +37,22 @@ class FLImage : Block
     {
         preDraw()
         
-        let rect = NSRect(x: x + xoffset, y: y + yoffset, width: width, height: height)
-
-        if image == nil && url != nil
+        if built == false
         {
-            //image = NSImage.init(byReferencing: url!)
+            let layer = CALayer()
+            layer.contents = image
+            layer.frame = CGRect(x: 0, y: 0, width: width, height: height)
+            baseLayer.addSublayer(layer)
+            Block.addLayerToParent(block: self, layer: baseLayer)
+            
+            built = true
         }
         
-        image?.draw(in: rect)
+        if baseLayer.bounds.width != width || baseLayer.bounds.height != height || baseLayer.position.x != x || baseLayer.position.y != y
+        {
+            baseLayer.bounds = CGRect(x: 0, y: 0,width: width, height: height)
+            baseLayer.position = CGPoint(x: x + xoffset + (width / 2), y: y + yoffset + (height / 2))
+        }
         
         postDraw(rect:nil)
     }

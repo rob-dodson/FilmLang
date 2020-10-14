@@ -174,12 +174,80 @@ class Block
         
         if rotation > -999
         {
-            let transform = CATransform3DMakeRotation(CGFloat(rotation * CGFloat.pi / 180), 0.0, 0.0, 1.0)
-            baseLayer.transform = transform
+            let rotationTransform = CATransform3DMakeRotation(CGFloat(rotation * CGFloat.pi / 180), 0.0, 0.0, 1.0)
+            baseLayer.transform = rotationTransform
         }
+        /*
+        if let layout = layoutSpec
+        {
+            if layout.fit == true
+            {
+                if let gridrect = Block.layoutGrid.getGridRect(x: layout.x,y:layout.y)
+                {
+                    if width > 0.0 && height > 0.0
+                    {
+                        let scaleAmtWidth =  gridrect.width / width
+                        let scaleAmtHeight =  gridrect.height / height
+                        let scaleTransform = CATransform3DMakeScale(scaleAmtWidth, scaleAmtHeight, 1.0)
+                        if rotation > -999
+                        {
+                            baseLayer.transform = CATransform3DConcat(baseLayer.transform,scaleTransform)
+                        }
+                        else
+                        {
+                            baseLayer.transform = scaleTransform
+                        }
+                    }
+                }
+            }
+        }
+ */
+       
     }
     
-    
+    func buildBasicRect()
+    {
+        let rectLayer = CALayer()
+        
+        let rect = CGRect(x: 0, y: 0,width: width, height: height)
+        rectLayer.bounds = rect
+        
+       // rectLayer.masksToBounds = clip
+        
+        if let strokecolor = strokeColor
+        {
+            rectLayer.borderColor = strokecolor.cgColor
+            rectLayer.borderWidth = strokeWidth
+            rectLayer.cornerRadius = radius
+        }
+        
+        if let fillcolor = fillColor
+        {
+            rectLayer.backgroundColor = fillcolor.cgColor
+        }
+        
+       
+        if let fillgradient = fillGradient
+        {
+            let gradlayer = CAGradientLayer()
+            gradlayer.bounds = rect
+            gradlayer.cornerRadius = radius
+            var color0 = NSColor()
+            var color1 = NSColor()
+            fillgradient.getColor(&color0, location: nil, at: 0)
+            fillgradient.getColor(&color1, location: nil, at: 1)
+            gradlayer.colors = [color0.cgColor,color1.cgColor]
+            addLayerConstraints(layer:gradlayer)
+            baseLayer.addSublayer(gradlayer)
+        }
+        
+        baseLayer.bounds = rect
+        addLayerConstraints(layer:rectLayer)
+        baseLayer.addSublayer(rectLayer)
+        Block.addLayerToParent(block: self, layer: baseLayer)
+    }
+        
+        
     func postDraw(rect:NSRect?)
     {
         if debug == true && rect != nil

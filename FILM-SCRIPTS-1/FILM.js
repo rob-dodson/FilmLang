@@ -132,7 +132,7 @@ let bezblock =
 	type:RECT,
 	x:20,
 	y:20,
-	layoutSpec:{x:3,y:2,fit:false},
+	layoutSpec:{x:3,y:2,fit:true},
 	width:400,
 	height:400,
 	fillGradient:blockbackgrad,
@@ -340,9 +340,9 @@ for (x = 0; x <= 4; x++)
 	}
 }
 
-let label1 = { type:TEXT,name:"label1",text:"723778-8293*9", layoutSpec:{x:0,y:1,fit:false},rotation:90,size:-15,x:0,y:50,textColor:orange,font:MainFont }
-let label2 = { type:TEXT,name:"label2",text:"723778-8293*9", layoutSpec:{x:0,y:2,fit:false},rotation:90,size:-15,x:0,y:50,textColor:orange,font:MainFont }
-let label3 = { type:TEXT,name:"label3",text:"723778-8293*9", layoutSpec:{x:0,y:3,fit:false},rotation:90,size:-15,x:0,y:50,textColor:orange,font:MainFont }
+let label1 = { type:TEXT,name:"label1",text:"723778-8293*9", layoutSpec:{x:0,y:1,fit:false},rotation:90,size:15,x:-20,y:50,textColor:orange,font:MainFont }
+let label2 = { type:TEXT,name:"label2",text:"723778-8293*9", layoutSpec:{x:0,y:2,fit:false},rotation:45,size:15,x:-10,y:50,textColor:orange,font:MainFont }
+let label3 = { type:TEXT,name:"label3",text:"723778-8293*9", layoutSpec:{x:0,y:3,fit:false},rotation:90,size:15,x:-10,y:50,textColor:orange,font:MainFont }
 addBlock(label1)
 addBlock(label2)
 addBlock(label3)

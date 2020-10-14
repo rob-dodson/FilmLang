@@ -33,44 +33,7 @@ class FLRect : Block
         
         if built == false
         {
-            let rectLayer = CALayer()
-            
-            let rect = CGRect(x: 0, y: 0,width: width, height: height)
-            rectLayer.bounds = rect
-            
-           // rectLayer.masksToBounds = clip
-            
-            if let strokecolor = strokeColor
-            {
-                rectLayer.borderColor = strokecolor.cgColor
-                rectLayer.borderWidth = strokeWidth
-                rectLayer.cornerRadius = radius
-            }
-            
-            if let fillcolor = fillColor
-            {
-                rectLayer.backgroundColor = fillcolor.cgColor
-            }
-            
-           
-            if let fillgradient = fillGradient
-            {
-                let gradlayer = CAGradientLayer()
-                gradlayer.bounds = rect
-                gradlayer.cornerRadius = radius
-                var color0 = NSColor()
-                var color1 = NSColor()
-                fillgradient.getColor(&color0, location: nil, at: 0)
-                fillgradient.getColor(&color1, location: nil, at: 1)
-                gradlayer.colors = [color0.cgColor,color1.cgColor]
-                addLayerConstraints(layer:gradlayer)
-                baseLayer.addSublayer(gradlayer)
-            }
-            
-            baseLayer.bounds = rect
-            addLayerConstraints(layer:rectLayer)
-            baseLayer.addSublayer(rectLayer)
-            Block.addLayerToParent(block: self, layer: baseLayer)
+            buildBasicRect()
             
             built = true
         }

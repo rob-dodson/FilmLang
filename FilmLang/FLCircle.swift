@@ -53,6 +53,7 @@ class FLCircle : Block
                 circleLayer.lineWidth = strokeWidth
             }
             
+            
             addLayerConstraints(layer:circleLayer)
             baseLayer.addSublayer(circleLayer)
             

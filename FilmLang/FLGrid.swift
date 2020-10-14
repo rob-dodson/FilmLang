@@ -17,6 +17,7 @@ class FLGrid : Block
     var yspacing : CGFloat = 10
     var gridColor = NSColor.green
     var gridStrokeWidth : CGFloat = 0.5
+    var built : Bool = false
     
     
     override func parseBlock(dict:NSDictionary)
@@ -41,59 +42,52 @@ class FLGrid : Block
         }
         
         
-        let rect = NSRect(x: x + xoffset, y: y + yoffset, width: width, height: height)
-        let rectanglePath = NSBezierPath(roundedRect: rect, xRadius: radius, yRadius: radius)
-
-
-        if let fillgradient = fillGradient
+        if built == false
         {
-            fillgradient.draw(in: rectanglePath, angle: gradientAngle)
-        }
-        else if let fillcolor = fillColor
-        {
-            fillcolor.setFill()
-            rectanglePath.fill()
-        }
-        
-        
-        let xaxiscount = Int(width / CGFloat(xspacing))
-        for xx in 1...xaxiscount
-        {
-            let xpos = rect.origin.x + (xspacing * CGFloat(xx))
+            buildBasicRect()
             
-            let bezierPath = NSBezierPath()
-            bezierPath.move(to: NSPoint(x: xpos, y: rect.origin.y))
-            bezierPath.line(to: NSPoint(x: xpos, y: rect.origin.y + rect.height))
+            let layer = CAShapeLayer()
+            layer.strokeColor = gridColor.cgColor
+            layer.lineWidth = gridStrokeWidth
             
-            gridColor.setStroke()
-            bezierPath.lineWidth = gridStrokeWidth
-            //bezierPath.setLineDash([2, 2], count: 2, phase: 0)
-            bezierPath.stroke()
+            let path = CGMutablePath()
+            
+            let xaxiscount = Int(width / CGFloat(xspacing))
+            for xx in 1...xaxiscount
+            {
+                let xpos =  (xspacing * CGFloat(xx))
+                
+                let line = CGMutablePath()
+                line.move(to: NSPoint(x: xpos, y: 0))
+                line.addLine(to: NSPoint(x: xpos, y:boundingRect.height))
+                
+                path.addPath(line)
+            }
+            
+            let yaxiscount = Int(height / CGFloat(yspacing))
+            for yy in 1...yaxiscount
+            {
+                let ypos = (yspacing * CGFloat(yy))
+                
+                let line = CGMutablePath()
+                line.move(to: NSPoint(x: 0, y: ypos))
+                line.addLine(to: NSPoint(x:boundingRect.width, y: ypos))
+                
+                path.addPath(line)
+            }
+            
+            layer.path = path
+            baseLayer.addSublayer(layer)
+            
+            built = true
         }
         
-        let yaxiscount = Int(height / CGFloat(yspacing))
-        for yy in 1...yaxiscount
+        if baseLayer.bounds.width != width || baseLayer.bounds.height != height || baseLayer.position.x != x || baseLayer.position.y != y
         {
-            let ypos = rect.origin.y + (yspacing * CGFloat(yy))
-            
-            let bezierPath = NSBezierPath()
-            bezierPath.move(to: NSPoint(x: rect.origin.x, y: ypos))
-            bezierPath.line(to: NSPoint(x: rect.origin.x + rect.width, y: ypos))
-            
-            gridColor.setStroke()
-            bezierPath.lineWidth = gridStrokeWidth
-           // bezierPath.setLineDash([2, 2], count: 2, phase: 0)
-            bezierPath.stroke()
+            baseLayer.bounds = CGRect(x: 0, y: 0,width: width, height: height)
+            baseLayer.position = CGPoint(x: x + xoffset + (width / 2), y: y + yoffset + (height / 2))
         }
         
-        
-        if let strokecolor = strokeColor
-        {
-            strokecolor.setStroke()
-            rectanglePath.lineWidth = strokeWidth
-            rectanglePath.stroke()
-        }
-        
-        postDraw(rect: rect)
+        postDraw(rect: nil)
     }
 }

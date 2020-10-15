@@ -261,7 +261,7 @@ class Block
                 .paragraphStyle: rectangleStyle,
             ] as [NSAttributedString.Key: Any]
             
-            name.draw(in: rect!.offsetBy(dx: 0, dy: -4), withAttributes: rectangleFontAttributes)
+            name.draw(in: rect!.offsetBy(dx:width / 2, dy:height / 2), withAttributes: rectangleFontAttributes)
         }
         
         if clip == true

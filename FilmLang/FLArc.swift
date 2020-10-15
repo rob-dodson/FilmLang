@@ -10,12 +10,17 @@ import Cocoa
 
 class FLArc : Block
 {
+    var closeArc : Bool = false
+    var built : Bool = false
+    var debugrect : NSRect!
+    
     override func parseBlock(dict:NSDictionary)
     {
         super.parseBlock(dict: dict)
         
         if let startAngle = dict["startAngle"] as? CGFloat { self.startAngle = startAngle }
         if let endAngle = dict["endAngle"]     as? CGFloat { self.endAngle = endAngle }
+        if let closeArc = dict["closeArc"]     as? Bool { self.closeArc = closeArc }
     }
     
     
@@ -23,25 +28,49 @@ class FLArc : Block
     {
         preDraw()
         
-        let startPoint = NSPoint(x: x + xoffset, y: y + yoffset)
-        let arcPath = NSBezierPath()
-        arcPath.appendArc(withCenter: startPoint, radius: CGFloat(radius),
-                          startAngle: CGFloat(startAngle), endAngle: CGFloat(endAngle))
-        
-        if let fillcolor = fillColor
+        if built == false
         {
-            fillcolor.setFill()
-            arcPath.fill()
+            let layer = CAShapeLayer()
+            
+            if let strokecolor = strokeColor
+            {
+                layer.strokeColor = strokecolor.cgColor
+                layer.lineWidth = strokeWidth
+            }
+            if let fillcolor = fillColor
+            {
+                layer.fillColor = fillcolor.cgColor
+            }
+            else
+            {
+                layer.fillColor = nil
+            }
+            
+            let arcPath = CGMutablePath()
+            
+            let startPoint = NSPoint(x: x + xoffset, y: y + yoffset)
+            
+            arcPath.addArc(center: startPoint, radius: radius, startAngle: CGFloat(startAngle * CGFloat.pi / 180), endAngle: CGFloat(endAngle * CGFloat.pi / 180), clockwise: true, transform:.identity)
+            if closeArc == true
+            {
+                arcPath.closeSubpath()
+            }
+         
+            layer.path = arcPath
+            baseLayer.addSublayer(layer)
+            Block.addLayerToParent(block: self, layer: baseLayer)
+            
+            debugrect = arcPath.boundingBox
+            built = true
         }
         
-        if let strokecolor = strokeColor
+        if baseLayer.bounds.width != width || baseLayer.bounds.height != height || baseLayer.position.x != x || baseLayer.position.y != y
         {
-            strokecolor.setStroke()
-            arcPath.lineWidth = strokeWidth
-            arcPath.stroke()
+            baseLayer.bounds = CGRect(x: 0, y: 0,width: width, height: height)
+            baseLayer.position = CGPoint(x: x + xoffset + (width / 2), y: y + yoffset + (height / 2))
         }
         
-        postDraw(rect:NSRect(x: arcPath.bounds.origin.x,y: arcPath.bounds.origin.y,width: arcPath.bounds.width,height: arcPath.bounds.height))
+        postDraw(rect:debugrect)
     }
 
 }

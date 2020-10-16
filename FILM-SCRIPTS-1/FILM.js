@@ -248,9 +248,9 @@ for (i = 0; i < 3; i++)
 	addBlock(circle1)
 	rad = rad - 3
 }
-let dot1 = {type:CIRCLE,debug:false,name:"dot1",x:250,y:200,radius:15,strokeColor:cyan,fillColor:orange,parent:"bezblock"}
+let dot1 = {type:CIRCLE,debug:false,name:"dot1",x:250,y:200,radius:15,strokeColor:cyan,fillColor:cyan,parent:"bezblock"}
 addBlock(dot1)
-let arc1 = {type:ARC,name:"arc1",startAngle:10,endAngle:90,x:0,y:0,radius:10,strokeWidth:5,strokeColor:blue,parent:"dot1"}
+let arc1 = {type:ARC,name:"arc1",startAngle:10,endAngle:90,x:0,y:0,radius:10,strokeWidth:5,strokeColor:cyan,parent:"dot1"}
 addBlock(arc1)
 let text1 = {type:TEXT,name:"text1",x:0,y:-38,text:"/// 432",textColor:cyan,size:10,parent:"dot1"}
 addBlock(text1)
@@ -263,9 +263,9 @@ for (i = 0; i < 3; i++)
 	addBlock(circle1)
 	rad = rad - 3
 }
-let dot2 = {type:CIRCLE,debug:false,name:"dot2",x:330,y:200,radius:15,strokeColor:cyan,fillColor:orange,parent:"bezblock"}
+let dot2 = {type:CIRCLE,debug:false,name:"dot2",x:330,y:200,radius:15,strokeColor:cyan,fillColor:cyan,parent:"bezblock"}
 addBlock(dot2)
-let arc2 = {type:ARC,name:"arc2",startAngle:20,endAngle:190,x:0,y:0,radius:10,strokeWidth:5,strokeColor:red,parent:"dot2"}
+let arc2 = {type:ARC,name:"arc2",startAngle:20,endAngle:190,x:0,y:0,radius:10,strokeWidth:5,strokeColor:orange,parent:"dot2"}
 addBlock(arc2)
 let text2 = {type:TEXT,name:"text2",x:0,y:-38,text:"/// 673",textColor:cyan,size:10,parent:"dot2"}
 addBlock(text2)
@@ -277,9 +277,9 @@ for (i = 0; i < 3; i++)
 	addBlock(circle1)
 	rad = rad - 3
 }
-let dot3 = {type:CIRCLE,debug:false,name:"dot3",x:290,y:270,radius:15,strokeColor:cyan,fillColor:orange,parent:"bezblock"}
+let dot3 = {type:CIRCLE,debug:false,name:"dot3",x:290,y:270,radius:15,strokeColor:cyan,fillColor:cyan,parent:"bezblock"}
 addBlock(dot3)
-let arc3 = {type:ARC,name:"arc3",startAngle:20,endAngle:290,x:0,y:0,radius:10,strokeWidth:5,strokeColor:blue,parent:"dot3"}
+let arc3 = {type:ARC,name:"arc3",startAngle:20,endAngle:290,x:0,y:0,radius:10,strokeWidth:5,strokeColor:cyan,parent:"dot3"}
 addBlock(arc3)
 let text3 = {type:TEXT,name:"text3",x:0,y:26,text:"/// 129",textColor:cyan,size:10,parent:"dot3"}
 addBlock(text3)

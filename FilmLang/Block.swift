@@ -246,6 +246,7 @@ class Block
         baseLayer.addSublayer(rectLayer)
         
         Block.addLayerToParent(block: self, layer: baseLayer)
+        
     }
         
         
@@ -261,7 +262,8 @@ class Block
                 .paragraphStyle: rectangleStyle,
             ] as [NSAttributedString.Key: Any]
             
-            name.draw(in: rect!.offsetBy(dx:width / 2, dy:height / 2), withAttributes: rectangleFontAttributes)
+            name.draw(in: rect!.offsetBy(dx:0, dy:0), withAttributes: rectangleFontAttributes)
+            
         }
         
         if clip == true

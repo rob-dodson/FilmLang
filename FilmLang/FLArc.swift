@@ -12,7 +12,8 @@ class FLArc : Block
 {
     var closeArc : Bool = false
     var built : Bool = false
-    var debugrect : NSRect!
+    var rect : NSRect!
+    var rectLayer  : CALayer!
     
     override func parseBlock(dict:NSDictionary)
     {
@@ -48,9 +49,9 @@ class FLArc : Block
             
             let arcPath = CGMutablePath()
             
-            let startPoint = NSPoint(x: x + xoffset, y: y + yoffset)
+            let centerPoint = CGPoint(x: x + parent!.width / 2, y: y + parent!.height / 2)
             
-            arcPath.addArc(center: startPoint, radius: radius, startAngle: CGFloat(startAngle * CGFloat.pi / 180), endAngle: CGFloat(endAngle * CGFloat.pi / 180), clockwise: true, transform:.identity)
+            arcPath.addArc(center: centerPoint, radius: radius, startAngle: CGFloat(startAngle * CGFloat.pi / 180), endAngle: CGFloat(endAngle * CGFloat.pi / 180), clockwise: true, transform:.identity)
             if closeArc == true
             {
                 arcPath.closeSubpath()
@@ -58,19 +59,30 @@ class FLArc : Block
          
             layer.path = arcPath
             baseLayer.addSublayer(layer)
+            //addLayerConstraints(layer:layer)
             Block.addLayerToParent(block: self, layer: baseLayer)
             
-            debugrect = arcPath.boundingBox
+            if debug == true
+            {
+                rect = arcPath.boundingBox
+                rectLayer = CALayer()
+                rectLayer.bounds = CGRect(x: 0, y: 0,width: radius * 2, height: radius * 2)
+                rectLayer.position = centerPoint
+                rectLayer.borderColor = CGColor.init(srgbRed: 1.0, green: 0.0, blue: 1.0, alpha: 1.0)
+                rectLayer.borderWidth = 1
+                baseLayer.addSublayer(rectLayer)
+            }
+            
             built = true
         }
         
         if baseLayer.bounds.width != width || baseLayer.bounds.height != height || baseLayer.position.x != x || baseLayer.position.y != y
         {
-            baseLayer.bounds = CGRect(x: 0, y: 0,width: width, height: height)
-            baseLayer.position = CGPoint(x: x + xoffset + (width / 2), y: y + yoffset + (height / 2))
+            baseLayer.bounds = CGRect(x: 0, y: 0,width: radius * 2, height: radius * 2)
+            baseLayer.position = CGPoint(x: x + parent!.width / 2, y: y + parent!.height / 2)
         }
         
-        postDraw(rect:debugrect)
+        postDraw(rect:nil)
     }
 
 }

@@ -16,7 +16,6 @@ class FLText : Block
     var size : CGFloat = 24.0
     var textColor = NSColor.green
     var padding : CGFloat = 0.0
-    var built : Bool = false
     var frameRect  : CGRect!
     
     

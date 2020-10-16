@@ -12,12 +12,10 @@ import Cocoa
 
 class FLGrid : Block
 {
-    
     var xspacing : CGFloat = 10
     var yspacing : CGFloat = 10
     var gridColor = NSColor.green
     var gridStrokeWidth : CGFloat = 0.5
-    var built : Bool = false
     
     
     override func parseBlock(dict:NSDictionary)

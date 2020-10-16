@@ -57,12 +57,16 @@ class Block
     var yoffset       : CGFloat = 0.0
     var windowWidthOffset  : CGFloat = 0.0
     var windowHeightOffset : CGFloat = 0.0
-    var fitToView          : Bool = false
-    var layoutSpec         : LayoutSpec?
-    var viewPadding        : CGFloat = 20
-    var scrollAmount       : CGFloat = 0.0
-    var baseLayer          : CALayer!
-    var hidden             : Bool = false
+    var fitToView     : Bool = false
+    var layoutSpec    : LayoutSpec?
+    var viewPadding   : CGFloat = 20
+    var scrollAmount  : CGFloat = 0.0
+    var baseLayer     : CALayer!
+    var hidden        : Bool = false
+    var built         : Bool = false
+    var zPosition     : CGFloat = 0
+    
+    
     
     
     init(name:String)
@@ -385,6 +389,7 @@ class Block
         if let gradientAngle = dict["gradientAngle"] as? CGFloat { self.gradientAngle = gradientAngle }
         if let scrollamount = dict["scrollAmount"]   as? CGFloat { self.scrollAmount = scrollamount }
         if let hidden = dict["hidden"]               as? Bool    { self.hidden = hidden }
+        if let zpos = dict["zPosition"]              as? CGFloat { self.zPosition = zpos }
         
         baseLayer.isHidden = hidden
         

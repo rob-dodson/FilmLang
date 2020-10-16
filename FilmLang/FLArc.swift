@@ -11,7 +11,6 @@ import Cocoa
 class FLArc : Block
 {
     var closeArc : Bool = false
-    var built : Bool = false
     var rect : NSRect!
     var rectLayer  : CALayer!
     

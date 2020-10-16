@@ -13,7 +13,6 @@ class FLImage : Block
 {
     var url : URL?
     var image : NSImage?
-    var built : Bool = false
     
     override init(name: String)
     {

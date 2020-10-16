@@ -12,9 +12,6 @@ import Cocoa
 
 class FLRect : Block
 {
-    var built : Bool = false
-    
-    
     override func parseBlock(dict:NSDictionary)
     {
         super.parseBlock(dict: dict)

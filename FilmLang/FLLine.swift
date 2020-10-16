@@ -29,19 +29,32 @@ class FLLine : Block
     {
         preDraw()
         
-        let linePath = NSBezierPath()
-        linePath.lineCapStyle = .square
-        linePath.move(to: NSPoint(x: x + xoffset, y: y + yoffset))
-        linePath.line(to: NSPoint(x: endX + xoffset, y: endY + yoffset))
-        
-            
-        if let strokecolor = strokeColor
+        if built == false
         {
-            strokecolor.setStroke()
-            linePath.lineWidth = strokeWidth
-            linePath.stroke()
-        }
+            let layer = CAShapeLayer()
+            if let strokecolor = strokeColor
+            {
+                layer.strokeColor = strokecolor.cgColor
+                layer.lineWidth = strokeWidth
+            }
             
+            let line = CGMutablePath()
+            line.move(to: NSPoint(x: x + xoffset, y: y + yoffset))
+            line.addLine(to: NSPoint(x: endX + xoffset, y: endY + yoffset))
+            
+            layer.path = line
+            
+            addLayerConstraints(layer:layer)
+            baseLayer.addSublayer(layer)
+            baseLayer.zPosition = zPosition
+            Block.addLayerToParent(block: self, layer: baseLayer)
+        }
+           
+        if baseLayer.bounds.width != width || baseLayer.bounds.height != height || baseLayer.position.x != x || baseLayer.position.y != y
+        {
+          //  baseLayer.bounds = CGRect(x: 0, y: 0,width: width, height: height)
+          //  baseLayer.position = CGPoint(x: x + xoffset, y: y + yoffset)
+        }
         postDraw(rect: nil)
     }
 }

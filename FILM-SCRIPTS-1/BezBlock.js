@@ -14,6 +14,7 @@ let bezblock =
 	strokeColor:orange,
 	strokeWidth:5,
 	radius:4,
+	animator0:{value:"x",amount:1,min:20,max:20,type:BOUNCE},
 	childBlock0: {type:TEXT,name:"beztitle",text:"BEZ-1",size:20,x:10,y:360,textColor:gray,font:MainFont,fillColor:gray,textColor:black,strokeColor:gray,radius:4 },
 }
 addBlock(bezblock)
@@ -109,11 +110,11 @@ addBlock(bigbez)
 //
 // circles
 // 
-let line1 = { type:LINE,name:"line1",x:250,y:200,endX:330,endY:200,strokeWidth:10,strokeColor:cyan,parent:"bezblock"}
+let line1 = { type:LINE,name:"line1",x:250,y:200,endX:330,endY:200,strokeWidth:10,strokeColor:cyan,parent:"bezblock",zPosition:-1}
 addBlock(line1)
-let line2 = { type:LINE,name:"line2",x:250,y:200,endX:290,endY:270,strokeWidth:10,strokeColor:cyan,parent:"bezblock"}
+let line2 = { type:LINE,name:"line2",x:250,y:200,endX:290,endY:270,strokeWidth:10,strokeColor:red,parent:"bezblock",zPosition:-1}
 addBlock(line2)
-let line3 = { type:LINE,name:"line3",x:330,y:200,endX:290,endY:270,strokeWidth:10,strokeColor:cyan,parent:"bezblock"}
+let line3 = { type:LINE,name:"line3",x:330,y:200,endX:290,endY:270,strokeWidth:10,strokeColor:cyan,parent:"bezblock",zPosition:-1}
 addBlock(line3)
 
 let rad = 25
@@ -123,9 +124,9 @@ for (i = 0; i < 3; i++)
 	addBlock(circle1)
 	rad = rad - 3
 }
-let dot1 = {type:CIRCLE,debug:false,name:"dot1",x:250,y:200,radius:15,strokeColor:cyan,fillColor:cyan,parent:"bezblock"}
+let dot1 = {type:CIRCLE,debug:false,name:"dot1",x:250,y:200,radius:15,strokeColor:cyan,fillColor:cyansolid,parent:"bezblock"}
 addBlock(dot1)
-let arc1 = {type:ARC,name:"arc1",startAngle:10,endAngle:90,x:0,y:0,radius:8,strokeWidth:5,strokeColor:cyan,parent:"dot1"}
+let arc1 = {type:ARC,name:"arc1",startAngle:10,endAngle:90,x:0,y:0,radius:8,strokeWidth:5,strokeColor:blue,parent:"dot1"}
 addBlock(arc1)
 let text1 = {type:TEXT,name:"text1",x:0,y:-38,text:"/// 432",textColor:cyan,size:10,parent:"dot1"}
 addBlock(text1)
@@ -138,7 +139,7 @@ for (i = 0; i < 3; i++)
 	addBlock(circle1)
 	rad = rad - 3
 }
-let dot2 = {type:CIRCLE,debug:false,name:"dot2",x:330,y:200,radius:15,strokeColor:cyan,fillColor:cyan,parent:"bezblock"}
+let dot2 = {type:CIRCLE,debug:false,name:"dot2",x:330,y:200,radius:15,strokeColor:cyan,fillColor:cyansolid,parent:"bezblock"}
 addBlock(dot2)
 let arc2 = {type:ARC,name:"arc2",startAngle:20,endAngle:190,x:0,y:0,radius:8,strokeWidth:5,strokeColor:orange,parent:"dot2"}
 addBlock(arc2)
@@ -152,9 +153,9 @@ for (i = 0; i < 3; i++)
 	addBlock(circle1)
 	rad = rad - 3
 }
-let dot3 = {type:CIRCLE,debug:false,name:"dot3",x:290,y:270,radius:15,strokeColor:cyan,fillColor:cyan,parent:"bezblock"}
+let dot3 = {type:CIRCLE,debug:false,name:"dot3",x:290,y:270,radius:15,strokeColor:cyan,fillColor:cyansolid,parent:"bezblock"}
 addBlock(dot3)
-let arc3 = {type:ARC,name:"arc3",startAngle:20,endAngle:290,x:0,y:0,radius:8,strokeWidth:5,strokeColor:cyan,parent:"dot3"}
+let arc3 = {type:ARC,name:"arc3",startAngle:20,endAngle:290,x:0,y:0,radius:8,strokeWidth:5,strokeColor:blue,parent:"dot3"}
 addBlock(arc3)
 let text3 = {type:TEXT,name:"text3",x:0,y:26,text:"/// 129",textColor:cyan,size:10,parent:"dot3"}
 addBlock(text3)

@@ -80,6 +80,23 @@ class Block
     }
     
     
+    func setColorsOnShapeLayer(layer:CAShapeLayer)
+    {
+        if let strokecolor = strokeColor
+        {
+            layer.strokeColor = strokecolor.cgColor
+            layer.lineWidth = strokeWidth
+        }
+        if let fillcolor = fillColor
+        {
+            layer.fillColor = fillcolor.cgColor
+        }
+        else
+        {
+            layer.fillColor = nil
+        }
+    }
+    
     func createBaseLayer()
     {
         baseLayer = CALayer()

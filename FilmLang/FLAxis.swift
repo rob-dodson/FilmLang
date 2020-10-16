@@ -13,7 +13,7 @@ import Cocoa
 class FLAxis : Block
 {
     var points : [NSPoint]
-    var axisColor : NSColor
+    var axisColor : NSColor?
     
     override init(name:String)
     {
@@ -51,9 +51,11 @@ class FLAxis : Block
             // axis
             //
             let layer = CAShapeLayer()
-            
-            layer.strokeColor = axisColor.cgColor
-            layer.lineWidth = strokeWidth
+            setColorsOnShapeLayer(layer:layer)
+            if let axiscolor = axisColor
+            {
+                layer.strokeColor = axiscolor.cgColor
+            }
             
             let graph = CGMutablePath()
             
@@ -92,9 +94,12 @@ class FLAxis : Block
             //
             // data points
             //
-            let curveLayer = CAShapeLayer()
+            
             if points.count > 0
             {
+                let curveLayer = CAShapeLayer()
+                setColorsOnShapeLayer(layer:curveLayer)
+                
                 let line = CGMutablePath()
                 
                 line.move(to: NSPoint(x: x, y: y))

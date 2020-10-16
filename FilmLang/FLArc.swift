@@ -32,19 +32,7 @@ class FLArc : Block
         {
             let layer = CAShapeLayer()
             
-            if let strokecolor = strokeColor
-            {
-                layer.strokeColor = strokecolor.cgColor
-                layer.lineWidth = strokeWidth
-            }
-            if let fillcolor = fillColor
-            {
-                layer.fillColor = fillcolor.cgColor
-            }
-            else
-            {
-                layer.fillColor = nil
-            }
+            setColorsOnShapeLayer(layer:layer)
             
             let arcPath = CGMutablePath()
             

@@ -32,11 +32,7 @@ class FLLine : Block
         if built == false
         {
             let layer = CAShapeLayer()
-            if let strokecolor = strokeColor
-            {
-                layer.strokeColor = strokecolor.cgColor
-                layer.lineWidth = strokeWidth
-            }
+            setColorsOnShapeLayer(layer:layer)
             
             let line = CGMutablePath()
             line.move(to: NSPoint(x: x + xoffset, y: y + yoffset))

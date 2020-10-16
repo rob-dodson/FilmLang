@@ -36,24 +36,11 @@ class FLCircle : Block
             }
             
             let circleLayer = CAShapeLayer()
+            setColorsOnShapeLayer(layer:circleLayer)
             
             let ovalPath = CGPath(ellipseIn: rect!, transform: nil)
             circleLayer.path = ovalPath
             
-            if let fillcolor = fillColor
-            {
-                circleLayer.fillColor = fillcolor.cgColor
-            }
-            else
-            {
-                circleLayer.fillColor = nil
-            }
-            
-            if let strokecolor = strokeColor
-            {
-                circleLayer.strokeColor = strokecolor.cgColor
-                circleLayer.lineWidth = strokeWidth
-            }
             
             
             addLayerConstraints(layer:circleLayer)

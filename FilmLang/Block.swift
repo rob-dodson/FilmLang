@@ -36,6 +36,7 @@ class Block
     var name          : String
     var x             : CGFloat = 10.0
     var y             : CGFloat = 10.0
+    var z             : CGFloat = 0
     var fillColor     : NSColor?
     var strokeColor   : NSColor?
     var strokeAlpha   : CGFloat = -1.0
@@ -64,7 +65,7 @@ class Block
     var baseLayer     : CALayer!
     var hidden        : Bool = false
     var built         : Bool = false
-    var zPosition     : CGFloat = 0
+    
     
     
     
@@ -379,6 +380,7 @@ class Block
         if let fit = dict["fitToView"]               as? Bool    { self.fitToView = fit }
         if let x = dict["x"]                         as? CGFloat { self.x = x }
         if let y = dict["y"]                         as? CGFloat { self.y = y }
+        if let z = dict["z"]                         as? CGFloat { self.z = z }
         if let width = dict["width"]                 as? CGFloat { self.width = width }
         if let height = dict["height"]               as? CGFloat { self.height = height }
         if let fillcolordict = dict["fillColor"]     as? NSDictionary { self.fillColor = Block.colorFromDict(dict: fillcolordict) }
@@ -389,7 +391,7 @@ class Block
         if let gradientAngle = dict["gradientAngle"] as? CGFloat { self.gradientAngle = gradientAngle }
         if let scrollamount = dict["scrollAmount"]   as? CGFloat { self.scrollAmount = scrollamount }
         if let hidden = dict["hidden"]               as? Bool    { self.hidden = hidden }
-        if let zpos = dict["zPosition"]              as? CGFloat { self.zPosition = zpos }
+        
         
         baseLayer.isHidden = hidden
         

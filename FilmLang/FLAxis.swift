@@ -45,64 +45,90 @@ class FLAxis : Block
     {
         preDraw()
 
-        //
-        // axis
-        //
-        axisColor.setStroke()
-        let axis = NSBezierPath()
-        axis.lineWidth = strokeWidth
-        axis.lineCapStyle = .square
-        axis.move(to: NSPoint(x: x + xoffset, y: y + yoffset))
-        axis.line(to: NSPoint(x: x + width + xoffset, y: y + yoffset))
-        axis.move(to: NSPoint(x: x + xoffset, y: y + yoffset))
-        axis.line(to: NSPoint(x: x + xoffset, y: y + height + yoffset))
-        axis.stroke()
+        if built == false
+        {
+            //
+            // axis
+            //
+            let layer = CAShapeLayer()
+            
+            layer.strokeColor = axisColor.cgColor
+            layer.lineWidth = strokeWidth
+            
+            let graph = CGMutablePath()
+            
+            let axis = CGMutablePath()
+            axis.move(to: NSPoint(x: x, y: y))
+            axis.addLine(to: NSPoint(x: x + width, y: y))
+            axis.move(to: NSPoint(x: x, y: y))
+            axis.addLine(to: NSPoint(x: x, y: y + height))
+            
+            graph.addPath(axis)
 
 
-        //
-        // ticks
-        //
-        let xticks = NSBezierPath()
-        xticks.lineWidth = strokeWidth
-        let inc : CGFloat = 20
-        let ticklen : CGFloat = 5
-        for xtick in stride(from: x, to: x + width, by: inc)
-        {
-            xticks.move(to: NSPoint(x: xtick + xoffset, y: y - ticklen + yoffset))
-            xticks.line(to: NSPoint(x: xtick + xoffset, y: y + ticklen + yoffset))
-        }
-        xticks.stroke()
-
-        let yticks = NSBezierPath()
-        yticks.lineWidth = strokeWidth
-        for ytick in stride(from: y, to: y + height, by: inc)
-        {
-            yticks.move(to: NSPoint(x: x - ticklen + xoffset, y: ytick + yoffset))
-            yticks.line(to: NSPoint(x: x + ticklen + xoffset, y: ytick + yoffset))
-        }
-        yticks.stroke()
-           
-        
-        //
-        // data points
-        //
-        if points.count > 0
-        {
-            let path = NSBezierPath()
-            path.lineJoinStyle = .round
-            path.move(to: NSPoint(x: xoffset + x, y: yoffset + y))
-            for point in points
+            //
+            // ticks
+            //
+            let xticks = CGMutablePath()
+            let inc : CGFloat = 20
+            let ticklen : CGFloat = 5
+            for xtick in stride(from: x, to: x + width, by: inc)
             {
-                path.line(to: NSPoint(x: point.x + xoffset + x, y: point.y + yoffset + y))
+                xticks.move(to: NSPoint(x: xtick, y: y - ticklen))
+                xticks.addLine(to: NSPoint(x: xtick, y: y + ticklen))
+            }
+            graph.addPath(xticks)
+            
+
+            let yticks = CGMutablePath()
+            for ytick in stride(from: y, to: y + height, by: inc)
+            {
+                yticks.move(to: NSPoint(x: x - ticklen, y: ytick))
+                yticks.addLine(to: NSPoint(x: x + ticklen, y: ytick))
+            }
+            graph.addPath(yticks)
+               
+            
+            //
+            // data points
+            //
+            let curveLayer = CAShapeLayer()
+            if points.count > 0
+            {
+                let line = CGMutablePath()
+                
+                line.move(to: NSPoint(x: x, y: y))
+                for point in points
+                {
+                    line.addLine(to: NSPoint(x: point.x + x, y: point.y + y))
+                }
+                
+                if let fillcolor = fillColor
+                {
+                    curveLayer.fillColor = fillcolor.cgColor
+                }
+                else
+                {
+                    curveLayer.fillColor = nil
+                }
+                
+                curveLayer.path = line
+                curveLayer.strokeColor = strokeColor?.cgColor
+                curveLayer.lineWidth = strokeWidth
+                baseLayer.addSublayer(curveLayer)
             }
             
-            if let strokecolor = strokeColor
-            {
-                strokecolor.setStroke()
-                path.lineWidth = strokeWidth
-                path.stroke()
-            }
+            layer.path = graph
+            baseLayer.addSublayer(layer)
+            addLayerConstraints(layer:layer)
+            Block.addLayerToParent(block: self, layer: baseLayer)
+            
+            built = true
         }
+        
+        baseLayer.bounds = CGRect(x: 0, y: 0, width: width, height: height)
+        baseLayer.position = CGPoint(x: x + xoffset + (width / 2), y: y + yoffset + (height / 2))
+        
         
         postDraw(rect: boundingRect)
     }

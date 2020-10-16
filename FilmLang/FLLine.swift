@@ -46,7 +46,7 @@ class FLLine : Block
             
             addLayerConstraints(layer:layer)
             baseLayer.addSublayer(layer)
-            baseLayer.zPosition = zPosition
+            baseLayer.zPosition = z
             Block.addLayerToParent(block: self, layer: baseLayer)
         }
            

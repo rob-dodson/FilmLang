@@ -110,10 +110,10 @@ let axis =
     name:"axis",
     type:AXIS,
 	axisColor: { red: 0.76, green: 0.38, blue: 0.00, alpha: 1.00 },
-    x:30,
-    y:30,
-    width:400,
-    height:300,
+    x:0,
+    y:0,
+    width:300,
+    height:200,
     layoutSpec:{x:2,y:1,fit:false},
     strokeWidth:2,
     strokeColor:cyan,
@@ -140,7 +140,7 @@ let bezblock =
 	strokeColor:orange,
 	strokeWidth:5,
 	radius:4,
-	animator0:{value:"x",amount:1,min:20,max:20,type:BOUNCE},
+//	animator0:{value:"x",amount:1,min:20,max:20,type:BOUNCE},
 	childBlock0: {type:TEXT,name:"beztitle",text:"BEZ-1",size:20,x:10,y:360,textColor:gray,font:MainFont,fillColor:gray,textColor:black,strokeColor:gray,radius:4 },
 }
 addBlock(bezblock)
@@ -236,11 +236,11 @@ addBlock(bigbez)
 //
 // circles
 // 
-let line1 = { type:LINE,name:"line1",x:250,y:200,endX:330,endY:200,strokeWidth:10,strokeColor:cyan,parent:"bezblock",zPosition:-1}
+let line1 = { type:LINE,name:"line1",x:250,y:200,endX:330,endY:200,strokeWidth:10,strokeColor:cyan,parent:"bezblock",z:-1}
 addBlock(line1)
-let line2 = { type:LINE,name:"line2",x:250,y:200,endX:290,endY:270,strokeWidth:10,strokeColor:red,parent:"bezblock",zPosition:-1}
+let line2 = { type:LINE,name:"line2",x:250,y:200,endX:290,endY:270,strokeWidth:10,strokeColor:red,parent:"bezblock",z:-1}
 addBlock(line2)
-let line3 = { type:LINE,name:"line3",x:330,y:200,endX:290,endY:270,strokeWidth:10,strokeColor:cyan,parent:"bezblock",zPosition:-1}
+let line3 = { type:LINE,name:"line3",x:330,y:200,endX:290,endY:270,strokeWidth:10,strokeColor:cyan,parent:"bezblock",z:-1}
 addBlock(line3)
 
 let rad = 25

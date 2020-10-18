@@ -19,6 +19,8 @@ class FLScrollText : Block
     var padding : CGFloat = 0.0
     var boundingtextRect : NSRect!
     var scrollLayer = CAScrollLayer()
+    var textpadding : CGFloat = 5.0
+    
     
     override func parseBlock(dict:NSDictionary)
     {
@@ -42,10 +44,10 @@ class FLScrollText : Block
             scrollLayer.bounds = CGRect(x: 0.0, y: 0.0, width: width, height: height)
             scrollLayer.position = CGPoint(x: x + xoffset + (width / 2), y: y + yoffset + (height / 2))
             scrollLayer.borderColor = strokeColor?.cgColor
-            scrollLayer.borderWidth = 5.0 // 12
+            scrollLayer.borderWidth = strokeWidth
             scrollLayer.scrollMode = CAScrollLayerScrollMode.vertically
-
           
+            
             if text == nil
             {
                 if let url = textURL
@@ -64,8 +66,6 @@ class FLScrollText : Block
                 {
                     text = "error: text not set"
                 }
-            
-               
             }
             
             
@@ -83,11 +83,13 @@ class FLScrollText : Block
                                              attributes: textFontAttributes)
             
             let textLayer = CATextLayer()
-            textLayer.bounds = CGRect(x: 0, y: 0, width: boundingtextRect.width, height: boundingtextRect.height)
-            textLayer.position = CGPoint(x: boundingtextRect.width / 2, y: boundingtextRect.height / 2)
+            
+            textLayer.bounds = CGRect(x: 0, y: 0, width: width - (textpadding * 2), height: boundingtextRect.height)
+            textLayer.position = CGPoint(x: width / 2 + textpadding, y: height / 2)
             textLayer.fontSize = size
             textLayer.font = CGFont(font as CFString)
             textLayer.foregroundColor = textColor.cgColor
+            textLayer.isWrapped = true
             textLayer.string = NSAttributedString(string: text, attributes: textFontAttributes)
        
             scrollLayer.addSublayer(textLayer)
@@ -98,7 +100,8 @@ class FLScrollText : Block
         
         scrollLayer.bounds = CGRect(x: 0, y: 0, width: width, height: height)
         scrollLayer.position = CGPoint(x: x + xoffset + (width / 2), y: y + yoffset + (height / 2))
-        scrollLayer.scroll(CGPoint(x: 0, y: 0 - scrollAmount))
+        
+        scrollLayer.scroll(CGPoint(x: 0, y: 0 + height + scrollAmount))
         
         
         postDraw(rect:nil)

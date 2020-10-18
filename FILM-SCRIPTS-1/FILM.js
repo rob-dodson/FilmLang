@@ -497,8 +497,6 @@ addBlock(map)
 {
     name:"scrollblock",
     type:SCROLLTEXT,
-    x:20,
-    y:20,
     layoutSpec:{x:3,y:0,fit:false},
     width:400,
     height:200,
@@ -509,7 +507,7 @@ addBlock(map)
 	font:MainFont,
 	strokeColor:cyan,
 	textColor:cyan,
-	animator0:{value:"scrollamount",amount:-1,min:-5000.0,max:0.0,type:INC},
+	animator0:{value:"scrollamount",amount:10,min:0,max:600.0,type:INC},
 }
 addBlock(scrollblock)
 
@@ -517,8 +515,6 @@ let scrollblock1 =
 {
 	name:"scrollblock1",
 	type:SCROLLTEXT,
-	x:20,
-	y:20,
 	layoutSpec:{x:3,y:1,fit:false},
 	width:400,
 	height:200,
@@ -529,7 +525,7 @@ let scrollblock1 =
 	font:MainFont,
 	strokeColor:cyan,
 	textColor:blue,
-	animator0:{value:"scrollamount",amount:-.5,min:-5000.0,max:0.0,type:INC},
+	animator0:{value:"scrollamount",amount:20,min:0,max:600.0,type:INC},
 }
 addBlock(scrollblock1)
 

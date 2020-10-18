@@ -62,6 +62,7 @@ class FLText : Block
                 fillgradient.getColor(&color0, location: nil, at: 0)
                 fillgradient.getColor(&color1, location: nil, at: 1)
                 gradLayer.colors = [color0.cgColor,color1.cgColor]
+                
                 addLayerConstraints(layer:gradLayer)
                 baseLayer.addSublayer(gradLayer)
             }
@@ -95,9 +96,9 @@ class FLText : Block
             textLayer.font = CGFont(font as CFString)
             textLayer.foregroundColor = textColor.cgColor
             textLayer.string = NSAttributedString(string: text, attributes: textFontAttributes)
+            
             addLayerConstraints(layer:textLayer)
             baseLayer.addSublayer(textLayer)
-            
             Block.addLayerToParent(block: self, layer: baseLayer)
             
             built = true

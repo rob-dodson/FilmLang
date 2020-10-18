@@ -69,8 +69,8 @@ class Animator
         if (val == "strokewidth") { value = Animator.AnimatorVal.strokewidth }
         if (val == "strokealpha") { value = Animator.AnimatorVal.strokealpha }
         if (val == "scrollamount"){ value = Animator.AnimatorVal.scrollamount }
-        if (val == "width"){ value = Animator.AnimatorVal.width }
-        if (val == "height"){ value = Animator.AnimatorVal.height }
+        if (val == "width")       { value = Animator.AnimatorVal.width }
+        if (val == "height")      { value = Animator.AnimatorVal.height }
 
         var anitype = Animator.AnimatorType.NOTSET
         if (type == "bounce") { anitype = Animator.AnimatorType.Bounce }

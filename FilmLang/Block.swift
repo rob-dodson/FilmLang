@@ -79,6 +79,10 @@ class Block
         createBaseLayer()
     }
     
+    func setLayerDefaults(layer:CALayer)
+    {
+        layer.zPosition = z
+    }
     
     func setColorsOnShapeLayer(layer:CAShapeLayer)
     {
@@ -406,7 +410,6 @@ class Block
         if let rotation = dict["rotation"]           as? CGFloat { self.rotation = rotation }
         if let strokeWidth = dict["strokeWidth"]     as? CGFloat { self.strokeWidth = strokeWidth }
         if let gradientAngle = dict["gradientAngle"] as? CGFloat { self.gradientAngle = gradientAngle }
-        if let scrollamount = dict["scrollAmount"]   as? CGFloat { self.scrollAmount = scrollamount }
         if let hidden = dict["hidden"]               as? Bool    { self.hidden = hidden }
         
         

@@ -11,14 +11,14 @@ import Cocoa
 
 class FLScrollText : Block
 {
-    var text : String?
+    var text : String!
     var textURL : String?
     var font : String = "Helvetica"
     var size : CGFloat = 24.0
     var textColor = NSColor.green
     var padding : CGFloat = 0.0
     var boundingtextRect : NSRect!
-    
+    var scrollLayer = CAScrollLayer()
     
     override func parseBlock(dict:NSDictionary)
     {
@@ -37,80 +37,69 @@ class FLScrollText : Block
     {
         preDraw()
         
-        let textStyle = NSMutableParagraphStyle()
-        textStyle.alignment = .left
-        let textFontAttributes = [
-            .font: NSFont(name: font, size: size)!,
-            .foregroundColor: textColor,
-            .paragraphStyle: textStyle,
-        ] as [NSAttributedString.Key: Any]
+        if built == false
+        {
+            scrollLayer.bounds = CGRect(x: 0.0, y: 0.0, width: width, height: height)
+            scrollLayer.position = CGPoint(x: x + xoffset + (width / 2), y: y + yoffset + (height / 2))
+            scrollLayer.borderColor = strokeColor?.cgColor
+            scrollLayer.borderWidth = 5.0 // 12
+            scrollLayer.scrollMode = CAScrollLayerScrollMode.vertically
 
-        
-        
-        let cliptextRect = NSRect(x: CGFloat(x + xoffset),
-                                          y: CGFloat(y + yoffset),
-                                          width: width,
-                                          height: height)
-        
-        let borderPath = NSBezierPath(roundedRect: cliptextRect, xRadius: radius, yRadius: radius)
-        
-        
-        if text == nil
-         {
-             if let url = textURL
-             {
-                 do
-                 {
-                     text = try String(contentsOf: URL(fileURLWithPath: url))
-                 }
-                 catch
-                 {
-                     print("Error: \(error)")
-                     text = "error: url not working"
-                 }
-             }
-             else
-             {
-                 text = "error: text not set"
-             }
-        
+          
+            if text == nil
+            {
+                if let url = textURL
+                {
+                    do
+                    {
+                        text = try String(contentsOf: URL(fileURLWithPath: url))
+                    }
+                    catch
+                    {
+                        print("Error: \(error)")
+                        text = "error: url not working"
+                    }
+                }
+                else
+                {
+                    text = "error: text not set"
+                }
+            
+               
+            }
+            
+            
+            let textStyle = NSMutableParagraphStyle()
+            textStyle.alignment = .left
+            let textFontAttributes = [
+                .font: NSFont(name: font, size: size)!,
+                .foregroundColor: textColor,
+                .paragraphStyle: textStyle,
+            ] as [NSAttributedString.Key: Any]
+
             boundingtextRect = text!.boundingRect(with: NSSize(width: CGFloat.infinity,
                                                           height: CGFloat.infinity),
                                              options: .usesLineFragmentOrigin,
                                              attributes: textFontAttributes)
-        }
-        
+            
+            let textLayer = CATextLayer()
+            textLayer.bounds = CGRect(x: 0, y: 0, width: boundingtextRect.width, height: boundingtextRect.height)
+            textLayer.position = CGPoint(x: boundingtextRect.width / 2, y: boundingtextRect.height / 2)
+            textLayer.fontSize = size
+            textLayer.font = CGFont(font as CFString)
+            textLayer.foregroundColor = textColor.cgColor
+            textLayer.string = NSAttributedString(string: text, attributes: textFontAttributes)
        
-       
-        
-        let textRect: NSRect = NSRect(x: CGFloat(x + xoffset),
-                                          y: CGFloat(y + yoffset) - (boundingtextRect.height - height) - scrollAmount,
-                                          width: boundingtextRect.width,
-                                          height: boundingtextRect.height)
-        
-        
-        if let strokecolor = strokeColor
-        {
-            strokecolor.setStroke()
-            borderPath.lineWidth = strokeWidth
-            borderPath.stroke()
-        }
-        if clip
-        {
-            cliptextRect.clip()
+            scrollLayer.addSublayer(textLayer)
+           
+            Block.addLayerToParent(block: self, layer: scrollLayer)
+            built = true
         }
         
-        if let fillgradient = fillGradient
-        {
-            fillgradient.draw(in: borderPath, angle: gradientAngle)
-        }
-        else if let fillcolor = fillColor
-        {
-            fillcolor.setFill()
-            borderPath.fill()
-        }
+        scrollLayer.bounds = CGRect(x: 0, y: 0, width: width, height: height)
+        scrollLayer.position = CGPoint(x: x + xoffset + (width / 2), y: y + yoffset + (height / 2))
+        scrollLayer.scroll(CGPoint(x: 0, y: 0 - scrollAmount))
         
-        text!.draw(in: textRect, withAttributes: textFontAttributes)
         
         postDraw(rect:nil)
     }

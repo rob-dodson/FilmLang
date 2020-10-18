@@ -33,6 +33,7 @@ class FLLine : Block
         {
             let layer = CAShapeLayer()
             setColorsOnShapeLayer(layer:layer)
+            setLayerDefaults(layer:baseLayer)
             
             let line = CGMutablePath()
             line.move(to: NSPoint(x: x + xoffset, y: y + yoffset))
@@ -42,7 +43,6 @@ class FLLine : Block
             
             addLayerConstraints(layer:layer)
             baseLayer.addSublayer(layer)
-            baseLayer.zPosition = z
             Block.addLayerToParent(block: self, layer: baseLayer)
         }
            

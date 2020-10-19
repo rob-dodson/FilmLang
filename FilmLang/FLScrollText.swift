@@ -101,7 +101,7 @@ class FLScrollText : Block
         scrollLayer.bounds = CGRect(x: 0, y: 0, width: width, height: height)
         scrollLayer.position = CGPoint(x: x + xoffset + (width / 2), y: y + yoffset + (height / 2))
         
-        scrollLayer.scroll(CGPoint(x: 0, y: 0 + height + scrollAmount))
+        scrollLayer.scroll(CGPoint(x: 0, y: height - scrollAmount))
         
         
         postDraw(rect:nil)

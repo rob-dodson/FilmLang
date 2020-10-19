@@ -10,9 +10,28 @@ let scrollblock1 =
 	textURL:"/Users/robertdodson/Desktop/FILM/scrollingtext.txt",
 	size:14,
 	font:MainFont,
-	strokeColor:cyansolid,
-	strokeWidth:5.0,
-	textColor:cyan,
-	animator0:{value:"scrollamount",amount:15,min:0,max:3000.0,type:BOUNCE},
+	strokeColor:cyan,
+	strokeWidth:2,
+	textColor:orange,
+	animator0:{value:"scrollamount",amount:15,min:0,max:3000.0,type:INC},
 }
 addBlock(scrollblock1)
+
+let scrollblock2 =
+{
+	name:"scrollblock2",
+	type:SCROLLTEXT,
+	layoutSpec:{x:3,y:0,fit:false},
+	width:400,
+	height:200,
+	radius:4,
+	clip:true,
+	textURL:"/Users/robertdodson/Desktop/FILM/scrollingtext.txt",
+	size:14,
+	font:MainFont,
+	strokeColor:cyan,
+	strokeWidth:1,
+	textColor:gray,
+	animator0:{value:"scrollamount",amount:25,min:0,max:3000.0,type:INC},
+}
+addBlock(scrollblock2)

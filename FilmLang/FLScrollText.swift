@@ -9,6 +9,27 @@
 import Foundation
 import Cocoa
 
+class animdel : NSObject, CAAnimationDelegate
+{
+    let textScroller : FLScrollText
+    
+    init(textscroller:FLScrollText)
+    {
+        self.textScroller = textscroller
+    }
+    
+    func animationDidStart(_ anim: CAAnimation)
+    {
+        print("anim started")
+    }
+    
+    func animationDidStop(_ anim: CAAnimation, finished flag: Bool)
+    {
+        print("anim done")
+        textScroller.animationGoing = false
+    }
+}
+
 class FLScrollText : Block
 {
     var text : String!
@@ -20,6 +41,8 @@ class FLScrollText : Block
     var boundingtextRect : NSRect!
     var scrollLayer = CAScrollLayer()
     var textpadding : CGFloat = 5.0
+    var animationGoing : Bool = false
+    var textLayer : CATextLayer!
     
     
     override func parseBlock(dict:NSDictionary)
@@ -82,7 +105,7 @@ class FLScrollText : Block
                                              options: .usesLineFragmentOrigin,
                                              attributes: textFontAttributes)
             
-            let textLayer = CATextLayer()
+             textLayer = CATextLayer()
             
             textLayer.bounds = CGRect(x: 0, y: 0, width: width - (textpadding * 2), height: boundingtextRect.height)
             textLayer.position = CGPoint(x: width / 2 + textpadding, y: height / 2)
@@ -101,8 +124,20 @@ class FLScrollText : Block
         scrollLayer.bounds = CGRect(x: 0, y: 0, width: width, height: height)
         scrollLayer.position = CGPoint(x: x + xoffset + (width / 2), y: y + yoffset + (height / 2))
         
-        scrollLayer.scroll(CGPoint(x: 0, y: height - scrollAmount))
         
+        if animationGoing == false
+        {
+            animationGoing = true
+            let anim = CABasicAnimation(keyPath: "position")
+            anim.fromValue = CGPoint(x: width / 2 + textpadding, y: height / 2)
+            anim.toValue = CGPoint(x: width / 2 + textpadding, y: height / 2 - 1000)
+            anim.duration = 10.0
+            anim.delegate = animdel(textscroller: self)
+            
+            textLayer.add(anim, forKey: "position")
+        }
+        
+
         
         postDraw(rect:nil)
     }

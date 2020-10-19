@@ -20,12 +20,10 @@ class animdel : NSObject, CAAnimationDelegate
     
     func animationDidStart(_ anim: CAAnimation)
     {
-        print("anim started")
     }
     
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool)
     {
-        print("anim done")
         textScroller.animationGoing = false
     }
 }
@@ -128,10 +126,11 @@ class FLScrollText : Block
         if animationGoing == false
         {
             animationGoing = true
+            let animator = self.animators[0]
             let anim = CABasicAnimation(keyPath: "position")
             anim.fromValue = CGPoint(x: width / 2 + textpadding, y: height / 2)
-            anim.toValue = CGPoint(x: width / 2 + textpadding, y: height / 2 - 1000)
-            anim.duration = 10.0
+            anim.toValue = CGPoint(x: width / 2 + textpadding, y: (height / 2) - animator.max)
+            anim.duration = CFTimeInterval(animator.amount)
             anim.delegate = animdel(textscroller: self)
             
             textLayer.add(anim, forKey: "position")

@@ -9,24 +9,6 @@
 import Foundation
 import Cocoa
 
-class animdel : NSObject, CAAnimationDelegate
-{
-    let textScroller : FLScrollText
-    
-    init(textscroller:FLScrollText)
-    {
-        self.textScroller = textscroller
-    }
-    
-    func animationDidStart(_ anim: CAAnimation)
-    {
-    }
-    
-    func animationDidStop(_ anim: CAAnimation, finished flag: Bool)
-    {
-        textScroller.animationGoing = false
-    }
-}
 
 class FLScrollText : Block
 {
@@ -39,9 +21,8 @@ class FLScrollText : Block
     var boundingtextRect : NSRect!
     var scrollLayer = CAScrollLayer()
     var textpadding : CGFloat = 5.0
-    var animationGoing : Bool = false
     var textLayer : CATextLayer!
-    
+    var animationController : AnimationController!
     
     override func parseBlock(dict:NSDictionary)
     {
@@ -62,6 +43,8 @@ class FLScrollText : Block
         
         if built == false
         {
+            animationController = AnimationController()
+            
             scrollLayer.bounds = CGRect(x: 0.0, y: 0.0, width: width, height: height)
             scrollLayer.position = CGPoint(x: x + xoffset + (width / 2), y: y + yoffset + (height / 2))
             scrollLayer.borderColor = strokeColor?.cgColor
@@ -123,17 +106,13 @@ class FLScrollText : Block
         scrollLayer.position = CGPoint(x: x + xoffset + (width / 2), y: y + yoffset + (height / 2))
         
         
-        if animationGoing == false
+        if animationController.animationGoing == false
         {
-            animationGoing = true
             let animator = self.animators[0]
-            let anim = CABasicAnimation(keyPath: "position")
-            anim.fromValue = CGPoint(x: width / 2 + textpadding, y: height / 2)
-            anim.toValue = CGPoint(x: width / 2 + textpadding, y: (height / 2) - animator.max)
-            anim.duration = CFTimeInterval(animator.amount)
-            anim.delegate = animdel(textscroller: self)
+            let toValue = CGPoint(x: width / 2 + textpadding, y: (height / 2) - animator.max)
+            let fromValue = CGPoint(x: width / 2 + textpadding, y: height / 2)
             
-            textLayer.add(anim, forKey: "position")
+            animationController.startAnimation(layer: textLayer, property: "position", tovalue: toValue, fromvalue: fromValue, duration: CFTimeInterval(animator.amount))
         }
         
 

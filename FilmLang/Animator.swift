@@ -7,9 +7,51 @@
 //
 
 import Foundation
+import Cocoa
+
+
+class AnimationController : NSObject, CAAnimationDelegate
+{
+    var animationGoing : Bool = false
+
+    
+    func animationDidStart(_ anim: CAAnimation)
+    {
+    }
+    
+    func animationDidStop(_ anim: CAAnimation, finished flag: Bool)
+    {
+        animationGoing = false
+    }
+
+    func startAnimation(layer:CALayer, property:String, tovalue:Any, fromvalue:Any, duration:CFTimeInterval)
+    {
+        if animationGoing == false
+        {
+            animationGoing = true
+            
+            let anim = CABasicAnimation(keyPath: property)
+            anim.toValue = tovalue
+            anim.fromValue = fromvalue
+            anim.duration = duration
+            anim.delegate = self
+            
+            layer.add(anim, forKey: property)
+        }
+    }
+}
+
 
 class Animator
 {
+    /*
+    var property : String
+    var duration : CGFloat
+    var val      : AnimatorVal
+    var type     : AnimatorType
+    
+    */
+    
     var val : AnimatorVal
     var amount : CGFloat
     var min : CGFloat
@@ -88,7 +130,8 @@ class Animator
             print("Animator NOTSET")
             
         case .x:
-            adjust(val:&block.x, animator: &animator)
+            print("x")
+           //adjust(val:&block.x, animator: &animator)
         
         case.y:
             adjust(val:&block.y, animator: &animator)

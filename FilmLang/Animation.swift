@@ -19,11 +19,13 @@ class Animation : NSObject, CAAnimationDelegate
     var repeatCount    : Float = Float.greatestFiniteMagnitude
     var beginTime      : CFTimeInterval = 0
     
+    var layer          : CALayer!
+    
     var move           : CGPoint?
     var fromColor      : NSColor?
     var toColor        : NSColor?
-    var layer          : CALayer!
-    
+    var fromSize       : CGFloat?
+    var toSize         : CGFloat?
     
     static func animationFromDict(dict:NSDictionary) -> Animation
     {
@@ -39,6 +41,8 @@ class Animation : NSObject, CAAnimationDelegate
         if let move = dict["move"]                     as? NSDictionary { animation.move = Block.pointFromDict(dict:move) }
         if let toColor = dict["toColor"]               as? NSDictionary { animation.toColor = Block.colorFromDict(dict:toColor) }
         if let fromColor = dict["fromColor"]           as? NSDictionary { animation.fromColor = Block.colorFromDict(dict:fromColor) }
+        if let toSize = dict["to"]                     as? CGFloat { animation.toSize = toSize }
+        if let fromSize = dict["from"]                 as? CGFloat { animation.fromSize = fromSize }
 
         return animation
     }
@@ -61,15 +65,25 @@ class Animation : NSObject, CAAnimationDelegate
         anim.delegate = self
        
         
-        if property == "backgroundColor"
+        if property == "position"
+        {
+            anim.fromValue = layer.position
+            anim.toValue = CGPoint(x: layer.position.x + move!.x, y: layer.position.y + move!.y)
+        }
+        else if property == "borderColor" || property == "backgroundColor"
         {
             anim.fromValue = fromColor?.cgColor
             anim.toValue = toColor?.cgColor
         }
-        else if property == "position"
+        else if property == "borderWidth" || property == "cornerRadius"
         {
-            anim.fromValue = layer.position
-            anim.toValue = CGPoint(x: layer.position.x + move!.x, y: layer.position.y + move!.y)
+            anim.fromValue = fromSize
+            anim.toValue = toSize
+        }
+        else
+        {
+            anim.fromValue = fromSize
+            anim.toValue = toSize
         }
         
         layer.add(anim, forKey:property)

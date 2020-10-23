@@ -16,9 +16,15 @@ let CamBlock =
 	height:330,
 	radius:4,
 	fillColor:red,
+	strokeWidth:5,
+	strokeColor:green,
 	gradientAngle:-50,
-	animation0:{property:"position",move:{x:40,y:0},duration:1.25,repeatDuration:100,autoReverses:false},
+	animation0:{property:"position",move:{x:40,y:0},duration:1.25,repeatDuration:100,autoReverses:true},
 	animation1:{property:"backgroundColor",fromColor:red,toColor:green,duration:1.25,repeatDuration:100,autoReverses:true},
+	animation2:{property:"borderColor",fromColor:blue,toColor:orange,duration:.25,repeatDuration:100,autoReverses:true},
+	animation3:{property:"opacity",from:0,to:1,duration:.1,repeatDuration:100,autoReverses:true},
+	animation4:{property:"cornerRadius",from:1,to:12,duration:.25,repeatDuration:100,autoReverses:true},
+	animation5:{property:"borderWidth",from:1,to:12,duration:.25,repeatDuration:100,autoReverses:true},
 	childBlock0: {type:TEXT,name:"title",text:"cameras",size:20,x:130,y:305,textColor:gray,font:MainFont },
 }
 addBlock(CamBlock)

@@ -22,7 +22,6 @@ class FLScrollText : Block
     var scrollLayer = CAScrollLayer()
     var textpadding : CGFloat = 5.0
     var textLayer : CATextLayer!
-    var animationController : AnimationController!
     
     override func parseBlock(dict:NSDictionary)
     {
@@ -43,7 +42,6 @@ class FLScrollText : Block
         
         if built == false
         {
-            animationController = AnimationController()
             
             scrollLayer.bounds = CGRect(x: 0.0, y: 0.0, width: width, height: height)
             scrollLayer.position = CGPoint(x: x + xoffset + (width / 2), y: y + yoffset + (height / 2))
@@ -105,7 +103,7 @@ class FLScrollText : Block
         scrollLayer.bounds = CGRect(x: 0, y: 0, width: width, height: height)
         scrollLayer.position = CGPoint(x: x + xoffset + (width / 2), y: y + yoffset + (height / 2))
         
-        
+        /*
         if animationController.animationGoing == false
         {
             let animator = self.animators[0]
@@ -114,7 +112,7 @@ class FLScrollText : Block
             
             animationController.startAnimation(layer: textLayer, property: "position", tovalue: toValue, fromvalue: fromValue, duration: CFTimeInterval(animator.amount))
         }
-        
+        */
 
         
         postDraw(rect:nil)

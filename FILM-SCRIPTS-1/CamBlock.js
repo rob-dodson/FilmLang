@@ -2,6 +2,9 @@
 // Cam Block
 //
 
+let red1       = { red:.7, green:0.0, blue:0.0, alpha:0.8}
+let red2       = { red:.9, green:0.0, blue:0.0, alpha:0.8}
+
 let CamBlock = 
 {
 	name:"CamBlock",
@@ -12,9 +15,10 @@ let CamBlock =
 	width:340,
 	height:330,
 	radius:4,
-	fillGradient:blockbackgrad,
+	fillColor:red,
 	gradientAngle:-50,
-	//animator0:{value:"x",amount:5,min:0,max:200.0,type:BOUNCE},
+	animation0:{property:"position",move:{x:40,y:0},duration:1.25,repeatDuration:100,autoReverses:false},
+	animation1:{property:"backgroundColor",fromColor:red,toColor:green,duration:1.25,repeatDuration:100,autoReverses:true},
 	childBlock0: {type:TEXT,name:"title",text:"cameras",size:20,x:130,y:305,textColor:gray,font:MainFont },
 }
 addBlock(CamBlock)

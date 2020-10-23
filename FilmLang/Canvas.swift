@@ -31,19 +31,11 @@ class Canvas: NSView
         //
         // Animation loop  MAKE THIS MULTI-THREADED!
         //
-        if Block.thereAreAnimators
+        if Block.thereAreAnimations
         {
-            timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true)
+            timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false)
             { (timer) in
-                
-                if Block.topBlock.animators.count > 0
-                {
-                    Block.topBlock.animate()
-                }
-                
                 self.animateChildren(children: Block.topBlock.children)
-                
-                self.needsDisplay = true
             }
         }
         
@@ -64,9 +56,9 @@ class Canvas: NSView
     {
         for block in children
         {
-            if block.animators.count > 0
+            if block.animations.count > 0
             {
-                block.animate()
+                block.runAnimations()
             }
         }
         

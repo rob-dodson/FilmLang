@@ -26,10 +26,11 @@ struct LayoutSpec
 
 class Block
 {
-    static var thereAreAnimators : Bool = false
-    static var topBlock          : Block!
-    static var layoutGrid        : FLLayoutGrid!
-    static var view              : NSView!
+    static var thereAreAnimators  : Bool = false
+    static var thereAreAnimations : Bool = false
+    static var topBlock           : Block!
+    static var layoutGrid         : FLLayoutGrid!
+    static var view               : NSView!
     
     var parent        : Block?
     var children      : [Block]
@@ -40,7 +41,6 @@ class Block
     var fillColor     : NSColor?
     var strokeColor   : NSColor?
     var strokeAlpha   : CGFloat = -1.0
-    var animators     : [Animator]
     var fillGradient  : NSGradient?
     var width         : CGFloat = 0.0
     var height        : CGFloat = 0.0
@@ -65,16 +65,14 @@ class Block
     var baseLayer     : CALayer!
     var hidden        : Bool = false
     var built         : Bool = false
-    
-    
-    
+    var animations    : [Animation]
     
     
     init(name:String)
     {
         self.name = name
         self.children = [Block]()
-        self.animators = [Animator]()
+        self.animations = [Animation]()
         
         createBaseLayer()
     }
@@ -108,21 +106,18 @@ class Block
         baseLayer.isHidden = hidden
     }
     
-    
-    func animate()
+    func animationGoing() -> Bool
     {
-        for index in 0..<animators.count
-        {
-            if let winchange = animators[index].windowChanged
-            {
-                winchange(animators[index])
-            }
-            
-            Animator.adjustBlockForAnimation(animator: &animators[index], block: self)
-           
-        }
+        
+        return false
     }
-
+    
+    
+    func runAnimations()
+    {
+        
+    }
+       
     func addLayerConstraints(layer:CALayer)
     {
         layer.addConstraint(CAConstraint(attribute: .midX, relativeTo: "superlayer", attribute:.midX))
@@ -231,7 +226,7 @@ class Block
        
     }
     
-    func buildBasicRect()
+    func buildBasicRect() -> CALayer
     {
         let rectLayer = CALayer()
         
@@ -273,6 +268,7 @@ class Block
         
         Block.addLayerToParent(block: self, layer: baseLayer)
         
+        return rectLayer
     }
         
         
@@ -448,11 +444,11 @@ class Block
         
         for i in 0...10
         {
-            if let animatordict = dict["animator\(i)"] as? NSDictionary
+            if let dict = dict["animation\(i)"] as? NSDictionary
             {
-                let animator = Animator.animatorFromDict(dict:animatordict)
-                self.animators.append(animator)
-                Block.thereAreAnimators = true
+                let animation = Animation.animationFromDict(dict:dict)
+                animations.append(animation)
+                Block.thereAreAnimations = true
             }
         }
 

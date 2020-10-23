@@ -12,11 +12,21 @@ import Cocoa
 
 class FLRect : Block
 {
-    var animationController : AnimationController!
-    
     override func parseBlock(dict:NSDictionary)
     {
         super.parseBlock(dict: dict)
+    }
+    
+    
+    override func runAnimations()
+    {
+        if animations.count > 0
+        {
+            for animation in animations
+            {
+                animation.startAnimation()
+            }
+        }
     }
     
     
@@ -32,9 +42,19 @@ class FLRect : Block
         
         if built == false
         {
-            animationController = AnimationController()
+            let rectlayer = buildBasicRect()
             
-            buildBasicRect()
+            for animation in animations
+            {
+                if animation.property == "position"
+                {
+                    animation.layer = baseLayer
+                }
+                else
+                {
+                    animation.layer = rectlayer
+                }
+            }
             
             built = true
         }
@@ -42,17 +62,11 @@ class FLRect : Block
         if baseLayer.bounds.width != width || baseLayer.bounds.height != height || baseLayer.position.x != x || baseLayer.position.y != y
         {
             baseLayer.bounds = CGRect(x: 0, y: 0,width: width, height: height)
-            baseLayer.position = CGPoint(x: x + xoffset + (width / 2), y: y + yoffset + (height / 2))
-        }
-        
-        
-        if animationController.animationGoing == false && self.animators.count > 0
-        {
-            let animator = self.animators[0]
-            let fromValue = baseLayer.position
-            let toValue = CGPoint(x: x + xoffset + (width / 2) + animator.max, y: y + yoffset + (height / 2))
             
-            animationController.startAnimation(layer: baseLayer, property: "position", tovalue: toValue, fromvalue: fromValue, duration: CFTimeInterval(5.0))
+            if animationGoing() == false
+            {
+                baseLayer.position = CGPoint(x: x + xoffset + (width / 2), y: y + yoffset + (height / 2))
+            }
         }
         
         postDraw(rect: boundingRect)

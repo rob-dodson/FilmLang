@@ -18,7 +18,7 @@ class Animation : NSObject, CAAnimationDelegate
     var repeatDuration : CGFloat = -1
     var repeatCount    : Float = Float.greatestFiniteMagnitude
     var beginTime      : CFTimeInterval = 0
-    
+    var max            : CGFloat = 0.0
     var layer          : CALayer!
     
     var move           : CGPoint?
@@ -28,6 +28,8 @@ class Animation : NSObject, CAAnimationDelegate
     var toSize         : CGFloat?
     var fromPath       : CGPath?
     var toPath         : CGPath?
+    var fromPoint      : CGPoint?
+    var toPoint        : CGPoint?
     
     
     static func animationFromDict(dict:NSDictionary) -> Animation
@@ -46,6 +48,7 @@ class Animation : NSObject, CAAnimationDelegate
         if let fromColor = dict["fromColor"]           as? NSDictionary { animation.fromColor = Block.colorFromDict(dict:fromColor) }
         if let toSize = dict["to"]                     as? CGFloat { animation.toSize = toSize }
         if let fromSize = dict["from"]                 as? CGFloat { animation.fromSize = fromSize }
+        if let max = dict["max"]                       as? CGFloat { animation.max = max }
 
         return animation
     }
@@ -68,8 +71,12 @@ class Animation : NSObject, CAAnimationDelegate
         }
         anim.delegate = self
        
-        
-        if property == "position"
+        if layer.isKind(of: CATextLayer.self)
+        {
+            anim.fromValue = fromPoint
+            anim.toValue = toPoint
+        }
+        else if property == "position"
         {
             anim.fromValue = layer.position
             anim.toValue = CGPoint(x: layer.position.x + move!.x, y: layer.position.y + move!.y)

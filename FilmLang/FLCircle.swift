@@ -32,7 +32,7 @@ class FLCircle : Block
             }
             else
             {
-                rect = NSRect(x: 0, y: 0, width:width, height: width)
+                rect = NSRect(x: 0, y: 0, width:width, height: height)
             }
             
             let circleLayer = CAShapeLayer()
@@ -52,8 +52,9 @@ class FLCircle : Block
                 {
                     animation.property = "path"
                     
-                    let fromrect = NSRect(x: 0, y: 0, width: animation.fromSize! * 2, height: animation.fromSize! * 2)
+                    let fromrect = NSRect(x: 0, y: 0, width:animation.fromSize! * 2, height:animation.fromSize! * 2)
                     animation.fromPath = CGPath(ellipseIn: fromrect, transform: nil)
+                    
                     let torect = NSRect(x: 0, y: 0, width: animation.toSize! * 2, height: animation.toSize! * 2)
                     animation.toPath = CGPath(ellipseIn: torect, transform: nil)
                     

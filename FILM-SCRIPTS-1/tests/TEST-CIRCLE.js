@@ -76,19 +76,30 @@ let screen =
 }
 addBlock(screen)
 
+let dur = 1.25
+let rev = false
 
-let circle =
+for (x = 1; x < 10; x++)
 {
-    name:"circle",
-    type:CIRCLE,
-    x:500,
-    y:500,
-	radius:100,
-    strokeColor:orange,
-    strokeWidth:5,
-	animation0:{property:"radius",from:100,to:150,duration:1.25,repeatDuration:100,autoReverses:false},
-	animation1:{property:"opacity",from:0,to:1,duration:.1,repeatDuration:100,autoReverses:true},
-    animation2:{property:"lineWidth",from:1,to:12,duration:.25,repeatDuration:100,autoReverses:true},
-	animation3:{property:"strokeColor",fromColor:blue,toColor:red,duration:.25,repeatDuration:100,autoReverses:true}
+	for (y = 1; y < 5; y++)
+	{
+		let circle =
+		{
+			name:"circle",
+			type:CIRCLE,
+			x:200 * x,
+			y:200 * y,
+			radius:50,
+			strokeColor:orange,
+			strokeWidth:5,
+			animation0:{property:"radius",from:10,to:150,duration:dur,autoReverses:rev},
+			animation1:{property:"position",move:{x:-140,y:-140},duration:dur,autoReverses:rev},
+			animation3:{property:"opacity",from:.3,to:1,duration:dur,autoReverses:rev},
+			animation4:{property:"lineWidth",from:5,to:22,duration:dur,autoReverses:rev},
+			animation5:{property:"strokeColor",fromColor:blue,toColor:red,duration:dur,autoReverses:rev},
+			//animation6:{property:"transform.rotation.z",from:0,to:6,duration:dur,autoReverses:rev},
+			//animation7:{property:"transform.rotation.x",from:0,to:6,duration:dur,autoReverses:rev},
+		}
+		addBlock(circle)
+	}
 }
-addBlock(circle)

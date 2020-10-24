@@ -97,23 +97,27 @@ class FLScrollText : Block
             scrollLayer.addSublayer(textLayer)
            
             Block.addLayerToParent(block: self, layer: scrollLayer)
+            
+            for animation in animations
+            {
+                if animation.property == "position"
+                {
+                    animation.layer = baseLayer
+                }
+                else if animation.property == "scrollamount"
+                {
+                    animation.property = "position"
+                    animation.layer = textLayer
+                    animation.toPoint = CGPoint(x: width / 2 + textpadding, y: (height / 2) - animation.max)
+                    animation.fromPoint = CGPoint(x: width / 2 + textpadding, y: height / 2)
+                }
+            }
+            
             built = true
         }
-        
         scrollLayer.bounds = CGRect(x: 0, y: 0, width: width, height: height)
         scrollLayer.position = CGPoint(x: x + xoffset + (width / 2), y: y + yoffset + (height / 2))
         
-        /*
-        if animationController.animationGoing == false
-        {
-            let animator = self.animators[0]
-            let toValue = CGPoint(x: width / 2 + textpadding, y: (height / 2) - animator.max)
-            let fromValue = CGPoint(x: width / 2 + textpadding, y: height / 2)
-            
-            animationController.startAnimation(layer: textLayer, property: "position", tovalue: toValue, fromvalue: fromValue, duration: CFTimeInterval(animator.amount))
-        }
-        */
-
         
         postDraw(rect:nil)
     }

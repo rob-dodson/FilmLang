@@ -13,7 +13,7 @@ let scrollblock1 =
 	strokeColor:cyan,
 	strokeWidth:2,
 	textColor:green,
-	animator0:{value:"scrollamount",amount:15,min:0,max:-3000.0,type:INC},
+	animation1:{property:"scrollamount",max:-3000,duration:15,autoReverses:false},
 }
 addBlock(scrollblock1)
 
@@ -32,6 +32,6 @@ let scrollblock2 =
 	strokeColor:cyan,
 	strokeWidth:1,
 	textColor:gray,
-	animator0:{value:"scrollamount",amount:20,min:0,max:3000.0,type:INC},
+	animation1:{property:"scrollamount",max:3000,duration:20,autoReverses:false},
 }
 addBlock(scrollblock2)

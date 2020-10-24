@@ -26,6 +26,9 @@ class Animation : NSObject, CAAnimationDelegate
     var toColor        : NSColor?
     var fromSize       : CGFloat?
     var toSize         : CGFloat?
+    var fromPath       : CGPath?
+    var toPath         : CGPath?
+    
     
     static func animationFromDict(dict:NSDictionary) -> Animation
     {
@@ -53,6 +56,7 @@ class Animation : NSObject, CAAnimationDelegate
         let anim = CABasicAnimation(keyPath:property)
         anim.autoreverses = autoReverses
         anim.duration = CFTimeInterval(duration)
+        anim.beginTime = beginTime
         
         if repeatDuration > 0
         {
@@ -70,7 +74,7 @@ class Animation : NSObject, CAAnimationDelegate
             anim.fromValue = layer.position
             anim.toValue = CGPoint(x: layer.position.x + move!.x, y: layer.position.y + move!.y)
         }
-        else if property == "borderColor" || property == "backgroundColor"
+        else if property == "borderColor" || property == "backgroundColor" || property == "strokeColor"
         {
             anim.fromValue = fromColor?.cgColor
             anim.toValue = toColor?.cgColor
@@ -79,6 +83,11 @@ class Animation : NSObject, CAAnimationDelegate
         {
             anim.fromValue = fromSize
             anim.toValue = toSize
+        }
+        else if property == "path"
+        {
+            anim.fromValue = fromPath
+            anim.toValue = toPath
         }
         else
         {

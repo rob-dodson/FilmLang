@@ -42,6 +42,28 @@ class FLCircle : Block
             circleLayer.path = ovalPath
             
             
+            for animation in animations
+            {
+                if animation.property == "position"
+                {
+                    animation.layer = baseLayer
+                }
+                else if animation.property == "radius"
+                {
+                    animation.property = "path"
+                    
+                    let fromrect = NSRect(x: 0, y: 0, width: animation.fromSize! * 2, height: animation.fromSize! * 2)
+                    animation.fromPath = CGPath(ellipseIn: fromrect, transform: nil)
+                    let torect = NSRect(x: 0, y: 0, width: animation.toSize! * 2, height: animation.toSize! * 2)
+                    animation.toPath = CGPath(ellipseIn: torect, transform: nil)
+                    
+                    animation.layer = circleLayer
+                }
+                else
+                {
+                    animation.layer = circleLayer
+                }
+            }
             
             addLayerConstraints(layer:circleLayer)
             baseLayer.addSublayer(circleLayer)

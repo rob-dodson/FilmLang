@@ -18,18 +18,6 @@ class FLRect : Block
     }
     
     
-    override func runAnimations()
-    {
-        if animations.count > 0
-        {
-            for animation in animations
-            {
-                animation.startAnimation()
-            }
-        }
-    }
-    
-    
     override func draw()
     {
         preDraw()

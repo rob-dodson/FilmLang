@@ -115,7 +115,13 @@ class Block
     
     func runAnimations()
     {
-        
+        if animations.count > 0
+        {
+            for animation in animations
+            {
+                animation.startAnimation()
+            }
+        }
     }
        
     func addLayerConstraints(layer:CALayer)

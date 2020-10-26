@@ -50,8 +50,6 @@ class Block
     var gradientAngle : CGFloat = -90
     var clip          : Bool = false
     var radius        : CGFloat = 0.0
-    var startAngle    : CGFloat = 0
-    var endAngle      : CGFloat = 45
     var lineCap       : CAShapeLayerLineCap = .square
     var windowChanged : ((Block) -> Void)?
     var boundingRect  : NSRect!
@@ -66,7 +64,6 @@ class Block
     var baseLayer     : CALayer!
     var hidden        : Bool = false
     var built         : Bool = false
-    
     var animations    : [Animation]
     
     
@@ -349,11 +346,6 @@ class Block
         {
             let image = FLImage(name: name)
             image.parseBlock(dict: dict)
-        }
-        else if type == "Arc"
-        {
-            let arc = FLArc(name: name)
-            arc.parseBlock(dict: dict)
         }
         else if type == "Circle"
         {

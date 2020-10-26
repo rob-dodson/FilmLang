@@ -10,7 +10,6 @@
 		AE0C92732540CCBD0016F2E6 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0C92722540CCBD0016F2E6 /* Animation.swift */; };
 		AE0F7871251D3BA200BCE3AD /* FLImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0F7870251D3BA200BCE3AD /* FLImage.swift */; };
 		AE183D2F250EB4180017805E /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE183D2E250EB4180017805E /* Block.swift */; };
-		AE1E77F825190BED00CFC143 /* FLArc.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1E77F725190BED00CFC143 /* FLArc.swift */; };
 		AE24CB0F25096A02000F20D7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE24CB0E25096A02000F20D7 /* AppDelegate.swift */; };
 		AE24CB1225096A02000F20D7 /* FilmLang.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AE24CB1025096A02000F20D7 /* FilmLang.xcdatamodeld */; };
 		AE24CB1425096A05000F20D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE24CB1325096A05000F20D7 /* Assets.xcassets */; };
@@ -34,7 +33,6 @@
 		AE0C92722540CCBD0016F2E6 /* Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
 		AE0F7870251D3BA200BCE3AD /* FLImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLImage.swift; sourceTree = "<group>"; };
 		AE183D2E250EB4180017805E /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
-		AE1E77F725190BED00CFC143 /* FLArc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLArc.swift; sourceTree = "<group>"; };
 		AE24CB0B25096A02000F20D7 /* FilmLang.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilmLang.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE24CB0E25096A02000F20D7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AE24CB1125096A02000F20D7 /* GraphToad.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GraphToad.xcdatamodel; sourceTree = "<group>"; };
@@ -97,7 +95,6 @@
 				AE0C92722540CCBD0016F2E6 /* Animation.swift */,
 				AE24CB2925096DC7000F20D7 /* Canvas.swift */,
 				AE93A981251BDDBA00F3D559 /* Javascript.swift */,
-				AE1E77F725190BED00CFC143 /* FLArc.swift */,
 				AEB8651D2527A5C6005CFEDF /* FLAxis.swift */,
 				AED9688925223188007B2CE6 /* FLBezier.swift */,
 				AEC3FBEA25100A5B00C32210 /* FLCircle.swift */,
@@ -197,7 +194,6 @@
 				AEC3FBED25101C1B00C32210 /* FLPath.swift in Sources */,
 				AE0F7871251D3BA200BCE3AD /* FLImage.swift in Sources */,
 				AEB8658A252FB18F005CFEDF /* FLScrollText.swift in Sources */,
-				AE1E77F825190BED00CFC143 /* FLArc.swift in Sources */,
 				AED96885251E96D7007B2CE6 /* FLLine.swift in Sources */,
 				AE3DDD7C252939C2003691A8 /* FLLayoutGrid.swift in Sources */,
 				AEB8651E2527A5C6005CFEDF /* FLAxis.swift in Sources */,

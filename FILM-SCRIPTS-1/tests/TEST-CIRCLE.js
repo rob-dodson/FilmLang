@@ -76,7 +76,7 @@ let screen =
 }
 addBlock(screen)
 
-let dur = 1.25
+let dur = 2.25
 let rev = true
 
 for (x = 1; x < 10; x++)
@@ -93,13 +93,13 @@ for (x = 1; x < 10; x++)
 			strokeColor:orange,
 			strokeWidth:5,
 			lineCap:"round",
-			animation0:{property:"strokeStart",from:.1,to:.5,duration:dur,autoReverses:rev},
-			animation1:{property:"strokeEnd",from:.6,to:.7,duration:2.4,autoReverses:rev},
+			animation0:{property:"strokeStart",from:.0,to:.5,duration:dur,autoReverses:rev},
+            animation1:{property:"strokeEnd",from:.5,to:1.0,duration:dur,autoReverses:rev},
 			//animation2:{property:"radius",from:10,to:150,duration:dur,autoReverses:rev},
 			//animation3:{property:"position",move:{x:-34,y:-34},.2:dur,autoReverses:false},
-			animation4:{property:"opacity",from:.3,to:1,duration:dur,autoReverses:rev},
-			animation5:{property:"lineWidth",from:1,to:15,duration:.5,autoReverses:rev},
-			animation6:{property:"strokeColor",fromColor:blue,toColor:red,duration:dur,autoReverses:rev},
+			//animation4:{property:"opacity",from:.3,to:1,duration:dur,autoReverses:rev},
+			//animation5:{property:"lineWidth",from:1,to:15,duration:.5,autoReverses:rev},
+			//animation6:{property:"strokeColor",fromColor:blue,toColor:red,duration:dur,autoReverses:rev},
 			//animation7:{property:"transform.rotation.z",from:0,to:6,duration:dur,autoReverses:rev},
 			//animation8:{property:"transform.rotation.x",from:0,to:6,duration:dur,autoReverses:rev},
 		}

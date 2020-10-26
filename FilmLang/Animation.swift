@@ -30,7 +30,12 @@ class Animation : NSObject, CAAnimationDelegate
     var toPath         : CGPath?
     var fromPoint      : CGPoint?
     var toPoint        : CGPoint?
-    
+    var fromStartAngle : CGFloat?
+    var toStartAngle   : CGFloat?
+    var fromEndAngle   : CGFloat?
+    var toEndAngle     : CGFloat?
+    var fromRadius     : CGFloat?
+    var toRadius       : CGFloat?
     
     static func animationFromDict(dict:NSDictionary) -> Animation
     {
@@ -49,7 +54,20 @@ class Animation : NSObject, CAAnimationDelegate
         if let toSize = dict["to"]                     as? CGFloat { animation.toSize = toSize }
         if let fromSize = dict["from"]                 as? CGFloat { animation.fromSize = fromSize }
         if let max = dict["max"]                       as? CGFloat { animation.max = max }
-
+        if let radius = dict["fromRadius"]             as? CGFloat { animation.fromRadius = radius }
+        if let radius = dict["toRadius"]               as? CGFloat { animation.toRadius = radius }
+        
+        if let fromAngles = dict["fromAngles"]         as? NSDictionary
+        {
+            animation.fromStartAngle = fromAngles["start"] as? CGFloat
+            animation.fromEndAngle = fromAngles["end"] as? CGFloat
+        }
+        if let toAngles = dict["toAngles"]                as? NSDictionary
+        {
+            animation.toStartAngle = toAngles["start"] as? CGFloat
+            animation.toEndAngle = toAngles["end"] as? CGFloat
+        }
+        
         return animation
     }
     

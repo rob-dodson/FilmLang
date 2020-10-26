@@ -11,8 +11,6 @@ import Cocoa
 class FLArc : Block
 {
     var closeArc : Bool = false
-    var rect : NSRect!
-    var rectLayer  : CALayer!
     
     override func parseBlock(dict:NSDictionary)
     {
@@ -31,34 +29,87 @@ class FLArc : Block
         
         if built == false
         {
-            let layer = CAShapeLayer()
+            let arclayer = CAShapeLayer()
             
-            setColorsOnShapeLayer(layer:layer)
+            setColorsOnShapeLayer(layer:arclayer)
             
+            let off : CGFloat = 90.0
+            let clockwise = false
+
+            let centerPoint = CGPoint(x: x, y: y)
             let arcPath = CGMutablePath()
             
-            let centerPoint = CGPoint(x: x + parent!.width / 2, y: y + parent!.height / 2)
+            arcPath.addArc(center: centerPoint,
+                           radius: radius,
+                           startAngle: CGFloat((startAngle + off) * CGFloat.pi / 180),
+                           endAngle: CGFloat((endAngle + off) * CGFloat.pi / 180),
+                           clockwise: clockwise,
+                           transform:.identity)
             
-            arcPath.addArc(center: centerPoint, radius: radius, startAngle: CGFloat(startAngle * CGFloat.pi / 180), endAngle: CGFloat(endAngle * CGFloat.pi / 180), clockwise: true, transform:.identity)
-            if closeArc == true
-            {
-                arcPath.closeSubpath()
-            }
+            if closeArc == true { arcPath.closeSubpath() }
          
-            layer.path = arcPath
-            baseLayer.addSublayer(layer)
+            arclayer.path = arcPath
+            baseLayer.addSublayer(arclayer)
             //addLayerConstraints(layer:layer)
             Block.addLayerToParent(block: self, layer: baseLayer)
             
             if debug == true
             {
-                rect = arcPath.boundingBox
-                rectLayer = CALayer()
-                rectLayer.bounds = CGRect(x: 0, y: 0,width: radius * 2, height: radius * 2)
-                rectLayer.position = centerPoint
-                rectLayer.borderColor = CGColor.init(srgbRed: 1.0, green: 0.0, blue: 1.0, alpha: 1.0)
-                rectLayer.borderWidth = 1
-                baseLayer.addSublayer(rectLayer)
+                let debugLayer = CALayer()
+                debugLayer.bounds = CGRect(x: 0, y: 0,width: radius * 2, height: radius * 2)
+                debugLayer.position = centerPoint
+                debugLayer.borderColor = CGColor.init(srgbRed: 1.0, green: 0.0, blue: 1.0, alpha: 1.0)
+                debugLayer.borderWidth = 0.5
+                baseLayer.addSublayer(debugLayer)
+            }
+            
+            for animation in animations
+            {
+                if animation.property == "position"
+                {
+                    animation.layer = baseLayer
+                }
+                else if animation.property == "angles"
+                {
+                    animation.property = "path"
+                    
+                    let centerPoint = CGPoint(x: x , y: y )
+                    
+                   
+                    let arcPathfrom = CGMutablePath()
+                    arcPathfrom.addArc(center: centerPoint,
+                                       radius: radius,
+                                       startAngle: CGFloat((animation.fromStartAngle! + off) * CGFloat.pi / 180),
+                                       endAngle: CGFloat((animation.fromEndAngle! + off) * CGFloat.pi / 180),
+                                       clockwise: clockwise,
+                                       transform:.identity)
+                    
+                    if closeArc == true
+                    {
+                        arcPathfrom.closeSubpath()
+                    }
+                    
+                    let arcPathto = CGMutablePath()
+                    arcPathto.addArc(center: centerPoint,
+                                     radius: radius,
+                                     startAngle: CGFloat((animation.toStartAngle! + off) * CGFloat.pi / 180),
+                                     endAngle: CGFloat((animation.toEndAngle! + off) * CGFloat.pi / 180),
+                                     clockwise: clockwise,
+                                     transform:.identity)
+                    if closeArc == true
+                    {
+                        arcPathto.closeSubpath()
+                    }
+                    
+                    animation.fromPath = arcPathfrom
+                    animation.toPath = arcPathto
+                    
+                    animation.layer = arclayer
+                }
+                else
+                {
+                    animation.layer = arclayer
+                }
             }
             
             built = true

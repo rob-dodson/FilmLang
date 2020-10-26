@@ -518,7 +518,7 @@ addBlock(map)
 	strokeColor:cyan,
 	strokeWidth:2,
 	textColor:green,
-	animation1:{property:"scrollamount",max:-3000,duration:15,autoReverses:false},
+	animation1:{property:"scrollamount",max:-3000,duration:115,autoReverses:false},
 }
 addBlock(scrollblock1)
 

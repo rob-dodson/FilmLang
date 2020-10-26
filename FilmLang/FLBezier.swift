@@ -123,7 +123,7 @@ class FLBezier : Block
         
         context.translateBy(x:-(x + xoffset), y:-(y + yoffset))
         
-        postDraw(rect: nil)
+        postDraw()
     }
 }
        

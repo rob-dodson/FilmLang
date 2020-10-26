@@ -60,7 +60,7 @@ class FLPath : Block
         }
        
         
-        postDraw(rect: nil)
+        postDraw()
     }
 }
        

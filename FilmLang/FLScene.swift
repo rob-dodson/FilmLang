@@ -56,7 +56,7 @@ class FLScene : Block
         sceneView.setFrameOrigin(NSPoint(x: boundingRect!.origin.x, y: boundingRect!.origin.y))
         sceneView.setFrameSize(NSSize(width: boundingRect!.width, height: boundingRect!.height))
         
-        postDraw(rect: boundingRect)
+        postDraw()
         
     }
     

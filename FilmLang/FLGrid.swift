@@ -86,6 +86,6 @@ class FLGrid : Block
             baseLayer.position = CGPoint(x: x + xoffset + (width / 2), y: y + yoffset + (height / 2))
         }
         
-        postDraw(rect: nil)
+        postDraw()
     }
 }

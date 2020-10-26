@@ -67,7 +67,6 @@ class FLLayoutGrid : Block
                 rect.height = rectheight
                 rect.strokeWidth = 0.5
                 rect.strokeColor = NSColor(deviceRed: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
-                rect.debug = true
                
                 addChild(childblock: rect)
                 cache.setValue(rect, forKey: key)
@@ -106,7 +105,7 @@ class FLLayoutGrid : Block
             baseLayer.position = CGPoint(x:viewPadding + (width / 2), y: viewPadding + (height / 2))
         }
         
-        postDraw(rect: boundingRect)
+        postDraw()
     }
     
 }

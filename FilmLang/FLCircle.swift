@@ -36,13 +36,12 @@ class FLCircle : Block
             }
             
             let circleLayer = CAShapeLayer()
+            setLayerDefaults(layer:baseLayer)
             setColorsOnShapeLayer(layer:circleLayer)
+            setShapeLayerDefaults(layer:circleLayer)
             
             let ovalPath = CGPath(ellipseIn: rect!, transform: nil)
             circleLayer.path = ovalPath
-            circleLayer.lineCap = lineCap
-            circleLayer.strokeStart = strokeStart
-            circleLayer.strokeEnd = strokeEnd
             
             for animation in animations
             {
@@ -72,24 +71,15 @@ class FLCircle : Block
             baseLayer.addSublayer(circleLayer)
             Block.addLayerToParent(block: self, layer: baseLayer)
             
-            if debug == true
-            {
-                let debugLayer = CALayer()
-                debugLayer.bounds = CGRect(x: 0, y: 0,width: rect.width, height: rect.height)
-                debugLayer.position = CGPoint(x: rect.width / 2, y: rect.height / 2)
-                debugLayer.borderColor = CGColor.init(srgbRed: 1.0, green: 0.0, blue: 1.0, alpha: 1.0)
-                debugLayer.borderWidth = 1
-                baseLayer.addSublayer(debugLayer)
-            }
-            
             built = true
         }
         
         width = radius * 2
         height = radius * 2
+        baseLayer.bounds = CGRect(x: x + xoffset - radius, y: y + yoffset - radius, width: radius * 2, height: radius * 2)
         baseLayer.position = CGPoint(x: x + xoffset - radius, y: y + yoffset - radius)
         
-        postDraw(rect:rect)
+        postDraw()
     }
 
 }

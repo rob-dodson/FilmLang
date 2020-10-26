@@ -87,6 +87,7 @@ for (x = 1; x < 10; x++)
 		{
 			name:"circle",
 			type:CIRCLE,
+			debug:true,
 			x:200 * x,
 			y:200 * y,
 			radius:50,

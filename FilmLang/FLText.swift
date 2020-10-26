@@ -110,6 +110,6 @@ class FLText : Block
             baseLayer.position = center
         }
         
-        postDraw(rect:nil)
+        postDraw()
     }
 }

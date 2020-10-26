@@ -83,6 +83,13 @@ class Block
         layer.zPosition = z
     }
     
+    func setShapeLayerDefaults(layer:CAShapeLayer)
+    {
+        layer.strokeStart = strokeStart
+        layer.strokeEnd = strokeEnd
+        layer.lineCap = lineCap
+    }
+    
     func setColorsOnShapeLayer(layer:CAShapeLayer)
     {
         if let strokecolor = strokeColor
@@ -141,11 +148,14 @@ class Block
         if let parent = block.parent
         {
             parent.baseLayer.addSublayer(layer)
+           
         }
         else // No parent? Add this layer to the main view's layer.
         {
             Block.view.layer?.addSublayer(layer)
         }
+        
+        block.setDebug()
     }
     
     
@@ -177,7 +187,7 @@ class Block
     {
         preDraw()
         
-        postDraw(rect: nil)
+        postDraw()
     }
    
     
@@ -205,6 +215,9 @@ class Block
             let rotationTransform = CATransform3DMakeRotation(CGFloat(rotation * CGFloat.pi / 180), 0.0, 0.0, 1.0)
             baseLayer.transform = rotationTransform
         }
+        
+       
+        
         /*
         if let layout = layoutSpec
         {
@@ -239,7 +252,8 @@ class Block
         
         let rect = CGRect(x: 0, y: 0,width: width, height: height)
         rectLayer.bounds = rect
-        
+       
+    
        // rectLayer.masksToBounds = clip
         
         if let strokecolor = strokeColor
@@ -277,24 +291,19 @@ class Block
         
         return rectLayer
     }
-        
-        
-    func postDraw(rect:NSRect?)
+      
+    func setDebug()
     {
-        if debug == true && rect != nil
+        if debug == true
         {
-            let rectangleStyle = NSMutableParagraphStyle()
-            rectangleStyle.alignment = .center
-            let rectangleFontAttributes = [
-                .font: NSFont(name: "Futura", size: 12)!,
-                .foregroundColor: NSColor.gray,
-                .paragraphStyle: rectangleStyle,
-            ] as [NSAttributedString.Key: Any]
-            
-            name.draw(in: rect!.offsetBy(dx:0, dy:0), withAttributes: rectangleFontAttributes)
-            
+            baseLayer.borderColor = NSColor.red.cgColor
+            baseLayer.borderWidth = 1
         }
+    }
         
+    
+    func postDraw()
+    {
         if clip == true
         {
             baseLayer.masksToBounds = true

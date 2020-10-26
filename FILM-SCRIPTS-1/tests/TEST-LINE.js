@@ -77,39 +77,26 @@ let screen =
 addBlock(screen)
 
 
-let arc1 = 
-{
-	type:ARC,
-	name:"arc1",
-	debug:true,
-	startAngle:0,
-	endAngle:90,
-	x:50,
-	y:100,
-	radius:200,
-	strokeWidth:15,
-	strokeColor:red,
-	//animation1:{property:"angles",fromRadius:200,toRadius:200,fromAngles:{start:0,end:90},toAngles:{start:0,end:105},duration:dur,autoReverses:rev},
-}
-addBlock(arc1)
-
-let dur = 1.0 
+let dur = 0.4 
 let rev = true
-let s = 0 
-let e = 10
-let arc2 = 
+
+for (x = 1; x < 10; x++)
 {
-	type:ARC,
-	name:"arc2",
-	debug:true,
-	startAngle:s,
-	endAngle:e,
-	x:300,
-	y:100,
-	radius:200,
-	strokeWidth:10,
-	strokeColor:green,
-	animation1:{property:"angles",fromRadius:200,toRadius:200,fromAngles:{start:s,end:e},toAngles:{start:s+90,end:e+90},duration:dur,autoReverses:rev},
+	let line2 = 
+	{
+		type:LINE,
+		name:"line",
+		x:0,
+		y:0,
+		endX:200 + (x * 10),
+		endY:200,
+		strokeWidth:1,
+		strokeColor:orange,
+		lineCap:"round",
+		debug:true,
+		animation0:{property:"strokeStart",from:1.0,to:0.0,duration:dur,autoReverses:rev},
+//		animation1:{property:"position",move:{x:100,y:100},duration:dur,autoReverses:rev},
+	}
+	addBlock(line2)
 }
-addBlock(arc2)
 

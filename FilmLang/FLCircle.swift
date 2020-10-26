@@ -41,6 +41,8 @@ class FLCircle : Block
             let ovalPath = CGPath(ellipseIn: rect!, transform: nil)
             circleLayer.path = ovalPath
             circleLayer.lineCap = lineCap
+            circleLayer.strokeStart = strokeStart
+            circleLayer.strokeEnd = strokeEnd
             
             for animation in animations
             {

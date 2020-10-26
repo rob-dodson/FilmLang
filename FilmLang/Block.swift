@@ -45,6 +45,8 @@ class Block
     var width         : CGFloat = 0.0
     var height        : CGFloat = 0.0
     var strokeWidth   : CGFloat = 2
+    var strokeStart   : CGFloat = 0.0
+    var strokeEnd     : CGFloat = 1.0
     var rotation      : CGFloat = -999
     var debug         : Bool = false
     var gradientAngle : CGFloat = -90
@@ -412,6 +414,8 @@ class Block
         if let radius = dict["radius"]               as? CGFloat { self.radius = radius }
         if let rotation = dict["rotation"]           as? CGFloat { self.rotation = rotation }
         if let strokeWidth = dict["strokeWidth"]     as? CGFloat { self.strokeWidth = strokeWidth }
+        if let strokeStart = dict["strokeStart"]     as? CGFloat { self.strokeStart = strokeStart }
+        if let strokeEnd = dict["strokeEnd"]         as? CGFloat { self.strokeEnd = strokeEnd }
         if let gradientAngle = dict["gradientAngle"] as? CGFloat { self.gradientAngle = gradientAngle }
         if let hidden = dict["hidden"]               as? Bool    { self.hidden = hidden }
         

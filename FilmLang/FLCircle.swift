@@ -52,10 +52,10 @@ class FLCircle : Block
                 {
                     animation.property = "path"
                     
-                    let fromrect = NSRect(x: 0, y: 0, width:animation.fromSize! * 2, height:animation.fromSize! * 2)
+                    let fromrect = NSRect(x: 0, y: 0, width:animation.from! * 2, height:animation.from! * 2)
                     animation.fromPath = CGPath(ellipseIn: fromrect, transform: nil)
                     
-                    let torect = NSRect(x: 0, y: 0, width: animation.toSize! * 2, height: animation.toSize! * 2)
+                    let torect = NSRect(x: 0, y: 0, width: animation.to! * 2, height: animation.to! * 2)
                     animation.toPath = CGPath(ellipseIn: torect, transform: nil)
                     
                     animation.layer = circleLayer

@@ -77,7 +77,7 @@ let screen =
 addBlock(screen)
 
 let dur = 1.25
-let rev = false
+let rev = true
 
 for (x = 1; x < 10; x++)
 {
@@ -92,8 +92,10 @@ for (x = 1; x < 10; x++)
 			radius:50,
 			strokeColor:orange,
 			strokeWidth:5,
-			animation0:{property:"radius",from:10,to:150,duration:dur,autoReverses:rev},
-			animation1:{property:"position",move:{x:-140,y:-140},duration:dur,autoReverses:rev},
+			animation0:{property:"strokeStart",from:.1,to:.5,duration:dur,autoReverses:rev},
+			animation1:{property:"strokeEnd",from:.6,to:.7,duration:2.4,autoReverses:rev},
+			//animation2:{property:"radius",from:10,to:150,duration:dur,autoReverses:rev},
+			//animation1:{property:"position",move:{x:-140,y:-140},duration:dur,autoReverses:rev},
 			animation3:{property:"opacity",from:.3,to:1,duration:dur,autoReverses:rev},
 			animation4:{property:"lineWidth",from:5,to:22,duration:dur,autoReverses:rev},
 			animation5:{property:"strokeColor",fromColor:blue,toColor:red,duration:dur,autoReverses:rev},

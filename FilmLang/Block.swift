@@ -97,6 +97,7 @@ class Block
             layer.strokeColor = strokecolor.cgColor
             layer.lineWidth = strokeWidth
         }
+        
         if let fillcolor = fillColor
         {
             layer.fillColor = fillcolor.cgColor

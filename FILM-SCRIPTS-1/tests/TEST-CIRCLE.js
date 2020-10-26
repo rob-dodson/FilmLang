@@ -79,25 +79,28 @@ addBlock(screen)
 let dur = 2.25
 let rev = true
 
+
 for (x = 1; x < 10; x++)
 {
 	for (y = 1; y < 5; y++)
 	{
+		let name = "circle".concat(x.toString()).concat(y.toString())
 		let circle =
 		{
-			name:"circle",
+			name:name,
 			type:CIRCLE,
-			debug:true,
+			debug:false,
 			x:200 * x,
 			y:200 * y,
 			radius:50,
 			strokeColor:orange,
 			strokeWidth:5,
+			childBlock0: {type:TEXT,name:"title",text:"circle",size:15,x:10,y:40,textColor:red,font:MainFont },
 			lineCap:"round",
 			animation0:{property:"strokeStart",from:.0,to:.5,duration:dur,autoReverses:rev},
             animation1:{property:"strokeEnd",from:.5,to:1.0,duration:dur,autoReverses:rev},
 			//animation2:{property:"radius",from:10,to:150,duration:dur,autoReverses:rev},
-			//animation3:{property:"position",move:{x:-34,y:-34},.2:dur,autoReverses:false},
+			animation3:{property:"position",move:{x:-75,y:-75},duration:dur,autoReverses:rev},
 			//animation4:{property:"opacity",from:.3,to:1,duration:dur,autoReverses:rev},
 			//animation5:{property:"lineWidth",from:1,to:15,duration:.5,autoReverses:rev},
 			//animation6:{property:"strokeColor",fromColor:blue,toColor:red,duration:dur,autoReverses:rev},

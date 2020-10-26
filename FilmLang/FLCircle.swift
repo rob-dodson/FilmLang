@@ -74,9 +74,13 @@ class FLCircle : Block
             built = true
         }
         
-        width = radius * 2
-        height = radius * 2
-        baseLayer.bounds = CGRect(x: x + xoffset - radius, y: y + yoffset - radius, width: radius * 2, height: radius * 2)
+        if radius > 0.0
+        {
+            width = radius * 2
+            height = radius * 2
+        }
+        
+        baseLayer.bounds = CGRect(x: 0, y: 0,width: width, height: height)
         baseLayer.position = CGPoint(x: x + xoffset - radius, y: y + yoffset - radius)
         
         postDraw()

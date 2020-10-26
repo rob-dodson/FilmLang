@@ -40,7 +40,7 @@ class FLCircle : Block
             
             let ovalPath = CGPath(ellipseIn: rect!, transform: nil)
             circleLayer.path = ovalPath
-            
+            circleLayer.lineCap = lineCap
             
             for animation in animations
             {

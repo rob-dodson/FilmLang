@@ -52,6 +52,7 @@ class Block
     var radius        : CGFloat = 0.0
     var startAngle    : CGFloat = 0
     var endAngle      : CGFloat = 45
+    var lineCap       : CAShapeLayerLineCap = .square
     var windowChanged : ((Block) -> Void)?
     var boundingRect  : NSRect!
     var xoffset       : CGFloat = 0.0
@@ -65,6 +66,7 @@ class Block
     var baseLayer     : CALayer!
     var hidden        : Bool = false
     var built         : Bool = false
+    
     var animations    : [Animation]
     
     
@@ -308,9 +310,13 @@ class Block
     
     static func addBlockFromDictionary(dict:NSDictionary)
     {
-        if dict["type"] as! String == "Rect"
+        let type = dict["type"] as! String
+        let name = dict["name"] as! String
+        
+        
+        if type == "Rect"
         {
-            let rect = FLRect(name: dict["name"] as! String)
+            let rect = FLRect(name: name)
             rect.parseBlock(dict: dict)
             
             if rect.name == "Screen"
@@ -330,65 +336,69 @@ class Block
                 
             }
         }
-        else if dict["type"] as! String == "Text"
+        else if type == "Text"
         {
-            let text = FLText(name: dict["name"] as! String)
+            let text = FLText(name: name)
             text.parseBlock(dict: dict)
         }
-        else if dict["type"] as! String == "Grid"
+        else if type == "Grid"
         {
-            let grid = FLGrid(name: dict["name"] as! String)
+            let grid = FLGrid(name: name)
             grid.parseBlock(dict: dict)
         }
-        else if dict["type"] as! String == "Image"
+        else if type == "Image"
         {
-            let image = FLImage(name: dict["name"] as! String)
+            let image = FLImage(name: name)
             image.parseBlock(dict: dict)
         }
-        else if dict["type"] as! String == "Arc"
+        else if type == "Arc"
         {
-            let arc = FLArc(name: dict["name"] as! String)
+            let arc = FLArc(name: name)
             arc.parseBlock(dict: dict)
         }
-        else if dict["type"] as! String == "Circle"
+        else if type == "Circle"
         {
-            let circle = FLCircle(name: dict["name"] as! String)
+            let circle = FLCircle(name: name)
             circle.parseBlock(dict: dict)
         }
-        else if dict["type"] as! String == "Line"
+        else if type == "Line"
         {
-            let line = FLLine(name: dict["name"] as! String)
+            let line = FLLine(name: name)
             line.parseBlock(dict: dict)
         }
-        else if dict["type"] as! String == "Path"
+        else if type == "Path"
         {
-            let path = FLPath(name: dict["name"] as! String)
+            let path = FLPath(name: name)
             path.parseBlock(dict: dict)
         }
-        else if dict["type"] as! String == "Bezier"
+        else if type == "Bezier"
         {
-            let bez = FLBezier(name: dict["name"] as! String)
+            let bez = FLBezier(name: name)
             bez.parseBlock(dict: dict)
         }
-        else if dict["type"] as! String == "Axis"
+        else if type == "Axis"
         {
-            let bez = FLAxis(name: dict["name"] as! String)
+            let bez = FLAxis(name: name)
             bez.parseBlock(dict: dict)
         }
-        else if dict["type"] as! String == "LayoutGrid"
+        else if type == "LayoutGrid"
         {
-            let layoutgrid = FLLayoutGrid(name: dict["name"] as! String)
+            let layoutgrid = FLLayoutGrid(name: name)
             layoutgrid.parseBlock(dict: dict)
         }
-        else if dict["type"] as! String == "SceneView"
+        else if type == "SceneView"
         {
-            let sceneview = FLScene(name: dict["name"] as! String)
+            let sceneview = FLScene(name: name)
             sceneview.parseBlock(dict: dict)
         }
-        else if dict["type"] as! String == "ScrollText"
+        else if type == "ScrollText"
         {
-            let scrolltext = FLScrollText(name: dict["name"] as! String)
+            let scrolltext = FLScrollText(name: name)
             scrolltext.parseBlock(dict: dict)
+        }
+        else
+        {
+            print("Error: Unknown type: \(type) \(name)")
         }
     }
     
@@ -413,6 +423,23 @@ class Block
         if let strokeWidth = dict["strokeWidth"]     as? CGFloat { self.strokeWidth = strokeWidth }
         if let gradientAngle = dict["gradientAngle"] as? CGFloat { self.gradientAngle = gradientAngle }
         if let hidden = dict["hidden"]               as? Bool    { self.hidden = hidden }
+        
+        
+        if let lineCap = dict["lineCap"]             as? String
+        {
+            if lineCap == "round"
+            {
+                self.lineCap = .round
+            }
+            else if lineCap == "square"
+            {
+                self.lineCap = .square
+            }
+            else if lineCap == "butt"
+            {
+                self.lineCap = .butt
+            }
+        }
         
         
         baseLayer.isHidden = hidden

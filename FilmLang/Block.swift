@@ -333,7 +333,6 @@ class Block
                     block.width = (Block.view?.frame.width)! - (block.viewPadding * 2)
                     block.height = (Block.view?.frame.height)! - (block.viewPadding * 2)
                 }
-                
             }
         }
         else if type == "Text"

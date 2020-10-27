@@ -47,7 +47,6 @@ class FLLayoutGrid : Block
         
         baseLayer.removeFromSuperlayer()
         createBaseLayer()
-        
         let rectwidth : CGFloat = (Block.view.frame.width - (viewPadding * 2)) / CGFloat(xcount)
         let rectheight : CGFloat = (Block.view.frame.height - (viewPadding * 2)) / CGFloat(ycount)
         
@@ -57,15 +56,15 @@ class FLLayoutGrid : Block
             {
                 let key = "\(x)-\(y)"
                 
-                let xx = rectwidth * CGFloat(x) + viewPadding
-                let yy = rectheight * CGFloat(y) + viewPadding
+                let xx = rectwidth * CGFloat(x) + viewPadding / 2
+                let yy = rectheight * CGFloat(y) + viewPadding / 2
                 
                 let rect = FLRect(name: key)
-                rect.x = xx
-                rect.y = yy
-                rect.width = rectwidth
-                rect.height = rectheight
-                rect.strokeWidth = 0.5
+                rect.x = xx.rounded()
+                rect.y = yy.rounded()
+                rect.width = rectwidth.rounded()
+                rect.height = rectheight.rounded()
+                rect.strokeWidth = 1.0
                 rect.strokeColor = NSColor(deviceRed: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
                
                 addChild(childblock: rect)
@@ -96,14 +95,8 @@ class FLLayoutGrid : Block
     {
         preDraw()
         
-        if baseLayer.bounds.width != Block.view.frame.width || baseLayer.bounds.height != Block.view.frame.height
-        {
-            let width = Block.view.frame.width - (viewPadding * 2)
-            let height = Block.view.frame.height - (viewPadding * 2)
-            
-            baseLayer.bounds = CGRect(x: viewPadding, y: viewPadding,width:width, height: height )
-            baseLayer.position = CGPoint(x:viewPadding + (width / 2), y: viewPadding + (height / 2))
-        }
+      //  width = Block.view.frame.width - (viewPadding * 2)
+      //  height = Block.view.frame.height - (viewPadding * 2)
         
         postDraw()
     }

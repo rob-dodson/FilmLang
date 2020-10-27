@@ -39,8 +39,8 @@ class FLLine : Block
             
             
             let line = CGMutablePath()
-            line.move(to: NSPoint(x: x + xoffset, y: y + yoffset))
-            line.addLine(to: NSPoint(x: endX + xoffset, y: endY + yoffset))
+            line.move(to: NSPoint(x: x, y: y))
+            line.addLine(to: NSPoint(x: endX , y: endY))
             
             layer.path = line
             
@@ -60,15 +60,13 @@ class FLLine : Block
             baseLayer.addSublayer(layer)
             Block.addLayerToParent(block: self, layer: baseLayer)
             
-            width = endX - x
-            height = endY - y
-            
-           
             built = true
         }
-           
-        baseLayer.bounds = CGRect(x: 0, y: 0,width: endX - x, height: endY - y)
-        baseLayer.position = CGPoint(x: x + xoffset + (width / 2), y: y + yoffset + (height / 2))
+          
+        width = abs(endX - x)
+        height = abs(endY - y)
+        
+        
         
         postDraw()
     }

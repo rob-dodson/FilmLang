@@ -30,10 +30,6 @@ class FLCircle : Block
             {
                 rect = NSRect(x: 0, y: 0, width: radius * 2, height: radius * 2)
             }
-            else
-            {
-                rect = NSRect(x: 0, y: 0, width:width, height: height)
-            }
             
             let circleLayer = CAShapeLayer()
             setLayerDefaults(layer:baseLayer)
@@ -74,14 +70,8 @@ class FLCircle : Block
             built = true
         }
         
-        if radius > 0.0
-        {
-            width = radius * 2
-            height = radius * 2
-        }
-        
-        baseLayer.bounds = CGRect(x: 0, y: 0,width: width, height: height)
-        baseLayer.position = CGPoint(x: x + xoffset - radius, y: y + yoffset - radius)
+        width = radius * 2
+        height = radius * 2
         
         postDraw()
     }

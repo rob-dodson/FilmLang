@@ -67,7 +67,7 @@ class Block
     var hidden        : Bool = false
     var built         : Bool = false
     var animations    : [Animation]
-    
+    var center        : Bool = false
     
     init(name:String)
     {
@@ -251,7 +251,7 @@ class Block
     {
         let rectLayer = CALayer()
         
-        let rect = CGRect(x: 0, y: 0,width: width, height: height)
+        let rect = CGRect(x: 0, y: 0,width: width.rounded(), height: height.rounded())
         rectLayer.bounds = rect
        
     
@@ -305,11 +305,44 @@ class Block
     
     func postDraw()
     {
+        //
+        // update bounds and position
+        //
+        baseLayer.bounds = CGRect(x: 0, y: 0,width: width, height: height)
+        baseLayer.position = CGPoint(x: x + xoffset + (width / 2), y: y + yoffset + (height / 2))
+        
+        
+        //
+        // centering
+        //
+        if center == true
+        {
+            if let layout = layoutSpec
+            {
+                if let gridrect = Block.layoutGrid.getGridRect(x: layout.x,y:layout.y)
+                {
+                    baseLayer.position = CGPoint(x: x + xoffset + (gridrect.width / 2), y: y + yoffset + (gridrect.height / 2))
+                }
+            }
+            else
+            {
+                baseLayer.position = CGPoint(x: x + xoffset + (parent!.width / 2), y: y + yoffset + (parent!.height / 2))
+            }
+        }
+        
+        
+        //
+        // clipping
+        //
         if clip == true
         {
             baseLayer.masksToBounds = true
         }
         
+        
+        //
+        // render children
+        //
         for block in children
         {
             block.draw()
@@ -428,6 +461,7 @@ class Block
         if let strokeEnd = dict["strokeEnd"]         as? CGFloat { self.strokeEnd = strokeEnd }
         if let gradientAngle = dict["gradientAngle"] as? CGFloat { self.gradientAngle = gradientAngle }
         if let hidden = dict["hidden"]               as? Bool    { self.hidden = hidden }
+        if let center = dict["center"]               as? Bool    { self.center = center }
         
         
         if let lineCap = dict["lineCap"]             as? String

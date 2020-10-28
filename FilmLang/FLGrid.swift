@@ -80,11 +80,6 @@ class FLGrid : Block
             built = true
         }
         
-        if baseLayer.bounds.width != width || baseLayer.bounds.height != height || baseLayer.position.x != x || baseLayer.position.y != y
-        {
-            baseLayer.bounds = CGRect(x: 0, y: 0,width: width, height: height)
-            baseLayer.position = CGPoint(x: x + xoffset + (width / 2), y: y + yoffset + (height / 2))
-        }
         
         postDraw()
     }

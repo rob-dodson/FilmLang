@@ -131,9 +131,6 @@ class FLAxis : Block
             built = true
         }
         
-        baseLayer.bounds = CGRect(x: 0, y: 0, width: width, height: height)
-        baseLayer.position = CGPoint(x: x + xoffset + (width / 2), y: y + yoffset + (height / 2))
-        
         
         postDraw()
     }

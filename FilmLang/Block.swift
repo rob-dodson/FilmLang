@@ -204,6 +204,7 @@ class Block
         }
 
         (xoffset,yoffset) = offset()
+        
         boundingRect = NSRect(x: x + xoffset, y: y + yoffset, width: width, height: height)
         
         if strokeAlpha > 0.0
@@ -310,7 +311,6 @@ class Block
         //
         baseLayer.bounds = CGRect(x: 0, y: 0,width: width, height: height)
         baseLayer.position = CGPoint(x: x + xoffset + (width / 2), y: y + yoffset + (height / 2))
-        
         
         //
         // centering

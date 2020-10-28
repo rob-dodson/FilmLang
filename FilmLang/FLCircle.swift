@@ -11,9 +11,6 @@ import Cocoa
 
 class FLCircle : Block
 {
-    var rect : NSRect!
-   
-    
     override func parseBlock(dict:NSDictionary)
     {
         super.parseBlock(dict: dict)
@@ -26,17 +23,14 @@ class FLCircle : Block
         
         if built == false
         {
-            if radius > 0.0
-            {
-                rect = NSRect(x: 0, y: 0, width: radius * 2, height: radius * 2)
-            }
+            let rect = NSRect(x: 0, y: 0, width: radius * 2, height: radius * 2)
             
             let circleLayer = CAShapeLayer()
             setLayerDefaults(layer:baseLayer)
             setColorsOnShapeLayer(layer:circleLayer)
             setShapeLayerDefaults(layer:circleLayer)
             
-            let ovalPath = CGPath(ellipseIn: rect!, transform: nil)
+            let ovalPath = CGPath(ellipseIn: rect, transform: nil)
             circleLayer.path = ovalPath
             
             for animation in animations
@@ -67,9 +61,11 @@ class FLCircle : Block
             baseLayer.addSublayer(circleLayer)
             Block.addLayerToParent(block: self, layer: baseLayer)
             
+            x = x - radius
+            y = y - radius
+           
             built = true
         }
-        
         width = radius * 2
         height = radius * 2
         

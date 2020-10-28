@@ -12,14 +12,18 @@ import Cocoa
 
 class FLLine : Block
 {
-    var endX               : CGFloat = 1.0
-    var endY               : CGFloat = 1.0
+    var startX : CGFloat = 0.0
+    var startY : CGFloat = 0.0
+    var endX   : CGFloat = 1.0
+    var endY   : CGFloat = 1.0
    
     
     override func parseBlock(dict:NSDictionary)
     {
         super.parseBlock(dict: dict)
         
+        startX = x
+        startY = y
         if let endX = dict["endX"] as? CGFloat { self.endX = endX }
         if let endY = dict["endY"] as? CGFloat { self.endY = endY }
     }
@@ -33,16 +37,46 @@ class FLLine : Block
         {
             let layer = CAShapeLayer()
             
+           
             setLayerDefaults(layer:baseLayer)
             setShapeLayerDefaults(layer:layer)
             setColorsOnShapeLayer(layer:layer)
             
+            // set baseLayer bounds
+            x =  startX > endX ? endX : startX
+            y =  startY > endY ? endY : startY
+            
+            //
+            // shift line layer start to 0
+            //
+            if endX > startX
+            {
+                endX = endX - startX
+                startX = 0
+            }
+            else
+            {
+                startX = startX - endX
+                endX = 0
+            }
+            
+            if endY > startY
+            {
+                endY = endY - startY
+                startY = 0
+            }
+            else
+            {
+                startY = startY - endY
+                endY = 0
+            }
             
             let line = CGMutablePath()
-            line.move(to: NSPoint(x: x, y: y))
+            line.move(to: NSPoint(x: startX, y: startY))
             line.addLine(to: NSPoint(x: endX , y: endY))
-            
             layer.path = line
+            
+           
             
             for animation in animations
             {
@@ -62,11 +96,9 @@ class FLLine : Block
             
             built = true
         }
-          
-        width = abs(endX - x)
-        height = abs(endY - y)
-        
-        
+       
+        width = max(abs(endX - startX),strokeWidth)
+        height = max(abs(endY - startY),strokeWidth)
         
         postDraw()
     }

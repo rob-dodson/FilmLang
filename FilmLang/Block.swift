@@ -543,6 +543,16 @@ class Block
         }
     }
     
+    func addDebugRect(point:CGPoint,color:NSColor)
+    {
+        let rect = FLRect(name: "debug")
+        rect.width = 5
+        rect.height = 5
+        rect.x = point.x
+        rect.y = point.y
+        rect.fillColor = color
+        self.addChild(childblock: rect)
+    }
     
     static func connectParent(block:Block,dict:NSDictionary)
     {

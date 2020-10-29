@@ -76,7 +76,6 @@ class FLLine : Block
             line.addLine(to: NSPoint(x: endX , y: endY))
             layer.path = line
             
-           
             
             for animation in animations
             {

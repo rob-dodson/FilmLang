@@ -20,10 +20,8 @@ class Animation : NSObject, CAAnimationDelegate
     var beginTime      : CFTimeInterval = 0
     var max            : CGFloat = 0.0
     var layer          : CALayer!
-    
-    var from       : CGFloat?
-    var to         : CGFloat?
-    
+    var from           : CGFloat?
+    var to             : CGFloat?
     var move           : CGPoint?
     var fromColor      : NSColor?
     var toColor        : NSColor?
@@ -31,16 +29,7 @@ class Animation : NSObject, CAAnimationDelegate
     var toPath         : CGPath?
     var fromPoint      : CGPoint?
     var toPoint        : CGPoint?
-    var fromStartAngle : CGFloat?
-    var toStartAngle   : CGFloat?
-    var fromEndAngle   : CGFloat?
-    var toEndAngle     : CGFloat?
-    var fromRadius     : CGFloat?
-    var toRadius       : CGFloat?
-    var strokeStartFrom: CGFloat?
-    var strokeStartTo  : CGFloat?
-    var strokeEndFrom  : CGFloat?
-    var strokeEndTo    : CGFloat?
+    
     
     static func animationFromDict(dict:NSDictionary) -> Animation
     {
@@ -56,32 +45,22 @@ class Animation : NSObject, CAAnimationDelegate
         if let move = dict["move"]                     as? NSDictionary { animation.move = Block.pointFromDict(dict:move) }
         if let toColor = dict["toColor"]               as? NSDictionary { animation.toColor = Block.colorFromDict(dict:toColor) }
         if let fromColor = dict["fromColor"]           as? NSDictionary { animation.fromColor = Block.colorFromDict(dict:fromColor) }
-        if let to = dict["to"]                     as? CGFloat { animation.to = to }
-        if let from = dict["from"]                 as? CGFloat { animation.from = from }
+        if let to = dict["to"]                         as? CGFloat { animation.to = to }
+        if let from = dict["from"]                     as? CGFloat { animation.from = from }
         if let max = dict["max"]                       as? CGFloat { animation.max = max }
-        if let radius = dict["fromRadius"]             as? CGFloat { animation.fromRadius = radius }
-        if let radius = dict["toRadius"]               as? CGFloat { animation.toRadius = radius }
+        if let radius = dict["fromRadius"]             as? CGFloat { animation.from = radius }
+        if let radius = dict["toRadius"]               as? CGFloat { animation.to = radius }
         
-        if let strokeStart = dict["strokeStart"]        as? NSDictionary
-        {
-            animation.strokeStartFrom = strokeStart["start"] as? CGFloat
-            animation.strokeStartTo = strokeStart["end"] as? CGFloat
-        }
-        if let strokeEnd = dict["strokeEnd"]        as? NSDictionary
-        {
-            animation.strokeEndFrom = strokeEnd["start"] as? CGFloat
-            animation.strokeEndTo = strokeEnd["end"] as? CGFloat
-        }
-        
+           
         if let fromAngles = dict["fromAngles"]         as? NSDictionary
         {
-            animation.fromStartAngle = fromAngles["start"] as? CGFloat
-            animation.fromEndAngle = fromAngles["end"] as? CGFloat
+            animation.from = fromAngles["start"] as? CGFloat
+            animation.to = fromAngles["end"] as? CGFloat
         }
         if let toAngles = dict["toAngles"]                as? NSDictionary
         {
-            animation.toStartAngle = toAngles["start"] as? CGFloat
-            animation.toEndAngle = toAngles["end"] as? CGFloat
+            animation.from = toAngles["start"] as? CGFloat
+            animation.to = toAngles["end"] as? CGFloat
         }
         
         return animation
@@ -120,25 +99,10 @@ class Animation : NSObject, CAAnimationDelegate
             anim.fromValue = fromColor?.cgColor
             anim.toValue = toColor?.cgColor
         }
-        else if property == "borderWidth" || property == "cornerRadius"
-        {
-            anim.fromValue = from
-            anim.toValue = to
-        }
         else if property == "path"
         {
             anim.fromValue = fromPath
             anim.toValue = toPath
-        }
-        else if property == "strokeStart"
-        {
-            anim.fromValue = from
-            anim.toValue = to
-        }
-        else if property == "strokeEnd"
-        {
-            anim.fromValue = from
-            anim.toValue = to
         }
         else
         {

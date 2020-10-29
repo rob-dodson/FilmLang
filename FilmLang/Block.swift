@@ -68,6 +68,8 @@ class Block
     var built         : Bool = false
     var animations    : [Animation]
     var center        : Bool = false
+    var debugColor    : NSColor = NSColor.red
+    
     
     init(name:String)
     {
@@ -298,8 +300,31 @@ class Block
     {
         if debug == true
         {
-            baseLayer.borderColor = NSColor.red.cgColor
-            baseLayer.borderWidth = 1
+            baseLayer.borderColor = debugColor.cgColor
+            baseLayer.borderWidth = 1.0
+            
+            
+            let textFontAttributes = [
+                .font: NSFont(name: "Helvetica", size: 18)!,
+                .foregroundColor: debugColor.cgColor,
+                .paragraphStyle: NSTextAlignment.center,
+            ] as [NSAttributedString.Key: Any]
+            
+            let textBoundingRect = name.boundingRect(with: NSSize(width: CGFloat.infinity,
+                                                                  height: CGFloat.infinity),
+                                                     options: .usesLineFragmentOrigin,
+                                                     attributes: textFontAttributes)
+            
+            
+            let textLayer = CATextLayer()
+            textLayer.bounds = CGRect(x: 0 , y: 0 , width:textBoundingRect.width, height:textBoundingRect.height )
+            textLayer.position = CGPoint(x:0, y: -10)
+            textLayer.fontSize = 18.0
+            textLayer.font = CGFont("Helvetica" as CFString)
+            textLayer.foregroundColor = debugColor.cgColor
+            textLayer.string = name
+            
+            baseLayer.addSublayer(textLayer)
         }
     }
         
@@ -445,6 +470,7 @@ class Block
     func parseBlock(dict:NSDictionary)
     {
         if let debug = dict["debug"]                 as? Bool    { self.debug = debug }
+        if let debugColorDict = dict["debugColor"]   as? NSDictionary { self.debugColor = Block.colorFromDict(dict: debugColorDict) }
         if let clip = dict["clip"]                   as? Bool    { self.clip = clip }
         if let fit = dict["fitToView"]               as? Bool    { self.fitToView = fit }
         if let x = dict["x"]                         as? CGFloat { self.x = x }

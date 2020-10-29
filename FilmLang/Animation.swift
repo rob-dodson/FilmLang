@@ -73,6 +73,7 @@ class Animation : NSObject, CAAnimationDelegate
         anim.autoreverses = autoReverses
         anim.duration = CFTimeInterval(duration)
         anim.beginTime = beginTime
+        anim.delegate = self
         
         if repeatDuration > 0
         {
@@ -82,7 +83,7 @@ class Animation : NSObject, CAAnimationDelegate
         {
             anim.repeatCount = repeatCount
         }
-        anim.delegate = self
+        
        
         if layer.isKind(of: CATextLayer.self)
         {

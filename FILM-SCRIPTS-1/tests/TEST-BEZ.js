@@ -130,6 +130,7 @@ let line2 =
 	name:"line",
 	x:10,
 	y:10,
+	debugColor:green,
 	endX:200,
 	endY:200,
 	layoutSpec:{x:3,y:2,fit:true},

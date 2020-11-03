@@ -252,9 +252,11 @@ for (i = 0; i < 3; i++)
 }
 let dot1 = {type:CIRCLE,debug:false,name:"dot1",x:250,y:200,radius:15,strokeColor:cyan,fillColor:cyansolid,parent:"bezblock"}
 addBlock(dot1)
-let arc1 = {type:CIRCLE,name:"arc1",strokeStart:.1,strokeEnd:.9,x:250,y:200,radius:8,strokeWidth:5,strokeColor:blue,parent:"bezblock"}
+let arc1 = {type:CIRCLE,name:"arc1",strokeStart:.1,strokeEnd:.9,x:250,y:200,radius:8,strokeWidth:5,strokeColor:blue,parent:"bezblock",
+	animation0:{property:"strokeStart",from:.1,to:.5,duration:2.4,autoReverses:true},
+	animation1:{property:"strokeEnd",from:.3,to:.8,duration:2.4,autoReverses:true},}
 addBlock(arc1)
-let text1 = {type:TEXT,name:"text1",x:0,y:-38,text:"/// 432",textColor:cyan,size:10,parent:"dot1"}
+let text1 = {type:TEXT,name:"text1",x:0,y:-25,text:"/// 432",textColor:cyan,size:10,parent:"dot1"}
 addBlock(text1)
 
 
@@ -267,9 +269,11 @@ for (i = 0; i < 3; i++)
 }
 let dot2 = {type:CIRCLE,debug:false,name:"dot2",x:330,y:200,radius:15,strokeColor:cyan,fillColor:cyansolid,parent:"bezblock"}
 addBlock(dot2)
-let arc2 = {type:CIRCLE,name:"arc2",strokeStart:.4,strokeEnd:.8,x:330,y:200,radius:8,strokeWidth:5,strokeColor:red,parent:"bezblock"}
+let arc2 = {type:CIRCLE,name:"arc2",strokeStart:.4,strokeEnd:.8,x:330,y:200,radius:8,strokeWidth:5,strokeColor:red,parent:"bezblock",
+	animation0:{property:"strokeStart",from:.1,to:.5,duration:2.4,autoReverses:true},
+	animation1:{property:"strokeEnd",from:.3,to:.8,duration:2.4,autoReverses:true},}
 addBlock(arc2)
-let text2 = {type:TEXT,name:"text2",x:0,y:-38,text:"/// 673",textColor:cyan,size:10,parent:"dot2"}
+let text2 = {type:TEXT,name:"text2",x:0,y:-25,text:"/// 673",textColor:cyan,size:10,parent:"dot2"}
 addBlock(text2)
 
 rad = 25
@@ -287,7 +291,7 @@ let arc3 = {
 	animation1:{property:"strokeEnd",from:.3,to:.8,duration:2.4,autoReverses:true},
 }
 addBlock(arc3)
-let text3 = {type:TEXT,name:"text3",x:0,y:26,text:"/// 129",textColor:cyan,size:10,parent:"dot3"}
+let text3 = {type:TEXT,name:"text3",x:0,y:45,text:"/// 129",textColor:cyan,size:10,parent:"dot3"}
 addBlock(text3)
 
 
@@ -308,13 +312,13 @@ let CamBlock =
 	width:340,
 	height:330,
 	radius:4,
-	fillColor:red,
 	strokeWidth:5,
 	strokeColor:green,
+	fillGradient:blockbackgrad,
 	gradientAngle:-50,
 	//animation0:{property:"position",move:{x:40,y:0},duration:1.25,repeatDuration:100,autoReverses:true},
 	//animation1:{property:"backgroundColor",fromColor:red,toColor:green,duration:1.25,repeatDuration:100,autoReverses:true},
-	animation2:{property:"borderColor",fromColor:blue,toColor:orange,duration:3.25,repeatDuration:100,autoReverses:true},
+	animation2:{property:"borderColor",fromColor:blue,toColor:cyan,duration:3.25,repeatDuration:100,autoReverses:true},
 	//animation3:{property:"opacity",from:0,to:1,duration:.1,repeatDuration:100,autoReverses:true},
 	//animation4:{property:"cornerRadius",from:1,to:12,duration:.25,repeatDuration:100,autoReverses:true},
 	//animation5:{property:"borderWidth",from:1,to:12,duration:.25,repeatDuration:100,autoReverses:true},
@@ -356,9 +360,9 @@ for (x = 0; x <= 4; x++)
 	}
 }
 
-let label1 = { type:TEXT,name:"label1",text:"723778-8293*9", layoutSpec:{x:0,y:1,fit:false},rotation:90,size:15,x:-20,y:50,textColor:orange,font:MainFont }
-let label2 = { type:TEXT,name:"label2",text:"723778-8293*9", layoutSpec:{x:0,y:2,fit:false},rotation:45,size:15,x:-10,y:50,textColor:orange,font:MainFont }
-let label3 = { type:TEXT,name:"label3",text:"723778-8293*9", layoutSpec:{x:0,y:3,fit:false},rotation:90,size:15,x:-10,y:50,textColor:orange,font:MainFont }
+let label1 = { type:TEXT,name:"label1",text:"723778-8293*9", layoutSpec:{x:0,y:1,fit:false},rotation:90,size:15,x:-45,y:50,textColor:orange,font:MainFont }
+let label2 = { type:TEXT,name:"label2",text:"723778-8293*9", layoutSpec:{x:0,y:2,fit:false},rotation:90,size:15,x:-45,y:50,textColor:orange,font:MainFont }
+let label3 = { type:TEXT,name:"label3",text:"723778-8293*9", layoutSpec:{x:0,y:3,fit:false},rotation:90,size:15,x:-45,y:50,textColor:orange,font:MainFont }
 addBlock(label1)
 addBlock(label2)
 addBlock(label3)
@@ -419,8 +423,9 @@ for (g = 0; g < 3; g++)
 			width:20,
 			height:160,
 			radius:2,	
-			strokeColor:cyan,
+			strokeColor:cyansolid,
 			strokeWidth:3,
+			z:1,
 			parent:"colorblock",
 			
 		 }
@@ -440,6 +445,7 @@ for (g = 0; g < 3; g++)
 			 height:Math.floor((Math.random() * 15) + 3),
 			 fillColor:orange,
 			 radius:2,
+			 z:-1,
 			 parent: name
 		  }
 		  addBlock(posblock)

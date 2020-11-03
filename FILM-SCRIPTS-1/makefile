@@ -1,3 +1,4 @@
+DESTDIR = ~/Desktop/FILM
 
 
 all:
@@ -5,7 +6,9 @@ all:
 	cat *.js > tmp.txt
 	cat Constants tmp.txt > FILM.js
 	rm tmp.txt
-	cp FILM.js ~/Desktop/FILM
-	cp map.png ~/Desktop/FILM
-	cp teapot.obj ~/Desktop/FILM
-	cp teapot.mtl ~/Desktop/FILM
+	mkdir -p ${DESTDIR}
+	cp FILM.js ${DESTDIR}
+	cp map.png ${DESTDIR}
+	cp teapot.obj ${DESTDIR}
+	cp teapot.mtl ${DESTDIR}
+	cp scrollingtext.txt ${DESTDIR}

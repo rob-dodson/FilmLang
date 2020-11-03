@@ -36,8 +36,9 @@ for (g = 0; g < 3; g++)
 			width:20,
 			height:160,
 			radius:2,	
-			strokeColor:cyan,
+			strokeColor:cyansolid,
 			strokeWidth:3,
+			z:1,
 			parent:"colorblock",
 			
 		 }
@@ -57,6 +58,7 @@ for (g = 0; g < 3; g++)
 			 height:Math.floor((Math.random() * 15) + 3),
 			 fillColor:orange,
 			 radius:2,
+			 z:-1,
 			 parent: name
 		  }
 		  addBlock(posblock)

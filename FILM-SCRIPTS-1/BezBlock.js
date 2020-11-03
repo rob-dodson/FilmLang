@@ -126,9 +126,11 @@ for (i = 0; i < 3; i++)
 }
 let dot1 = {type:CIRCLE,debug:false,name:"dot1",x:250,y:200,radius:15,strokeColor:cyan,fillColor:cyansolid,parent:"bezblock"}
 addBlock(dot1)
-let arc1 = {type:CIRCLE,name:"arc1",strokeStart:.1,strokeEnd:.9,x:250,y:200,radius:8,strokeWidth:5,strokeColor:blue,parent:"bezblock"}
+let arc1 = {type:CIRCLE,name:"arc1",strokeStart:.1,strokeEnd:.9,x:250,y:200,radius:8,strokeWidth:5,strokeColor:blue,parent:"bezblock",
+	animation0:{property:"strokeStart",from:.1,to:.5,duration:2.4,autoReverses:true},
+	animation1:{property:"strokeEnd",from:.3,to:.8,duration:2.4,autoReverses:true},}
 addBlock(arc1)
-let text1 = {type:TEXT,name:"text1",x:0,y:-38,text:"/// 432",textColor:cyan,size:10,parent:"dot1"}
+let text1 = {type:TEXT,name:"text1",x:0,y:-25,text:"/// 432",textColor:cyan,size:10,parent:"dot1"}
 addBlock(text1)
 
 
@@ -141,9 +143,11 @@ for (i = 0; i < 3; i++)
 }
 let dot2 = {type:CIRCLE,debug:false,name:"dot2",x:330,y:200,radius:15,strokeColor:cyan,fillColor:cyansolid,parent:"bezblock"}
 addBlock(dot2)
-let arc2 = {type:CIRCLE,name:"arc2",strokeStart:.4,strokeEnd:.8,x:330,y:200,radius:8,strokeWidth:5,strokeColor:red,parent:"bezblock"}
+let arc2 = {type:CIRCLE,name:"arc2",strokeStart:.4,strokeEnd:.8,x:330,y:200,radius:8,strokeWidth:5,strokeColor:red,parent:"bezblock",
+	animation0:{property:"strokeStart",from:.1,to:.5,duration:2.4,autoReverses:true},
+	animation1:{property:"strokeEnd",from:.3,to:.8,duration:2.4,autoReverses:true},}
 addBlock(arc2)
-let text2 = {type:TEXT,name:"text2",x:0,y:-38,text:"/// 673",textColor:cyan,size:10,parent:"dot2"}
+let text2 = {type:TEXT,name:"text2",x:0,y:-25,text:"/// 673",textColor:cyan,size:10,parent:"dot2"}
 addBlock(text2)
 
 rad = 25
@@ -161,7 +165,7 @@ let arc3 = {
 	animation1:{property:"strokeEnd",from:.3,to:.8,duration:2.4,autoReverses:true},
 }
 addBlock(arc3)
-let text3 = {type:TEXT,name:"text3",x:0,y:26,text:"/// 129",textColor:cyan,size:10,parent:"dot3"}
+let text3 = {type:TEXT,name:"text3",x:0,y:45,text:"/// 129",textColor:cyan,size:10,parent:"dot3"}
 addBlock(text3)
 
 

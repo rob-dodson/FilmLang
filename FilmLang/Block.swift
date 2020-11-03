@@ -24,6 +24,7 @@ struct LayoutSpec
     let fit : Bool
 }
 
+
 class Block
 {
     static var thereAreAnimators  : Bool = false
@@ -69,6 +70,9 @@ class Block
     var animations    : [Animation]
     var center        : Bool = false
     var debugColor    : NSColor = NSColor.red
+    var debugFont     : String = "Helvetica"
+    var debugFontSize : CGFloat = 18.0
+    
     
     
     init(name:String)
@@ -80,10 +84,12 @@ class Block
         createBaseLayer()
     }
     
+    
     func setLayerDefaults(layer:CALayer)
     {
         layer.zPosition = z
     }
+    
     
     func setShapeLayerDefaults(layer:CAShapeLayer)
     {
@@ -91,6 +97,7 @@ class Block
         layer.strokeEnd = strokeEnd
         layer.lineCap = lineCap
     }
+    
     
     func setColorsOnShapeLayer(layer:CAShapeLayer)
     {
@@ -110,6 +117,7 @@ class Block
         }
     }
     
+    
     func createBaseLayer()
     {
         baseLayer = CALayer()
@@ -117,9 +125,9 @@ class Block
         baseLayer.isHidden = hidden
     }
     
+    
     func animationGoing() -> Bool
     {
-        
         return false
     }
     
@@ -135,6 +143,7 @@ class Block
         }
     }
        
+    
     func addLayerConstraints(layer:CALayer)
     {
         layer.addConstraint(CAConstraint(attribute: .midX, relativeTo: "superlayer", attribute:.midX))
@@ -253,13 +262,12 @@ class Block
     func buildBasicRect() -> CALayer
     {
         let rectLayer = CALayer()
-        
+        setLayerDefaults(layer: rectLayer)
+
         let rect = CGRect(x: 0, y: 0,width: width.rounded(), height: height.rounded())
         rectLayer.bounds = rect
        
     
-       // rectLayer.masksToBounds = clip
-        
         if let strokecolor = strokeColor
         {
             rectLayer.borderColor = strokecolor.cgColor
@@ -296,6 +304,7 @@ class Block
         return rectLayer
     }
       
+    
     func setDebug()
     {
         if debug == true
@@ -304,10 +313,12 @@ class Block
             baseLayer.borderWidth = 1.0
             
             
+            let textStyle = NSMutableParagraphStyle()
+            textStyle.alignment = .center
             let textFontAttributes = [
-                .font: NSFont(name: "Helvetica", size: 18)!,
+                .font: NSFont(name: debugFont, size: debugFontSize)!,
                 .foregroundColor: debugColor.cgColor,
-                .paragraphStyle: NSTextAlignment.center,
+                .paragraphStyle: textStyle,
             ] as [NSAttributedString.Key: Any]
             
             let textBoundingRect = name.boundingRect(with: NSSize(width: CGFloat.infinity,
@@ -319,8 +330,8 @@ class Block
             let textLayer = CATextLayer()
             textLayer.bounds = CGRect(x: 0 , y: 0 , width:textBoundingRect.width, height:textBoundingRect.height )
             textLayer.position = CGPoint(x:0, y: -10)
-            textLayer.fontSize = 18.0
-            textLayer.font = CGFont("Helvetica" as CFString)
+            textLayer.fontSize = debugFontSize
+            textLayer.font = CGFont(debugFont as CFString)
             textLayer.foregroundColor = debugColor.cgColor
             textLayer.string = name
             
@@ -471,6 +482,8 @@ class Block
     {
         if let debug = dict["debug"]                 as? Bool    { self.debug = debug }
         if let debugColorDict = dict["debugColor"]   as? NSDictionary { self.debugColor = Block.colorFromDict(dict: debugColorDict) }
+        if let debugFontSize = dict["debugFontSize"] as? CGFloat { self.debugFontSize = debugFontSize }
+        if let debugFont = dict["debugFont"]         as? String { self.debugFont = debugFont }
         if let clip = dict["clip"]                   as? Bool    { self.clip = clip }
         if let fit = dict["fitToView"]               as? Bool    { self.fitToView = fit }
         if let x = dict["x"]                         as? CGFloat { self.x = x }
@@ -569,6 +582,7 @@ class Block
         }
     }
     
+    
     func addDebugRect(point:CGPoint,color:NSColor)
     {
         let rect = FLRect(name: "debug")
@@ -579,6 +593,7 @@ class Block
         rect.fillColor = color
         self.addChild(childblock: rect)
     }
+    
     
     static func connectParent(block:Block,dict:NSDictionary)
     {
@@ -631,9 +646,7 @@ class Block
         return nil
     }
     
-   
-    
-    
+
     static func pointFromDict(dict:NSDictionary) -> NSPoint
     {
         let x = CGFloat.init(dict["x"] as! Double)
@@ -641,6 +654,7 @@ class Block
         
         return NSPoint(x: x, y: y)
     }
+ 
     
     static func colorFromDict(dict:NSDictionary) -> NSColor
     {

@@ -67,12 +67,17 @@ class FLLayoutGrid : Block
                 rect.y = yy.rounded()
                 rect.width = rectwidth.rounded()
                 rect.height = rectheight.rounded()
-                rect.strokeWidth = 1.0
-                rect.debug = debug
-                rect.debugColor = debugColor
-                rect.debugFont = debugFont
+                rect.strokeWidth = 0.0
                 rect.strokeColor = NSColor(deviceRed: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
-               
+                
+                if debug == true
+                {
+                    rect.strokeWidth = 1.0
+                    rect.debug = debug
+                    rect.debugColor = debugColor
+                    rect.debugFont = debugFont
+                }
+                
                 addChild(childblock: rect)
                 cache.setValue(rect, forKey: key)
                 

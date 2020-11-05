@@ -52,6 +52,7 @@ class FLAxis : Block
             //
             let layer = CAShapeLayer()
             setColorsOnShapeLayer(layer:layer)
+            
             if let axiscolor = axisColor
             {
                 layer.strokeColor = axiscolor.cgColor

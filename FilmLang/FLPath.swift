@@ -38,27 +38,26 @@ class FLPath : Block
     {
         preDraw()
         
-        let path = NSBezierPath()
-        path.lineJoinStyle = .round
-        path.move(to: NSPoint(x: xoffset + x, y: yoffset + y))
-        for point in points
+        if built == false
         {
-            path.line(to: NSPoint(x: point.x + xoffset, y: point.y + yoffset))
+            let layer = CAShapeLayer()
+            layer.lineCap = .round
+            setColorsOnShapeLayer(layer:layer)
+            
+            let path = CGMutablePath()
+            path.move(to: NSPoint(x: xoffset + x, y: yoffset + y))
+            for point in points
+            {
+                path.addLine(to: NSPoint(x: point.x + xoffset, y: point.y + yoffset))
+            }
+
+            layer.path = path
+            baseLayer.addSublayer(layer)
+            addLayerConstraints(layer:layer)
+            Block.addLayerToParent(block: self, layer: baseLayer)
+            
+            built = true
         }
-        
-        if let fillcolor = fillColor
-        {
-            fillcolor.setFill()
-            path.fill()
-        }
-        
-        if let strokecolor = strokeColor
-        {
-            strokecolor.setStroke()
-            path.lineWidth = strokeWidth
-            path.stroke()
-        }
-       
         
         postDraw()
     }

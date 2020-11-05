@@ -42,11 +42,11 @@ let dtxblock =
 	type:PATH,
 	name:"dtxblock",
 	fillColor:cyan,
-	point0:{x: 260, y: 42},
-	point1:{x: 270, y: 44},
-	point2:{x: 270, y: 90},
-	point3:{x: 260, y: 92},
-	point4:{x: 260, y: 42},
+	point0:{x: 250, y: 32},
+	point1:{x: 260, y: 34},
+	point2:{x: 260, y: 80},
+	point3:{x: 250, y: 82},
+	point4:{x: 250, y: 32},
 	parent:"bezblock"
 }
 addBlock(dtxblock)

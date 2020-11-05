@@ -81,7 +81,8 @@ let layout =
     name:"layout",
     xcount:4,
     ycount:4,
-    debug:false,
+    debug:true,
+	debugColor:red,
 }
 addBlock(layout)
 
@@ -167,6 +168,7 @@ let dtxblock =
 { 
 	type:PATH,
 	name:"dtxblock",
+	strokeColor:orange,
 	fillColor:cyan,
 	point0:{x: 250, y: 32},
 	point1:{x: 260, y: 34},

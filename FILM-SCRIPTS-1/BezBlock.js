@@ -41,6 +41,7 @@ let dtxblock =
 { 
 	type:PATH,
 	name:"dtxblock",
+	strokeColor:orange,
 	fillColor:cyan,
 	point0:{x: 250, y: 32},
 	point1:{x: 260, y: 34},

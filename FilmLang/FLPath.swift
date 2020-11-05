@@ -45,10 +45,21 @@ class FLPath : Block
             setColorsOnShapeLayer(layer:layer)
             
             let path = CGMutablePath()
-            path.move(to: NSPoint(x: xoffset + x, y: yoffset + y))
+            var count = 0
             for point in points
             {
-                path.addLine(to: NSPoint(x: point.x + xoffset, y: point.y + yoffset))
+                let point = NSPoint(x: point.x + xoffset, y: point.y + yoffset)
+                
+                if count == 0
+                {
+                    path.move(to: point)
+                }
+                else
+                {
+                    path.addLine(to: point)
+                }
+                
+                count = count + 1
             }
 
             layer.path = path

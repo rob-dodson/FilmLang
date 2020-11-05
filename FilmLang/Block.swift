@@ -329,7 +329,7 @@ class Block
             
             let textLayer = CATextLayer()
             textLayer.bounds = CGRect(x: 0 , y: 0 , width:textBoundingRect.width, height:textBoundingRect.height )
-            textLayer.position = CGPoint(x:0, y: -10)
+            textLayer.position = CGPoint(x:width / 2, y: height - 10)
             textLayer.fontSize = debugFontSize
             textLayer.font = CGFont(debugFont as CFString)
             textLayer.foregroundColor = debugColor.cgColor

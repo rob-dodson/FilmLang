@@ -50,6 +50,9 @@ class FLLayoutGrid : Block
         let rectwidth : CGFloat = (Block.view.frame.width - (viewPadding * 2)) / CGFloat(xcount)
         let rectheight : CGFloat = (Block.view.frame.height - (viewPadding * 2)) / CGFloat(ycount)
         
+        width = Block.view.frame.width - (viewPadding * 2) + x * 2
+        height = Block.view.frame.height - (viewPadding * 2) + y * 2
+        
         for x in 0..<xcount
         {
             for y in 0..<ycount
@@ -65,6 +68,9 @@ class FLLayoutGrid : Block
                 rect.width = rectwidth.rounded()
                 rect.height = rectheight.rounded()
                 rect.strokeWidth = 1.0
+                rect.debug = debug
+                rect.debugColor = debugColor
+                rect.debugFont = debugFont
                 rect.strokeColor = NSColor(deviceRed: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
                
                 addChild(childblock: rect)
@@ -95,9 +101,9 @@ class FLLayoutGrid : Block
     {
         preDraw()
         
-      //  width = Block.view.frame.width - (viewPadding * 2)
-      //  height = Block.view.frame.height - (viewPadding * 2)
-        
+        width = Block.view.frame.width - (viewPadding * 2) + x * 2
+        height = Block.view.frame.height - (viewPadding * 2) + y * 2
+                
         postDraw()
     }
     

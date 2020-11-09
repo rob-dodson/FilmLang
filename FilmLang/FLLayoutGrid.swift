@@ -53,6 +53,10 @@ class FLLayoutGrid : Block
         width = Block.view.frame.width - (viewPadding * 2) + x * 2
         height = Block.view.frame.height - (viewPadding * 2) + y * 2
         
+        
+        //
+        // Add an FLRect child for each layout block
+        //
         for x in 0..<xcount
         {
             for y in 0..<ycount
@@ -87,6 +91,9 @@ class FLLayoutGrid : Block
     }
     
     
+    //
+    // hashed look up of requested grid block
+    //
     func getGridRect(x:Int,y:Int) -> FLRect?
     {
         let key = "\(x)-\(y)"
@@ -102,6 +109,9 @@ class FLLayoutGrid : Block
     }
     
     
+    //
+    // postDraw() will draw the child blocks
+    //
     override func draw()
     {
         preDraw()

@@ -20,12 +20,15 @@ class Canvas: NSView
         //
         super.init(coder: coder)
         Block.view = self
-
-        
+    }
+    
+    
+    func run()
+    {
         //
         // parse javascript
         //
-        let js = Javascript(canvas: self)
+        let js = Javascript(canvas: self, parentView: self)
         js.execScript(path:"/Users/robertdodson/Desktop/FILM/FILM.js")
         
         //
@@ -39,6 +42,7 @@ class Canvas: NSView
             }
         }
         
+        Block.topBlock.draw()
     }
     
     
@@ -95,7 +99,7 @@ class Canvas: NSView
         //
         // blocks
         //
-        Block.topBlock.draw()
+  //      Block.topBlock.draw()
         
     }
     

@@ -15,11 +15,13 @@ class Javascript
 {
     var context : JSContext?
     var canvas  : Canvas
+    var parentView : NSView
     
-    init(canvas:Canvas)
+    init(canvas:Canvas, parentView:NSView)
     {
         self.context = JSContext()
         self.canvas = canvas
+        self.parentView = parentView
         
         
         //
@@ -27,8 +29,15 @@ class Javascript
         //
         context?.exceptionHandler =
         { context, exception in
-            print(exception!.toString()!)
-            print(context!)
+            
+            let msg = "Error in Javascript: \(exception!.toString()!))"
+            print(msg)
+            
+            Alert.showAlertInWindow(window: parentView.window!,
+                                    message: msg,
+                info: "",
+                ok: {},
+                cancel: {})
         }
         
         //

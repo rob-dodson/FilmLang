@@ -13,10 +13,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet weak var window: NSWindow!
 
-    @IBOutlet weak var canvas: NSView!
+    @IBOutlet weak var canvas: Canvas!
     
-    func applicationDidFinishLaunching(_ aNotification: Notification) {
-        
+    func applicationDidFinishLaunching(_ aNotification: Notification)
+    {
+        canvas.run()
         
         // Insert code here to initialize your application
     }

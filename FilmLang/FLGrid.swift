@@ -42,7 +42,7 @@ class FLGrid : Block
         
         if built == false
         {
-            buildBasicRect()
+            _ = buildBasicRect()
             
             let layer = CAShapeLayer()
             layer.strokeColor = gridColor.cgColor

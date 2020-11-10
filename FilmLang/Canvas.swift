@@ -26,7 +26,7 @@ class Canvas: NSView
         // parse javascript
         //
         let js = Javascript(canvas: self)
-        js.execScript()
+        js.execScript(path:"/Users/robertdodson/Desktop/FILM/FILM.js")
         
         //
         // Animation loop  MAKE THIS MULTI-THREADED!

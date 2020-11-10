@@ -377,13 +377,13 @@ let cambracket =
 {
 	name:"cambracket",
 	type:PATH,
-	x: 20,
-    y: -10,
     strokeWidth:10,
-    point1:{x:-10,y:-10},
-    point2:{x:-10,y:340},
-    point3:{x:20,y:340},
+    point1:{x:20,y:-18},
+    point2:{x:-18,y:-18},
+    point3:{x:-18,y:328},
+    point4:{x:20,y:328},
 	strokeColor:cyan,
+	debug:false,
 	parent:"CamBlock",
 }
 addBlock(cambracket)

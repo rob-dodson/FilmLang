@@ -5,6 +5,12 @@
 //  Created by Robert Dodson on 11/19/20.
 //  Copyright © 2020 Robert Dodson. All rights reserved.
 //
+// CoreImage filter reference:
+//
+// https://developer.apple.com/library/archive/documentation/GraphicsImaging/Reference/CoreImageFilterReference/index.html
+//
+// Example js filter definition:  filter:{type:FILTER,name:"CIBoxBlur",inputRadius:80.0},
+//
 
 import Foundation
 import Cocoa
@@ -32,6 +38,12 @@ class Filter
                 {
                     let color = Block.colorFromDict(dict: dict[strkey] as! NSDictionary)
                     filter.setValue(color, forKey:strkey)
+                }
+                else if strkey.uppercased().contains("POINT")
+                {
+                    let point = Block.pointFromDict(dict: dict[strkey] as! NSDictionary)
+                    let vector = CIVector.init(cgPoint: point)
+                    filter.setValue(vector, forKey:strkey)
                 }
                 else if let val = dict[strkey] as? CGFloat
                 {

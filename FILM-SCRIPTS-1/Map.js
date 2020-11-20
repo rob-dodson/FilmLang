@@ -21,7 +21,9 @@ let map =
 	y:0,
 	width:350,
 	height:250,
-	filter:{type:FILTER,name:"CIBoxBlur",inputRadius:80.0},
+	filter:{type:FILTER,name:"CIComicEffect"},
+	//filter:{type:FILTER,name:"CIBoxBlur",inputRadius:80.0},
+	//filter:{type:FILTER,name:"CILinearGradient",inputPoint0:{x:10,y:10},inputPoint1:{x:100,y:100},inputColor0:blue,inputColor1:red},
 	parent:"mapgrid"
 }
 addBlock(map)

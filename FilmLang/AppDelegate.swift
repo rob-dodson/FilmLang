@@ -12,18 +12,17 @@ import Cocoa
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     @IBOutlet weak var window: NSWindow!
-
     @IBOutlet weak var canvas: Canvas!
+    
     
     func applicationDidFinishLaunching(_ aNotification: Notification)
     {
-        canvas.run()
-        
-        // Insert code here to initialize your application
+        canvas.run(path:"/Users/robertdodson/Desktop/FILM/FILM.js")
     }
 
-    func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
+    
+    func applicationWillTerminate(_ aNotification: Notification)
+    {
     }
 
     // MARK: - Core Data stack

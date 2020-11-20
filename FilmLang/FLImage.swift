@@ -13,6 +13,8 @@ class FLImage : Block
 {
     var url : URL?
     var image : NSImage?
+    var ciimage : CIImage!
+    var filter : CIFilter?
     
     override init(name: String)
     {
@@ -27,10 +29,17 @@ class FLImage : Block
         {
             if let url = URL(string: urlstr)
             {
-                image = NSImage(byReferencing: url)
+               //image = NSImage(byReferencing: url)
+                ciimage = CIImage(contentsOf: url)
             }
         }
+        
+        if let filterdict = dict["filter"]  as? NSDictionary
+        {
+            filter = Filter.parseFilter(dict: filterdict)
+        }
     }
+    
     
     override func draw()
     {
@@ -39,7 +48,26 @@ class FLImage : Block
         if built == false
         {
             let layer = CALayer()
-            layer.contents = image
+            
+            if let filter = filter
+            {
+                print(filter.inputKeys)
+                
+                filter.setValue(ciimage, forKey: kCIInputImageKey)
+                
+                let rep : NSCIImageRep = NSCIImageRep(ciImage:filter.outputImage!)
+                let nsImage: NSImage = NSImage(size: rep.size)
+                nsImage.addRepresentation(rep)
+                layer.contents = nsImage
+            }
+            else
+            {
+                let rep : NSCIImageRep = NSCIImageRep(ciImage:ciimage)
+                let nsImage: NSImage = NSImage(size: rep.size)
+                nsImage.addRepresentation(rep)
+                layer.contents = nsImage
+            }
+            
             layer.frame = CGRect(x: 0, y: 0, width: width, height: height)
             baseLayer.addSublayer(layer)
             Block.addLayerToParent(block: self, layer: baseLayer)

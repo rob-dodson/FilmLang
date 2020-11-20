@@ -67,6 +67,7 @@ class FLBezier : Block
     override func draw()
     {
         preDraw()
+        
         if built == false
         {
             let layer = CAShapeLayer()

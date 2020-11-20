@@ -15,21 +15,25 @@ class Canvas: NSView
     
     required init?(coder: NSCoder)
     {
-        //
-        // init
-        //
         super.init(coder: coder)
         Block.view = self
     }
     
     
-    func run()
+    func run(path:String)
     {
         //
         // parse javascript
         //
         let js = Javascript(canvas: self, parentView: self)
-        js.execScript(path:"/Users/robertdodson/Desktop/FILM/FILM.js")
+        js.execScript(path:path)
+        
+        
+        //
+        // Draw all blocks
+        //
+        Block.topBlock.draw()
+        
         
         //
         // Animation loop  MAKE THIS MULTI-THREADED!
@@ -41,8 +45,6 @@ class Canvas: NSView
                 self.animateChildren(children: Block.topBlock.children)
             }
         }
-        
-        Block.topBlock.draw()
     }
     
     
@@ -87,6 +89,7 @@ class Canvas: NSView
         let backColor = NSColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0)
         backColor.setFill()
         backPath.fill()
+       
         
         //
         // grid
@@ -96,11 +99,14 @@ class Canvas: NSView
             layoutgrid.draw()
         }
         
-        //
-        // blocks
-        //
-  //      Block.topBlock.draw()
         
+        //
+        // redraw blocks if screen changes
+        //
+        if Block.topBlock != nil
+        {
+            Block.topBlock.draw()
+        }
     }
     
 }

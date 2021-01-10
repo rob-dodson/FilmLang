@@ -8,6 +8,9 @@
 
 import Cocoa
 
+import RobToolsLibrary
+
+
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
@@ -17,9 +20,23 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationDidFinishLaunching(_ aNotification: Notification)
     {
-        canvas.run(path:"/Users/robertdodson/Desktop/FILM/FILM.js")
+        self.pickFile()
     }
 
+    @IBAction func openFileAction(_ sender: Any)
+    {
+        self.pickFile()
+    }
+    
+    
+    func pickFile()
+    {
+        RFile.pickfile(title:"Open a FilmLang js file.",folders:false,startfolder:"~/Desktop")
+        { (keyfile) in
+            
+                self.canvas.run(path:keyfile)
+        }
+    }
     
     func applicationWillTerminate(_ aNotification: Notification)
     {

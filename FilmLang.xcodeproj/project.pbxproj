@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -29,6 +29,7 @@
 		AEC3FBED25101C1B00C32210 /* FLPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC3FBEC25101C1B00C32210 /* FLPath.swift */; };
 		AED96885251E96D7007B2CE6 /* FLLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED96884251E96D7007B2CE6 /* FLLine.swift */; };
 		AED9688A25223188007B2CE6 /* FLBezier.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED9688925223188007B2CE6 /* FLBezier.swift */; };
+		AEFFB9F025AB85CF002A7C8D /* RobToolsLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = AEFFB9EF25AB85CF002A7C8D /* RobToolsLibrary */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,7 @@
 		AEC3FBEC25101C1B00C32210 /* FLPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLPath.swift; sourceTree = "<group>"; };
 		AED96884251E96D7007B2CE6 /* FLLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLLine.swift; sourceTree = "<group>"; };
 		AED9688925223188007B2CE6 /* FLBezier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLBezier.swift; sourceTree = "<group>"; };
+		AEFFB9EC25AB853F002A7C8D /* RobToolsLibrary */ = {isa = PBXFileReference; lastKnownFileType = folder; name = RobToolsLibrary; path = ../devtools/RobToolsLibrary; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEFFB9F025AB85CF002A7C8D /* RobToolsLibrary in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,8 +76,10 @@
 		AE24CB0225096A02000F20D7 = {
 			isa = PBXGroup;
 			children = (
+				AEFFB9EC25AB853F002A7C8D /* RobToolsLibrary */,
 				AE24CB0D25096A02000F20D7 /* FilmLang */,
 				AE24CB0C25096A02000F20D7 /* Products */,
+				AEFFB9EE25AB85CF002A7C8D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -117,6 +122,13 @@
 			path = FilmLang;
 			sourceTree = "<group>";
 		};
+		AEFFB9EE25AB85CF002A7C8D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -133,6 +145,9 @@
 			dependencies = (
 			);
 			name = FilmLang;
+			packageProductDependencies = (
+				AEFFB9EF25AB85CF002A7C8D /* RobToolsLibrary */,
+			);
 			productName = GraphToad;
 			productReference = AE24CB0B25096A02000F20D7 /* FilmLang.app */;
 			productType = "com.apple.product-type.application";
@@ -405,6 +420,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AEFFB9EF25AB85CF002A7C8D /* RobToolsLibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = RobToolsLibrary;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		AE24CB1025096A02000F20D7 /* FilmLang.xcdatamodeld */ = {

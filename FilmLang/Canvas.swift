@@ -19,6 +19,15 @@ class Canvas: NSView
         Block.view = self
     }
     
+    func clear()
+    {
+        if (Block.topBlock != nil)
+        {
+            Block.topBlock.baseLayer.sublayers?.forEach { $0.removeFromSuperlayer() }
+            Block.topBlock.children.removeAll()
+            Block.topBlock = nil
+        }
+    }
     
     func run(path:String)
     {

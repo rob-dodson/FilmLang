@@ -152,8 +152,7 @@ class Block
         layer.addConstraint(CAConstraint(attribute: .height, relativeTo: "superlayer", attribute:.height))
     }
     
-    
-    
+        
     
     static func addLayerToParent(block:Block, layer:CALayer)
     {
@@ -394,17 +393,17 @@ class Block
         
         if type == "Rect"
         {
-            let rect = FLRect(name: name)
-            rect.parseBlock(dict: dict)
+            let rectblock = FLRect(name: name)
+            rectblock.parseBlock(dict: dict)
             
-            if rect.name == "Screen"
+            if rectblock.name == "Screen"
             {
-                Block.topBlock = rect
+                Block.topBlock = rectblock
                 Block.topBlock.fitToView = true
-                rect.x = (Block.view?.frame.origin.x)! + rect.viewPadding
-                rect.y = (Block.view?.frame.origin.y)! + rect.viewPadding
-                rect.width = (Block.view?.frame.width)! - (rect.viewPadding * 2)
-                rect.height = (Block.view?.frame.height)! - (rect.viewPadding * 2)
+                rectblock.x = (Block.view?.frame.origin.x)! + rectblock.viewPadding
+                rectblock.y = (Block.view?.frame.origin.y)! + rectblock.viewPadding
+                rectblock.width = (Block.view?.frame.width)! - (rectblock.viewPadding * 2)
+                rectblock.height = (Block.view?.frame.height)! - (rectblock.viewPadding * 2)
                 
                 Block.topBlock.windowChanged =
                 {(block) -> Void in

@@ -34,7 +34,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         RFile.pickfile(title:"Open a FilmLang js file.",folders:false,startfolder:"~/Desktop")
         { (keyfile) in
             
-                self.canvas.run(path:keyfile)
+            self.canvas.clear()
+            self.canvas.run(path:keyfile)
         }
     }
     
@@ -42,6 +43,28 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     {
     }
 
+    private func applicationShouldTerminateAfterLastWindowClosed(app:NSApplication) -> Bool
+    {
+        return false
+    }
+
+    internal func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool
+    {
+        if (flag)
+        {
+            return false
+        }
+        else
+        {
+            window.makeKeyAndOrderFront(self)
+            return true
+        }
+    }
+
+    
+    
+    
+    
     // MARK: - Core Data stack
 
     lazy var persistentContainer: NSPersistentCloudKitContainer = {

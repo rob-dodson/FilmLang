@@ -482,7 +482,7 @@ class Block
         if let debug = dict["debug"]                 as? Bool    { self.debug = debug }
         if let debugColorDict = dict["debugColor"]   as? NSDictionary { self.debugColor = Block.colorFromDict(dict: debugColorDict) }
         if let debugFontSize = dict["debugFontSize"] as? CGFloat { self.debugFontSize = debugFontSize }
-        if let debugFont = dict["debugFont"]         as? String { self.debugFont = debugFont }
+        if let debugFont = dict["debugFont"]         as? String  { self.debugFont = debugFont }
         if let clip = dict["clip"]                   as? Bool    { self.clip = clip }
         if let fit = dict["fitToView"]               as? Bool    { self.fitToView = fit }
         if let x = dict["x"]                         as? CGFloat { self.x = x }
@@ -502,6 +502,27 @@ class Block
         if let center = dict["center"]               as? Bool    { self.center = center }
         
         
+        if let waitstartsecs = dict["waitStartSeconds"] as? Double
+        {
+            self.hidden = true
+            self.baseLayer.isHidden = true
+            Timer.scheduledTimer(withTimeInterval: waitstartsecs, repeats: false)
+            { (timer) in
+                self.hidden = false
+                self.baseLayer.isHidden = false
+            }
+        }
+        
+        if let waitendsecs = dict["waitEndSeconds"] as? Double
+        {
+            Timer.scheduledTimer(withTimeInterval: waitendsecs, repeats: false)
+            { (timer) in
+                self.hidden = true
+                self.baseLayer.isHidden = true
+            }
+        }
+       
+        
         if let lineCap = dict["lineCap"]             as? String
         {
             if lineCap == "round"
@@ -518,8 +539,6 @@ class Block
             }
         }
         
-        
-        baseLayer.isHidden = hidden
         
         if let layout = dict["layoutSpec"] as? NSDictionary
         {

@@ -41,7 +41,7 @@ class Javascript
         }
         
         //
-        // tell JavascriptCore about our new function: addBlock(dictionary)
+        // tell JavascriptCore about our new functions: addBlock(dictionary)
         //
         let addBlock : @convention(block) (NSDictionary) -> Void =
         { dict in
@@ -59,9 +59,46 @@ class Javascript
     {
         do
         {
+            //
+            // handle includeFile("path")
+            //
             let url = NSURL.fileURL(withPath:path)
-            let scripttorun = try String(contentsOf: url, encoding:.utf8)
-            context?.evaluateScript(scripttorun)
+            let folder = url.deletingLastPathComponent()
+            
+            let scripttorun = try String(contentsOf: url)
+            let deststring = NSMutableString.init(string: scripttorun)
+            
+            let re = try NSRegularExpression(pattern: #"includeFile\(\"(.*)\"\)"#, options: .caseInsensitive)
+            let matches  = re.matches(in: scripttorun, options: .withoutAnchoringBounds, range:NSMakeRange(0,scripttorun.count))
+            
+            for match in matches
+            {
+                let range = match.range(at: 1) // capture is in 1
+                let includecmd = match.range(at: 0) // full match in 0
+                let file = String(scripttorun.prefix(range.lowerBound + range.length).suffix(range.length)) // get a substring of the file path
+                
+                var path : URL
+                if !file.hasPrefix("/")
+                {
+                    path = URL.init(fileURLWithPath:folder.absoluteString)
+                    path = path.appendingPathComponent(file)
+                }
+                else
+                {
+                    path = URL.init(fileURLWithPath:file)
+                }
+                
+                print("including: \(path)")
+                
+                let includefilestring = try String(contentsOf:path)
+                
+                re.replaceMatches(in: deststring, options: .withoutAnchoringBounds, range: includecmd, withTemplate: includefilestring)
+            }
+            
+            //
+            // execute script
+            //
+            context?.evaluateScript(deststring as String)
         }
         catch
         {

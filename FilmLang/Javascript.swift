@@ -10,6 +10,7 @@ import Foundation
 import JavaScriptCore
 import Cocoa
 
+import RobToolsLibrary
 
 class Javascript
 {
@@ -33,7 +34,7 @@ class Javascript
             let msg = "Error in Javascript: \(exception!.toString()!))"
             print(msg)
             
-            Alert.showAlertInWindow(window: parentView.window!,
+            RAlert.showAlertInWindow(window: parentView.window!,
                                     message: msg,
                 info: "",
                 ok: {},
@@ -77,20 +78,20 @@ class Javascript
                 let includecmd = match.range(at: 0) // full match in 0
                 let file = String(scripttorun.prefix(range.lowerBound + range.length).suffix(range.length)) // get a substring of the file path
                 
-                var path : URL
+                var incpath : URL
                 if !file.hasPrefix("/")
                 {
-                    path = URL.init(fileURLWithPath:folder.absoluteString)
-                    path = path.appendingPathComponent(file)
+                    incpath = URL.init(fileURLWithPath:folder.absoluteString)
+                    incpath = incpath.appendingPathComponent(file)
                 }
                 else
                 {
-                    path = URL.init(fileURLWithPath:file)
+                    incpath = URL.init(fileURLWithPath:file)
                 }
                 
-                print("including: \(path)")
+                print("including: \(incpath)")
                 
-                let includefilestring = try String(contentsOf:path)
+                let includefilestring = try String(contentsOf:incpath)
                 
                 re.replaceMatches(in: deststring, options: .withoutAnchoringBounds, range: includecmd, withTemplate: includefilestring)
             }
@@ -102,7 +103,15 @@ class Javascript
         }
         catch
         {
-            print("Eval script error: \(error)")
+            let msg = "Eval script error: \(error)"
+            
+            RAlert.showAlertInWindow(window: parentView.window!,
+                                    message: msg,
+                info: "",
+                ok: {},
+                cancel: {})
+            
+            
         }
     }
 }

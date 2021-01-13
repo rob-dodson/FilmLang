@@ -70,30 +70,33 @@ class Javascript
             let deststring = NSMutableString.init(string: scripttorun)
             
             let re = try NSRegularExpression(pattern: #"includeFile\(\"(.*)\"\)"#, options: .caseInsensitive)
-            let matches  = re.matches(in: scripttorun, options: .withoutAnchoringBounds, range:NSMakeRange(0,scripttorun.count))
+            let matches  = re.matches(in: scripttorun, options:[], range: NSMakeRange(0,scripttorun.count))
             
             for match in matches
             {
-                let range = match.range(at: 1) // capture is in 1
-                let includecmd = match.range(at: 0) // full match in 0
-                let file = String(scripttorun.prefix(range.lowerBound + range.length).suffix(range.length)) // get a substring of the file path
+                let includefilecmd_nsrange : NSRange = match.range(at: 0) // full match in 0
                 
-                var incpath : URL
-                if !file.hasPrefix("/")
+                if let filematch_range = scripttorun.rangeFromNSRange(nsRange: match.range(at: 1)) // capture is in 1
                 {
-                    incpath = URL.init(fileURLWithPath:folder.absoluteString)
-                    incpath = incpath.appendingPathComponent(file)
+                    let filename = String(scripttorun[filematch_range])
+                    
+                    var incpath : URL
+                    if !filename.hasPrefix("/")
+                    {
+                        incpath = URL.init(fileURLWithPath:folder.absoluteString)
+                        incpath = incpath.appendingPathComponent(filename)
+                    }
+                    else
+                    {
+                        incpath = URL.init(fileURLWithPath:filename)
+                    }
+                    
+                    print("including: \(incpath)")
+                    
+                    let includefilestring = try String(contentsOf:incpath)
+                    
+                    re.replaceMatches(in: deststring, options:[], range: includefilecmd_nsrange, withTemplate: includefilestring)
                 }
-                else
-                {
-                    incpath = URL.init(fileURLWithPath:file)
-                }
-                
-                print("including: \(incpath)")
-                
-                let includefilestring = try String(contentsOf:incpath)
-                
-                re.replaceMatches(in: deststring, options: .withoutAnchoringBounds, range: includecmd, withTemplate: includefilestring)
             }
             
             //

@@ -65,39 +65,51 @@ class Javascript
             //
             let url = NSURL.fileURL(withPath:path)
             let folder = url.deletingLastPathComponent()
-            
             let scripttorun = try String(contentsOf: url)
-            let deststring = NSMutableString.init(string: scripttorun)
             
-            let re = try NSRegularExpression(pattern: #"includeFile\(\"(.*)\"\)"#, options: .caseInsensitive)
-            let matches  = re.matches(in: scripttorun, options:[], range: NSMakeRange(0,scripttorun.count))
+            let lines = scripttorun.split(separator: "\n")
             
-            for match in matches
+            let deststring = NSMutableString.init()
+
+            for line in lines
             {
-                let includefilecmd_nsrange : NSRange = match.range(at: 0) // full match in 0
-                
-                if let filematch_range = scripttorun.rangeFromNSRange(nsRange: match.range(at: 1)) // capture is in 1
+                if  line.contains("includeFile") == true
                 {
-                    let filename = String(scripttorun[filematch_range])
+                    let line_str = String(line)
                     
-                    var incpath : URL
-                    if !filename.hasPrefix("/")
+                    let re = try NSRegularExpression(pattern: #"includeFile\(\"(.*)\"\)"#, options: .caseInsensitive)
+                    let matches  = re.matches(in: line_str, options:[], range: NSMakeRange(0,line_str.count))
+                    
+                    let match = matches[0]
+                    if let filematch_range = line_str.rangeFromNSRange(nsRange: match.range(at: 1)) // capture is in 1
                     {
-                        incpath = URL.init(fileURLWithPath:folder.absoluteString)
-                        incpath = incpath.appendingPathComponent(filename)
+                        let includefile = String(line_str[filematch_range])
+                    
+                        var incpath : URL
+                        if !includefile.hasPrefix("/")
+                        {
+                            incpath = URL.init(fileURLWithPath:folder.absoluteString)
+                            incpath = incpath.appendingPathComponent(includefile)
+                        }
+                        else
+                        {
+                            incpath = URL.init(fileURLWithPath:includefile)
+                        }
+                        
+                        print("including: \(incpath)")
+                        
+                        let includefilestring = try String(contentsOf:incpath)
+                        deststring.append(includefilestring)
                     }
-                    else
-                    {
-                        incpath = URL.init(fileURLWithPath:filename)
-                    }
-                    
-                    print("including: \(incpath)")
-                    
-                    let includefilestring = try String(contentsOf:incpath)
-                    
-                    re.replaceMatches(in: deststring, options:[], range: includefilecmd_nsrange, withTemplate: includefilestring)
                 }
+                else
+                {
+                    deststring.append(String(line))
+                }
+                
+                deststring.append("\n")
             }
+            
             
             //
             // execute script

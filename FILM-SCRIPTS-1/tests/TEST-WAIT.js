@@ -1,5 +1,7 @@
 includeFile("../Constants")
 
+includeFile("../BasicScreen")
+
 let bezblock =
 {
 	name:"bezblock",
@@ -8,7 +10,7 @@ let bezblock =
 	y:100,
 	width:40,
 	height:40,
-	fillGradient:blockbackgrad,
+	fillColor:black,
 	strokeColor:orange,
 	strokeWidth:5,
 	radius:4,
@@ -25,7 +27,7 @@ for (i = 0 ; i < 10 ; i++)
 		y:160 + (i * 10),
 		width:40,
 		height:40,
-		fillGradient:blockbackgrad,
+		fillColor:red,
 		strokeColor:orange,
 		strokeWidth:5,
 		radius:4,

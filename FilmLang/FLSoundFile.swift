@@ -33,7 +33,7 @@ class FLSoundFile : Block
                 var url : URL
                 if !soundFilePath!.hasPrefix("/")
                 {
-                    url = URL(fileURLWithPath: Javascript.runFolder!.absoluteString)
+                    url = Javascript.runFolder!
                     url = url.appendingPathComponent(soundFilePath!)
                 }
                 else

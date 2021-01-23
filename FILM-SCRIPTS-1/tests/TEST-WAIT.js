@@ -38,3 +38,11 @@ for (i = 0 ; i < 10 ; i++)
 	addBlock(bezblock2)
 }
 
+
+let sound  = 
+{
+	name:"sound1",
+    type:SOUND,
+	URL:"/Users/robertdodson/Desktop/foo.mp3"
+}
+addBlock(sound)

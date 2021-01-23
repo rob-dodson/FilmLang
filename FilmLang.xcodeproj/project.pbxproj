@@ -29,6 +29,7 @@
 		AED96885251E96D7007B2CE6 /* FLLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED96884251E96D7007B2CE6 /* FLLine.swift */; };
 		AED9688A25223188007B2CE6 /* FLBezier.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED9688925223188007B2CE6 /* FLBezier.swift */; };
 		AEFFB9F025AB85CF002A7C8D /* RobToolsLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = AEFFB9EF25AB85CF002A7C8D /* RobToolsLibrary */; };
+		AEFFBA0B25BBC056002A7C8D /* FLSoundFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFFBA0A25BBC056002A7C8D /* FLSoundFile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,7 @@
 		AED96884251E96D7007B2CE6 /* FLLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLLine.swift; sourceTree = "<group>"; };
 		AED9688925223188007B2CE6 /* FLBezier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FLBezier.swift; sourceTree = "<group>"; };
 		AEFFB9EC25AB853F002A7C8D /* RobToolsLibrary */ = {isa = PBXFileReference; lastKnownFileType = folder; name = RobToolsLibrary; path = ../devtools/RobToolsLibrary; sourceTree = "<group>"; };
+		AEFFBA0A25BBC056002A7C8D /* FLSoundFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FLSoundFile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 				AEC3FBEC25101C1B00C32210 /* FLPath.swift */,
 				AE8E380B2512B79F0092C187 /* FLText.swift */,
 				AEC3FBE6251009F200C32210 /* FLRect.swift */,
+				AEFFBA0A25BBC056002A7C8D /* FLSoundFile.swift */,
 				AE3DDD7B252939C2003691A8 /* FLLayoutGrid.swift */,
 				AED96884251E96D7007B2CE6 /* FLLine.swift */,
 				AE0F7870251D3BA200BCE3AD /* FLImage.swift */,
@@ -218,6 +221,7 @@
 				AEB8651E2527A5C6005CFEDF /* FLAxis.swift in Sources */,
 				AE0C92732540CCBD0016F2E6 /* Animation.swift in Sources */,
 				AEC3FBE925100A3A00C32210 /* FLGrid.swift in Sources */,
+				AEFFBA0B25BBC056002A7C8D /* FLSoundFile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

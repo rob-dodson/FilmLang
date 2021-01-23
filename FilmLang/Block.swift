@@ -467,6 +467,11 @@ class Block
             let scrolltext = FLScrollText(name: name)
             scrolltext.parseBlock(dict: dict)
         }
+        else if type == "Sound"
+        {
+            let sound = FLSoundFile(name: name)
+            sound.parseBlock(dict: dict)
+        }
         else
         {
             print("Error: Unknown type: \(type) \(name)")

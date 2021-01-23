@@ -27,7 +27,7 @@ class FLScrollText : Block
         super.parseBlock(dict: dict)
         
         if let textstr = dict["text"]        as? String { text = textstr }
-        if let texturl = dict["textURL"]        as? String { textURL = texturl }
+        if let texturl = dict["textURL"]     as? String { textURL = texturl }
         if let fontstr = dict["font"]        as? String { font = fontstr }
         if let colordict = dict["textColor"] as? NSDictionary  { textColor = Block.colorFromDict(dict: colordict) }
         if let size = dict["size"]           as? CGFloat { self.size = size }

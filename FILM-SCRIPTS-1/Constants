@@ -16,6 +16,7 @@ let METALVIEW = "MetalView"
 let SCENEVIEW = "SceneView"
 let SCROLLTEXT = "ScrollText"
 let FILTER = "Filter"
+let SOUND = "Sound"
 
 
 

@@ -13,14 +13,14 @@ import AVFoundation
 
 class FLSoundFile : Block
 {
-    var soundFileURL : String?
+    var soundFilePath : String?
     var player : AVAudioPlayer?
     
     override func parseBlock(dict:NSDictionary)
     {
         super.parseBlock(dict: dict)
         
-        if let soundfileurl = dict["URL"]        as? String { soundFileURL = soundfileurl }
+        if let soundfilestr = dict["File"] as? String { soundFilePath = soundfilestr }
     }
     
     
@@ -28,14 +28,32 @@ class FLSoundFile : Block
     {
         if built == false
         {
-            if soundFileURL != nil
+            if soundFilePath != nil
             {
-                let url = URL(fileURLWithPath: soundFileURL!)
+                var url : URL
+                if !soundFilePath!.hasPrefix("/")
+                {
+                    url = URL(fileURLWithPath: Javascript.runFolder!.absoluteString)
+                    url = url.appendingPathComponent(soundFilePath!)
+                }
+                else
+                {
+                    url = URL(fileURLWithPath: soundFilePath!)
+                }
+                
                 
                 do
                 {
                     player = try AVAudioPlayer.init(contentsOf: url)
-                    player!.play()
+                    
+                    if (waitStartSecs > 0)
+                    {
+                        player?.play(atTime: player!.deviceCurrentTime + waitStartSecs)
+                    }
+                    else
+                    {
+                        player!.play()
+                    }
                 }
                 catch
                 {

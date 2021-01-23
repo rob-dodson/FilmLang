@@ -18,6 +18,8 @@ class Javascript
     var canvas  : Canvas
     var parentView : NSView
     
+    static var runFolder : URL?
+    
     init(canvas:Canvas, parentView:NSView)
     {
         self.context = JSContext()
@@ -64,10 +66,10 @@ class Javascript
             // handle includeFile("path")
             //
             let url = NSURL.fileURL(withPath:path)
-            let folder = url.deletingLastPathComponent()
+            Javascript.runFolder = url.deletingLastPathComponent()
             let scripttorun = try String(contentsOf: url)
             
-            let fullscript = try handleInclude(folder: folder, filestring: scripttorun)
+            let fullscript = try handleInclude(folder: Javascript.runFolder!, filestring: scripttorun)
             
            
             

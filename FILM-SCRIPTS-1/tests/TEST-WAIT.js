@@ -43,6 +43,8 @@ let sound  =
 {
 	name:"sound1",
     type:SOUND,
-	URL:"/Users/robertdodson/Desktop/foo.mp3"
+	File:"Message.mp3",
+	waitStartSeconds:2.0,
+	
 }
 addBlock(sound)

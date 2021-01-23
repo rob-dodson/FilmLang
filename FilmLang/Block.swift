@@ -72,7 +72,8 @@ class Block
     var debugColor    : NSColor = NSColor.red
     var debugFont     : String = "Helvetica"
     var debugFontSize : CGFloat = 18.0
-    
+    var waitStartSecs : Double = 0.0
+    var waitEndSecs   : Double = 0.0
     
     
     init(name:String)
@@ -509,9 +510,11 @@ class Block
         
         if let waitstartsecs = dict["waitStartSeconds"] as? Double
         {
+            waitStartSecs = waitstartsecs
+            
             self.hidden = true
             self.baseLayer.isHidden = true
-            Timer.scheduledTimer(withTimeInterval: waitstartsecs, repeats: false)
+            Timer.scheduledTimer(withTimeInterval: waitStartSecs, repeats: false)
             { (timer) in
                 self.hidden = false
                 self.baseLayer.isHidden = false
@@ -520,6 +523,8 @@ class Block
         
         if let waitendsecs = dict["waitEndSeconds"] as? Double
         {
+            waitEndSecs = waitendsecs
+            
             Timer.scheduledTimer(withTimeInterval: waitendsecs, repeats: false)
             { (timer) in
                 self.hidden = true

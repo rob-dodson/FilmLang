@@ -10,6 +10,7 @@ import Foundation
 import Cocoa
 import AVFoundation
 
+import RobToolsLibrary
 
 class FLSoundFile : Block
 {
@@ -28,19 +29,11 @@ class FLSoundFile : Block
     {
         if built == false
         {
-            if soundFilePath != nil
+            if let soundfilepath = soundFilePath
             {
-                var url : URL
-                if !soundFilePath!.hasPrefix("/")
-                {
-                    url = Javascript.runFolder!
-                    url = url.appendingPathComponent(soundFilePath!)
-                }
-                else
-                {
-                    url = URL(fileURLWithPath: soundFilePath!)
-                }
+                let url = RFile.makeFilePathURL(rootPath: Javascript.runFolder!.absoluteString, filePath: soundfilepath)
                 
+                print("Playing sound: \(url)")
                 
                 do
                 {

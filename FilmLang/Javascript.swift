@@ -112,17 +112,7 @@ func handleInclude(folder:URL, filestring:String) throws -> String
             {
                 let includefile = String(line_str[filematch_range])
             
-                var incpath : URL
-                if !includefile.hasPrefix("/")
-                {
-                    incpath = URL.init(fileURLWithPath:folder.absoluteString)
-                    incpath = incpath.appendingPathComponent(includefile)
-                }
-                else
-                {
-                    incpath = URL.init(fileURLWithPath:includefile)
-                }
-                
+                let incpath = RFile.makeFilePathURL(rootPath: folder.absoluteString, filePath: includefile)
                 print("including: \(incpath)")
                 
                 var includefilestring = try String(contentsOf:incpath)

@@ -12,6 +12,7 @@ import Cocoa
 
 class Animation : NSObject, CAAnimationDelegate
 {
+    var type           : String
     var property       : String!
     var duration       : CGFloat = 1.0
     var autoReverses   : Bool = false
@@ -31,9 +32,15 @@ class Animation : NSObject, CAAnimationDelegate
     var toPoint        : CGPoint?
     
     
-    static func animationFromDict(dict:NSDictionary) -> Animation
+    init(type:String)
     {
-        let animation = Animation()
+        self.type = type
+    }
+  
+    
+    static func animationFromDict(type:String,dict:NSDictionary) -> Animation
+    {
+        let animation = Animation(type:type)
         
         if let property = dict["property"]             as? String { animation.property = property }
         if let duration = dict["duration"]             as? CGFloat { animation.duration = duration }
@@ -84,8 +91,12 @@ class Animation : NSObject, CAAnimationDelegate
             anim.repeatCount = repeatCount
         }
         
-       
-        if property == "position"
+        if type == "ScrollText"
+        {
+            anim.fromValue = fromPoint
+            anim.toValue = toPoint
+        }
+        else if property == "position"
         {
             anim.fromValue = layer.position
             anim.toValue = CGPoint(x: layer.position.x + move!.x, y: layer.position.y + move!.y)
@@ -112,7 +123,6 @@ class Animation : NSObject, CAAnimationDelegate
     
     func animationDidStart(_ anim: CAAnimation)
     {
-        print("Start animation")
     }
     
     

@@ -17,9 +17,9 @@ class FLLayoutGrid : Block
     var cache  : NSMutableDictionary = NSMutableDictionary()
     
     
-    override init(name:String)
+    override init(name:String,type:String)
     {
-        super.init(name: name)
+        super.init(name: name,type:type)
     }
     
     
@@ -66,7 +66,7 @@ class FLLayoutGrid : Block
                 let xx = rectwidth * CGFloat(x) + viewPadding / 2
                 let yy = rectheight * CGFloat(y) + viewPadding / 2
                 
-                let rect = FLRect(name: key)
+                let rect = FLRect(name: key,type:"RECT")
                 rect.x = xx.rounded()
                 rect.y = yy.rounded()
                 rect.width = rectwidth.rounded()

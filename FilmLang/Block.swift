@@ -33,9 +33,10 @@ class Block
     static var layoutGrid         : FLLayoutGrid!
     static var view               : NSView!
     
+    var type          : String
+    var name          : String
     var parent        : Block?
     var children      : [Block]
-    var name          : String
     var x             : CGFloat = 10.0
     var y             : CGFloat = 10.0
     var z             : CGFloat = 0
@@ -76,9 +77,10 @@ class Block
     var waitEndSecs   : Double = 0.0
     
     
-    init(name:String)
+    init(name:String,type:String)
     {
         self.name = name
+        self.type = type
         self.children = [Block]()
         self.animations = [Animation]()
         
@@ -394,7 +396,7 @@ class Block
         
         if type == "Rect"
         {
-            let rectblock = FLRect(name: name)
+            let rectblock = FLRect(name: name,type:type)
             rectblock.parseBlock(dict: dict)
             
             if rectblock.name == "Screen"
@@ -415,62 +417,62 @@ class Block
         }
         else if type == "Text"
         {
-            let text = FLText(name: name)
+            let text = FLText(name: name,type:type)
             text.parseBlock(dict: dict)
         }
         else if type == "Grid"
         {
-            let grid = FLGrid(name: name)
+            let grid = FLGrid(name: name,type:type)
             grid.parseBlock(dict: dict)
         }
         else if type == "Image"
         {
-            let image = FLImage(name: name)
+            let image = FLImage(name: name,type:type)
             image.parseBlock(dict: dict)
         }
         else if type == "Circle"
         {
-            let circle = FLCircle(name: name)
+            let circle = FLCircle(name: name,type:type)
             circle.parseBlock(dict: dict)
         }
         else if type == "Line"
         {
-            let line = FLLine(name: name)
+            let line = FLLine(name: name,type:type)
             line.parseBlock(dict: dict)
         }
         else if type == "Path"
         {
-            let path = FLPath(name: name)
+            let path = FLPath(name: name,type:type)
             path.parseBlock(dict: dict)
         }
         else if type == "Bezier"
         {
-            let bez = FLBezier(name: name)
+            let bez = FLBezier(name: name,type:type)
             bez.parseBlock(dict: dict)
         }
         else if type == "Axis"
         {
-            let bez = FLAxis(name: name)
+            let bez = FLAxis(name: name,type:type)
             bez.parseBlock(dict: dict)
         }
         else if type == "LayoutGrid"
         {
-            let layoutgrid = FLLayoutGrid(name: name)
+            let layoutgrid = FLLayoutGrid(name: name,type:type)
             layoutgrid.parseBlock(dict: dict)
         }
         else if type == "SceneView"
         {
-            let sceneview = FLScene(name: name)
+            let sceneview = FLScene(name: name,type:type)
             sceneview.parseBlock(dict: dict)
         }
         else if type == "ScrollText"
         {
-            let scrolltext = FLScrollText(name: name)
+            let scrolltext = FLScrollText(name: name,type:type)
             scrolltext.parseBlock(dict: dict)
         }
         else if type == "Sound"
         {
-            let sound = FLSoundFile(name: name)
+            let sound = FLSoundFile(name: name,type:type)
             sound.parseBlock(dict: dict)
         }
         else
@@ -585,7 +587,7 @@ class Block
         {
             if let dict = dict["animation\(i)"] as? NSDictionary
             {
-                let animation = Animation.animationFromDict(dict:dict)
+                let animation = Animation.animationFromDict(type:type,dict:dict)
                 animations.append(animation)
                 Block.thereAreAnimations = true
             }
@@ -613,7 +615,7 @@ class Block
     
     func addDebugRect(point:CGPoint,color:NSColor)
     {
-        let rect = FLRect(name: "debug")
+        let rect = FLRect(name: "debug",type:"RECT")
         rect.width = 5
         rect.height = 5
         rect.x = point.x

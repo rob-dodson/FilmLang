@@ -16,9 +16,9 @@ class FLImage : Block
     var ciimage : CIImage!
     var filter : CIFilter?
     
-    override init(name: String)
+    override init(name: String,type:String)
     {
-        super.init(name: name)
+        super.init(name: name,type:type)
     }
     
     override func parseBlock(dict:NSDictionary)

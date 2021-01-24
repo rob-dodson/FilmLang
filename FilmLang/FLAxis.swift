@@ -15,12 +15,12 @@ class FLAxis : Block
     var points : [NSPoint]
     var axisColor : NSColor?
     
-    override init(name:String)
+    override init(name:String,type:String)
     {
         points = [NSPoint]()
         axisColor = NSColor.green
         
-        super.init(name: name)
+        super.init(name: name,type:type)
     }
     
     

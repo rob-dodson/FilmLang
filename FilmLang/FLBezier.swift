@@ -27,11 +27,11 @@ class FLBezier : Block
 {
     var bezpoints : [BezPoint]
     
-    override init(name:String)
+    override init(name:String,type:String)
     {
         bezpoints = [BezPoint]()
         
-        super.init(name: name)
+        super.init(name: name,type:type)
     }
     
     override func parseBlock(dict:NSDictionary)

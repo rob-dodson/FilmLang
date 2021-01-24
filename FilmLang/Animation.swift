@@ -85,12 +85,7 @@ class Animation : NSObject, CAAnimationDelegate
         }
         
        
-        if layer.isKind(of: CATextLayer.self)
-        {
-            anim.fromValue = fromPoint
-            anim.toValue = toPoint
-        }
-        else if property == "position"
+        if property == "position"
         {
             anim.fromValue = layer.position
             anim.toValue = CGPoint(x: layer.position.x + move!.x, y: layer.position.y + move!.y)
@@ -117,6 +112,7 @@ class Animation : NSObject, CAAnimationDelegate
     
     func animationDidStart(_ anim: CAAnimation)
     {
+        print("Start animation")
     }
     
     

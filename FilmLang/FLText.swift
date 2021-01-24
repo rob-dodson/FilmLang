@@ -97,6 +97,21 @@ class FLText : Block
             textLayer.foregroundColor = textColor.cgColor
             textLayer.string = NSAttributedString(string: text, attributes: textFontAttributes)
             
+            
+            for animation in animations
+            {
+                if animation.property == "position"
+                {
+                    animation.layer = baseLayer
+                }
+                else
+                {
+                    animation.layer = textLayer
+                }
+            }
+            
+            
+            
             addLayerConstraints(layer:textLayer)
             baseLayer.addSublayer(textLayer)
             Block.addLayerToParent(block: self, layer: baseLayer)

@@ -47,7 +47,7 @@ class Animation : NSObject, CAAnimationDelegate
         if let autoReverses = dict["autoReverses"]     as? Bool { animation.autoReverses = autoReverses }
         if let repeatDuration = dict["repeatDuration"] as? CGFloat { animation.repeatDuration = repeatDuration }
         if let repeatCount = dict["repeatCount"]       as? Float { animation.repeatCount = repeatCount }
-        if let beginTime = dict["beginTime"]           as? CFTimeInterval { animation.beginTime = beginTime }
+        if let beginTime = dict["waitStartSeconds"]           as? CFTimeInterval { animation.beginTime = beginTime }
         
         if let move = dict["move"]                     as? NSDictionary { animation.move = Block.pointFromDict(dict:move) }
         if let toColor = dict["toColor"]               as? NSDictionary { animation.toColor = Block.colorFromDict(dict:toColor) }

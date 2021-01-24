@@ -531,6 +531,11 @@ class Block
             { (timer) in
                 self.hidden = true
                 self.baseLayer.isHidden = true
+                
+                for animation in self.animations
+                {
+                    animation.layer.removeAllAnimations()
+                }
             }
         }
        

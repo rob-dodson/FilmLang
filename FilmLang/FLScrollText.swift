@@ -9,6 +9,8 @@
 import Foundation
 import Cocoa
 
+import RobToolsLibrary
+
 
 class FLScrollText : Block
 {
@@ -50,11 +52,14 @@ class FLScrollText : Block
             
             if text == nil
             {
-                if let url = textURL
+                if let textfile = textURL
                 {
+                    let url = RFile.makeFilePathURL(rootPath: Javascript.runFolder!.absoluteString, filePath: textfile)
+                    
+                    
                     do
                     {
-                        text = try String(contentsOf: URL(fileURLWithPath: url))
+                        text = try String(contentsOf: url)
                     }
                     catch
                     {

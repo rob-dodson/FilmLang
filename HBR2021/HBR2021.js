@@ -119,6 +119,7 @@ for (x = 0; x < layoutx; x++)
         }
         addBlock(back)
 
+		let duration = Math.random(20) + 2
         let scrollblock1 =
         {
             name:"scrollblock1",
@@ -126,12 +127,12 @@ for (x = 0; x < layoutx; x++)
             width:180,
             height:180,
             clip:true,
-            textURL:"/Users/robertdodson/Pro/dev/FilmLang/HBR2021/text.txt",
+            textURL:"text.txt",
             size:14,
             font:MainFont,
             strokeColor:cyan,
             textColor:green,
-			animation0:{property:"scrollamount",max:300,duration:10,autoReverses:true},
+			animation0:{property:"scrollamount",max:300,duration:duration,autoReverses:true},
 			waitStartSeconds:ctime + x,
 			waitEndSeconds:ctime + 4.0 + x,
             parent:bname

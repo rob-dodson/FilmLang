@@ -2,6 +2,21 @@ includeFile("../Constants")
 includeFile("../BasicScreen")
 
 
+let layoutx = 5
+let layouty = 5
+let htime = 3.5
+
+let layout =
+{
+    type:LAYOUT,
+    name:"layout",
+    xcount:layoutx,
+    ycount:layouty,
+    debug:false,
+    debugColor:gray,
+}
+addBlock(layout)
+
 let bigbez =
 {
     name:"bigbez",

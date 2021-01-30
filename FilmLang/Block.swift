@@ -75,7 +75,7 @@ class Block
     var debugFontSize : CGFloat = 18.0
     var waitStartSecs : Double = 0.0
     var waitEndSecs   : Double = 0.0
-    
+    var closePath     : Bool = false
     
     init(name:String,type:String)
     {
@@ -508,6 +508,7 @@ class Block
         if let gradientAngle = dict["gradientAngle"] as? CGFloat { self.gradientAngle = gradientAngle }
         if let hidden = dict["hidden"]               as? Bool    { self.hidden = hidden }
         if let center = dict["center"]               as? Bool    { self.center = center }
+        if let closepath = dict["closePath"]         as? Bool    { self.closePath = closepath }
         
         
         if let waitstartsecs = dict["waitStartSeconds"] as? Double
@@ -540,7 +541,7 @@ class Block
         }
        
         
-        if let lineCap = dict["lineCap"]             as? String
+        if let lineCap = dict["lineCap"] as? String
         {
             if lineCap == "round"
             {

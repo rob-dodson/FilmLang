@@ -8,7 +8,9 @@ includeFile("BasicScreen")
 
 let layoutx = 5
 let layouty = 5
+ 
 let htime = 3.5
+
 
 let layout =
 {
@@ -28,7 +30,7 @@ let sound  =
     type:SOUND,
     File:"Message.mp3",
 }
-addBlock(sound)
+//addBlock(sound)
 
 let music  =
 {
@@ -141,3 +143,59 @@ for (x = 0; x < layoutx; x++)
 
     }
 }
+
+let H =
+{
+    name:"H",
+    type:PATH,
+    strokeWidth:4,
+//	layoutSpec:{x:1,y:1,fit:true},
+
+point0: {x: 30.5, y: 159.5},
+point1: {x: 30.5, y: 33.5},
+point2: {x: 56.55, y: 33.5},
+point3: {x: 56.55, y: 83.47},
+point4: {x: 91.28, y: 83.47},
+point5: {x: 91.28, y: 33.5},
+point6: {x: 119.5, y: 33.5},
+point7: {x: 119.5, y: 159.5},
+point8: {x: 91.28, y: 159.5},
+point9: {x: 91.28, y: 103.02},
+point10: {x: 56.55, y: 103.02},
+point11: {x: 56.55, y: 159.5},
+point12: {x: 30.5, y: 159.5},
+
+	closePath:true,
+    strokeColor:green,
+    debug:false,
+	animation0:{property:"strokeStart",from:1.0,to:0.0,duration:2.4,autoReverses:true},
+}
+addBlock(H)
+
+let B =
+{
+    name:"B",
+    type:PATH,
+    strokeWidth:4,
+//    layoutSpec:{x:2,y:1,fit:true},
+
+point0:{x: 121.5, y: 161.5},
+point1:{x: 121.5, y: 34.5},
+point2:{x: 172.5, y: 34.5},
+point3:{x: 190.5, y: 61.5},
+point4:{x: 190.5, y: 83.5},
+point5:{x: 172.5, y: 97.5},
+point6:{x: 137.5, y: 100.5},
+point7:{x: 172.5, y: 105.5},
+point8:{x: 190.5, y: 116.5},
+point9:{x: 190.5, y: 147.5},
+point10:{x: 172.5, y: 161.5},
+point11:{x: 121.5, y: 161.5},
+
+	closePath:true,
+    strokeColor:green,
+    debug:false,
+    animation0:{property:"strokeStart",from:1.0,to:0.0,duration:2.4,autoReverses:true},
+}
+addBlock(B)
+

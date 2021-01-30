@@ -61,8 +61,27 @@ class FLPath : Block
                 
                 count = count + 1
             }
-
+            
+            if closePath == true
+            {
+                path.closeSubpath()
+            }
+            
             layer.path = path
+            
+            for animation in animations
+            {
+                if animation.property == "position"
+                {
+                    animation.layer = baseLayer
+                }
+                else
+                {
+                    animation.layer = layer
+                }
+            }
+            
+            
             baseLayer.addSublayer(layer)
             addLayerConstraints(layer:layer)
             Block.addLayerToParent(block: self, layer: baseLayer)

@@ -95,8 +95,8 @@
 			isa = PBXGroup;
 			children = (
 				AE24CB0E25096A02000F20D7 /* AppDelegate.swift */,
-				AE24CB1325096A05000F20D7 /* Assets.xcassets */,
 				AE24CB1925096A06000F20D7 /* FilmLang.entitlements */,
+				AE24CB1325096A05000F20D7 /* Assets.xcassets */,
 				AE24CB1525096A06000F20D7 /* MainMenu.xib */,
 				AE24CB1825096A06000F20D7 /* Info.plist */,
 				AE24CB1025096A02000F20D7 /* FilmLang.xcdatamodeld */,

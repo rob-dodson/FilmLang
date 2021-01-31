@@ -48,7 +48,9 @@ class FLPath : Block
             var count = 0
             for point in points
             {
-                let point = NSPoint(x: point.x + xoffset, y: point.y + yoffset)
+                var point = NSPoint(x: point.x + xoffset, y: point.y + yoffset)
+                point.x *= scalePath
+                point.y *= scalePath
                 
                 if count == 0
                 {

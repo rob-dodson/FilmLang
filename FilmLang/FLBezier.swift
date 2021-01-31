@@ -11,16 +11,19 @@ import Cocoa
 
 struct BezPoint
 {
-    internal init(point: NSPoint, controlPoint1: NSPoint?, controlPoint2: NSPoint?)
+    internal init(point: NSPoint?, controlPoint1: NSPoint?, controlPoint2: NSPoint?,close:Bool)
     {
         self.point = point
         self.controlPoint1 = controlPoint1
         self.controlPoint2 = controlPoint2
+        self.close = close
     }
     
-    let point : NSPoint
+    
+    let point : NSPoint?
     let controlPoint1 : NSPoint?
     let controlPoint2 : NSPoint?
+    let close : Bool
 }
 
 class FLBezier : Block
@@ -56,9 +59,17 @@ class FLBezier : Block
                     controlpoint2.x *= scalePath
                     controlpoint2.y *= scalePath
                     
-                    let bezpoint = BezPoint(point: point, controlPoint1: controlpoint1, controlPoint2:controlpoint2)
+                    let bezpoint = BezPoint(point: point, controlPoint1: controlpoint1, controlPoint2:controlpoint2,close:false)
                     
                     bezpoints.append(bezpoint)
+                }
+                else if let cmd = bdict["cmd"] as? String
+                {
+                    if cmd == "close"
+                    {
+                        let bezpoint = BezPoint(point: nil, controlPoint1: nil, controlPoint2:nil,close:true)
+                        bezpoints.append(bezpoint)
+                    }
                 }
                 else if bdict["x"] != nil
                 {
@@ -67,7 +78,7 @@ class FLBezier : Block
                     point.x *= scalePath
                     point.y *= scalePath
                     
-                    let bezpoint = BezPoint(point: point, controlPoint1: nil, controlPoint2:nil)
+                    let bezpoint = BezPoint(point: point, controlPoint1: nil, controlPoint2:nil,close:false)
                     
                     bezpoints.append(bezpoint)
                 }
@@ -90,34 +101,39 @@ class FLBezier : Block
         
             let path = CGMutablePath()
             
-            var count = 0
+            var closed = true
             for bezpoint in bezpoints
             {
-                if bezpoint.controlPoint1 == nil && bezpoint.controlPoint2 == nil
+                if bezpoint.close == true
                 {
-                    if count == 0
+                    path.closeSubpath()
+                    closed = true
+                }
+                else if bezpoint.controlPoint1 == nil && bezpoint.controlPoint2 == nil
+                {
+                    if closed
                     {
-                        path.move(to: bezpoint.point)
+                        path.move(to: bezpoint.point!)
+                        closed = false
                     }
                     else
                     {
-                        path.addLine(to: bezpoint.point)
+                        path.addLine(to: bezpoint.point!)
                     }
-                    count = count + 1
                     
                     if debug
                     {
-                        addDebugRect(point:bezpoint.point,color:NSColor.green)
+                        addDebugRect(point:bezpoint.point!,color:NSColor.green)
                     }
                    
                 }
                 else
                 {
-                    path.addCurve(to: bezpoint.point, control1: bezpoint.controlPoint1!, control2: bezpoint.controlPoint2!)
+                    path.addCurve(to: bezpoint.point!, control1: bezpoint.controlPoint1!, control2: bezpoint.controlPoint2!)
                     
                     if debug
                     {
-                        addDebugRect(point:bezpoint.point,color:NSColor.red)
+                        addDebugRect(point:bezpoint.point!,color:NSColor.red)
                         addDebugRect(point:bezpoint.controlPoint1!,color:NSColor.purple)
                         addDebugRect(point:bezpoint.controlPoint2!,color:NSColor.blue)
                     }

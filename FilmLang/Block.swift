@@ -76,6 +76,8 @@ class Block
     var waitStartSecs : Double = 0.0
     var waitEndSecs   : Double = 0.0
     var closePath     : Bool = false
+    var scalePath     : CGFloat = 1.0
+    
     
     init(name:String,type:String)
     {
@@ -509,6 +511,7 @@ class Block
         if let hidden = dict["hidden"]               as? Bool    { self.hidden = hidden }
         if let center = dict["center"]               as? Bool    { self.center = center }
         if let closepath = dict["closePath"]         as? Bool    { self.closePath = closepath }
+        if let scalepath = dict["scalePath"]         as? CGFloat { self.scalePath = scalepath }
         
         
         if let waitstartsecs = dict["waitStartSeconds"] as? Double

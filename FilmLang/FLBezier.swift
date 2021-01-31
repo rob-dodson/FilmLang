@@ -45,17 +45,30 @@ class FLBezier : Block
             {
                 if bdict["point"] != nil
                 {
-                    let point = Block.pointFromDict(dict: bdict["point"] as! NSDictionary)
-                    let controlpoint1 = Block.pointFromDict(dict: bdict["controlpoint1"] as! NSDictionary)
-                    let controlpoint2 = Block.pointFromDict(dict: bdict["controlpoint2"] as! NSDictionary)
+                    var point = Block.pointFromDict(dict: bdict["point"] as! NSDictionary)
+                    var controlpoint1 = Block.pointFromDict(dict: bdict["controlPoint1"] as! NSDictionary)
+                    var controlpoint2 = Block.pointFromDict(dict: bdict["controlPoint2"] as! NSDictionary)
+                    
+                    point.x *= scalePath
+                    point.y *= scalePath
+                    controlpoint1.x *= scalePath
+                    controlpoint1.y *= scalePath
+                    controlpoint2.x *= scalePath
+                    controlpoint2.y *= scalePath
+                    
                     let bezpoint = BezPoint(point: point, controlPoint1: controlpoint1, controlPoint2:controlpoint2)
                     
                     bezpoints.append(bezpoint)
                 }
                 else if bdict["x"] != nil
                 {
-                    let point = Block.pointFromDict(dict: bdict)
+                    var point = Block.pointFromDict(dict: bdict)
+                    
+                    point.x *= scalePath
+                    point.y *= scalePath
+                    
                     let bezpoint = BezPoint(point: point, controlPoint1: nil, controlPoint2:nil)
+                    
                     bezpoints.append(bezpoint)
                 }
                 
@@ -111,7 +124,26 @@ class FLBezier : Block
                 }
             }
             
+            if closePath == true
+            {
+                path.closeSubpath()
+            }
+            
             layer.path = path
+            
+            for animation in animations
+            {
+                if animation.property == "position"
+                {
+                    animation.layer = baseLayer
+                }
+                else
+                {
+                    animation.layer = layer
+                }
+            }
+            
+            
             width = path.boundingBox.width
             height = path.boundingBox.height
             

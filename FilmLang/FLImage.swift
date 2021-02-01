@@ -9,6 +9,9 @@
 import Foundation
 import Cocoa
 
+import RobToolsLibrary
+
+
 class FLImage : Block
 {
     var url : URL?
@@ -27,11 +30,8 @@ class FLImage : Block
         
         if let urlstr = dict["url"]   as? String
         {
-            if let url = URL(string: urlstr)
-            {
-               //image = NSImage(byReferencing: url)
-                ciimage = CIImage(contentsOf: url)
-            }
+            let url = RFile.makeFilePathURL(rootPath: Javascript.runFolder!.absoluteString, filePath: urlstr)
+            ciimage = CIImage(contentsOf: url)
         }
         
         if let filterdict = dict["filter"]  as? NSDictionary

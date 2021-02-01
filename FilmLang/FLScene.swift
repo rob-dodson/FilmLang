@@ -11,12 +11,14 @@ import Cocoa
 import SceneKit
 import SceneKit.ModelIO
 
+import RobToolsLibrary
+
 class FLScene : Block
 {
     var scene:SCNScene!
     var sceneView      : SCNView!
     var cameraNode     : SCNNode!
-    var objFilePath    : String!
+    var objFileURL     : URL!
     var objectPosition : SCNVector3!
     var objectScale    : SCNVector3!
     var cameraPosition : SCNVector3!
@@ -27,7 +29,11 @@ class FLScene : Block
     {
         super.parseBlock(dict: dict)
         
-        if let objfilepath    = dict["objectFilePath"] as? String { self.objFilePath = objfilepath }
+        if let objfilepath   = dict["objectFilePath"] as? String
+        {
+            self.objFileURL = RFile.makeFilePathURL(rootPath: Javascript.runFolder!.absoluteString, filePath: objfilepath)
+        }
+        
         if let objectscale    = dict["objectScale"]    as? NSDictionary { self.objectScale = vectorFromDict(dict: objectscale) }
         if let objectposition = dict["objectPosition"] as? NSDictionary { self.objectPosition = vectorFromDict(dict: objectposition) }
         if let objectcolor    = dict["objectColor"]    as? NSDictionary { self.objectColor = Block.colorFromDict(dict: objectcolor) }
@@ -110,8 +116,7 @@ class FLScene : Block
         //
         // load object
         //
-        let url = NSURL.fileURL(withPath: objFilePath)
-        let asset = MDLAsset(url: url)
+        let asset = MDLAsset(url: objFileURL)
         let object = asset.object(at: 0)
         let node = SCNNode(mdlObject: object)
         node.position = objectPosition

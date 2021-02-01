@@ -1,0 +1,70 @@
+FilmLang
+==============
+
+1) Basic parameters that apply to all types
+
+debug
+debugColor
+debugFontSize
+debugFont
+clip
+fitToView
+x
+y
+z
+width
+height
+fillColor
+strokeColor
+radius
+rotation
+strokeWidth
+strokeStart
+strokeEnd
+gradientAngle
+hidden
+center
+closePath
+scalePath
+waitStartSeconds
+waitEndSeconds
+lineCap
+layoutSpec
+fillGradient
+windowOffset
+animation
+
+2) Animation parameters
+
+property
+duration
+autoReverses
+repeatDuration
+repeatCount
+waitStartSeconds
+move
+toColor
+fromColor
+to
+from
+max
+fromRadius
+toRadius
+fromAngles
+toAngles
+
+3) TEXT
+4) RECT
+5) LINE
+6) SCROLLTEXT
+7) GRID
+8) BEZIER
+9) CIRCLE
+10) AXIS
+11) SOUNDFILE
+12) IMAGE
+13) SCENE
+
+
+
+

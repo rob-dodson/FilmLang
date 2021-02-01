@@ -50,4 +50,7 @@ let orange    = { red: 0.95, green: 0.43, blue: 0.04, alpha: 1.0 }
 let black     = { red: 0.0, green: 0.0, blue: 0.0, alpha: 1.00 }
 let white     = { red: 1.0, green: 1.0, blue: 1.0, alpha: 1.00 }
 
+let fillmain       = {red: 0.43, green: 0.57, blue: 0.63, alpha: 0.8}
+let strokemain     = {red: 0.69, green: 0.96, blue: 0.40, alpha: 1.00}
+
 

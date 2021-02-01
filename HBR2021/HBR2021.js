@@ -9,7 +9,20 @@ includeFile("BasicScreen")
 let layoutx = 5
 let layouty = 5
  
-let htime = 3.5
+let time1 = 3.5
+let time1duration = 7.0 
+
+let time2 = time1 + time1duration - 1.0
+let time2duration = 8.0 
+
+let time3 = time2 + time2duration
+let time3duration = 4.0 
+
+let time4 = time3 + 8.0
+let time4duration = 8.0 
+
+let time5 = time4 + time4duration
+let time5duration = 5.0 
 
 
 let layout =
@@ -30,7 +43,7 @@ let sound  =
     type:SOUND,
     File:"Message.mp3",
 }
-//addBlock(sound)
+addBlock(sound)
 
 let music  =
 {
@@ -51,11 +64,11 @@ let HBRText =
 	layoutSpec:{x:2,y:2,fit:true},
 	size:50,
 	font:"Futura",
-	textColor:green,
+	textColor:fillmain,
     waitStartSeconds:.5,
-	animation0:{property:"transform.scale.x",from:1,to:5,duration:htime,autoReverses:false},
-	animation1:{property:"transform.scale.y",from:1,to:5,duration:htime,autoReverses:false},
-    waitEndSeconds:htime - .25,
+	animation0:{property:"transform.scale.x",from:1,to:5,duration:2.0,autoReverses:false},
+	animation1:{property:"transform.scale.y",from:1,to:5,duration:2.0,autoReverses:false},
+    waitEndSeconds:3,
 }
 addBlock(HBRText)
 
@@ -77,16 +90,15 @@ for (x = 0; x < layoutx; x++)
             center:true,
             strokeColor:orange,
             strokeWidth:2,
-            childBlock0: {type:TEXT,name:"title",text:"HBR",size:15,x:10,y:40,textColor:red,font:MainFont },
-			waitStartSeconds:htime + 1,
+            childBlock0: {type:TEXT,name:"title",text:"HBR",size:15,center:true,textColor:red,font:MainFont },
+			waitStartSeconds:time1 + 1,
             animation7:{property:"transform.rotation.z",from:0,to:6,duration:4.0,autoReverses:true},
             animation8:{property:"transform.rotation.x",from:0,to:6,duration:4.0,autoReverses:true},
-			waitEndSeconds:htime + htime + 4.25,
+			waitEndSeconds:time1 + time1duration,
 		}
 		addBlock(b1)
 
 
-		btime = htime + htime + 5.0
 		let b2 =
 		{
 			name:"b2",
@@ -94,19 +106,18 @@ for (x = 0; x < layoutx; x++)
 			layoutSpec:{x:x,y:y,fit:true},
 			width:40,
 			height:40,
-			fillColor:red,
+			fillColor:fillmain,
 			strokeColor:orange,
 			strokeWidth:5,
 			radius:4,
-			waitStartSeconds:btime + x,
-			waitEndSeconds:btime + 4.0 + x,
+			waitStartSeconds:time2 + x,
+			waitEndSeconds:time2 + time2duration + x,
 			animation0:{property:"position",move:{x:15,y:15},duration:2.0,autoReverses:true},
 			animation1:{property:"opacity",from:.3,to:1,duration:2.0,autoReverses:true},
 		}
 		addBlock(b2)
 		
 
-		ctime = btime + 8.0
         let bname = "back".concat(x.toString()).concat(y.toString())
 
         let back =
@@ -116,12 +127,16 @@ for (x = 0; x < layoutx; x++)
             height:180,
             type:RECT,
             layoutSpec:{x:x,y:y,fit:false},
-			waitStartSeconds:ctime + x,
-			waitEndSeconds:ctime + 4.0 + x,
+			waitStartSeconds:time3 + x,
+			waitEndSeconds:time3 + time3duration + x,
         }
         addBlock(back)
 
 		let duration = Math.random(20) + 2
+		let r = Math.random()
+		let g = Math.random()
+		let b = Math.random()
+		let rancolor  = { red:r, green:g, blue:b, alpha:0.8}
         let scrollblock1 =
         {
             name:"scrollblock1",
@@ -133,10 +148,10 @@ for (x = 0; x < layoutx; x++)
             size:14,
             font:MainFont,
             strokeColor:cyan,
-            textColor:green,
+            textColor:rancolor,
 			animation0:{property:"scrollamount",max:300,duration:duration,autoReverses:true},
-			waitStartSeconds:ctime + x,
-			waitEndSeconds:ctime + 4.0 + x,
+			waitStartSeconds:time3 + x,
+			waitEndSeconds:time3 + time3duration + x,
             parent:bname
         }
         addBlock(scrollblock1)
@@ -144,31 +159,89 @@ for (x = 0; x < layoutx; x++)
     }
 }
 
+
+let HBRParent = 
+{
+	name:"HBRParent",
+	center:true,
+	width:700,
+	height:400,
+	type:RECT,
+	debug:false,
+}
+addBlock(HBRParent)
+
+
+let HParent = 
+{
+	name:"HParent",
+	x:0,
+	y:0,
+	width:180,
+	height:280,
+	type:RECT,
+	debug:false,
+	parent:"HBRParent",
+}
+addBlock(HParent)
+
+let BParent = 
+{
+	name:"BParent",
+	x:220,
+	y:0,
+	width:180,
+	height:280,
+	type:RECT,
+	debug:false,
+	parent:"HBRParent",
+}
+addBlock(BParent)
+
+let RParent = 
+{
+	name:"RParent",
+	x:420,
+	y:0,
+	width:180,
+	height:280,
+	type:RECT,
+	debug:false,
+	parent:"HBRParent",
+}
+addBlock(RParent)
+
+
+
+
 let H =
 {
     name:"H",
     type:PATH,
-    strokeWidth:2,
-	layoutSpec:{x:1,y:1,fit:true},
+    strokeWidth:4,
 
-	point0: {x: 30.5, y: 159.5},
-	point1: {x: 30.5, y: 33.5},
-	point2: {x: 56.55, y: 33.5},
-	point3: {x: 56.55, y: 83.47},
-	point4: {x: 91.28, y: 83.47},
-	point5: {x: 91.28, y: 33.5},
-	point6: {x: 119.5, y: 33.5},
-	point7: {x: 119.5, y: 159.5},
-	point8: {x: 91.28, y: 159.5},
-	point9: {x: 91.28, y: 103.02},
-	point10: {x: 56.55, y: 103.02},
-	point11: {x: 56.55, y: 159.5},
-	point12: {x: 30.5, y: 159.5},
+	point0: {x:102, y:0},
+	point1: {x:102, y:128.16},
+	point2: {x:86.09, y:128.16},
+	point3: {x:86.09, y:72.74},
+	point4: {x:16.08, y:72.74},
+	point5: {x:16.08, y:128.16},
+	point6: {x:0.17, y:128.16},
+	point7: {x:0.17, y:0},
+	point8: {x:16.08, y:0},
+	point9: {x:16.08, y:58.35},
+	point10: {x:86.09, y:58.35},
+	point11: {x:86.09, y:0},
+	point12: {x:102, y:0},
 
-	closePath:true,
-    strokeColor:green,
+	scalePath:2.0,
+    strokeColor:strokemain,
+    fillColor:fillmain,
     debug:false,
 	animation0:{property:"strokeStart",from:1.0,to:0.0,duration:2.4,autoReverses:true},
+	waitStartSeconds:time4,
+	waitEndSeconds:time4 + time4duration,
+	parent:"HParent",
 }
 addBlock(H)
 
@@ -180,32 +253,53 @@ let B =
 {
     name:"B",
     type:BEZIER,
-    strokeWidth:2,
-    layoutSpec:{x:1,y:1,fit:true},
+    strokeWidth:4,
 
-	point1:  { x: 50.37, y: 81.00},
-	point2:  { point:{x: 63.08, y: 83.35},  controlPoint1: {x: 55.33, y: 81.00},  controlPoint2: {x: 59.57, y: 81.78}},
-	point3:  { point:{x: 71.17, y: 90.10},  controlPoint1: {x: 66.59, y: 84.92},  controlPoint2: {x: 69.29, y: 87.17}},
-	point4:  { point:{x: 74.00, y: 100.65}, controlPoint1: {x: 73.06, y: 93.02},  controlPoint2: {x: 74.00, y: 96.54}},
-	point5:  { point:{x: 72.09, y: 108.92}, controlPoint1: {x: 74.00, y: 103.75}, controlPoint2: {x: 73.36, y: 106.51}},
-	point6:  { point:{x: 66.7,  y: 114.81}, controlPoint1: {x: 70.82, y: 111.33}, controlPoint2: {x: 69.02, y: 113.29}},
-	point7:  { point:{x: 58.44, y: 117.67}, controlPoint1: {x: 64.38, y: 116.33}, controlPoint2: {x: 61.63, y: 117.29}},
-	point8:  { x: 58.44, y: 118.45},
-	point9:  { point:{x: 64.53, y: 121.26}, controlPoint1: {x: 60.70, y: 118.87}, controlPoint2: {x: 62.73, y: 119.81}},
-	point10: { point:{x: 68.85, y: 126.67}, controlPoint1: {x: 66.33, y: 122.72}, controlPoint2: {x: 67.77, y: 124.52}},
-	point11: { point:{x: 70.47, y: 133.54}, controlPoint1: {x: 69.93, y: 128.82}, controlPoint2: {x: 70.47, y: 131.11}},
-	point12: { point:{x: 67.98, y: 142.83}, controlPoint1: {x: 70.47, y: 137.13}, controlPoint2: {x: 69.64, y: 140.22}},
-	point13: { point:{x: 60.88, y: 148.87}, controlPoint1: {x: 66.33, y: 145.43}, controlPoint2: {x: 63.96, y: 147.44}},
-	point14: { point:{x: 49.84, y: 151.00}, controlPoint1: {x: 57.80, y: 150.29}, controlPoint2: {x: 54.12, y: 151.00}},
-	point15: { x: 23.17, y: 151.00},
-	point16: { x: 23.17, y:  81.00},
-	point17: { x: 50.37, y:  81.00},
+	point0: {x:50.38, y:0},
+	point1: { point:{x:73.84, y:4.31}, controlPoint1: {x: 59.54, y: 0}, controlPoint2: {x: 67.36, y: 1.44}},
+	point2: { point:{x:88.78, y:16.65}, controlPoint1: {x: 80.32, y: 7.18}, controlPoint2: {x: 85.3, y: 11.29}},
+	point3: { point:{x:94, y:35.97}, controlPoint1: {x: 92.26, y: 22.01}, controlPoint2: {x: 94, y: 28.45}},
+	point4: { point:{x:90.48, y:51.11}, controlPoint1: {x: 94, y: 41.65}, controlPoint2: {x: 92.83, y: 46.7}},
+	point5: { point:{x:80.53, y:61.9}, controlPoint1: {x: 88.13, y: 55.52}, controlPoint2: {x: 84.81, y: 59.12}},
+	point6: { point:{x:65.28, y:67.14}, controlPoint1: {x: 76.25, y: 64.69}, controlPoint2: {x: 71.17, y: 66.43}},
+	point7: {x:65.28, y:68.56},
+	point8: { point:{x:76.52, y:73.72}, controlPoint1: {x: 69.44, y: 69.33}, controlPoint2: {x: 73.19, y: 71.05}},
+	point9: { point:{x:84.5, y:83.62}, controlPoint1: {x: 79.85, y: 76.38}, controlPoint2: {x: 82.51, y: 79.68}},
+	point10: { point:{x:87.49, y:96.19}, controlPoint1: {x: 86.49, y: 87.56}, controlPoint2: {x: 87.49, y: 91.75}},
+	point11: { point:{x:82.9, y:113.19}, controlPoint1: {x: 87.49, y: 102.76}, controlPoint2: {x: 85.96, y: 108.43}},
+	point12: { point:{x:69.78, y:124.25}, controlPoint1: {x: 79.83, y: 117.96}, controlPoint2: {x: 75.46, y: 121.65}},
+	point13: { point:{x:49.4, y:128.16}, controlPoint1: {x: 64.11, y: 126.86}, controlPoint2: {x: 57.31, y: 128.16}},
+	point14: {x:0.17, y:128.16},
+	point15: {x:0.17, y:0},
+	point16: {x:50.38, y:0},
+	point17: {cmd:"close"},
+	point18: {x:16.22, y:114.04},
+	point19: {x:46.01, y:114.04},
+	point20: { point:{x:64.61, y:108.62}, controlPoint1: {x: 53.98, y: 114.04}, controlPoint2: {x: 60.18, y: 112.23}},
+	point21: { point:{x:71.26, y:93.43}, controlPoint1: {x: 69.04, y: 105.01}, controlPoint2: {x: 71.26, y: 99.95}},
+	point22: { point:{x:63.9, y:78.07}, controlPoint1: {x: 71.26, y: 86.62}, controlPoint2: {x: 68.8, y: 81.5}},
+	point23: { point:{x:41.91, y:72.92}, controlPoint1: {x: 58.99, y: 74.63}, controlPoint2: {x: 51.66, y: 72.92}},
+	point24: {x:16.22, y:72.92},
+	point25: {x:16.22, y:114.04},
+	point26: {cmd:"close"},
+	point27: {x:16.22, y:14.12},
+	point28: {x:16.22, y:59.15},
+	point29: {x:46.46, y:59.15},
+	point30: { point:{x:69.69, y:53.51}, controlPoint1: {x: 56.75, y: 59.15}, controlPoint2: {x: 64.49, y: 57.27}},
+	point31: { point:{x:77.5, y:36.77}, controlPoint1: {x: 74.9, y: 49.75}, controlPoint2: {x: 77.5, y: 44.17}},
+	point32: { point:{x:70.01, y:19.89}, controlPoint1: {x: 77.5, y: 29.37}, controlPoint2: {x: 75, y: 23.74}},
+	point33: { point:{x:47.98, y:14.12}, controlPoint1: {x: 65.01, y: 16.05}, controlPoint2: {x: 57.67, y: 14.12}},
+	point34: {x:16.22, y:14.12},
+	point35: {cmd:"close"},
 
 	scalePath:2.0,
-	closePath:true,
-    strokeColor:green,
+    strokeColor:strokemain,
+    fillColor:fillmain,
     debug:false,
     animation0:{property:"strokeStart",from:1.0,to:0.0,duration:2.4,autoReverses:true},
+	waitStartSeconds:time4,
+	waitEndSeconds:time4 + time4duration,
+	parent:"BParent",
 }
 addBlock(B)
 
@@ -215,32 +309,71 @@ let R =
 {
     name:"R",
     type:BEZIER,
-    strokeWidth:2,
-    layoutSpec:{x:1,y:1,fit:true},
+    strokeWidth:4,
 
-point1: {x: 99.01, y: 108.7},
-point2: {x: 116.45, y: 108.7},
-point3: {x: 116.45, y: 108.7},
-point4: {x: 116.45, y: 108.7},
-point5: {x: 131.63, y: 81},
-point6: {x: 142, y: 81},
-point7: {x: 125.59, y: 110.06},
-point8: {point: {x: 136.06, y: 117.48}, controlPoint1: {x: 130.05, y: 111.45}, controlPoint2: { x: 133.53, y: 113.92}},
-point9: {point: {x: 139.84, y: 130.14}, controlPoint1: {x: 138.58, y: 121.04}, controlPoint2: { x: 139.84, y: 125.26}},
-point10: {point: {x: 137.04, y: 141.13}, controlPoint1: {x: 139.84, y: 134.34}, controlPoint2: { x: 138.9, y: 138.01}},
-point11: {point: {x: 129.15, y: 148.4}, controlPoint1: {x: 135.17, y: 144.25}, controlPoint2: { x: 132.54, y: 146.67}},
-point12: {point: {x: 117.24, y: 151}, controlPoint1: {x: 125.76, y: 150.13}, controlPoint2: { x: 121.79, y: 151}},
-point13: {x: 90.17, y: 151},
-point14: {x: 90.17, y: 81},
-point15: {x: 99.01, y: 81},
-point16: {x: 99.01, y: 108.7},
-
+	point0: {x:16.18, y:113.95},
+	point1: {x:47.04, y:113.95},
+	point2: { point:{x:66.52, y:107.47}, controlPoint1: {x: 55.34, y: 113.95}, controlPoint2: {x: 61.83, y: 111.79}},
+	point3: { point:{x:73.54, y:89.44}, controlPoint1: {x: 71.2, y: 103.14}, controlPoint2: {x: 73.54, y: 97.13}},
+	point4: { point:{x:66.83, y:71.27}, controlPoint1: {x: 73.54, y: 81.56}, controlPoint2: {x: 71.31, y: 75.51}},
+	point5: { point:{x:47.75, y:64.92}, controlPoint1: {x: 62.35, y: 67.04}, controlPoint2: {x: 55.99, y: 64.92}},
+	point6: {x:16.18, y:64.92},
+	point7: {x:16.18, y:113.95},
+	point8: {cmd:"close"},
+	point9: {x:16.18, y:50.71},
+	point10: {x:47.75, y:50.71},
+	point11: {x:47.75, y:50.71},
+	point12: {x:47.75, y:50.71},
+	point13: {x:75.23, y:0},
+	point14: {x:94, y:0},
+	point15: {x:64.29, y:53.2},
+	point16: { point:{x:83.24, y:66.79}, controlPoint1: {x: 72.36, y: 55.75}, controlPoint2: {x: 78.67, y: 60.28}},
+	point17: { point:{x:90.09, y:89.97}, controlPoint1: {x: 87.8, y: 73.3}, controlPoint2: {x: 90.09, y: 81.03}},
+	point18: { point:{x:85.02, y:110.09}, controlPoint1: {x: 90.09, y: 97.67}, controlPoint2: {x: 88.4, y: 104.37}},
+	point19: { point:{x:70.74, y:123.41}, controlPoint1: {x: 81.64, y: 115.8}, controlPoint2: {x: 76.88, y: 120.24}},
+	point20: { point:{x:49.17, y:128.16}, controlPoint1: {x: 64.61, y: 126.58}, controlPoint2: {x: 57.42, y: 128.16}},
+	point21: {x:0.17, y:128.16},
+	point22: {x:0.17, y:0},
+	point23: {x:16.18, y:0},
+	point24: {x:16.18, y:50.71},
 
 	scalePath:2.0,
-	closePath:true,
-    strokeColor:green,
+    strokeColor:strokemain,
+    fillColor:fillmain,
     debug:false,
     animation0:{property:"strokeStart",from:1.0,to:0.0,duration:2.4,autoReverses:true},
+	waitStartSeconds:time4,
+	waitEndSeconds:time4 + time4duration,
+	parent:"RParent",
 }
 addBlock(R)
 
+
+for (x = 0; x < layoutx; x++)
+{
+	for (y = 0; y < layouty; y++)
+	{
+		let r = Math.random()
+		let g = Math.random()
+		let b = Math.random()
+		let rancolor  = { red:r, green:g, blue:b, alpha:0.8}
+
+		let name = "text2021".concat(x.toString().concat(y.toString()))
+        let  text =
+		{
+			type:TEXT,
+			layoutSpec:{x:x,y:y,fit:true},
+			name:name,
+			text:"2021",
+			size:95,
+			center:true,
+			textColor:rancolor,
+			font:MainFont,
+			waitStartSeconds:time5,
+			waitEndSeconds:time5 + time5duration,
+            animation0:{property:"transform.rotation.y",from:0,to:6,duration:4.0,autoReverses:true},
+			animation1:{property:"opacity",from:.3,to:1,duration:2,autoReverses:true},
+		}
+		addBlock(text)
+	}
+}

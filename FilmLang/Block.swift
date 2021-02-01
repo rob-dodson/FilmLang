@@ -37,15 +37,15 @@ class Block
     var name          : String
     var parent        : Block?
     var children      : [Block]
-    var x             : CGFloat = 10.0
-    var y             : CGFloat = 10.0
-    var z             : CGFloat = 0
+    var x             : CGFloat = 0.0
+    var y             : CGFloat = 0.0
+    var z             : CGFloat = 0.0
+    var width         : CGFloat = 0.0
+    var height        : CGFloat = 0.0
     var fillColor     : NSColor?
     var strokeColor   : NSColor?
     var strokeAlpha   : CGFloat = -1.0
     var fillGradient  : NSGradient?
-    var width         : CGFloat = 0.0
-    var height        : CGFloat = 0.0
     var strokeWidth   : CGFloat = 2
     var strokeStart   : CGFloat = 0.0
     var strokeEnd     : CGFloat = 1.0

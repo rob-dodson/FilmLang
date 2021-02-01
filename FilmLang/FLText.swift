@@ -50,7 +50,7 @@ class FLText : Block
                                                      options: .usesLineFragmentOrigin,
                                                      attributes: textFontAttributes)
             
-            frameRect = CGRect(x: 0, y: 0, width: textBoundingRect.width + (padding * 2), height: textBoundingRect.height + (padding * 2))
+            frameRect = CGRect(x: 0 + padding, y: 0 + padding, width: textBoundingRect.width + (padding * 2), height: textBoundingRect.height + (padding * 2))
             
             if let fillgradient = fillGradient
             {

@@ -140,9 +140,7 @@ class FLScene : Block
         //
         let run = SCNAction.run
         { _ in
-            
             self.draw()
-            
         }
 
         //

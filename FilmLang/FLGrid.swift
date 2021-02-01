@@ -75,6 +75,20 @@ class FLGrid : Block
             }
             
             layer.path = path
+            
+            for animation in animations
+            {
+                if animation.property == "position"
+                {
+                    animation.layer = baseLayer
+                }
+                else
+                {
+                    animation.layer = layer
+                }
+            }
+            
+            
             baseLayer.addSublayer(layer)
             
             built = true

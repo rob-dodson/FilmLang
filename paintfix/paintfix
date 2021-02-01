@@ -1,0 +1,42 @@
+#!/usr/bin/perl
+#
+# Convert Paintcode.app Swift code for a bezier to FilmLang BEZIER code.
+#
+# Usage: paintfix <input file> 
+# 
+# Copy output code into a FilmLang BEZIER block.
+#
+
+
+open(FILE,$ARGV[0]) || die "Error opening $ARGV[0]: $?";
+
+$count = 0;
+while(<FILE>)
+{
+	chomp;
+
+	if (/^.+move\(to: NSPoint\(x: ([0-9.]+), y: ([0-9.]+)\)\)/)
+	{
+		print "point$count: {x:$1, y:$2},\n";	
+	}
+
+	if (/^.+line\(to: NSPoint\(x: ([0-9.]+), y: ([0-9.]+)\)\)/)
+	{
+		print "point$count: {x:$1, y:$2},\n";	
+	}
+
+	if (/^.+curve\(to: NSPoint\(x: ([0-9.]+), y: ([0-9.]+)\), controlPoint1: NSPoint\(x: ([0-9.]+), y: ([0-9.]+)\), controlPoint2: NSPoint\(x: ([0-9.]+), y: ([0-9.]+)\)\)/)
+	{
+		print "point$count: { point:{x:$1, y:$2}, controlPoint1: {x: $3, y: $4}, controlPoint2: {x: $5, y: $6}},\n";	
+	}
+
+	if (/^.+close\(/)
+	{
+		print "point$count: {cmd:\"close\"},\n";
+	}
+	
+	$count++;
+}
+close FILE;
+
+exit 0;

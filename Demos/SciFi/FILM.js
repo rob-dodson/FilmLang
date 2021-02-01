@@ -1,17 +1,8 @@
-includeFile("Constants")
+includeFile("../Constants")
 
 let camborder = {red:0.5, green:0.5, blue:0.5, alpha:0.7}
 let camback   = {red:0.0, green:0.0, blue:0.4, alpha:0.6}
 let camiconcolor = {red:0.09, green:0.09, blue:0.09, alpha:0.7}
-
-//
-// gradients
-//
-let blockbackgrad =
-{
-    startColor: {red:0.0, green:0.5, blue:0., alpha:0.4},
-    endColor: {red:0.0, green:0.0, blue:0.0, alpha:0.1},
-}
 
 let screen = 
 {
@@ -51,7 +42,7 @@ let scene =
 	width:width,
 	height:height,
 	layoutSpec:{x:2,y:2,fit:false},
-	objectFilePath:"/Users/robertdodson/Desktop/FILM/teapot.obj",
+	objectFilePath:"teapot.obj",
     objectScale:{x:50,y:50,z:50},
     objectPosition:{x:width/2,y:height/3,z:50},
 	objectColor:{red:.5,green:.5,blue:.5,alpha:1.0},
@@ -161,8 +152,8 @@ for (i = 0; i < 5; i++)
 		y:45 + (i * yoffset),
 		strokeWidth:3,
 		point1:{ x: 60, y: 200 },
-		point2:{ point:{ x: 90, y: 100 }, controlpoint1:{ x: 60, y:200 }, controlpoint2:{ x: 90, y:170 }},
-		point3:{ point:{ x: 60, y: 0  },  controlpoint1:{ x: 90, y:30  }, controlpoint2:{ x: 60, y:0 }},
+		point2:{ point:{ x: 90, y: 100 }, controlPoint1:{ x: 60, y:200 }, controlPoint2:{ x: 90, y:170 }},
+		point3:{ point:{ x: 60, y: 0  },  controlPoint1:{ x: 90, y:30  }, controlPoint2:{ x: 60, y:0 }},
 		strokeColor:cyan,
 		parent:"bezblock"
 	}
@@ -179,9 +170,9 @@ let bigbez =
 	strokeWidth:10,
 	debug:false,
 	point1:{ x: 45,  y: 200 },
-	point2:{ point:{ x: 100,  y: 190 }, controlpoint1:{ x: 45, y: 200  }, controlpoint2:{ x: 80, y: 220 }},
-	point3:{ point:{ x: 145, y: 15  }, controlpoint1:{ x: 120, y: 180 }, controlpoint2:{ x: 135,  y: 20 }},
-	point4:{ point:{ x: 190, y: 0   }, controlpoint1:{ x: 155, y: -10 }, controlpoint2:{ x: 190, y: 0 }},
+	point2:{ point:{ x: 100,  y: 190 }, controlPoint1:{ x: 45, y: 200  }, controlPoint2:{ x: 80, y: 220 }},
+	point3:{ point:{ x: 145, y: 15  }, controlPoint1:{ x: 120, y: 180 }, controlPoint2:{ x: 135,  y: 20 }},
+	point4:{ point:{ x: 190, y: 0   }, controlPoint1:{ x: 155, y: -10 }, controlPoint2:{ x: 190, y: 0 }},
 	strokeColor:cyan,
 	parent:"bezblock"
 }
@@ -460,12 +451,12 @@ let map =
 {
 	type:IMAGE,
 	name:"map",
-	url:"file:///Users/robertdodson/Desktop/FILM/map.png",
+	url:"map.png",
 	x:0,
 	y:0,
 	width:350,
 	height:250,
-	//filter:{type:FILTER,name:"CIMotionBlur",inputRadius:30.0,inputAngle:5},
+	filter:{type:FILTER,name:"CIMotionBlur",inputRadius:30.0,inputAngle:5},
 	//filter:{type:FILTER,name:"CIBoxBlur",inputRadius:80.0},
 	//filter:{type:FILTER,name:"CILinearGradient",inputPoint0:{x:10,y:10},inputPoint1:{x:100,y:100},inputColor0:blue,inputColor1:red},
 	parent:"mapgrid"
@@ -481,7 +472,7 @@ let scrollblock1 =
 	height:250,
 	radius:4,
 	clip:true,
-	textURL:"/Users/robertdodson/Desktop/FILM/scrollingtext.txt",
+	textURL:"scrollingtext.txt",
 	size:14,
 	font:MainFont,
 	strokeColor:cyan,
@@ -500,7 +491,7 @@ let scrollblock2 =
 	height:250,
 	radius:4,
 	clip:true,
-	textURL:"/Users/robertdodson/Desktop/FILM/scrollingtext.txt",
+	textURL:"scrollingtext.txt",
 	size:14,
 	font:MainFont,
 	strokeColor:cyan,

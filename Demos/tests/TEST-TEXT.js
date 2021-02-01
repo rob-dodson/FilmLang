@@ -16,7 +16,7 @@ let bezblock =
 
 	//childBlock0: {type:TEXT,name:"beztitle",text:"nO CenTER BEZ-1",size:20,x:70,y:240,textColor:gray,font:"Futura",textColor:blue,strokeColor:orange,radius:4,padding:5},
 
-	childBlock1: {type:TEXT,name:"beztitle",text:"Center BEZ-1",size:20,center:true,textColor:gray,font:"Futura",textColor:blue,strokeColor:orange,radius:4,padding:15},
+	childBlock1: {type:TEXT,name:"center",text:"This Text is Centered?",size:20,center:true,textColor:red,font:"Futura",strokeColor:green,radius:4,padding:15},
 
 	//childBlock2: {type:TEXT,name:"beztitle",text:"BEZ-2",size:20,x:70,y:200,textColor:gray,font:"Futura",textColor:black,strokeColor:orange,radius:4,fillColor:red,padding:5},
 

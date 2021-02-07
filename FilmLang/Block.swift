@@ -27,7 +27,6 @@ struct LayoutSpec
 
 class Block
 {
-    static var thereAreAnimators  : Bool = false
     static var thereAreAnimations : Bool = false
     static var topBlock           : Block!
     static var layoutGrid         : FLLayoutGrid!
@@ -78,6 +77,7 @@ class Block
     var closePath     : Bool = false
     var scalePath     : CGFloat = 1.0
     var timer         : Timer?
+    var started       : Bool = false
     
     
     init(name:String,type:String)
@@ -202,11 +202,21 @@ class Block
     //
     func draw()
     {
-        preDraw()
+        print("draw() Sub class must override")
         
-        postDraw()
     }
    
+    //
+    // subclass may override
+    //
+    func start()
+    {
+    }
+    
+    func end()
+    {
+    }
+    
     
     //
     // must be called from subclass's draw().
@@ -347,6 +357,12 @@ class Block
     
     func postDraw()
     {
+        if started == false
+        {
+            start()
+            started = true
+        }
+        
         //
         // update bounds and position
         //
@@ -526,10 +542,13 @@ class Block
             
             self.hidden = true
             self.baseLayer.isHidden = true
+            
             Timer.scheduledTimer(withTimeInterval: waitStartSecs, repeats: false)
             { (timer) in
                 self.hidden = false
                 self.baseLayer.isHidden = false
+                
+                self.start()
             }
         }
         
@@ -551,6 +570,8 @@ class Block
                 {
                     self.timer!.invalidate()
                 }
+                
+                self.end()
             }
         }
        

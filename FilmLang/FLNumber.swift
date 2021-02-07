@@ -123,18 +123,6 @@ class FLNumber : Block
                 }
             }
             
-            if incrementSeconds > 0.0
-            {
-                timer = Timer.scheduledTimer(withTimeInterval: incrementSeconds, repeats: true)
-                { (timer) in
-                    
-                    self.number += self.increment
-                    let text = String(format: self.format,self.number)
-                    self.textLayer.string = NSAttributedString(string: text, attributes: self.textFontAttributes)
-                }
-            }
-            
-            
             addLayerConstraints(layer:textLayer)
             baseLayer.addSublayer(textLayer)
             Block.addLayerToParent(block: self, layer: baseLayer)
@@ -146,5 +134,20 @@ class FLNumber : Block
         height = frameRect.height
         
         postDraw()
+    }
+    
+    
+    override func start()
+    {
+        if incrementSeconds > 0.0 && timer == nil
+        {
+            timer = Timer.scheduledTimer(withTimeInterval: incrementSeconds, repeats: true)
+            { (timer) in
+                
+                self.number += self.increment
+                let text = String(format: self.format,self.number)
+                self.textLayer.string = NSAttributedString(string: text, attributes: self.textFontAttributes)
+            }
+        }
     }
 }

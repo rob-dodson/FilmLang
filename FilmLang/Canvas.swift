@@ -1,6 +1,5 @@
 //
 //  Canvas.swift
-//  GraphToad
 //
 //  Created by Robert Dodson on 9/9/20.
 //  Copyright © 2020 Robert Dodson. All rights reserved.

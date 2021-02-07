@@ -27,6 +27,9 @@ let time5duration = 5.0
 let time6 = time5 + time5duration
 let time6duration = 4.0 
 
+let time7 = time6 + time6duration
+let time7duration = 3.0 
+
 
 let layout =
 {
@@ -147,7 +150,7 @@ for (x = 0; x < layoutx; x++)
             width:180,
             height:180,
             clip:true,
-            textURL:"text.txt",
+            textFile:"text.txt",
             size:14,
             font:MainFont,
             strokeColor:cyan,
@@ -406,5 +409,28 @@ for (x = 0; x < layoutx; x++)
 		addBlock(grid)
 	}
 }
+
+let countdown = 
+{
+    name:"countdown",
+    type:NUMBER,
+    number: 3.0,
+	layoutSpec:{x:2,y:2,fit:true},
+	center:true,
+    format:"Pausing: %1.1f Seconds",
+    increment: -0.1,
+    incrementSeconds: 0.1,
+    fillGradient:blockbackgrad,
+    strokeColor:green,
+    strokeWidth:5,
+    radius:4,
+    textColor:white,
+    font:"Courier",
+    padding:45,
+	waitStartSeconds:time7,
+	waitEndSeconds:time7 + time7duration,
+}
+
+addBlock(countdown)
 
 

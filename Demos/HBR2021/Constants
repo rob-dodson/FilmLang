@@ -17,6 +17,7 @@ let SCENEVIEW = "SceneView"
 let SCROLLTEXT = "ScrollText"
 let FILTER = "Filter"
 let SOUND = "Sound"
+let NUMBER = "Number"
 
 
 

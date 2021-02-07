@@ -44,14 +44,11 @@ class Canvas: NSView
         
         
         //
-        // Animation loop  MAKE THIS MULTI-THREADED!
+        // start animations
         //
         if Block.thereAreAnimations
         {
-            timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false)
-            { (timer) in
-                self.animateChildren(children: Block.topBlock.children)
-            }
+            self.animateChildren(children: Block.topBlock.children)
         }
     }
     

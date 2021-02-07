@@ -51,9 +51,9 @@ class FLSoundFile : Block
             {
                 print("Playing sound: \(url)")
                 player = try AVAudioPlayer.init(contentsOf: url)
-                if player != nil
+                if let player = self.player
                 {
-                    player!.play()
+                    player.play()
                 }
             }
         }

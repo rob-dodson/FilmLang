@@ -77,6 +77,7 @@ class Block
     var waitEndSecs   : Double = 0.0
     var closePath     : Bool = false
     var scalePath     : CGFloat = 1.0
+    var timer         : Timer?
     
     
     init(name:String,type:String)
@@ -477,6 +478,11 @@ class Block
             let sound = FLSoundFile(name: name,type:type)
             sound.parseBlock(dict: dict)
         }
+        else if type == "Number"
+        {
+            let number = FLNumber(name: name,type:type)
+            number.parseBlock(dict: dict)
+        }
         else
         {
             print("Error: Unknown type: \(type) \(name)")
@@ -539,6 +545,11 @@ class Block
                 for animation in self.animations
                 {
                     animation.layer.removeAllAnimations()
+                }
+                
+                if self.timer != nil
+                {
+                    self.timer!.invalidate()
                 }
             }
         }

@@ -357,7 +357,7 @@ class Block
     
     func postDraw()
     {
-        if started == false
+        if started == false && waitStartSecs == 0.0
         {
             start()
             started = true

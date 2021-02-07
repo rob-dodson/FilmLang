@@ -19,10 +19,9 @@ class FLNumber : Block
     var frameRect    : CGRect!
     var format       : String = "%f"
     var increment    : Double = 0.0
-    
     var incrementSeconds : Double = 0.0
     var textLayer    : CATextLayer!
-    var textFontAttributes : [NSAttributedString.Key: Any]!
+    var textFontAttributes : [NSAttributedString.Key: Any]?
     
     
     override func parseBlock(dict:NSDictionary)
@@ -35,8 +34,8 @@ class FLNumber : Block
         if let colordict = dict["textColor"] as? NSDictionary  { textColor = Block.colorFromDict(dict: colordict) }
         if let sizeval = dict["size"]        as? CGFloat { size = sizeval }
         if let paddingval = dict["padding"]  as? CGFloat { padding = paddingval }
-        if let incnum = dict["increment"]     as? Double { increment = incnum }
-        if let incsecs = dict["incrementSeconds"]  as? Double { incrementSeconds = incsecs }
+        if let incnum = dict["increment"]    as? Double { increment = incnum }
+        if let incsecs = dict["incrementSeconds"] as? Double { incrementSeconds = incsecs }
     }
     
     

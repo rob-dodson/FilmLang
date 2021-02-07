@@ -72,7 +72,7 @@ class Block
     var debugColor    : NSColor = NSColor.red
     var debugFont     : String = "Helvetica"
     var debugFontSize : CGFloat = 18.0
-    var waitStartSecs : Double = 0.0
+    var waitStartSecs : Double = -1.0
     var waitEndSecs   : Double = 0.0
     var closePath     : Bool = false
     var scalePath     : CGFloat = 1.0
@@ -357,8 +357,14 @@ class Block
     
     func postDraw()
     {
-        if started == false && waitStartSecs == 0.0
+        if type == "Sound"
         {
+            print("dound")
+        }
+        
+        if started == false && waitStartSecs < 0.0
+        {
+           
             start()
             started = true
         }

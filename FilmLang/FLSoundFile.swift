@@ -15,7 +15,8 @@ import RobToolsLibrary
 class FLSoundFile : Block
 {
     var soundFilePath : String?
-    var player : AVAudioPlayer?
+    var soundUrl : URL?
+    var player   : AVAudioPlayer?
     
     override func parseBlock(dict:NSDictionary)
     {
@@ -27,36 +28,38 @@ class FLSoundFile : Block
     
     override func draw()
     {
+        preDraw()
+        
         if built == false
         {
             if let soundfilepath = soundFilePath
             {
-                let url = RFile.makeFilePathURL(rootPath: Javascript.runFolder!.absoluteString, filePath: soundfilepath)
-                
-                print("Playing sound: \(url)")
-                
-                do
-                {
-                    player = try AVAudioPlayer.init(contentsOf: url)
-                    
-                    if (waitStartSecs > 0)
-                    {
-                        player?.play(atTime: player!.deviceCurrentTime + waitStartSecs)
-                    }
-                    else
-                    {
-                        player!.play()
-                    }
-                }
-                catch
-                {
-                    print("sound file \(url) failed to load")
-                }
-               
+                soundUrl = RFile.makeFilePathURL(rootPath: Javascript.runFolder!.absoluteString, filePath: soundfilepath)
             }
             
             built = true
         }
         
+        postDraw()
+    }
+    
+    override func start()
+    {
+        do
+        {
+            if let url = soundUrl
+            {
+                print("Playing sound: \(url)")
+                player = try AVAudioPlayer.init(contentsOf: url)
+                if player != nil
+                {
+                    player!.play()
+                }
+            }
+        }
+        catch
+        {
+                print("error playing sound")
+        }
     }
 }

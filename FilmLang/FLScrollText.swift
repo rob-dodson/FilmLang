@@ -15,7 +15,8 @@ import RobToolsLibrary
 class FLScrollText : Block
 {
     var text : String!
-    var textURL : String?
+    var textFile : String?
+    var textURL : URL?
     var font : String = "Helvetica"
     var size : CGFloat = 24.0
     var textColor = NSColor.green
@@ -28,12 +29,13 @@ class FLScrollText : Block
     {
         super.parseBlock(dict: dict)
         
-        if let textstr = dict["text"]        as? String { text = textstr }
-        if let texturl = dict["textURL"]     as? String { textURL = texturl }
-        if let fontstr = dict["font"]        as? String { font = fontstr }
+        if let textstr   = dict["text"]      as? String { text = textstr }
+        if let texturl   = dict["textURL"]   as? URL { textURL = texturl }
+        if let textfile  = dict["textFile"]  as? String { textFile = textfile }
+        if let fontstr   = dict["font"]      as? String { font = fontstr }
         if let colordict = dict["textColor"] as? NSDictionary  { textColor = Block.colorFromDict(dict: colordict) }
-        if let size = dict["size"]           as? CGFloat { self.size = size }
-        if let padding = dict["padding"]     as? CGFloat { self.padding = padding }
+        if let size      = dict["size"]      as? CGFloat { self.size = size }
+        if let padding   = dict["padding"]   as? CGFloat { self.padding = padding }
     }
     
     
@@ -52,10 +54,9 @@ class FLScrollText : Block
             
             if text == nil
             {
-                if let textfile = textURL
+                if let textfile = textFile
                 {
                     let url = RFile.makeFilePathURL(rootPath: Javascript.runFolder!.absoluteString, filePath: textfile)
-                    
                     
                     do
                     {
@@ -64,8 +65,21 @@ class FLScrollText : Block
                     catch
                     {
                         print("Error: \(error)")
-                        text = "error: url not working"
+                        text = "error: text file not working"
                     }
+                }
+                else if let texturl = textURL
+                {
+                    do
+                    {
+                        text = try String(contentsOf: texturl)
+                    }
+                    catch
+                    {
+                        print("Error: \(error)")
+                        text = "error: text URL not working"
+                    }
+                    
                 }
                 else
                 {

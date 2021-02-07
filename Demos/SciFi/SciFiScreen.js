@@ -345,7 +345,7 @@ let colorblock  =
 	height:240,
 	fillGradient:blockbackgrad,
 	radius:4,
-	childBlock0: {type:TEXT,name:"beztitle",text:"primary",size:20,x:10,y:210,textColor:gray,font:MainFont,fillColor:gray,textColor:black,strokeColor:gray,radius:4 },
+	childBlock0: {type:TEXT,name:"beztitle",text:"primary",size:20,x:10,y:210,padding:5,textColor:gray,font:MainFont,fillColor:gray,textColor:black,strokeColor:gray,radius:4 },
 }
 addBlock(colorblock)
 
@@ -392,6 +392,7 @@ for (g = 0; g < 3; g++)
 			 fillColor:orange,
 			 radius:2,
 			 z:-1,
+			 animation0:{property:"position",move:{x:0,y:Math.floor((Math.random() * 60) + 10)},duration:Math.floor((Math.random() * 8) + 1),autoReverses:true},
 			 parent: name
 		  }
 		  addBlock(posblock)
@@ -410,9 +411,13 @@ for (g = 0; g < 3; g++)
 		 size:15,
 		 x:(25 * g * 5) + 10,
 		 y:5,
-		 textColor:cyan,
+		 textColor:black,
+		 padding:3,
 		 parent:"colorblock",
-		 font:MainFont,fillColor:gray,textColor:black,strokeColor:gray,radius:4
+		 font:MainFont,
+		 fillColor:gray,
+		 strokeColor:gray,
+		 radius:2
 	 }
 	 addBlock(grouplabel)
 }

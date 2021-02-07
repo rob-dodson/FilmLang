@@ -24,6 +24,9 @@ let time4duration = 8.0
 let time5 = time4 + time4duration
 let time5duration = 5.0 
 
+let time6 = time5 + time5duration
+let time6duration = 4.0 
+
 
 let layout =
 {
@@ -68,7 +71,7 @@ let HBRText =
     waitStartSeconds:.5,
 	animation0:{property:"transform.scale.x",from:1,to:5,duration:2.0,autoReverses:false},
 	animation1:{property:"transform.scale.y",from:1,to:5,duration:2.0,autoReverses:false},
-    waitEndSeconds:3,
+    waitEndSeconds:4,
 }
 addBlock(HBRText)
 
@@ -85,8 +88,6 @@ for (x = 0; x < layoutx; x++)
 			name:name,
 			layoutSpec:{x:x,y:y,fit:true},
 			radius:35,
-            x:0,
-            y:0,
             center:true,
             strokeColor:orange,
             strokeWidth:2,
@@ -110,10 +111,12 @@ for (x = 0; x < layoutx; x++)
 			strokeColor:orange,
 			strokeWidth:5,
 			radius:4,
+			center:true,
 			waitStartSeconds:time2 + x,
 			waitEndSeconds:time2 + time2duration + x,
-			animation0:{property:"position",move:{x:15,y:15},duration:2.0,autoReverses:true},
+			animation0:{property:"position",move:{x:40,y:40},duration:3,autoReverses:true},
 			animation1:{property:"opacity",from:.3,to:1,duration:2.0,autoReverses:true},
+			animation2:{property:"transform.rotation.z",from:0,to:6,duration:Math.random(4),autoReverses:true},
 		}
 		addBlock(b2)
 		
@@ -132,7 +135,7 @@ for (x = 0; x < layoutx; x++)
         }
         addBlock(back)
 
-		let duration = Math.random(20) + 2
+		let duration = Math.random(15) + 2
 		let r = Math.random()
 		let g = Math.random()
 		let b = Math.random()
@@ -149,7 +152,7 @@ for (x = 0; x < layoutx; x++)
             font:MainFont,
             strokeColor:cyan,
             textColor:rancolor,
-			animation0:{property:"scrollamount",max:300,duration:duration,autoReverses:true},
+			animation0:{property:"scrollamount",max:Math.random(250) + 20,duration:Math.random(10),autoReverses:true},
 			waitStartSeconds:time3 + x,
 			waitEndSeconds:time3 + time3duration + x,
             parent:bname
@@ -356,7 +359,8 @@ for (x = 0; x < layoutx; x++)
 		let r = Math.random()
 		let g = Math.random()
 		let b = Math.random()
-		let rancolor  = { red:r, green:g, blue:b, alpha:0.8}
+		let a = Math.random() + .3
+		let rancolor  = { red:r, green:g, blue:b, alpha:a}
 
 		let name = "text2021".concat(x.toString().concat(y.toString()))
         let  text =
@@ -377,3 +381,30 @@ for (x = 0; x < layoutx; x++)
 		addBlock(text)
 	}
 }
+
+
+for (x = 0; x < layoutx; x++)
+{
+	for (y = 0; y < layouty; y++)
+	{
+		let name = "grid".concat(x.toString().concat(y.toString()))
+		let  grid =
+		{
+			type:GRID,
+			layoutSpec:{x:x,y:y,fit:true},
+			name:name,
+			xspacing:10,
+			yspacing:10,
+			width: 150,
+			height:150,
+			center:true,
+			gridColor:green,
+			waitStartSeconds:time6,
+			waitEndSeconds:time6 + time6duration,
+            childBlock0: {type:TEXT,name:"title",text:"HBR",size:55,center:true,textColor:red,font:MainFont,animation0:{property:"transform.rotation.z",from:0,to:40,duration:Math.random(10),autoReverses:true}},
+		}
+		addBlock(grid)
+	}
+}
+
+

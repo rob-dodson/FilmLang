@@ -63,15 +63,15 @@ class Animation : NSObject, CAAnimationDelegate
         {
             if let size = dict["fromSize"] as? NSDictionary
             {
-                let width = size["width"] as! CGFloat
-                let height = size["height"] as! CGFloat
+                let width = size["width"] as? CGFloat ?? 10.0
+                let height = size["height"] as? CGFloat ?? 10.0
                 animation.fromBounds = CGRect(x: 0, y: 0, width: width, height: height)
             }
             
             if let size = dict["toSize"] as? NSDictionary
             {
-                let width = size["width"] as! CGFloat
-                let height = size["height"] as! CGFloat
+                let width = size["width"] as? CGFloat ?? 20.0
+                let height = size["height"] as? CGFloat ?? 20.0
                 animation.toBounds = CGRect(x: 0, y: 0, width: width, height: height)
             }
             animation.property = "bounds"

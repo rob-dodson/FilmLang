@@ -724,10 +724,21 @@ class Block
     }
     
 
+    static func rectFromDict(dict:NSDictionary) -> CGRect
+    {
+        let x = CGFloat.init(dict["x"] as? Double ?? 0.0)
+        let y = CGFloat.init(dict["y"] as? Double ?? 0.0)
+        let width = CGFloat.init(dict["width"] as? Double ?? 10.0)
+        let height = CGFloat.init(dict["height"] as? Double ?? 10.0)
+        
+        return CGRect(x: x, y: y, width: width, height: height)
+    }
+    
+    
     static func pointFromDict(dict:NSDictionary) -> NSPoint
     {
-        let x = CGFloat.init(dict["x"] as! Double)
-        let y = CGFloat.init(dict["y"] as! Double)
+        let x = CGFloat.init(dict["x"] as? Double ?? 0.0)
+        let y = CGFloat.init(dict["y"] as? Double ?? 0.0)
         
         return NSPoint(x: x, y: y)
     }
@@ -735,10 +746,10 @@ class Block
     
     static func colorFromDict(dict:NSDictionary) -> NSColor
     {
-        let red = CGFloat.init(dict["red"] as! Double)
-        let green = CGFloat.init(dict["green"] as! Double)
-        let blue = CGFloat.init(dict["blue"] as! Double)
-        let alpha = CGFloat.init(dict["alpha"] as! Double)
+        let red = CGFloat.init(dict["red"] as? Double ?? 0.5)
+        let green = CGFloat.init(dict["green"] as? Double ?? 0.5)
+        let blue = CGFloat.init(dict["blue"] as? Double ?? 0.5)
+        let alpha = CGFloat.init(dict["alpha"] as? Double ?? 1.0)
         
         return NSColor.init(calibratedRed: red, green: green, blue: blue, alpha: alpha)
     }

@@ -30,7 +30,8 @@ class Animation : NSObject, CAAnimationDelegate
     var toPath         : CGPath?
     var fromPoint      : CGPoint?
     var toPoint        : CGPoint?
-    
+    var fromBounds     : CGRect?
+    var toBounds       : CGRect?
     
     init(type:String)
     {
@@ -58,7 +59,10 @@ class Animation : NSObject, CAAnimationDelegate
         if let radius = dict["fromRadius"]             as? CGFloat { animation.from = radius }
         if let radius = dict["toRadius"]               as? CGFloat { animation.to = radius }
         
+        if let rect = dict["fromBounds"]               as? NSDictionary { animation.fromBounds = Block.rectFromDict(dict: rect) }
+        if let rect = dict["toBounds"]                 as? NSDictionary { animation.toBounds = Block.rectFromDict(dict: rect) }
            
+        
         if let fromAngles = dict["fromAngles"]         as? NSDictionary
         {
             animation.from = fromAngles["start"] as? CGFloat
@@ -100,6 +104,11 @@ class Animation : NSObject, CAAnimationDelegate
         {
             anim.fromValue = layer.position
             anim.toValue = CGPoint(x: layer.position.x + move!.x, y: layer.position.y + move!.y)
+        }
+        else if property == "bounds"
+        {
+            anim.fromValue = fromBounds
+            anim.toValue = toBounds
         }
         else if property == "borderColor" || property == "backgroundColor" || property == "strokeColor"
         {

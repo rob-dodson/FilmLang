@@ -357,23 +357,22 @@ class Block
     
     func postDraw()
     {
-        if type == "Sound"
-        {
-            print("dound")
-        }
-        
+        //
+        // start timers, etc for blocks that don't have a waitStartSecs
+        //
         if started == false && waitStartSecs < 0.0
         {
-           
             start()
             started = true
         }
+        
         
         //
         // update bounds and position
         //
         baseLayer.bounds = CGRect(x: 0, y: 0,width: width, height: height)
         baseLayer.position = CGPoint(x: x + xoffset + (width / 2), y: y + yoffset + (height / 2))
+        
         
         //
         // centering
@@ -413,6 +412,9 @@ class Block
     }
     
     
+    //
+    // main addBlock() parsing entry point. Create a block type and call it to parse itself.
+    //
     static func addBlockFromDictionary(dict:NSDictionary)
     {
         let type = dict["type"] as! String
@@ -513,7 +515,8 @@ class Block
     
     
     //
-    // override in child and call super.parseBlock() there
+    // Parse the common shared parameters.
+    // override in child and call super.parseBlock() there.
     //
     func parseBlock(dict:NSDictionary)
     {

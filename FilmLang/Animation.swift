@@ -43,13 +43,12 @@ class Animation : NSObject, CAAnimationDelegate
     {
         let animation = Animation(type:type)
         
-        if let property = dict["property"]             as? String { animation.property = property }
+        if let property = dict["property"]             as? String  { animation.property = property }
         if let duration = dict["duration"]             as? CGFloat { animation.duration = duration }
-        if let autoReverses = dict["autoReverses"]     as? Bool { animation.autoReverses = autoReverses }
+        if let autoReverses = dict["autoReverses"]     as? Bool    { animation.autoReverses = autoReverses }
         if let repeatDuration = dict["repeatDuration"] as? CGFloat { animation.repeatDuration = repeatDuration }
-        if let repeatCount = dict["repeatCount"]       as? Float { animation.repeatCount = repeatCount }
-        if let beginTime = dict["waitStartSeconds"]           as? CFTimeInterval { animation.beginTime = beginTime }
-        
+        if let repeatCount = dict["repeatCount"]       as? Float   { animation.repeatCount = repeatCount }
+        if let beginTime = dict["waitStartSeconds"]    as? CFTimeInterval { animation.beginTime = beginTime }
         if let move = dict["move"]                     as? NSDictionary { animation.move = Block.pointFromDict(dict:move) }
         if let toColor = dict["toColor"]               as? NSDictionary { animation.toColor = Block.colorFromDict(dict:toColor) }
         if let fromColor = dict["fromColor"]           as? NSDictionary { animation.fromColor = Block.colorFromDict(dict:fromColor) }
@@ -59,15 +58,31 @@ class Animation : NSObject, CAAnimationDelegate
         if let radius = dict["fromRadius"]             as? CGFloat { animation.from = radius }
         if let radius = dict["toRadius"]               as? CGFloat { animation.to = radius }
         
-        if let rect = dict["fromBounds"]               as? NSDictionary { animation.fromBounds = Block.rectFromDict(dict: rect) }
-        if let rect = dict["toBounds"]                 as? NSDictionary { animation.toBounds = Block.rectFromDict(dict: rect) }
-           
-        
+       
+        if animation.property == "size"
+        {
+            if let size = dict["fromSize"] as? NSDictionary
+            {
+                let width = size["width"] as! CGFloat
+                let height = size["height"] as! CGFloat
+                animation.fromBounds = CGRect(x: 0, y: 0, width: width, height: height)
+            }
+            
+            if let size = dict["toSize"] as? NSDictionary
+            {
+                let width = size["width"] as! CGFloat
+                let height = size["height"] as! CGFloat
+                animation.toBounds = CGRect(x: 0, y: 0, width: width, height: height)
+            }
+            animation.property = "bounds"
+        }
+              
         if let fromAngles = dict["fromAngles"]         as? NSDictionary
         {
             animation.from = fromAngles["start"] as? CGFloat
             animation.to = fromAngles["end"] as? CGFloat
         }
+        
         if let toAngles = dict["toAngles"]                as? NSDictionary
         {
             animation.from = toAngles["start"] as? CGFloat

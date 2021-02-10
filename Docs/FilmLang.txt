@@ -1,7 +1,15 @@
 FilmLang
 ==============
 
-1) Basic parameters that apply to all types
+- FilmLang is basic Javascript with some additional function calls. 
+
+1) addBlock(dictionary)
+2) includeFile("/path/to/filmlangtext.js")
+
+
+
+
+- Basic parameters that apply to all types
 
 debug
 debugColor
@@ -34,7 +42,7 @@ fillGradient
 windowOffset
 animation
 
-2) Animation parameters
+- Animation parameters
 
 property
 duration
@@ -53,22 +61,22 @@ toRadius
 fromAngles
 toAngles
 
-3) Text
+- Text
 	text: "text"
 	font: "fontname"
 	textColor: { red:.7, green:0.0, blue:0.0, alpha:0.8 }
 	size: 15.0
 	padding: 2.0
 
-4) RECT
+- RECT
 
-5) LINE
+- LINE
 	x: 10.0
 	y: 10.0
 	endX: 20.0
 	endY: 20.0
 
-6) SCROLLTEXT
+- SCROLLTEXT
 	text: "text"
 	textFile: "filename" | "/path/filename"
 	textURL: "https://www.foo.com/text"
@@ -77,30 +85,51 @@ toAngles
 	size: 15.0
 	padding: 2.0
 
-7) GRID
+- GRID
 	xspacing: 10.0
 	yspacing: 10.0
 	gridColor: { red:.7, green:0.0, blue:0.0, alpha:0.8 }
 	gridStrokeWidth: 2.0
 
-8) BEZIER
+- BEZIER
 	point0: { x:50.38, y:0 },
     point1: { point: { x:73.84, y:4.31 }, controlPoint1: { x: 59.54, y: 0 }, controlPoint2: {x: 67.36, y: 1.44 }},
 	point2: { cmd:"close" },
 
-9) CIRCLE
-10) AXIS
-11) SOUNDFILE
-12) IMAGE
-13) SCENE
-14) NUMBER
+- CIRCLE
+- AXIS
+- SOUNDFILE
+- IMAGE
+- SCENE
+- NUMBER
 
 
 
-Examples
+Details
 ========
 
-1) You must have a Screen block:
+- addBlock() takes a Javascript dictionary which is a a set of comma separated key:value pairs:
+
+let circle =
+{
+	type:CIRCLE,
+	name:"circle1",
+	layoutSpec:{x:1,y:2,fit:true},
+	radius:35,
+	center:true,
+	strokeColor:orange,
+	strokeWidth:2,
+	childBlock0: {type:TEXT,name:"title",text:"A Circle",size:15,center:true,textColor:red,font:"Helvetica" },
+	waitStartSeconds:2.0,
+	waitEndSeconds:4.0,
+	animation7:{property:"transform.rotation.z",from:0,to:6,duration:4.0,autoReverses:true},
+	animation8:{property:"transform.rotation.x",from:0,to:6,duration:4.0,autoReverses:true},
+	parent: "block1"
+}
+addBlock(circle)
+
+
+- You must have a RECT block named "Screen":
 
 let screen =
 {
@@ -118,22 +147,15 @@ let screen =
 addBlock(screen)
 
 
+- You may have a layout grid:
 
-let circle =
+let layout =
 {
-	type:CIRCLE,
-	name:name,
-	layoutSpec:{x:x,y:y,fit:true},
-	radius:35,
-	center:true,
-	strokeColor:orange,
-	strokeWidth:2,
-	childBlock0: {type:TEXT,name:"title",text:"A Circle",size:15,center:true,textColor:red,font:"Helvetica" },
-	waitStartSeconds:2.0,
-	waitEndSeconds:4.0,
-	animation7:{property:"transform.rotation.z",from:0,to:6,duration:4.0,autoReverses:true},
-	animation8:{property:"transform.rotation.x",from:0,to:6,duration:4.0,autoReverses:true},
+	type:LAYOUT,
+	name:"mylayout",
+	xcount:5,
+	ycount:5,
 }
-addBlock(circle)
+addBlock(layout)
 
 

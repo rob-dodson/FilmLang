@@ -7,7 +7,6 @@
 # Copy output code into a FilmLang BEZIER block.
 #
 
-
 open(FILE,$ARGV[0]) || die "Error opening $ARGV[0]: $?";
 
 $count = 0;

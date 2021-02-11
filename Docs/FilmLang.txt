@@ -1,15 +1,36 @@
 FilmLang
 ==============
 
-- FilmLang is basic Javascript with some additional function calls. 
+- The FilmLang language is basic Javascript with some additional function calls. 
 
-1) addBlock(dictionary)
-2) includeFile("/path/to/filmlangtext.js")
+- addBlock(dictionary)
+- includeFile("/path/to/filmlangtext.js")
+
+Otherwise you can use all basic Javascript code including variables, loops, math, and other main function calls.
+
+- addBlock() takes a Javascript dictionary which is a a set of comma separated key:value pairs:
+
+let circle =
+{
+	type:CIRCLE,
+	name:"circle1",
+	layoutSpec:{x:1,y:2,fit:true},
+	radius:35,
+	center:true,
+	strokeColor:orange,
+	strokeWidth:2,
+	childBlock0: {type:TEXT,name:"title",text:"A Circle",size:15,center:true,textColor:red,font:"Helvetica" },
+	waitStartSeconds:2.0,
+	waitEndSeconds:4.0,
+	animation7:{property:"transform.rotation.z",from:0,to:6,duration:4.0,autoReverses:true},
+	animation8:{property:"transform.rotation.x",from:0,to:6,duration:4.0,autoReverses:true},
+	parent: "block1"
+}
+addBlock(circle)
 
 
 
-
-- Basic parameters that apply to all types
+- Basic dictionary keys that apply to most block types. 
 
 debug
 debugColor
@@ -107,27 +128,6 @@ toAngles
 
 Details
 ========
-
-- addBlock() takes a Javascript dictionary which is a a set of comma separated key:value pairs:
-
-let circle =
-{
-	type:CIRCLE,
-	name:"circle1",
-	layoutSpec:{x:1,y:2,fit:true},
-	radius:35,
-	center:true,
-	strokeColor:orange,
-	strokeWidth:2,
-	childBlock0: {type:TEXT,name:"title",text:"A Circle",size:15,center:true,textColor:red,font:"Helvetica" },
-	waitStartSeconds:2.0,
-	waitEndSeconds:4.0,
-	animation7:{property:"transform.rotation.z",from:0,to:6,duration:4.0,autoReverses:true},
-	animation8:{property:"transform.rotation.x",from:0,to:6,duration:4.0,autoReverses:true},
-	parent: "block1"
-}
-addBlock(circle)
-
 
 - You must have a RECT block named "Screen":
 

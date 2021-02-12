@@ -1,14 +1,14 @@
 FilmLang
 ==============
 
-- The FilmLang language is basic Javascript with some additional function calls. 
+- The FilmLang language is Javascript with some additional function calls. 
 
 - addBlock(dictionary)
 - includeFile("/path/to/filmlangtext.js")
 
 Otherwise you can use all basic Javascript code including variables, loops, math, and other main function calls.
 
-- addBlock() takes a Javascript dictionary which is a a set of comma separated key:value pairs:
+- addBlock() takes a Javascript dictionary which is a a set of comma separated key:value pairs. For example:
 
 let circle =
 {
@@ -32,55 +32,57 @@ addBlock(circle)
 
 - Basic dictionary keys that apply to most block types. 
 
-debug
-debugColor
-debugFontSize
-debugFont
-clip
-fitToView
-x
-y
-z
-width
-height
-fillColor
-strokeColor
-radius
-rotation
-strokeWidth
-strokeStart
-strokeEnd
-gradientAngle
-hidden
-center
-closePath
-scalePath
-waitStartSeconds
-waitEndSeconds
-lineCap
-layoutSpec
-fillGradient
-windowOffset
-animation
+debug:Bool
+debugColor:{red:1.0, green:0.0, blue:0.0, alpha:1.0}
+debugFontSize:Double
+debugFont:"FontName"
+clip:Bool
+fitToView:Bool
+x:double
+y:double
+z:doubler
+width:double
+height:double
+fillColor:L{color}
+strokeColor:{color}
+radius:double
+rotation:
+strokeWidth:double
+strokeStart:0.0 - 1.0
+strokeEnd:0.0 - 1.0
+gradientAngle:double
+hidden:Bool
+center:Bool
+closePath:Bool
+scalePath:double
+waitStartSeconds:double
+waitEndSeconds:double
+lineCap:"butt" | "round"
+layoutSpec:{Spec}
+fillGradient:{{color},{color}}
+windowOffset:double
+animation: {animation parameters}
+
 
 - Animation parameters
 
-property
-duration
-autoReverses
-repeatDuration
-repeatCount
-waitStartSeconds
-move
-toColor
-fromColor
-to
-from
-max
-fromRadius
-toRadius
-fromAngles
-toAngles
+property:"name"
+duration:double
+autoReverses:Bool
+repeatDuration:Bool
+repeatCount:int
+waitStartSeconds:double
+move:{x:X,y:Y}
+toColor:{color}
+fromColor:{color}
+to:
+from:
+max:
+fromRadius:double
+toRadius:double
+fromAngles:double
+toAngles:double
+
 
 - Text
 	text: "text"
@@ -90,6 +92,14 @@ toAngles
 	padding: 2.0
 
 - RECT
+	x: 10.0
+	y: 10.0	
+	width: 20.0
+	height: 20.0
+	strokeColor:{color}
+	fillColor:{color}
+	radius:4
+	strokeWidth:3
 
 - LINE
 	x: 10.0

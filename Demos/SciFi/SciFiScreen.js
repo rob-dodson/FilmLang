@@ -2,7 +2,7 @@ includeFile("../Constants")
 
 let camborder = {red:0.5, green:0.5, blue:0.5, alpha:0.7}
 let camback   = {red:0.0, green:0.0, blue:0.4, alpha:0.6}
-let camiconcolor = {red:0.09, green:0.09, blue:0.09, alpha:0.7}
+let camiconcolor = {red:0.09, green:0.09, blue:0.8, alpha:0.7}
 
 let screen = 
 {
@@ -12,7 +12,7 @@ let screen =
 	y:20,
 	width:300,
 	height:400,
-	gradientAngle:-50,
+	gradientAngle:0.0,
 	clip:true,
 	fitToView:true,
 	fillGradient: { startColor: {red:0.0, green:0.5, blue:0.5, alpha:0.6},endColor: {red:0.0, green:0.0, blue:0.0, alpha:0.4}},
@@ -50,6 +50,7 @@ let scene =
     lightPosition:{x:50,y:height,z:100},
 }
 addBlock(scene)
+
 let axis =
 {
     name:"axis",
@@ -69,6 +70,7 @@ let axis =
     point4:{x: 86, y: 42},
 }
 addBlock(axis)
+
 //
 // BezBlock
 //
@@ -82,8 +84,8 @@ let bezblock =
 	width:400,
 	height:400,
 	fillGradient:blockbackgrad,
-	strokeColor:orange,
-	strokeWidth:5,
+	strokeColor:blue,
+	strokeWidth:2,
 	radius:4,
 //	animator0:{value:"x",amount:1,min:20,max:20,type:BOUNCE},
 	childBlock0: {type:TEXT,name:"beztitle",text:"BEZ-1",size:20,x:10,y:360,textColor:gray,font:MainFont,fillColor:gray,textColor:black,strokeColor:gray,radius:4 },
@@ -114,11 +116,11 @@ let dtxblock =
 	name:"dtxblock",
 	strokeColor:orange,
 	fillColor:cyan,
-	point0:{x: 250, y: 32},
-	point1:{x: 260, y: 34},
-	point2:{x: 260, y: 80},
-	point3:{x: 250, y: 82},
-	point4:{x: 250, y: 32},
+	point0:{x: 262, y: 43},
+	point1:{x: 272, y: 46},
+	point2:{x: 272, y: 87},
+	point3:{x: 262, y: 90},
+	point4:{x: 262, y: 43},
 	parent:"bezblock"
 }
 addBlock(dtxblock)
@@ -167,7 +169,7 @@ let bigbez =
 	type:BEZIER,
 	x:27,
 	y:50,
-	strokeWidth:10,
+	strokeWidth:8,
 	debug:false,
 	point1:{ x: 45,  y: 200 },
 	point2:{ point:{ x: 100,  y: 190 }, controlPoint1:{ x: 45, y: 200  }, controlPoint2:{ x: 80, y: 220 }},
@@ -252,7 +254,7 @@ let CamBlock =
 {
 	name:"CamBlock",
 	type:RECT,
-	x:40,
+	x:60,
 	y:20,
 	layoutSpec:{x:0,y:2,fit:true},
 	width:340,
@@ -261,7 +263,7 @@ let CamBlock =
 	strokeWidth:5,
 	strokeColor:green,
 	fillGradient:blockbackgrad,
-	gradientAngle:-50,
+	gradientAngle:0.0,
 	//animation0:{property:"position",move:{x:40,y:0},duration:1.25,repeatDuration:100,autoReverses:true},
 	//animation1:{property:"backgroundColor",fromColor:red,toColor:green,duration:1.25,repeatDuration:100,autoReverses:true},
 	animation2:{property:"borderColor",fromColor:blue,toColor:cyan,duration:3.25,repeatDuration:100,autoReverses:true},
@@ -322,15 +324,16 @@ let cambracket =
 	name:"cambracket",
 	type:PATH,
     strokeWidth:10,
-    point1:{x:20,y:-18},
-    point2:{x:-18,y:-18},
-    point3:{x:-18,y:328},
-    point4:{x:20,y:328},
+    point1:{x:30,y:-15},
+    point2:{x:-15,y:-15},
+    point3:{x:-15,y:340},
+    point4:{x:30,y:340},
 	strokeColor:cyan,
 	debug:false,
 	parent:"CamBlock",
 }
 addBlock(cambracket)
+
 //
 // color block
 //
@@ -436,7 +439,7 @@ let colorcube =
 	y:90,
 	width:40,
 	height:40,
-	gradientAngle:-50,
+	gradientAngle:0.0,
 	strokeColor:cyan,
 	strokeWidth:1,
 	fillGradient:{ startColor: {red:1.0, green:0.0, blue:0.0, alpha:0.8},endColor: {red:0.0, green:0.9, blue:0.9, alpha:0.8}},
@@ -528,4 +531,60 @@ let titleblock =
 }
 addBlock(titleblock)
 
+//
+// connected boxes
+// 
+
+let cbox1 = 
+{
+	name:"cbox1",
+	type:RECT,
+	layoutSpec:{x:0,y:0,fit:false},
+	x:60,
+	y:20,
+	width:60,
+	height:40,
+	strokeColor:cyan,
+	radius:4,	
+	childBlock0: {type:RECT,name:"icon", x:5,y:20,width:30,height:15,fillGradient:glowgrad,gradientAngle:90,},
+	childBlock1: {type:TEXT,name:"title",text:"488",size:15,x:5,y:5,textColor:gray,font:MainFont },
+}
+addBlock(cbox1)
+
+let cbox2 = 
+{
+	name:"cbox2",
+	type:RECT,
+	layoutSpec:{x:0,y:0,fit:false},
+	x:140,
+	y:20,
+	width:60,
+	height:40,
+	strokeColor:cyan,
+	radius:4,
+	childBlock0: {type:RECT,name:"icon", x:5,y:20,width:30,height:15,fillGradient:glowgrad, gradientAngle:90,},	
+	childBlock1: {type:TEXT,name:"title",text:"788",size:15,x:5,y:5,textColor:gray,font:MainFont },
+}
+addBlock(cbox2)
+
+let cbox3 = 
+{
+	name:"cbox3",
+	type:RECT,
+	layoutSpec:{x:0,y:0,fit:false},
+	x:80,
+	y:80,
+	width:60,
+	height:40,
+	strokeColor:cyan,
+	radius:4,	
+	childBlock0: {type:RECT,name:"icon", x:5,y:20,width:30,height:15,fillGradient:glowgrad,gradientAngle:-180, },
+	childBlock1: {type:TEXT,name:"title",text:"123",size:15,x:5,y:5,textColor:gray,font:MainFont },
+}
+addBlock(cbox3)
+
+let cline1 = { type:LINE,name:"line1",x:120,y:40,endX:140,endY:40,strokeWidth:2,strokeColor:cyan,layoutSpec:{x:0,y:0,fit:false},}
+addBlock(cline1)
+let cline2 = { type:LINE,name:"line1",x:90,y:60,endX:90,endY:80,strokeWidth:2,strokeColor:cyan,layoutSpec:{x:0,y:0,fit:false},}
+addBlock(cline2)
 

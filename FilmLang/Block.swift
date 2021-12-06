@@ -50,7 +50,7 @@ class Block
     var strokeEnd     : CGFloat = 1.0
     var rotation      : CGFloat = -999
     var debug         : Bool = false
-    var gradientAngle : CGFloat = -90
+    var gradientAngle : CGFloat = 180.0
     var clip          : Bool = false
     var radius        : CGFloat = 0.0
     var lineCap       : CAShapeLayerLineCap = .square
@@ -306,6 +306,8 @@ class Block
             fillgradient.getColor(&color0, location: nil, at: 0)
             fillgradient.getColor(&color1, location: nil, at: 1)
             gradlayer.colors = [color0.cgColor,color1.cgColor]
+            gradlayer.transform = CATransform3DMakeRotation(gradientAngle * (3.14 / 180.0), 0, 0, 1)
+
             addLayerConstraints(layer:gradlayer)
             baseLayer.addSublayer(gradlayer)
         }
@@ -426,7 +428,7 @@ class Block
             let rectblock = FLRect(name: name,type:type)
             rectblock.parseBlock(dict: dict)
             
-            if rectblock.name == "Screen"
+            if rectblock.name == "Screen" // all filmlang scripts need a Screen block
             {
                 Block.topBlock = rectblock
                 Block.topBlock.fitToView = true
@@ -633,7 +635,7 @@ class Block
         }
         
         
-        for i in 0...10
+        for i in 0...10 // max of 10 animations per block
         {
             if let dict = dict["animation\(i)"] as? NSDictionary
             {
@@ -652,7 +654,7 @@ class Block
             Block.connectParent(block:self,dict: dict)
         }
 
-        for i in 0...10
+        for i in 0...10 // max of 10 children per block
         {
             if let childblockdict = dict["childBlock\(i)"] as? NSDictionary
             {

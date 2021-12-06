@@ -1,6 +1,20 @@
 includeFile("../Constants")
 includeFile("../BasicScreen")
 
+let layoutx = 5
+let layouty = 5
+
+let layout =
+{
+	type:LAYOUT,
+	name:"layout",
+	xcount:layoutx,
+	ycount:layouty,
+	debug:false,
+	debugColor:gray,
+}
+addBlock(layout)
+
 for (x = 0; x < 4; x++)
 {
 	for (y = 0; y < 4; y++)
@@ -20,21 +34,25 @@ for (x = 0; x < 4; x++)
 		}
 		addBlock(back)
 
+		let	blockname = "block".concat(x.toString()).concat(y.toString())
+		
+		
+		
 		let scrollblock1 =
 		{
-			name:"scrollblock1",
+			name:blockname,
 			type:SCROLLTEXT,
 			width:400,
 			height:250,
 			radius:4,
 			clip:true,
-			textURL:"/Users/robertdodson/Desktop/FILM/scrollingtext.txt",
+			textFile:"/Users/robertdodson/Desktop/foo.txt",
 			size:14,
 			font:MainFont,
 			strokeColor:cyan,
 			strokeWidth:2,
 			textColor:green,
-			animator0:{value:"scrollamount",amount:2*x,min:0,max:-3000.0,type:INC},
+			animation1:{property:"scrollamount",max:-3000,duration:115,autoReverses:false},
 			parent:name
 		}
 		addBlock(scrollblock1)

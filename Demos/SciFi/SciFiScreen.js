@@ -381,18 +381,24 @@ for (g = 0; g < 3; g++)
 		 let sliderlabel =  { type:TEXT,name:slidername,text:label,size:15,x:6,y:140,textColor:cyan,font:MainFont,parent: name}
 		 addBlock(sliderlabel)
 		 
+		 let x = 1
+		 let y = Math.floor((Math.random() * 60) + 10)
+		 let width = 19
+		 let height = Math.floor((Math.random() * 15) + 3)
+
 		 let posblock = 
 		 {
 			 name:"posblock",
 			 type:RECT,
-			 x:1,
-			 y:Math.floor((Math.random() * 60) + 10),
-			 width:19,
-			 height:Math.floor((Math.random() * 15) + 3),
+			 x:x,
+			 y:y,
+			 width:width,
+			 height:height,
 			 fillColor:orange,
 			 radius:2,
 			 z:-1,
 			 animation0:{property:"position",move:{x:0,y:Math.floor((Math.random() * 60) + 10)},duration:Math.floor((Math.random() * 8) + 1),autoReverses:true},
+			 animation2:{property:"size",fromSize:{width:width,height:height},toSize:{width:width,height:height * 1.5},duration:1.0,autoReverses:true},
 			 parent: name
 		  }
 		  addBlock(posblock)

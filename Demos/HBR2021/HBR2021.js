@@ -1,5 +1,5 @@
 //
-// HBR2021
+// HBR2022
 //
 includeFile("Constants")
 includeFile("Gradients")
@@ -30,6 +30,8 @@ let time6duration = 4.0
 let time7 = time6 + time6duration
 let time7duration = 3.0 
 
+let time8 = time7 + time7duration
+let time8duration = 5.0 
 
 let layout =
 {
@@ -66,7 +68,7 @@ let HBRText =
 {
 	type:TEXT,
 	name:"hbrtext",
-	text:"HBR2021",
+	text:"HBR2022",
 	layoutSpec:{x:2,y:2,fit:true},
 	size:50,
 	font:"Futura",
@@ -365,13 +367,13 @@ for (x = 0; x < layoutx; x++)
 		let a = Math.random() + .3
 		let rancolor  = { red:r, green:g, blue:b, alpha:a}
 
-		let name = "text2021".concat(x.toString().concat(y.toString()))
+		let name = "text2022".concat(x.toString().concat(y.toString()))
         let  text =
 		{
 			type:TEXT,
 			layoutSpec:{x:x,y:y,fit:true},
 			name:name,
-			text:"2021",
+			text:"2022",
 			size:95,
 			center:true,
 			textColor:rancolor,
@@ -429,8 +431,42 @@ let countdown =
     padding:45,
 	waitStartSeconds:time7,
 	waitEndSeconds:time7 + time7duration,
+	animation0:{property:"position",move:{x:40,y:40},duration:time7duration,autoReverses:false},
 }
 
 addBlock(countdown)
 
 
+let happy = 
+{
+	type:TEXT,
+	layoutSpec:{x:2,y:2,fit:true},
+	name:"happy",
+	text:"HAPPY BIRTHDAY",
+	size:200,
+	center:true,
+	textColor:red,
+	font:"Futura",
+	waitStartSeconds:time8,
+	waitEndSeconds:time8 + time8duration,
+	animation1:{property:"opacity",from:0.0,to:1.0,duration:10,autoReverses:false},
+
+}
+addBlock(happy)
+
+let person = 
+{
+	type:TEXT,
+	layoutSpec:{x:2,y:1,fit:true},
+	name:"person",
+	text:"REYN",
+	size:200,
+	center:true,
+	textColor:blue,
+	font:"Futura",
+	waitStartSeconds:time8,
+	waitEndSeconds:time8 + time8duration,
+	animation1:{property:"opacity",from:0.0,to:1.0,duration:10,autoReverses:false},
+
+}
+addBlock(person)

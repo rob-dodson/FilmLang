@@ -65,3 +65,39 @@ let countdown =
 
 addBlock(countdown)
 
+
+let happy =
+{
+    type:TEXT,
+	x:100,
+	y:320,
+    name:"happy",
+    text:"HAPPY BIRTHDAY",
+    size:180,
+    center:true,
+    textColor:red,
+    font:"Futura",
+    waitStartSeconds:3,
+    waitEndSeconds: 10,
+    animation1:{property:"opacity",from:0.0,to:1.0,duration:10,autoReverses:false},
+
+}
+addBlock(happy)
+
+let person =
+{
+    type:TEXT,
+	x:100,
+	y:220,
+    name:"person",
+    text:"REYN",
+    size:180,
+    center:true,
+    textColor:blue,
+    font:"Futura",
+    waitStartSeconds:3,
+    waitEndSeconds: 10,
+    animation1:{property:"opacity",from:0.0,to:1.0,duration:10,autoReverses:false},
+
+}
+addBlock(person)

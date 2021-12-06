@@ -77,13 +77,13 @@ class Animation : NSObject, CAAnimationDelegate
             animation.property = "bounds"
         }
               
-        if let fromAngles = dict["fromAngles"]         as? NSDictionary
+        if let fromAngles = dict["fromAngles"] as? NSDictionary
         {
             animation.from = fromAngles["start"] as? CGFloat
             animation.to = fromAngles["end"] as? CGFloat
         }
         
-        if let toAngles = dict["toAngles"]                as? NSDictionary
+        if let toAngles = dict["toAngles"] as? NSDictionary
         {
             animation.from = toAngles["start"] as? CGFloat
             animation.to = toAngles["end"] as? CGFloat

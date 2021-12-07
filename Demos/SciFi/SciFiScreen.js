@@ -51,25 +51,48 @@ let scene =
 }
 addBlock(scene)
 
+//
+// graph
+//
 let axis =
 {
     name:"axis",
     type:AXIS,
-	axisColor: { red: 0.76, green: 0.38, blue: 0.00, alpha: 1.00 },
+	axisColor: orange,
     x:0,
     y:0,
     width:300,
     height:200,
     layoutSpec:{x:2,y:1,fit:false},
-    strokeWidth:2,
+    strokeWidth:1,
     strokeColor:cyan,
 	point0:{x: 0, y: 0},
-    point1:{x: 27, y: 44},
-    point2:{x: 37, y: 92},
-    point3:{x: 56, y: 94},
-    point4:{x: 86, y: 42},
+    point1:{x: 10, y: 44},
+    point2:{x: 20, y: 92},
+    point3:{x: 30, y: 94},
+    point4:{x: 40, y: 42},
+	point5:{x: 50, y: 10},
+	point6:{x: 100, y: 44},
+	point7:{x: 110, y: 92},
+	point8:{x: 120, y: 94},
+	point9:{x: 130, y: 42},
+	point10:{x: 140, y: 5},
+	point11:{x: 150, y: 44},
+	point12:{x: 160, y: 92},
+	point13:{x: 170, y: 94},
+	point14:{x: 180, y: 42},
+	point15:{x: 190, y: 9},
+	point16:{x: 200, y: 88},
+	point17:{x: 210, y: 92},
+	point18:{x: 220, y: 194},
+	point19:{x: 230, y: 142},
+	childBlock0: {type:TEXT,name:"title",text:" Average ",size:20,x:10,y:200,textColor:gray,font:MainFont,fillColor:gray,textColor:black,strokeColor:gray,radius:4 },
+	childBlock1: {type:TEXT,name:"label",text:"12.4%",size:20,x:10,y:10,textColor:gray,font:MainFont },
+	childBlock2: {type:TEXT,name:"label",text:"*12.2*",size:20,x:100,y:90,textColor:orange,font:MainFont },
+	childBlock3: {type:TEXT,name:"label",text:"-- 123+^^34",size:15,x:150,y:140,textColor:red,font:MainFont },
 }
 addBlock(axis)
+
 
 //
 // BezBlock
@@ -278,7 +301,7 @@ let cameraicon =
 { 
 	type:PATH,
 	name:"cameraicon",
-	fillColor:cyan,
+	fillColor:camiconcolor,
 	point0:{x: 5, y: 20},
 	point1:{x: 25, y: 20},
 	point2:{x: 25, y: 24},
@@ -544,14 +567,30 @@ let titleblock =
 	fillGradient:blockbackgrad,
 	radius:4,
 	childBlock0: {type:TEXT,name:"title",text:"central core",size:20,x:10,y:40,textColor:gray,font:MainFont },
-	childBlock1: {type:TEXT,name:"sub1",text:"IG. US",size:15,x:10,y:10,textColor:black,font:MainFont },
+	childBlock1: {type:TEXT,name:"sub1",text:"IG. US",size:15,x:10,y:10,textColor:green,font:MainFont },
 }
 addBlock(titleblock)
 
 //
 // connected boxes
 // 
-
+let contitle = 
+{
+	type:TEXT,
+	name:"title",
+	text:" BRK ",
+	size:20,
+	x:10,
+	y:180,
+	textColor:gray,
+	font:MainFont,
+	fillColor:gray,
+	textColor:black,
+	strokeColor:gray,
+	radius:4 ,
+	layoutSpec:{x:0,y:0,fit:false},
+}
+addBlock(contitle)
 let cbox1 = 
 {
 	name:"cbox1",
@@ -629,4 +668,55 @@ let cline3 = { type:LINE,name:"line1",x:140,y:100,endX:180,endY:100,strokeWidth:
 addBlock(cline3)
 let cline4 = { type:LINE,name:"line1",x:190,y:60,endX:190,endY:80,strokeWidth:2,strokeColor:cyan,layoutSpec:{x:0,y:0,fit:false},}
 addBlock(cline4)
+
+
+//
+// Big Buttons
+//
+let buttitle = 
+{
+	type:TEXT,
+	name:"title",
+	text:" DISH ",
+	size:20,
+	x:10,
+	y:180,
+	textColor:gray,
+	font:MainFont,
+	fillColor:gray,
+	textColor:black,
+	strokeColor:gray,
+	radius:4 ,
+	layoutSpec:{x:3,y:1,fit:false},
+}
+addBlock(buttitle)
+
+let bnum = 1
+for (x = 0; x < 3; x++)
+{
+	for (y = 0; y < 3; y++)
+	{
+		let name = "button".concat(x.toString()).concat(y.toString())
+		let color = gray
+		if (y == 2 && x == 2) 
+			color = orange
+		 
+		let b1 = 
+		{
+			name:name,
+			type:RECT,
+			layoutSpec:{x:3,y:1,fit:false},
+			x:10 + (x * 65),
+			y:10 + (y * 50),
+			width:60,
+			height:40,
+			strokeColor:cyan,
+			fillColor:cyan,
+			radius:4,	
+			childBlock1: {type:TEXT,name:"title",text:bnum.toString(),size:40,x:17,y:-1,textColor:color,font:MainFont },
+		}
+		addBlock(b1)
+		bnum++
+	}
+}
 

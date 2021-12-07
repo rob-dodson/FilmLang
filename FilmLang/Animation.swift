@@ -125,7 +125,7 @@ class Animation : NSObject, CAAnimationDelegate
             anim.fromValue = fromBounds
             anim.toValue = toBounds
         }
-        else if property == "borderColor" || property == "backgroundColor" || property == "strokeColor"
+        else if property == "borderColor" || property == "backgroundColor" || property == "strokeColor" || property == "fillColor"
         {
             anim.fromValue = fromColor?.cgColor
             anim.toValue = toColor?.cgColor

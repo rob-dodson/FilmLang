@@ -274,6 +274,22 @@ let CamBlock =
 }
 addBlock(CamBlock)
 
+let cameraicon =
+{ 
+	type:PATH,
+	name:"cameraicon",
+	fillColor:cyan,
+	point0:{x: 5, y: 20},
+	point1:{x: 25, y: 20},
+	point2:{x: 25, y: 24},
+	point3:{x: 35, y: 20},
+	point4:{x: 35, y: 30},
+	point5:{x: 25, y: 26},
+	point6:{x: 25, y: 30},
+	point7:{x: 5, y: 30},
+	point8:{x: 5, y: 20},
+}
+
 for (x = 0; x <= 4; x++)
 {
 	for (y = 0; y <= 5; y++)
@@ -299,7 +315,8 @@ for (x = 0; x <= 4; x++)
 			height:40,
 			strokeColor:bordercolor,
 			fillColor:camback,
-			childBlock0: {type:RECT,name:"icon", x:5,y:20,width:30,height:15,fillColor:iconcolor },
+			
+			childBlock0: cameraicon,
 			childBlock1: {type:TEXT,name:"text",text:camname,size:10,x:5,y:5,textColor:darkgreen },
 			childBlock2: {type:TEXT,name:"textbig",text:camnum,size:15,x:40,y:20,textColor:gray,font:MainFont },
 			parent:"CamBlock",
@@ -547,7 +564,7 @@ let cbox1 =
 	strokeColor:cyan,
 	radius:4,	
 	childBlock0: {type:RECT,name:"icon", x:5,y:20,width:30,height:15,fillGradient:glowgrad,gradientAngle:90,},
-	childBlock1: {type:TEXT,name:"title",text:"488",size:15,x:5,y:5,textColor:gray,font:MainFont },
+	childBlock1: {type:TEXT,name:"title",text:"488",size:15,x:5,y:2,textColor:gray,font:MainFont },
 }
 addBlock(cbox1)
 
@@ -563,7 +580,7 @@ let cbox2 =
 	strokeColor:cyan,
 	radius:4,
 	childBlock0: {type:RECT,name:"icon", x:5,y:20,width:30,height:15,fillGradient:glowgrad, gradientAngle:90,},	
-	childBlock1: {type:TEXT,name:"title",text:"788",size:15,x:5,y:5,textColor:gray,font:MainFont },
+	childBlock1: {type:TEXT,name:"title",text:"788",size:15,x:5,y:2,textColor:gray,font:MainFont },
 }
 addBlock(cbox2)
 
@@ -578,13 +595,38 @@ let cbox3 =
 	height:40,
 	strokeColor:cyan,
 	radius:4,	
-	childBlock0: {type:RECT,name:"icon", x:5,y:20,width:30,height:15,fillGradient:glowgrad,gradientAngle:-180, },
-	childBlock1: {type:TEXT,name:"title",text:"123",size:15,x:5,y:5,textColor:gray,font:MainFont },
+	childBlock0: {type:RECT,name:"icon", x:5,y:20,width:30,height:15,fillGradient:glowgrad,gradientAngle:90, },
+	childBlock1: {type:TEXT,name:"title",text:"123",size:15,x:5,y:2,textColor:gray,font:MainFont },
 }
 addBlock(cbox3)
+
+let cbox4 = 
+{
+	name:"cbox4",
+	type:RECT,
+	layoutSpec:{x:0,y:0,fit:false},
+	x:180,
+	y:80,
+	width:40,
+	height:70,
+	strokeColor:cyan,
+	radius:4,	
+	childBlock0:{type:CIRCLE,name:"circle1",x:12,y:10,radius:6,strokeColor:cyan,fillColor:red1,
+		animation0:{property:"fillColor",fromColor:red1,toColor:green,duration:.75,repeatDuration:1000,autoReverses:true},},
+	childBlock1:{type:CIRCLE,name:"circle1",x:12,y:25,radius:6,strokeColor:cyan,fillColor:red1},
+	childBlock2:{type:CIRCLE,name:"circle1",x:12,y:40,radius:6,strokeColor:cyan,fillColor:red1},
+	childBlock3:{type:CIRCLE,name:"circle1",x:12,y:55,radius:6,strokeColor:cyan,fillColor:red1,
+		animation0:{property:"fillColor",fromColor:red1,toColor:green,duration:.25,repeatDuration:1000,autoReverses:true},},
+}
+addBlock(cbox4)
+
 
 let cline1 = { type:LINE,name:"line1",x:120,y:40,endX:140,endY:40,strokeWidth:2,strokeColor:cyan,layoutSpec:{x:0,y:0,fit:false},}
 addBlock(cline1)
 let cline2 = { type:LINE,name:"line1",x:90,y:60,endX:90,endY:80,strokeWidth:2,strokeColor:cyan,layoutSpec:{x:0,y:0,fit:false},}
 addBlock(cline2)
+let cline3 = { type:LINE,name:"line1",x:140,y:100,endX:180,endY:100,strokeWidth:2,strokeColor:cyan,layoutSpec:{x:0,y:0,fit:false},}
+addBlock(cline3)
+let cline4 = { type:LINE,name:"line1",x:190,y:60,endX:190,endY:80,strokeWidth:2,strokeColor:cyan,layoutSpec:{x:0,y:0,fit:false},}
+addBlock(cline4)
 

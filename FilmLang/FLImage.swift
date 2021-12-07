@@ -30,6 +30,11 @@ class FLImage : Block
         
         if let urlstr = dict["url"]   as? String
         {
+            let url = URL(string:urlstr)
+            ciimage = CIImage(contentsOf: url!)
+        }
+        else if let urlstr = dict["file"]   as? String
+        {
             let url = RFile.makeFilePathURL(rootPath: Javascript.runFolder!.absoluteString, filePath: urlstr)
             ciimage = CIImage(contentsOf: url)
         }

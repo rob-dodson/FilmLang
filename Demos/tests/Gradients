@@ -1,0 +1,20 @@
+//
+// gradients
+//
+let blockbackgrad =
+{
+    startColor: {red:0.0, green:0.5, blue:0.5, alpha:0.4},
+    endColor: {red:0.0, green:0.0, blue:0.0, alpha:0.1},
+}
+
+let redgrad =
+{
+    startColor: {red:0.9, green:0.0, blue:0.0, alpha:0.4},
+    endColor: {red:0.2, green:0.0, blue:0.0, alpha:0.4},
+}
+
+let glowgrad =
+{
+    startColor: {red:0.9, green:0.0, blue:0.6, alpha:0.4},
+    endColor: {red:1.0, green:0.0, blue:1.0, alpha:0.8},
+}

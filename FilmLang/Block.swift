@@ -608,7 +608,7 @@ class Block
         {
             let x = layout["x"] as! Int
             let y = layout["y"] as! Int
-            let fit = layout["fit"] as! Bool
+            let fit = layout["fit"] as! Bool // not currently used
             self.layoutSpec = LayoutSpec(x: x, y: y, fit: fit)
         }
         

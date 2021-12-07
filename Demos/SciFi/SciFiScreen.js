@@ -1,8 +1,10 @@
-includeFile("../Constants")
+includeFile("Constants")
 
 let camborder = {red:0.5, green:0.5, blue:0.5, alpha:0.7}
 let camback   = {red:0.0, green:0.0, blue:0.4, alpha:0.6}
 let camiconcolor = {red:0.09, green:0.09, blue:0.8, alpha:0.7}
+let radius = 4
+
 
 let screen = 
 {
@@ -33,12 +35,20 @@ addBlock(layout)
 let width = 350
 let height = 250
 
+
+let toptitle = 
+{
+	type:TEXT,name:"top",text:"MT56r7 - MANAGEMENT PANEL - Version: 23.5.61.7.22",padding:5,size:50,x:20,y:1100,textColor:cyan,font:MainFont 
+}
+addBlock(toptitle)
+
+
 let scene =
 {
 	type:SCENEVIEW,
 	name:"sceneview",
 	x:10,
-	y:10,
+	y:100,
 	width:width,
 	height:height,
 	layoutSpec:{x:2,y:2,fit:false},
@@ -86,7 +96,7 @@ let axis =
 	point17:{x: 210, y: 92},
 	point18:{x: 220, y: 194},
 	point19:{x: 230, y: 142},
-	childBlock0: {type:TEXT,name:"title",text:" Average ",size:20,x:10,y:200,textColor:gray,font:MainFont,fillColor:gray,textColor:black,strokeColor:gray,radius:4 },
+	childBlock0: {type:TEXT,name:"title",text:" Average ",padding:5,size:20,x:10,y:200,textColor:gray,font:MainFont,fillColor:gray,textColor:black,strokeColor:gray,radius:4 },
 	childBlock1: {type:TEXT,name:"label",text:"12.4%",size:20,x:10,y:10,textColor:gray,font:MainFont },
 	childBlock2: {type:TEXT,name:"label",text:"*12.2*",size:20,x:100,y:90,textColor:orange,font:MainFont },
 	childBlock3: {type:TEXT,name:"label",text:"-- 123+^^34",size:15,x:150,y:140,textColor:red,font:MainFont },
@@ -109,9 +119,9 @@ let bezblock =
 	fillGradient:blockbackgrad,
 	strokeColor:blue,
 	strokeWidth:2,
-	radius:4,
+	radius:radius,
 //	animator0:{value:"x",amount:1,min:20,max:20,type:BOUNCE},
-	childBlock0: {type:TEXT,name:"beztitle",text:"BEZ-1",size:20,x:10,y:360,textColor:gray,font:MainFont,fillColor:gray,textColor:black,strokeColor:gray,radius:4 },
+	childBlock0: {type:TEXT,name:"beztitle",text:"BEZ-1",padding:5,size:20,x:10,y:360,textColor:gray,font:MainFont,fillColor:gray,textColor:black,strokeColor:gray,radius:4 },
 }
 addBlock(bezblock)
 
@@ -282,11 +292,10 @@ let CamBlock =
 	layoutSpec:{x:0,y:2,fit:true},
 	width:340,
 	height:330,
-	radius:4,
+	radius:radius,
 	strokeWidth:5,
 	strokeColor:green,
 	fillGradient:blockbackgrad,
-	gradientAngle:0.0,
 	//animation0:{property:"position",move:{x:40,y:0},duration:1.25,repeatDuration:100,autoReverses:true},
 	//animation1:{property:"backgroundColor",fromColor:red,toColor:green,duration:1.25,repeatDuration:100,autoReverses:true},
 	animation2:{property:"borderColor",fromColor:blue,toColor:cyan,duration:3.25,repeatDuration:100,autoReverses:true},
@@ -387,8 +396,8 @@ let colorblock  =
 	width:400,
 	height:240,
 	fillGradient:blockbackgrad,
-	radius:4,
-	childBlock0: {type:TEXT,name:"beztitle",text:"primary",size:20,x:10,y:210,padding:5,textColor:gray,font:MainFont,fillColor:gray,textColor:black,strokeColor:gray,radius:4 },
+	radius:radius,
+	childBlock0: {type:TEXT,name:"beztitle",text:"Primary",size:20,x:10,y:198,padding:5,textColor:gray,font:MainFont,fillColor:gray,textColor:black,strokeColor:gray,radius:4 },
 }
 addBlock(colorblock)
 
@@ -483,10 +492,11 @@ let colorcube =
 	strokeColor:cyan,
 	strokeWidth:1,
 	fillGradient:{ startColor: {red:1.0, green:0.0, blue:0.0, alpha:0.8},endColor: {red:0.0, green:0.9, blue:0.9, alpha:0.8}},
-	radius:2,
+	radius:radius,
 	parent: "colorblock",	
 }
 addBlock(colorcube)
+
 let mapgrid =
 {
 	type:GRID,
@@ -498,6 +508,7 @@ let mapgrid =
 	height:250,
 	strokeColor:cyan,
 	gridColor:cyan,
+	childBlock0: {type:TEXT,name:"beztitle",text:"US",size:20,x:10,y:210,padding:5,textColor:gray,font:MainFont,fillColor:gray,textColor:black,strokeColor:gray,radius:4 },
 }
 addBlock(mapgrid)
 
@@ -505,17 +516,34 @@ let map =
 {
 	type:IMAGE,
 	name:"map",
-	url:"map.png",
+	file:"map.png",
 	x:0,
 	y:0,
 	width:350,
 	height:250,
-	filter:{type:FILTER,name:"CIMotionBlur",inputRadius:30.0,inputAngle:5},
-	//filter:{type:FILTER,name:"CIBoxBlur",inputRadius:80.0},
+	//filter:{type:FILTER,name:"CIMotionBlur",inputRadius:30.0,inputAngle:5},
+	filter:{type:FILTER,name:"CIBoxBlur",inputRadius:30.0},
 	//filter:{type:FILTER,name:"CILinearGradient",inputPoint0:{x:10,y:10},inputPoint1:{x:100,y:100},inputColor0:blue,inputColor1:red},
 	parent:"mapgrid"
 }
 addBlock(map)
+
+let radar = 
+{
+	type:IMAGE,
+	name:"radar",
+	layoutSpec:{x:0,y:1,fit:false},
+	//url:"https://www.weather.gov/images/gsp/tdwr/TCLT1842Refl.gif",
+	//url:"https://ak6.picdn.net/shutterstock/videos/1020930286/thumb/12.jpg",
+	url:"https://images5.alphacoders.com/294/294947.png",
+	x:40,
+	y:0,
+	width:350,
+	height:250,
+	childBlock0: {type:TEXT,name:"beztitle",text:"TCLT1842Refl subpanel",size:20,x:10,y:210,padding:5,textColor:gray,font:MainFont,fillColor:gray,textColor:black,strokeColor:gray,radius:4 },
+	//filter:{type:FILTER,name:"CIMotionBlur",inputRadius:10.0,inputAngle:5},
+}
+addBlock(radar)
 	
 let scrollblock1 =
 {
@@ -524,15 +552,16 @@ let scrollblock1 =
 	layoutSpec:{x:2,y:0,fit:false},
 	width:400,
 	height:250,
-	radius:4,
+	radius:radius,
 	clip:true,
-	textFile:"scrollingtext.txt",
+	//textFile:"scrollingtext.txt",
+	textURL:"https://robdodson.net/styles.css",
 	size:14,
 	font:MainFont,
 	strokeColor:cyan,
 	strokeWidth:2,
-	textColor:green,
-	animation1:{property:"scrollamount",max:-3000,duration:115,autoReverses:false},
+	textColor:cyan,
+	animation1:{property:"scrollamount",max:-500,duration:15,autoReverses:false},
 }
 addBlock(scrollblock1)
 
@@ -543,7 +572,7 @@ let scrollblock2 =
 	layoutSpec:{x:3,y:0,fit:false},
 	width:400,
 	height:250,
-	radius:4,
+	radius:radius,
 	clip:true,
 	textFile:"scrollingtext.txt",
 	size:14,
@@ -559,26 +588,28 @@ let titleblock =
 {
 	name:"titleblock",
 	type:RECT,
-	layoutSpec:{x:1,y:3,fit:false},
+	layoutSpec:{x:1,y:2,fit:false},
 	x:40,
-	y:70,
-	width:200,
-	height:100,
+	y:100,
+	width:300,
+	height:200,
 	fillGradient:blockbackgrad,
-	radius:4,
-	childBlock0: {type:TEXT,name:"title",text:"central core",size:20,x:10,y:40,textColor:gray,font:MainFont },
-	childBlock1: {type:TEXT,name:"sub1",text:"IG. US",size:15,x:10,y:10,textColor:green,font:MainFont },
+	radius:radius,
+	childBlock0: {type:TEXT,name:"title",text:"Location: Central Core",size:20,x:10,y:180,textColor:gray,font:MainFont },
+	childBlock1: {type:TEXT,name:"sub1",text:"IG. US",size:15,x:10,y:160,textColor:green,font:MainFont },
+	childBlock2: {type:TEXT,name:"sub1",text:"Online",size:15,x:10,y:140,textColor:cyan,font:MainFont },
 }
 addBlock(titleblock)
 
 //
-// connected boxes
+// connected boxes BRK
 // 
 let contitle = 
 {
 	type:TEXT,
 	name:"title",
-	text:" BRK ",
+	text:"BRK",
+	padding:5,
 	size:20,
 	x:10,
 	y:180,
@@ -587,9 +618,13 @@ let contitle =
 	fillColor:gray,
 	textColor:black,
 	strokeColor:gray,
-	radius:4 ,
+	radius:radius,
 	layoutSpec:{x:0,y:0,fit:false},
 }
+
+
+let grad = {type:RECT,name:"icon", x:5,y:20,width:50,height:15,fillGradient:glowgrad,gradientAngle:90,}
+
 addBlock(contitle)
 let cbox1 = 
 {
@@ -601,8 +636,8 @@ let cbox1 =
 	width:60,
 	height:40,
 	strokeColor:cyan,
-	radius:4,	
-	childBlock0: {type:RECT,name:"icon", x:5,y:20,width:30,height:15,fillGradient:glowgrad,gradientAngle:90,},
+	radius:radius,	
+	childBlock0: grad,
 	childBlock1: {type:TEXT,name:"title",text:"488",size:15,x:5,y:2,textColor:gray,font:MainFont },
 }
 addBlock(cbox1)
@@ -617,8 +652,8 @@ let cbox2 =
 	width:60,
 	height:40,
 	strokeColor:cyan,
-	radius:4,
-	childBlock0: {type:RECT,name:"icon", x:5,y:20,width:30,height:15,fillGradient:glowgrad, gradientAngle:90,},	
+	radius:radius,
+	childBlock0: grad,	
 	childBlock1: {type:TEXT,name:"title",text:"788",size:15,x:5,y:2,textColor:gray,font:MainFont },
 }
 addBlock(cbox2)
@@ -633,8 +668,8 @@ let cbox3 =
 	width:60,
 	height:40,
 	strokeColor:cyan,
-	radius:4,	
-	childBlock0: {type:RECT,name:"icon", x:5,y:20,width:30,height:15,fillGradient:glowgrad,gradientAngle:90, },
+	radius:radius,	
+	childBlock0: grad,
 	childBlock1: {type:TEXT,name:"title",text:"123",size:15,x:5,y:2,textColor:gray,font:MainFont },
 }
 addBlock(cbox3)
@@ -649,7 +684,7 @@ let cbox4 =
 	width:40,
 	height:70,
 	strokeColor:cyan,
-	radius:4,	
+	radius:radius,	
 	childBlock0:{type:CIRCLE,name:"circle1",x:12,y:10,radius:6,strokeColor:cyan,fillColor:red1,
 		animation0:{property:"fillColor",fromColor:red1,toColor:green,duration:.75,repeatDuration:1000,autoReverses:true},},
 	childBlock1:{type:CIRCLE,name:"circle1",x:12,y:25,radius:6,strokeColor:cyan,fillColor:red1},
@@ -677,7 +712,8 @@ let buttitle =
 {
 	type:TEXT,
 	name:"title",
-	text:" DISH ",
+	text:"DISH",
+	padding:5,
 	size:20,
 	x:10,
 	y:180,
@@ -712,7 +748,7 @@ for (x = 0; x < 3; x++)
 			height:40,
 			strokeColor:cyan,
 			fillColor:cyan,
-			radius:4,	
+			radius:radius,	
 			childBlock1: {type:TEXT,name:"title",text:bnum.toString(),size:40,x:17,y:-1,textColor:color,font:MainFont },
 		}
 		addBlock(b1)

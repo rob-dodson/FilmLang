@@ -3,7 +3,7 @@
 //
 let blockbackgrad =
 {
-    startColor: {red:0.0, green:0.5, blue:0.0, alpha:0.4},
+    startColor: {red:0.0, green:0.5, blue:0.5, alpha:0.4},
     endColor: {red:0.0, green:0.0, blue:0.0, alpha:0.1},
 }
 

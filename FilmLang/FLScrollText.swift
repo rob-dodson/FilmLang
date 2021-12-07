@@ -16,7 +16,7 @@ class FLScrollText : Block
 {
     var text : String!
     var textFile : String?
-    var textURL : URL?
+    var textURL : String?
     var font : String = "Helvetica"
     var size : CGFloat = 24.0
     var textColor = NSColor.green
@@ -30,7 +30,7 @@ class FLScrollText : Block
         super.parseBlock(dict: dict)
         
         if let textstr   = dict["text"]      as? String { text = textstr }
-        if let texturl   = dict["textURL"]   as? URL { textURL = texturl }
+        if let texturl   = dict["textURL"]   as? String { textURL = texturl }
         if let textfile  = dict["textFile"]  as? String { textFile = textfile }
         if let fontstr   = dict["font"]      as? String { font = fontstr }
         if let colordict = dict["textColor"] as? NSDictionary  { textColor = Block.colorFromDict(dict: colordict) }
@@ -72,7 +72,7 @@ class FLScrollText : Block
                 {
                     do
                     {
-                        text = try String(contentsOf: texturl)
+                        text = try String(contentsOf:URL(string:texturl)!)
                     }
                     catch
                     {

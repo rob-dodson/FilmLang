@@ -51,6 +51,7 @@ let scene =
 	y:100,
 	width:width,
 	height:height,
+	fillColor:{red:0.0,green:0.0,blue:0.0,alpha:0.0},
 	layoutSpec:{x:2,y:2,fit:false},
 	objectFilePath:"teapot.obj",
     objectScale:{x:50,y:50,z:50},
@@ -594,12 +595,46 @@ let titleblock =
 	width:300,
 	height:200,
 	fillGradient:blockbackgrad,
+	//gradientAngle:90,
 	radius:radius,
 	childBlock0: {type:TEXT,name:"title",text:"Location: Central Core",size:20,x:10,y:180,textColor:gray,font:MainFont },
 	childBlock1: {type:TEXT,name:"sub1",text:"IG. US",size:15,x:10,y:160,textColor:green,font:MainFont },
 	childBlock2: {type:TEXT,name:"sub1",text:"Online",size:15,x:10,y:140,textColor:cyan,font:MainFont },
 }
 addBlock(titleblock)
+
+//
+// core
+//
+let cradius = 200
+let cz = -100
+let cb = .5
+let cs = .1
+for (r = 0; r < 30; r++)
+{
+	let core = 
+	{
+		type:CIRCLE,
+		layoutSpec:{x:2,y:1,fit:false},
+		name:"core",
+		x:200,
+		y:200,
+		z:cz,
+		radius:cradius,
+		strokeWidth:8,
+		strokeStart:cs,
+		strokeEnd:.9,
+		strokeColor:{red:0.0,green:0.0,blue:cb,alpha:.4},
+	}
+	
+	cz += 10
+	cradius -= 10
+	cb += .1
+	cs += .1
+	
+	addBlock(core)
+}
+
 
 //
 // connected boxes BRK

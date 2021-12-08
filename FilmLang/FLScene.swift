@@ -54,7 +54,7 @@ class FLScene : Block
             sceneView.scene = scene
             sceneView.allowsCameraControl = true
            //sceneView.showsStatistics = true
-            sceneView.backgroundColor = NSColor.black
+            sceneView.backgroundColor = fillColor ?? NSColor.black
             
             Block.view.addSubview(sceneView)
         }

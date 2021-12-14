@@ -15,6 +15,7 @@ let screen =
 	width:300,
 	height:400,
 	gradientAngle:0.0,
+	scale:0.75,
 	clip:true,
 	fitToView:true,
 	fillGradient: { startColor: {red:0.0, green:0.5, blue:0.5, alpha:0.6},endColor: {red:0.0, green:0.0, blue:0.0, alpha:0.4}},
@@ -38,7 +39,7 @@ let height = 250
 
 let toptitle = 
 {
-	type:TEXT,name:"top",text:"MT56r7 - MANAGEMENT PANEL - Version: 23.5.61.7.22",padding:5,size:50,x:20,y:1100,textColor:cyan,font:MainFont 
+	type:TEXT,name:"top",text:"MT56r7 - MANAGEMENT PANEL - Version: 23.5.61.7.22",padding:5,size:50,x:20,y:1000,textColor:cyan,font:MainFont 
 }
 addBlock(toptitle)
 
@@ -74,6 +75,7 @@ let axis =
     y:0,
     width:300,
     height:200,
+	scale:.5,
     layoutSpec:{x:2,y:1,fit:false},
     strokeWidth:1,
     strokeColor:cyan,

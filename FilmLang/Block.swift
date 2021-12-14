@@ -31,6 +31,8 @@ class Block
     static var topBlock           : Block!
     static var layoutGrid         : FLLayoutGrid!
     static var view               : NSView!
+    static var screenScale        : CGFloat = 0.0
+    
     
     var type          : String
     var name          : String
@@ -78,6 +80,7 @@ class Block
     var scalePath     : CGFloat = 1.0
     var timer         : Timer?
     var started       : Bool = false
+    var scale         : CGFloat = 0.0
     
     
     init(name:String,type:String)
@@ -233,15 +236,27 @@ class Block
         
         boundingRect = NSRect(x: x + xoffset, y: y + yoffset, width: width, height: height)
         
-        if strokeAlpha > 0.0
-        {
-            strokeColor = strokeColor?.withAlphaComponent(strokeAlpha)
-        }
         
+        //
+        // one time transforms
+        //
+        baseLayer.transform = CATransform3DIdentity
         if rotation > -999
         {
             let rotationTransform = CATransform3DMakeRotation(CGFloat(rotation * CGFloat.pi / 180), 0.0, 0.0, 1.0)
-            baseLayer.transform = rotationTransform
+            CATransform3DConcat(baseLayer.transform, rotationTransform)
+        }
+        
+        if scale > 0.0
+        {
+            let scaleTransform = CATransform3DMakeScale(scale,scale,0.0)
+            baseLayer.transform = CATransform3DConcat(baseLayer.transform, scaleTransform)
+        }
+        
+        if Block.screenScale > 0.0
+        {
+            let scaleTransform = CATransform3DMakeScale(Block.screenScale,Block.screenScale,0.0)
+            baseLayer.transform = CATransform3DConcat(baseLayer.transform, scaleTransform)
         }
         
        
@@ -273,6 +288,7 @@ class Block
  */
        
     }
+    
     
     func buildBasicRect() -> CALayer
     {
@@ -432,6 +448,8 @@ class Block
             {
                 Block.topBlock = rectblock
                 Block.topBlock.fitToView = true
+                Block.screenScale = rectblock.scale
+                
                 rectblock.x = (Block.view?.frame.origin.x)! + rectblock.viewPadding
                 rectblock.y = (Block.view?.frame.origin.y)! + rectblock.viewPadding
                 rectblock.width = (Block.view?.frame.width)! - (rectblock.viewPadding * 2)
@@ -545,6 +563,8 @@ class Block
         if let center = dict["center"]               as? Bool    { self.center = center }
         if let closepath = dict["closePath"]         as? Bool    { self.closePath = closepath }
         if let scalepath = dict["scalePath"]         as? CGFloat { self.scalePath = scalepath }
+        if let scale = dict["scale"]                 as? CGFloat { self.scale = scale }
+        
         
         
         if let waitstartsecs = dict["waitStartSeconds"] as? Double
@@ -662,6 +682,13 @@ class Block
                 Block.addBlockFromDictionary(dict: childblockdict)
             }
         }
+        
+        if strokeAlpha > 0.0
+        {
+            strokeColor = strokeColor?.withAlphaComponent(strokeAlpha)
+        }
+        
+       
     }
     
     

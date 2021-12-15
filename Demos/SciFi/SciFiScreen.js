@@ -5,7 +5,6 @@ let camback   = {red:0.0, green:0.0, blue:0.4, alpha:0.6}
 let camiconcolor = {red:0.09, green:0.09, blue:0.8, alpha:0.7}
 let radius = 4
 
-
 let screen = 
 {
 	type:RECT,
@@ -15,7 +14,7 @@ let screen =
 	width:300,
 	height:400,
 	gradientAngle:0.0,
-	scale:0.75,
+	scale:0.0,
 	clip:true,
 	fitToView:true,
 	fillGradient: { startColor: {red:0.0, green:0.5, blue:0.5, alpha:0.6},endColor: {red:0.0, green:0.0, blue:0.0, alpha:0.4}},
@@ -35,6 +34,25 @@ addBlock(layout)
 
 let width = 350
 let height = 250
+
+
+let music1  =
+{
+	name:"music",
+	type:SOUND,
+	File:"hum.mp3",
+	waitStartSeconds:0.5,
+}
+addBlock(music1)
+
+let music2  =
+{
+	name:"music",
+	type:SOUND,
+	File:"spaceship1.mp3",
+	waitStartSeconds:10.0,
+}
+addBlock(music2)
 
 
 let toptitle = 
@@ -75,7 +93,7 @@ let axis =
     y:0,
     width:300,
     height:200,
-	scale:.5,
+	scale:0.0,
     layoutSpec:{x:2,y:1,fit:false},
     strokeWidth:1,
     strokeColor:cyan,
@@ -558,7 +576,8 @@ let scrollblock1 =
 	radius:radius,
 	clip:true,
 	//textFile:"scrollingtext.txt",
-	textURL:"https://robdodson.net/styles.css",
+	//textURL:"https://robdodson.net/styles.css",
+	textURL:"https://raw.githubusercontent.com/rob-dodson/colorwar/master/ColorWar3d/ColorWar3d/GameViewController.swift",
 	size:14,
 	font:MainFont,
 	strokeColor:cyan,
@@ -792,4 +811,13 @@ for (x = 0; x < 3; x++)
 		bnum++
 	}
 }
+
+
+let cyan1      = { red: 0.07, green: 0.61, blue: 0.65, alpha: .2}
+for (y = 0; y < 1500; y += 100)
+{
+	let backline1 = { type:LINE,name:"backline1",x:0,y:y,endX:20,endY:y,strokeWidth:20,strokeColor:cyan1,z:-10}
+	addBlock(backline1)
+}
+
 

@@ -24,6 +24,7 @@ class FLScene : Block
     var cameraPosition : SCNVector3!
     var lightPosition  : SCNVector3!
     var objectColor    : NSColor!
+    var lightColor     : NSColor!
     
     override func parseBlock(dict:NSDictionary)
     {
@@ -37,6 +38,7 @@ class FLScene : Block
         if let objectscale    = dict["objectScale"]    as? NSDictionary { self.objectScale = vectorFromDict(dict: objectscale) }
         if let objectposition = dict["objectPosition"] as? NSDictionary { self.objectPosition = vectorFromDict(dict: objectposition) }
         if let objectcolor    = dict["objectColor"]    as? NSDictionary { self.objectColor = Block.colorFromDict(dict: objectcolor) }
+        if let lightcolor     = dict["lightColor"]    as? NSDictionary { self.lightColor = Block.colorFromDict(dict: lightcolor) }
         if let cameraposition = dict["cameraPosition"] as? NSDictionary { self.cameraPosition = vectorFromDict(dict: cameraposition) }
         if let lightposition  = dict["lightPosition"]  as? NSDictionary { self.lightPosition = vectorFromDict(dict: lightposition) }
     }
@@ -100,7 +102,7 @@ class FLScene : Block
         lightNode.light = SCNLight()
         lightNode.light!.type = .omni
         lightNode.position = lightPosition
-        lightNode.light!.color = NSColor.orange
+        lightNode.light!.color = lightColor ?? NSColor.green
         scene?.rootNode.addChildNode(lightNode)
 
         //

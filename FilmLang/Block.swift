@@ -81,6 +81,7 @@ class Block
     var timer         : Timer?
     var started       : Bool = false
     var scale         : CGFloat = 0.0
+    var transformsDone: Bool = false
     
     
     init(name:String,type:String)
@@ -240,23 +241,28 @@ class Block
         //
         // one time transforms
         //
-        baseLayer.transform = CATransform3DIdentity
-        if rotation > -999
+        if transformsDone == false
         {
-            let rotationTransform = CATransform3DMakeRotation(CGFloat(rotation * CGFloat.pi / 180), 0.0, 0.0, 1.0)
-            CATransform3DConcat(baseLayer.transform, rotationTransform)
-        }
-        
-        if scale > 0.0
-        {
-            let scaleTransform = CATransform3DMakeScale(scale,scale,0.0)
-            baseLayer.transform = CATransform3DConcat(baseLayer.transform, scaleTransform)
-        }
-        
-        if Block.screenScale > 0.0
-        {
-            let scaleTransform = CATransform3DMakeScale(Block.screenScale,Block.screenScale,0.0)
-            baseLayer.transform = CATransform3DConcat(baseLayer.transform, scaleTransform)
+            baseLayer.transform = CATransform3DIdentity
+            if rotation > -999
+            {
+                let rotationTransform = CATransform3DMakeRotation(CGFloat(rotation * CGFloat.pi / 180), 0.0, 0.0, 1.0)
+                baseLayer.transform = CATransform3DConcat(baseLayer.transform, rotationTransform)
+            }
+            
+            if scale > 0.0
+            {
+                let scaleTransform = CATransform3DMakeScale(scale,scale,0.0)
+                baseLayer.transform = CATransform3DConcat(baseLayer.transform, scaleTransform)
+            }
+            
+            if Block.screenScale > 0.0
+            {
+                let scaleTransform = CATransform3DMakeScale(Block.screenScale,Block.screenScale,0.0)
+                baseLayer.transform = CATransform3DConcat(baseLayer.transform, scaleTransform)
+            }
+            
+            transformsDone = true;
         }
         
        

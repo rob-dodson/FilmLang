@@ -76,6 +76,7 @@ let scene =
     objectScale:{x:50,y:50,z:50},
     objectPosition:{x:width/2,y:height/3,z:50},
 	objectColor:{red:.5,green:.5,blue:.5,alpha:1.0},
+	lightColor:cyan,
     cameraPosition:{x:width/2,y:height/2,z:350},
     lightPosition:{x:50,y:height,z:100},
 }
@@ -141,7 +142,7 @@ let bezblock =
 	strokeColor:blue,
 	strokeWidth:2,
 	radius:radius,
-//	animator0:{value:"x",amount:1,min:20,max:20,type:BOUNCE},
+	
 	childBlock0: {type:TEXT,name:"beztitle",text:"BEZ-1",padding:5,size:20,x:10,y:360,textColor:gray,font:MainFont,fillColor:gray,textColor:black,strokeColor:gray,radius:4 },
 }
 addBlock(bezblock)
@@ -646,6 +647,8 @@ for (r = 0; r < 30; r++)
 		strokeStart:cs,
 		strokeEnd:.9,
 		strokeColor:{red:0.0,green:0.0,blue:cb,alpha:.4},
+		animation0:{property:"position",move:{x:3,y:3},duration:0.05,repeatDuration:100,autoReverses:true},
+		animation1:{property:"strokeStart",from:cs,to:cs + .5,duration:1.4,autoReverses:true},
 	}
 	
 	cz += 10

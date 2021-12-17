@@ -33,6 +33,9 @@ let time7duration = 3.0
 let time8 = time7 + time7duration
 let time8duration = 5.0 
 
+let time9 = time8 + time8duration
+let time9duration = 5.0 
+
 let layout =
 {
     type:LAYOUT,
@@ -406,7 +409,7 @@ for (x = 0; x < layoutx; x++)
 			gridColor:green,
 			waitStartSeconds:time6,
 			waitEndSeconds:time6 + time6duration,
-            childBlock0: {type:TEXT,name:"title",text:"HBR",size:55,center:true,textColor:red,font:MainFont,animation0:{property:"transform.rotation.z",from:0,to:40,duration:Math.random(10),autoReverses:true}},
+            childBlock0: {type:TEXT,name:"title",text:"HBR",size:55,center:true,textColor:red,font:MainFont,animation0:{property:"transform.rotation.z",from:0,to:360,duration:Math.random(40),autoReverses:true}},
 		}
 		addBlock(grid)
 	}
@@ -449,8 +452,6 @@ let happy =
 	font:"Futura",
 	waitStartSeconds:time8,
 	waitEndSeconds:time8 + time8duration,
-	animation1:{property:"opacity",from:0.0,to:1.0,duration:10,autoReverses:false},
-
 }
 addBlock(happy)
 
@@ -466,7 +467,10 @@ let person =
 	font:"Futura",
 	waitStartSeconds:time8,
 	waitEndSeconds:time8 + time8duration,
-	animation1:{property:"opacity",from:0.0,to:1.0,duration:10,autoReverses:false},
+	animation0:{property:"opacity",from:1.0,to:0.0,duration:5,autoReverses:false},
 
 }
 addBlock(person)
+
+
+

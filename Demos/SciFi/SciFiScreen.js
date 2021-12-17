@@ -753,6 +753,29 @@ let cbox4 =
 }
 addBlock(cbox4)
 
+let countdown = 
+{
+	name:"countdown",
+	type:NUMBER,
+	number: 299.8,
+	x:240,
+	y:80,
+	size:12,
+	layoutSpec:{x:0,y:0,fit:true},
+	format:"%1.1f",
+	increment: 0.1,
+	incrementSeconds: .1,
+	fillGradient:blockbackgrad,
+	strokeColor:cyan,
+	strokeWidth:1,
+	radius:radius,
+	textColor:green,
+	font:"Courier",
+	padding:6,
+	//animation0:{property:"position",move:{x:10,y:0},duration:5,autoReverses:true},
+}
+addBlock(countdown)
+
 
 let cline1 = { type:LINE,name:"line1",x:120,y:40,endX:140,endY:40,strokeWidth:2,strokeColor:cyan,layoutSpec:{x:0,y:0,fit:false},}
 addBlock(cline1)
@@ -762,6 +785,11 @@ let cline3 = { type:LINE,name:"line1",x:140,y:100,endX:180,endY:100,strokeWidth:
 addBlock(cline3)
 let cline4 = { type:LINE,name:"line1",x:190,y:60,endX:190,endY:80,strokeWidth:2,strokeColor:cyan,layoutSpec:{x:0,y:0,fit:false},}
 addBlock(cline4)
+let cline5 = { type:LINE,name:"line1",x:220,y:90,endX:240,endY:90,strokeWidth:2,strokeColor:cyan,layoutSpec:{x:0,y:0,fit:false},}
+addBlock(cline5)
+
+
+
 
 
 //
@@ -796,6 +824,8 @@ for (x = 0; x < 3; x++)
 		if (y == 2 && x == 2) 
 			color = orange
 		 
+		let r = Math.floor((Math.random() * 5) + 1)
+		
 		let b1 = 
 		{
 			name:name,
@@ -809,6 +839,7 @@ for (x = 0; x < 3; x++)
 			fillColor:cyan,
 			radius:radius,	
 			childBlock1: {type:TEXT,name:"title",text:bnum.toString(),size:40,x:17,y:-1,textColor:color,font:MainFont },
+			animation0:{property:"position",move:{x:r,y:0},duration:.05,autoReverses:true},
 		}
 		addBlock(b1)
 		bnum++

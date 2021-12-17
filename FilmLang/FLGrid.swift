@@ -51,7 +51,7 @@ class FLGrid : Block
             let path = CGMutablePath()
             
             let xaxiscount = Int(width / CGFloat(xspacing))
-            for xx in 1...xaxiscount
+            for xx in 0...xaxiscount
             {
                 let xpos =  (xspacing * CGFloat(xx))
                 
@@ -63,7 +63,7 @@ class FLGrid : Block
             }
             
             let yaxiscount = Int(height / CGFloat(yspacing))
-            for yy in 1...yaxiscount
+            for yy in 0...yaxiscount
             {
                 let ypos = (yspacing * CGFloat(yy))
                 

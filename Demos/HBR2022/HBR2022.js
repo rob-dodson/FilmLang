@@ -36,6 +36,12 @@ let time8duration = 5.0
 let time9 = time8 + time8duration
 let time9duration = 5.0 
 
+let time10 = time9 + time9duration
+let time10duration = 5.0 
+
+let time11 = time10 + time10duration
+let time11duration = 5.0 
+
 let layout =
 {
     type:LAYOUT,
@@ -84,6 +90,8 @@ let HBRText =
 addBlock(HBRText)
 
 
+
+
 for (x = 0; x < layoutx; x++)
 {
 	for (y = 0; y < layouty; y++)
@@ -124,7 +132,7 @@ for (x = 0; x < layoutx; x++)
 			waitEndSeconds:time2 + time2duration + x,
 			animation0:{property:"position",move:{x:40,y:40},duration:3,autoReverses:true},
 			animation1:{property:"opacity",from:.3,to:1,duration:2.0,autoReverses:true},
-			animation2:{property:"transform.rotation.z",from:0,to:6,duration:Math.random(4),autoReverses:true},
+			animation2:{property:"transform.rotation.z",from:0,to:6,duration:Math.random() * 4,autoReverses:true},
 		}
 		addBlock(b2)
 		
@@ -143,7 +151,7 @@ for (x = 0; x < layoutx; x++)
         }
         addBlock(back)
 
-		let duration = Math.random(15) + 2
+		let duration = Math.random() * 15 + 2
 		let r = Math.random()
 		let g = Math.random()
 		let b = Math.random()
@@ -160,7 +168,7 @@ for (x = 0; x < layoutx; x++)
             font:MainFont,
             strokeColor:cyan,
             textColor:rancolor,
-			animation0:{property:"scrollamount",max:Math.random(250) + 20,duration:Math.random(10),autoReverses:true},
+			animation0:{property:"scrollamount",max:Math.random() * 100 + 20,duration:Math.random() * 10,autoReverses:true},
 			waitStartSeconds:time3 + x,
 			waitEndSeconds:time3 + time3duration + x,
             parent:bname
@@ -409,7 +417,7 @@ for (x = 0; x < layoutx; x++)
 			gridColor:green,
 			waitStartSeconds:time6,
 			waitEndSeconds:time6 + time6duration,
-            childBlock0: {type:TEXT,name:"title",text:"HBR",size:55,center:true,textColor:red,font:MainFont,animation0:{property:"transform.rotation.z",from:0,to:360,duration:Math.random(40),autoReverses:true}},
+            childBlock0: {type:TEXT,name:"title",text:"HBR",size:55,center:true,textColor:red,font:MainFont,animation0:{property:"transform.rotation.z",from:0,to:360,duration:Math.random() * 60 + 5,autoReverses:true}},
 		}
 		addBlock(grid)
 	}
@@ -434,7 +442,7 @@ let countdown =
     padding:45,
 	waitStartSeconds:time7,
 	waitEndSeconds:time7 + time7duration,
-	animation0:{property:"position",move:{x:40,y:40},duration:time7duration,autoReverses:false},
+	animation0:{property:"position",move:{x:40,y:40},duration:time7duration + 5,autoReverses:false},
 }
 
 addBlock(countdown)
@@ -473,4 +481,92 @@ let person =
 addBlock(person)
 
 
+for (x = 0; x < 10; x++)
+{
+	let r = Math.random()
+	let g = Math.random()
+	let b = Math.random()
+	let rancolor  = { red:r, green:g, blue:b, alpha:0.8}
+	
+	let xr = Math.random() * 1000
+	let yr = Math.random() * 1000
+	let name = "bar".concat(xr.toString())
+	
+	let bar1 = 
+	{
+		type:LINE,
+		debug : false,
+		name:name,
+		x:0,y:20 * x,endX:1000,endY:20 * x,strokeWidth:10,strokeColor:rancolor,
+		waitStartSeconds:time9,
+		waitEndSeconds:time9 + time9duration,
+		animation0:{property:"opacity",from:0,to:1,duration:.5,autoReverses:true},
+		animation1:{property:"position",move:{x:xr,y:yr},duration:2,autoReverses:false},
+	}
 
+	addBlock(bar1)
+}
+
+for (x = 0; x < 50; x++)
+{
+	let r = Math.random()
+	let g = Math.random()
+	let b = Math.random()
+	let rancolor  = { red:r, green:g, blue:b, alpha:0.8}
+	
+	let xr = (Math.random() * 2000) + 20
+	let yr = (Math.random() * 2000) + 20
+	let name = "circle".concat(xr.toString())
+	
+	let b1 =
+	{
+		type:CIRCLE,
+		name:name,
+		x:xr,
+		y:yr,
+		radius:Math.random() * 40 + 5,
+		strokeColor:rancolor,
+		strokeWidth:2,
+		waitStartSeconds:time10,
+		waitEndSeconds:time10 + time10duration,
+		animation0:{property:"transform.rotation.z",from:0,to:Math.random() * 7 + 1,duration:1.0,autoReverses:false},
+		animation1:{property:"transform.rotation.x",from:0,to:Math.random() * 7 + 1,duration:1.0,autoReverses:false},
+	}
+	addBlock(b1)
+}
+
+let b2 =
+{
+	name:"b2",
+	type:RECT,
+	x:0,
+	y:0,
+	z:-1,
+	width:1000,
+	height:1000,
+	fillColor:fillmain,
+	strokeColor:orange,
+	strokeWidth:5,
+	radius:4,
+	center:true,
+	waitStartSeconds:time11,
+	waitEndSeconds:time11 + time11duration,
+	animation1:{property:"opacity",from:0,to:1,duration:5.0,autoReverses:true},
+	animation2:{property:"transform.rotation.z",from:0,to:60,duration:60,autoReverses:true},
+}
+addBlock(b2)
+
+let happy2 = 
+{
+	type:TEXT,
+	name:"happy2",
+	text:"HAPPY BIRTHDAY",
+	size:200,
+	center:true,
+	textColor:red,
+	font:"Futura",
+	waitStartSeconds:time11,
+	waitEndSeconds:time11 + time11duration,
+	animation0:{property:"transform.rotation.z",from:60,to:00,duration:60,autoReverses:true},
+}
+addBlock(happy2)

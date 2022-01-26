@@ -40,7 +40,13 @@ let time10 = time9 + time9duration
 let time10duration = 5.0 
 
 let time11 = time10 + time10duration
-let time11duration = 5.0 
+let time11duration = 8.0 
+
+let time12 = time11 + time11duration
+let time12duration = 8.0 
+
+let time13 = time12 + time12duration
+let time13duration = 8.0 
 
 let layout =
 {
@@ -60,7 +66,7 @@ let sound  =
     type:SOUND,
     File:"Message.mp3",
 }
-addBlock(sound)
+//addBlock(sound)
 
 let music  =
 {
@@ -69,7 +75,7 @@ let music  =
     File:"Philip.m4a",
     waitStartSeconds:3.0,
 }
-addBlock(music)
+//addBlock(music)
 
 
 
@@ -490,14 +496,14 @@ for (x = 0; x < 10; x++)
 	
 	let xr = Math.random() * 1000
 	let yr = Math.random() * 1000
-	let name = "bar".concat(xr.toString())
+	let name = "bar".concat(xr.toString()) 
 	
 	let bar1 = 
 	{
 		type:LINE,
 		debug : false,
 		name:name,
-		x:0,y:20 * x,endX:1000,endY:20 * x,strokeWidth:10,strokeColor:rancolor,
+		x:0,y:20 * x,endX:1000,endY:20 * x,strokeWidth:Math.random() * 60 + 3,strokeColor:rancolor,
 		waitStartSeconds:time9,
 		waitEndSeconds:time9 + time9duration,
 		animation0:{property:"opacity",from:0,to:1,duration:.5,autoReverses:true},
@@ -535,9 +541,9 @@ for (x = 0; x < 50; x++)
 	addBlock(b1)
 }
 
-let b2 =
+let b8 =
 {
-	name:"b2",
+	name:"b8",
 	type:RECT,
 	x:0,
 	y:0,
@@ -553,8 +559,9 @@ let b2 =
 	waitEndSeconds:time11 + time11duration,
 	animation1:{property:"opacity",from:0,to:1,duration:5.0,autoReverses:true},
 	animation2:{property:"transform.rotation.z",from:0,to:60,duration:60,autoReverses:true},
+	childBlock0: {type:TEXT,name:"title",text:"HBR - 2022",size:55,x:100,y:100,textColor:red,font:MainFont, parent:"b8"},
 }
-addBlock(b2)
+addBlock(b8)
 
 let happy2 = 
 {
@@ -570,3 +577,93 @@ let happy2 =
 	animation0:{property:"transform.rotation.z",from:60,to:00,duration:60,autoReverses:true},
 }
 addBlock(happy2)
+
+
+for (x = 0; x < 50; x++)
+{
+	let r = Math.random()
+	let g = Math.random()
+	let b = Math.random()
+	let rancolor  = { red:r, green:g, blue:b, alpha:0.8}
+	
+	let r2 = Math.random()
+	let g2 = Math.random()
+	let b2 = Math.random()
+	let rancolor2  = { red:r2, green:g2, blue:b2, alpha:0.3}
+	
+	let xr = (Math.random() * 2000) + 20
+	let yr = (Math.random() * 2000) + 20
+	let name = "circle2".concat(xr.toString())
+	
+	let b1 =
+	{
+		type:CIRCLE,
+		name:name,
+		x:xr,
+		y:yr,
+		radius:Math.random() * 40 + 5,
+		strokeColor:rancolor,
+		strokeWidth:2,
+		waitStartSeconds:time12,
+		fillColor:rancolor2,
+		waitEndSeconds:time12 + time12duration,
+		animation0:{property:"transform.rotation.z",from:0,to:Math.random() * 17 + 1,duration:2.0,autoReverses:false},
+		animation1:{property:"transform.rotation.x",from:0,to:Math.random() * 17 + 1,duration:2.0,autoReverses:false},
+	}
+	addBlock(b1)
+}
+
+for (x = 0; x < 50; x++)
+{
+	let r = Math.random()
+	let g = Math.random()
+	let b = Math.random()
+	let rancolor  = { red:r, green:g, blue:b, alpha:0.8}
+	
+	let r2 = Math.random()
+	let g2 = Math.random()
+	let b2 = Math.random()
+	let rancolor2  = { red:r2, green:g2, blue:b2, alpha:0.3}
+	
+	let xr = (Math.random() * 2000) + 20
+	let yr = (Math.random() * 2000) + 20
+	let name = "RECT1".concat(xr.toString())
+	
+	let b1 =
+	{
+		type:RECT,
+		name:name,
+		x:xr,
+		y:yr,
+		width: Math.random() * 60 + 5,
+		height: Math.random() * 60 + 5,
+		radius:4,
+		strokeColor:rancolor,
+		strokeWidth:2,
+		waitStartSeconds:time12,
+		fillColor:rancolor2,
+		waitEndSeconds:time12 + time12duration,
+		animation0:{property:"transform.rotation.z",from:0,to:Math.random() * 200 + 10,duration:5.0,autoReverses:false},
+		animation1:{property:"transform.rotation.x",from:0,to:Math.random() * 200 + 10,duration:5.0,autoReverses:false},
+	}
+	addBlock(b1)
+}
+
+let happy3 = 
+{
+	type:TEXT,
+	name:"happy2",
+	text:"HAPPY BIRTHDAY",
+	size:200,
+	x: 100,
+	y: -800,
+	center:true,
+	textColor:green,
+	font:"Futura",
+	waitStartSeconds:time13,
+	waitEndSeconds:time13 + time13duration,
+	animation0:{property:"transform.rotation.x",from:0,to:180,duration:100,autoReverses:true},
+	animation1:{property:"position",move:{x:0,y:1800},duration:10,autoReverses:false},
+}
+addBlock(happy3)
+

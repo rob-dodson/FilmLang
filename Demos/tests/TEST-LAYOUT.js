@@ -1,5 +1,5 @@
-includeFile("../Constants")
-includeFile("../BasicScreen")
+includeFile("Constants")
+includeFile("BasicScreen")
 
 let layoutx = 10
 let layouty = 10

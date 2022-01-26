@@ -1,5 +1,5 @@
-includeFile("../Constants")
-includeFile("../BasicScreen")
+includeFile("Constants")
+includeFile("BasicScreen")
 
 let bezblock =
 {

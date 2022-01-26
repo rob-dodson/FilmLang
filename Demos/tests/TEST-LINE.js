@@ -1,5 +1,5 @@
-includeFile("../Constants")
-includeFile("../BasicScreen")
+includeFile("Constants")
+includeFile("BasicScreen")
 
 let dur = 0.4 
 let rev = true

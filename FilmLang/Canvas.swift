@@ -48,7 +48,7 @@ class Canvas: NSView
         //
         if Block.thereAreAnimations
         {
-            self.animateChildren(children: Block.topBlock.children)
+           self.animateChildren(children: Block.topBlock.children)
         }
     }
     
@@ -69,7 +69,10 @@ class Canvas: NSView
         {
             if block.animations.count > 0
             {
-                block.runAnimations()
+                if (block.waitStartSecs < 0)
+                {
+                    block.runAnimations()
+                }
             }
         }
         

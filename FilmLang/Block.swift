@@ -586,6 +586,7 @@ class Block
                 self.baseLayer.isHidden = false
                 
                 self.start()
+                self.runAnimations()
             }
         }
         

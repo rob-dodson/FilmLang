@@ -51,7 +51,11 @@ class FLCircle : Block
                 }
                 else if animation.property.starts(with: "transform.")
                 {
-                    animation.layer = baseLayer //circleLayer
+                    animation.layer = baseLayer
+                }
+                else
+                {
+                    animation.layer = circleLayer
                 }
             }
             

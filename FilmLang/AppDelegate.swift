@@ -31,7 +31,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func pickFile()
     {
-        RFile.pickfile(title:"Open a FilmLang js file.",folders:false,startfolder:"~/Desktop")
+        RFile.pickfile(title:"Open a FilmLang js file.",folders:false,startfolder:"~/Desktop", defaultsname: "FilmLang")
         { (keyfile) in
             
             self.canvas.clear()

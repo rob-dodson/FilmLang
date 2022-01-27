@@ -169,7 +169,6 @@ class Block
         if let parent = block.parent
         {
             parent.baseLayer.addSublayer(layer)
-           
         }
         else // No parent? Add this layer to the main view's layer.
         {
@@ -307,14 +306,18 @@ class Block
     
         if let strokecolor = strokeColor
         {
-            rectLayer.borderColor = strokecolor.cgColor
-            rectLayer.borderWidth = strokeWidth
-            rectLayer.cornerRadius = radius
+            //rectLayer.borderColor = strokecolor.cgColor
+            //rectLayer.borderWidth = strokeWidth
+            //rectLayer.cornerRadius = radius
+            baseLayer.borderColor = strokecolor.cgColor
+            baseLayer.borderWidth = strokeWidth
+            baseLayer.cornerRadius = radius
         }
         
         if let fillcolor = fillColor
         {
-            rectLayer.backgroundColor = fillcolor.cgColor
+            //rectLayer.backgroundColor = fillcolor.cgColor
+            baseLayer.backgroundColor = fillcolor.cgColor
         }
         
        
@@ -328,7 +331,7 @@ class Block
             fillgradient.getColor(&color0, location: nil, at: 0)
             fillgradient.getColor(&color1, location: nil, at: 1)
             gradlayer.colors = [color0.cgColor,color1.cgColor]
-            gradlayer.transform = CATransform3DMakeRotation(gradientAngle * (3.14 / 180.0), 0, 0, 1)
+            gradlayer.transform = CATransform3DMakeRotation(gradientAngle * (3.14159 / 180.0), 0, 0, 1)
 
             addLayerConstraints(layer:gradlayer)
             baseLayer.addSublayer(gradlayer)
@@ -336,9 +339,9 @@ class Block
         
         baseLayer.bounds = rect
         addLayerConstraints(layer:rectLayer)
-        baseLayer.addSublayer(rectLayer)
+        //baseLayer.addSublayer(rectLayer)
         
-        Block.addLayerToParent(block: self, layer: baseLayer)
+        Block.addLayerToParent(block: self, layer:baseLayer)
         
         return rectLayer
     }
@@ -429,9 +432,9 @@ class Block
         //
         // render children
         //
-        for block in children
+        for childblock in children
         {
-            block.draw()
+            childblock.draw()
         }
     }
     
@@ -715,7 +718,7 @@ class Block
     {
         if let parent = dict["parent"] as? String
         {
-            if let parentblock = findBlock(nametofind: parent, startblock: topBlock)
+            if let parentblock = findBlock(nametofind: parent, startblock: topBlock) // make sure each block has a unique name so child can find correct parent
             {
                 parentblock.addChild(childblock:block)
             }

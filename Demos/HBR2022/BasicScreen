@@ -6,10 +6,10 @@ let screen =
     y:20,
     width:300,
     height:400,
-    gradientAngle:90,
+    gradientAngle:0,
     clip:true,
     fitToView:true,
-    fillGradient: { startColor: {red:0.0, green:0.5, blue:0.5, alpha:0.6},endColor: {red:0.0, green:0.0, blue:0.0, alpha:0.4}},
+    fillGradient: { startColor: {red:0.0, green:0.5, blue:0.0, alpha:0.6},endColor: {red:0.0, green:0.0, blue:0.0, alpha:0.4}},
 }
 addBlock(screen)
 

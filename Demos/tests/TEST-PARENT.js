@@ -10,11 +10,13 @@ let bezblock =
 	y:110,
 	width:240,
 	height:240,
-	fillColor:black,
+	fillColor:{ red: 0.07, green: 0.61, blue: 0.65, alpha: 1.0},
 	strokeColor:orange,
 	strokeWidth:2,
 	radius:4,
-	animation1:{property:"position",move:{x:200,y:200},duration:4.0,autoReverses:true},
+	animation0:{property:"position",move:{x:200,y:200},duration:4.0,autoReverses:true},
+	animation1:{property:"transform.rotation.y",from:0,to:6,duration:5,autoReverses:true},
+	animation2:{property:"borderWidth",from:1,to:10,duration:.5,autoReverses:true},
 }
 addBlock(bezblock)
 

@@ -149,8 +149,8 @@ class FLBezier : Block
             
             for animation in animations
             {
-                if animation.property == "position"
-                {
+                if animation.property == "position" || animation.property.starts(with: "transform.")
+                {                
                     animation.layer = baseLayer
                 }
                 else

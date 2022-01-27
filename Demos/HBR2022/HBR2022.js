@@ -559,7 +559,6 @@ let b8 =
 	waitEndSeconds:time11 + time11duration,
 	animation1:{property:"opacity",from:0,to:1,duration:5.0,autoReverses:true},
 	animation2:{property:"transform.rotation.z",from:0,to:60,duration:60,autoReverses:true},
-	childBlock0: {type:TEXT,name:"title",text:"HBR - 2022",size:55,x:100,y:100,textColor:red,font:MainFont, parent:"b8"},
 }
 addBlock(b8)
 
@@ -666,4 +665,8 @@ let happy3 =
 	animation1:{property:"position",move:{x:0,y:1800},duration:10,autoReverses:false},
 }
 addBlock(happy3)
+
+
+
+
 

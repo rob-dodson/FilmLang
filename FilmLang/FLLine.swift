@@ -35,11 +35,8 @@ class FLLine : Block
         
         if built == false
         {
-            let layer = CAShapeLayer()
+            let layer = newCAShapeLayer()
             
-           
-            setLayerDefaults(layer:baseLayer)
-            setShapeLayerDefaults(layer:layer)
             setColorsOnShapeLayer(layer:layer)
             
             // set baseLayer bounds

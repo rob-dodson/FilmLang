@@ -94,18 +94,34 @@ class Block
         createBaseLayer()
     }
     
-    
-    func setLayerDefaults(layer:CALayer)
+
+    func newCALayer() -> CALayer
     {
+        let layer = CALayer()
         layer.zPosition = z
+        
+        return layer
     }
     
     
-    func setShapeLayerDefaults(layer:CAShapeLayer)
+    func newCAShapeLayer() -> CAShapeLayer
     {
+        let layer = CAShapeLayer()
+        layer.zPosition = z
         layer.strokeStart = strokeStart
         layer.strokeEnd = strokeEnd
         layer.lineCap = lineCap
+        
+        return layer
+    }
+    
+    
+    func newCAGradientLayer() -> CAGradientLayer
+    {
+        let layer = CAGradientLayer()
+        layer.zPosition = z
+
+        return layer
     }
     
     
@@ -133,7 +149,6 @@ class Block
         baseLayer = CALayer()
         baseLayer.layoutManager = CAConstraintLayoutManager()
         baseLayer.isHidden = hidden
-  
     }
     
     
@@ -298,9 +313,7 @@ class Block
     
     func buildBasicRect() -> CALayer
     {
-        let rectLayer = CALayer()
-        
-        setLayerDefaults(layer: rectLayer)
+        let rectLayer = newCALayer()
 
         let rect = CGRect(x: 0, y: 0,width: width.rounded(), height: height.rounded())
         rectLayer.bounds = rect
@@ -321,8 +334,7 @@ class Block
        
         if let fillgradient = fillGradient
         {
-            let gradlayer = CAGradientLayer()
-            setLayerDefaults(layer: gradlayer)
+            let gradlayer = newCAGradientLayer()
             
             gradlayer.bounds = rect
             gradlayer.cornerRadius = radius

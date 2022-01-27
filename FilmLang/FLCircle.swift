@@ -25,10 +25,8 @@ class FLCircle : Block
         {
             let rect = NSRect(x: 0, y: 0, width: radius * 2, height: radius * 2)
             
-            let circleLayer = CAShapeLayer()
-            setLayerDefaults(layer:baseLayer)
+            let circleLayer =  newCAShapeLayer()
             setColorsOnShapeLayer(layer:circleLayer)
-            setShapeLayerDefaults(layer:circleLayer)
             
             let ovalPath = CGPath(ellipseIn: rect, transform: nil)
             circleLayer.path = ovalPath

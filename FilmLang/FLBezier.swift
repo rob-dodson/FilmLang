@@ -94,10 +94,8 @@ class FLBezier : Block
         
         if built == false
         {
-            let layer = CAShapeLayer()
-            setLayerDefaults(layer:baseLayer)
+            let layer = newCAShapeLayer()
             setColorsOnShapeLayer(layer:layer)
-            setShapeLayerDefaults(layer:layer)
         
             let path = CGMutablePath()
             

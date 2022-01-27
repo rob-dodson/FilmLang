@@ -31,6 +31,23 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func pickFile()
     {
+        let arguments = CommandLine.arguments
+        
+        var count = 0
+        for arg in arguments
+        {
+            if arg == "--file"
+            {
+                let file = CommandLine.arguments[count + 1]
+                
+                self.canvas.clear()
+                self.canvas.run(path:file)
+                
+                return
+            }
+            count = count + 1
+        }
+        
         RFile.pickfile(title:"Open a FilmLang js file.",folders:false,startfolder:"~/Desktop", defaultsname: "FilmLang")
         { (keyfile) in
             

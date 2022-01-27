@@ -31,7 +31,7 @@ class FLRect : Block
         if built == false
         {
             let rectlayer = buildBasicRect()
-            
+
             for animation in animations
             {
                 if animation.property == "position" || animation.property.starts(with: "transform.")

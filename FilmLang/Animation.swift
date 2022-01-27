@@ -141,7 +141,14 @@ class Animation : NSObject, CAAnimationDelegate
             anim.toValue = to
         }
         
-        layer.add(anim, forKey:property)
+        if let ourlayer = layer
+        {
+            ourlayer.add(anim, forKey:property)
+        }
+        else
+        {
+            NSLog("attempting to add animation to nil layer: \(type) \(property)")
+        }
     }
     
     

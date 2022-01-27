@@ -133,6 +133,7 @@ class Block
         baseLayer = CALayer()
         baseLayer.layoutManager = CAConstraintLayoutManager()
         baseLayer.isHidden = hidden
+  
     }
     
     
@@ -298,6 +299,7 @@ class Block
     func buildBasicRect() -> CALayer
     {
         let rectLayer = CALayer()
+        
         setLayerDefaults(layer: rectLayer)
 
         let rect = CGRect(x: 0, y: 0,width: width.rounded(), height: height.rounded())
@@ -306,24 +308,22 @@ class Block
     
         if let strokecolor = strokeColor
         {
-            //rectLayer.borderColor = strokecolor.cgColor
-            //rectLayer.borderWidth = strokeWidth
-            //rectLayer.cornerRadius = radius
-            baseLayer.borderColor = strokecolor.cgColor
-            baseLayer.borderWidth = strokeWidth
-            baseLayer.cornerRadius = radius
+            rectLayer.borderColor = strokecolor.cgColor
+            rectLayer.borderWidth = strokeWidth
+            rectLayer.cornerRadius = radius
         }
         
         if let fillcolor = fillColor
         {
-            //rectLayer.backgroundColor = fillcolor.cgColor
-            baseLayer.backgroundColor = fillcolor.cgColor
+            rectLayer.backgroundColor = fillcolor.cgColor
         }
         
        
         if let fillgradient = fillGradient
         {
             let gradlayer = CAGradientLayer()
+            setLayerDefaults(layer: gradlayer)
+            
             gradlayer.bounds = rect
             gradlayer.cornerRadius = radius
             var color0 = NSColor()
@@ -332,14 +332,15 @@ class Block
             fillgradient.getColor(&color1, location: nil, at: 1)
             gradlayer.colors = [color0.cgColor,color1.cgColor]
             gradlayer.transform = CATransform3DMakeRotation(gradientAngle * (3.14159 / 180.0), 0, 0, 1)
-
+            
             addLayerConstraints(layer:gradlayer)
             baseLayer.addSublayer(gradlayer)
+            
         }
         
         baseLayer.bounds = rect
         addLayerConstraints(layer:rectLayer)
-        //baseLayer.addSublayer(rectLayer)
+        baseLayer.addSublayer(rectLayer)
         
         Block.addLayerToParent(block: self, layer:baseLayer)
         
@@ -455,6 +456,7 @@ class Block
             
             if rectblock.name == "Screen" // all filmlang scripts need a Screen block
             {
+                
                 Block.topBlock = rectblock
                 Block.topBlock.fitToView = true
                 Block.screenScale = rectblock.scale
@@ -463,6 +465,8 @@ class Block
                 rectblock.y = (Block.view?.frame.origin.y)! + rectblock.viewPadding
                 rectblock.width = (Block.view?.frame.width)! - (rectblock.viewPadding * 2)
                 rectblock.height = (Block.view?.frame.height)! - (rectblock.viewPadding * 2)
+               
+                
                 
                 Block.topBlock.windowChanged =
                 {(block) -> Void in

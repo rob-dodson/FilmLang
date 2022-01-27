@@ -4,6 +4,7 @@ let screen =
     name:"Screen",
     x:20,
     y:20,
+    z:-1000,
     width:300,
     height:400,
     gradientAngle:0,

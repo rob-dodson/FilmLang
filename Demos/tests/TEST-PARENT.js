@@ -6,15 +6,15 @@ let bezblock =
 {
 	name:"bezblock",
 	type:RECT,
-	x:110,
+	x:-110,
 	y:110,
 	width:240,
 	height:240,
-	fillColor:{ red: 0.07, green: 0.61, blue: 0.65, alpha: 1.0},
+	fillColor:{ red: 0.07, green: 0.61, blue: 0.65, alpha: 0.5},
 	strokeColor:orange,
 	strokeWidth:2,
 	radius:4,
-	animation0:{property:"position",move:{x:200,y:200},duration:4.0,autoReverses:true},
+	animation0:{property:"position",move:{x:400,y:400},duration:4.0,autoReverses:true},
 	animation1:{property:"transform.rotation.y",from:0,to:6,duration:5,autoReverses:true},
 	animation2:{property:"borderWidth",from:1,to:10,duration:.5,autoReverses:true},
 }
@@ -23,8 +23,8 @@ addBlock(bezblock)
 let B =
 {
     name:"B",
-	x:10,
-	y:10,
+	x:30,
+	y:30,
     type:BEZIER,
     strokeWidth:2,
 	strokeColor:green,

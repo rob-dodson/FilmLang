@@ -4,11 +4,12 @@ let screen =
     name:"Screen",
     x:20,
     y:20,
+    z:-1000,
     width:300,
     height:400,
     clip:true,
     fitToView:true,
-    fillGradient: { startColor: {red:0.0, green:0.5, blue:0.5, alpha:0.6},endColor: {red:0.0, green:0.0, blue:0.0, alpha:0.4}},
+    fillGradient: { startColor: {red:0.0, green:0.5, blue:0.5, alpha:0.6},endColor: {red:0.0, green:0.0, blue:0.0, alpha:1.0}},
 }
 addBlock(screen)
 

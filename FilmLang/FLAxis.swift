@@ -50,7 +50,7 @@ class FLAxis : Block
             //
             // axis
             //
-            let layer = CAShapeLayer()
+            let layer = newCAShapeLayer()
             setColorsOnShapeLayer(layer:layer)
             
             if let axiscolor = axisColor
@@ -98,7 +98,7 @@ class FLAxis : Block
             
             if points.count > 0
             {
-                let curveLayer = CAShapeLayer()
+                let curveLayer = newCAShapeLayer()
                 setColorsOnShapeLayer(layer:curveLayer)
                 
                 let line = CGMutablePath()

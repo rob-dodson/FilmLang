@@ -44,7 +44,7 @@ class FLGrid : Block
         {
             _ = buildBasicRect()
             
-            let layer = CAShapeLayer()
+            let layer = newCAShapeLayer()
             layer.strokeColor = gridColor.cgColor
             layer.lineWidth = gridStrokeWidth
             

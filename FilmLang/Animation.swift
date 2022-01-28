@@ -147,7 +147,7 @@ class Animation : NSObject, CAAnimationDelegate
         }
         else
         {
-            NSLog("attempting to add animation to nil layer: \(type) \(property)")
+            NSLog("attempting to add animation to nil layer: \(type) \(String(describing: property))")
         }
     }
     

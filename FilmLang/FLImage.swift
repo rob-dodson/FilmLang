@@ -52,7 +52,7 @@ class FLImage : Block
         
         if built == false
         {
-            let layer = CALayer()
+            let layer = newCALayer()
             
             if let filter = filter
             {

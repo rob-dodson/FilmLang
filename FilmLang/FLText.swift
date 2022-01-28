@@ -54,7 +54,7 @@ class FLText : Block
             
             if let fillgradient = fillGradient
             {
-                let gradLayer = CAGradientLayer()
+                let gradLayer = newCAGradientLayer()
                 gradLayer.bounds = frameRect
                 gradLayer.cornerRadius = radius
                 var color0 = NSColor()
@@ -69,7 +69,7 @@ class FLText : Block
             
             if strokeColor != nil || fillColor != nil
             {
-                let frameLayer = CALayer()
+                let frameLayer = newCALayer()
                 
                 frameLayer.bounds = frameRect
                 if let strokecolor = strokeColor

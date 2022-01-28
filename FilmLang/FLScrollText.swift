@@ -22,7 +22,7 @@ class FLScrollText : Block
     var textColor = NSColor.green
     var padding : CGFloat = 0.0
     var boundingtextRect : NSRect!
-    var scrollLayer = CAScrollLayer()
+    
     var textpadding : CGFloat = 5.0
     
     override func parseBlock(dict:NSDictionary)
@@ -45,6 +45,8 @@ class FLScrollText : Block
         
         if built == false
         {
+            let scrollLayer = newCAScrollLayer()
+            
             scrollLayer.bounds = CGRect(x: 0.0, y: 0.0, width: width, height: height)
             scrollLayer.position = CGPoint(x: x + xoffset + (width / 2), y: y + yoffset + (height / 2))
             scrollLayer.borderColor = strokeColor?.cgColor
@@ -101,7 +103,7 @@ class FLScrollText : Block
                                              options: .usesLineFragmentOrigin,
                                              attributes: textFontAttributes)
             
-            let textLayer = CATextLayer()
+            let textLayer = newCATextLayer()
             
             textLayer.bounds = CGRect(x: 0, y: 0, width: width - (textpadding * 2), height: boundingtextRect.height)
             textLayer.position = CGPoint(x: width / 2 + textpadding, y: height / 2)
@@ -132,8 +134,6 @@ class FLScrollText : Block
             
             built = true
         }
-        scrollLayer.bounds = CGRect(x: 0, y: 0, width: width, height: height)
-        scrollLayer.position = CGPoint(x: x + xoffset + (width / 2), y: y + yoffset + (height / 2))
         
         
         postDraw()

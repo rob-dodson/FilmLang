@@ -124,6 +124,22 @@ class Block
         return layer
     }
     
+    func newCATextLayer() -> CATextLayer
+    {
+        let layer = CATextLayer()
+        layer.zPosition = z
+
+        return layer
+    }
+    
+    func newCAScrollLayer() -> CAScrollLayer
+    {
+        let layer = CAScrollLayer()
+        layer.zPosition = z
+
+        return layer
+    }
+    
     
     func setColorsOnShapeLayer(layer:CAShapeLayer)
     {
@@ -382,7 +398,7 @@ class Block
                                                      attributes: textFontAttributes)
             
             
-            let textLayer = CATextLayer()
+            let textLayer = newCATextLayer()
             textLayer.bounds = CGRect(x: 0 , y: 0 , width:textBoundingRect.width, height:textBoundingRect.height )
             textLayer.position = CGPoint(x:width / 2, y: height - 10)
             textLayer.fontSize = debugFontSize

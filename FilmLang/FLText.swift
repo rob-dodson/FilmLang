@@ -89,7 +89,7 @@ class FLText : Block
             
             baseLayer.bounds = frameRect
             
-            let textLayer = CATextLayer()
+            let textLayer = newCATextLayer()
             let frame = CGRect(x: 0 - padding, y: 0 + padding, width: textBoundingRect.width + (padding * 2), height: textBoundingRect.height + (padding * 2))
             textLayer.bounds = frame
             textLayer.fontSize = size

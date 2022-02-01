@@ -46,7 +46,7 @@ for (x = 0; x < 4; x++)
 			height:250,
 			radius:4,
 			clip:true,
-			textFile:"/Users/robertdodson/Desktop/foo.txt",
+			textFile:"ScrollText.js",
 			size:14,
 			font:MainFont,
 			strokeColor:cyan,

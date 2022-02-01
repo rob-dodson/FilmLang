@@ -153,10 +153,28 @@ class Block
         {
             layer.fillColor = fillcolor.cgColor
         }
+        else if let fillgradient = fillGradient // not currently working
+        {
+            let gradlayer = newCAGradientLayer()
+            
+            gradlayer.bounds = layer.bounds
+            gradlayer.cornerRadius = radius
+            var color0 = NSColor()
+            var color1 = NSColor()
+            fillgradient.getColor(&color0, location: nil, at: 0)
+            fillgradient.getColor(&color1, location: nil, at: 1)
+            gradlayer.colors = [color0.cgColor,color1.cgColor]
+            gradlayer.transform = CATransform3DMakeRotation(gradientAngle * (3.14159 / 180.0), 0, 0, 1)
+            
+            addLayerConstraints(layer:gradlayer)
+            baseLayer.addSublayer(gradlayer)
+            
+        }
         else
         {
             layer.fillColor = nil
         }
+        
     }
     
     

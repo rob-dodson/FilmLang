@@ -105,7 +105,7 @@ class Animation : NSObject, CAAnimationDelegate
         {
             anim.repeatDuration = CFTimeInterval(repeatDuration)
         }
-        else
+        else if repeatCount > 0
         {
             anim.repeatCount = repeatCount
         }

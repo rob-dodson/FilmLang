@@ -49,7 +49,11 @@ let time13 = time12 + time12duration
 let time13duration = 8.0 
 
 let time14 = time13 + time13duration
-let time14duration = 8.0 
+let time14duration = 12.0 
+
+let time15 = time14 + time14duration
+let time15duration = 4.0 
+
 
 let layout =
 {
@@ -69,7 +73,7 @@ let sound  =
     type:SOUND,
     File:"Message.mp3",
 }
-//addBlock(sound)
+addBlock(sound)
 
 let music  =
 {
@@ -80,6 +84,14 @@ let music  =
 }
 addBlock(music)
 
+let bassdrop  =
+{
+	name:"bassdrop",
+	type:SOUND,
+	File:"bassdrop.mp3",
+	waitStartSeconds:time15,
+}
+addBlock(bassdrop)
 
 
 let HBRText =
@@ -87,14 +99,14 @@ let HBRText =
 	type:TEXT,
 	name:"hbrtext",
 	text:"HBR2022",
-	layoutSpec:{x:2,y:2,fit:true},
+	center:true,
 	size:50,
 	font:"Futura",
 	textColor:fillmain,
     waitStartSeconds:.5,
+    waitEndSeconds:4,
 	animation0:{property:"transform.scale.x",from:1,to:5,duration:2.0,autoReverses:false},
 	animation1:{property:"transform.scale.y",from:1,to:5,duration:2.0,autoReverses:false},
-    waitEndSeconds:4,
 }
 addBlock(HBRText)
 
@@ -247,7 +259,6 @@ let H =
     name:"H",
     type:PATH,
     strokeWidth:4,
-
 	point0: {x:102, y:0},
 	point1: {x:102, y:128.16},
 	point2: {x:86.09, y:128.16},
@@ -460,10 +471,10 @@ addBlock(countdown)
 let happy = 
 {
 	type:TEXT,
-	layoutSpec:{x:2,y:2,fit:true},
 	name:"happy",
 	text:"HAPPY BIRTHDAY",
 	size:200,
+	y:300,
 	center:true,
 	textColor:red,
 	font:"Futura",
@@ -475,16 +486,16 @@ addBlock(happy)
 let person = 
 {
 	type:TEXT,
-	layoutSpec:{x:2,y:1,fit:true},
 	name:"person",
 	text:"REYN",
 	size:200,
+	y:100,
 	center:true,
 	textColor:blue,
 	font:"Futura",
 	waitStartSeconds:time8,
 	waitEndSeconds:time8 + time8duration,
-	animation0:{property:"opacity",from:1.0,to:0.0,duration:5,autoReverses:false},
+	animation0:{property:"opacity",from:1.0,to:0.0,duration:time8duration + 1 ,autoReverses:false},
 
 }
 addBlock(person)
@@ -544,9 +555,12 @@ for (x = 0; x < 50; x++)
 	addBlock(b1)
 }
 
+//
+// spinning block and text
+//
 let b8 =
 {
-	name:"b8",
+	name:"spinningblock",
 	type:RECT,
 	x:0,
 	y:0,
@@ -562,8 +576,46 @@ let b8 =
 	waitEndSeconds:time11 + time11duration,
 	animation1:{property:"opacity",from:0,to:1,duration:5.0,autoReverses:true},
 	animation2:{property:"transform.rotation.z",from:0,to:60,duration:60,autoReverses:true},
+	childBlock0: {type:TEXT,name:"2022",text:"HBR - 2022",size:35,center:true,textColor:green,font:MainFont },
 }
 addBlock(b8)
+
+for (x = 0; x < 30; x++)
+{
+	let r = Math.random()
+	let g = Math.random()
+	let b = Math.random()
+	let rancolor  = { red:r, green:g, blue:b, alpha:0.8}
+	
+	let r2 = Math.random()
+	let g2 = Math.random()
+	let b2 = Math.random()
+	let rancolor2  = { red:r2, green:g2, blue:b2, alpha:0.3}
+	
+	let xr = (Math.random() * 900) + 20
+	let yr = (Math.random() * 900) + 20
+	let name = "circle2".concat(xr.toString())
+	
+	let starttime = Math.random() * 3
+	let b1 =
+	{
+		type:CIRCLE,
+		name:name,
+		x:xr,
+		y:yr,
+		radius:Math.random() * 240 + 5,
+		strokeColor:rancolor,
+		strokeWidth:2,
+		waitStartSeconds:time11 + starttime,
+		waitEndSeconds:starttime + 1,
+		fillColor:rancolor2,
+		animation0:{property:"transform.rotation.z",from:0,to:Math.random() * 17 + 1,duration:2.0,autoReverses:false},
+		animation1:{property:"transform.rotation.x",from:0,to:Math.random() * 17 + 1,duration:2.0,autoReverses:false},
+		parent:"spinningblock"
+	}
+	addBlock(b1)
+}
+
 
 let happy2 = 
 {
@@ -581,6 +633,9 @@ let happy2 =
 addBlock(happy2)
 
 
+//
+// random circles
+//
 for (x = 0; x < 50; x++)
 {
 	let r = Math.random()
@@ -673,7 +728,7 @@ addBlock(happy3)
 //
 // Candles
 //
-for (i = 0 ; i < 20 ; i++)
+for (i = 0 ; i < 30 ; i++)
 {
 	let r = Math.random()
 	let g = Math.random()
@@ -695,15 +750,15 @@ for (i = 0 ; i < 20 ; i++)
 		type:RECT,
 		name:name,
 		x:100 + (i * 100),
-		y:-40,
+		y:-240,
 		width:width,
 		height:ranheight,
 		radius: 2,
 		fillGradient: { startColor: rancolor, endColor: rancolor2 },
 		gradientAngle:90,
 		waitStartSeconds:time13,
-		waitEndSeconds:time13 + time13duration,
-		animation0:{property:"position",move:{x:0,y:40},duration:time13duration,autoReverses:false},
+		waitEndSeconds:time13 + time13duration + time14duration,
+		animation0:{property:"position",move:{x:0,y:240},duration:time13duration,autoReverses:false},
 	}
 	addBlock(candle)
 	
@@ -719,7 +774,6 @@ for (i = 0 ; i < 20 ; i++)
 		point3:{x: 0, y: ranheight + 50},
 		point4:{x: width / 2, y: ranheight},
 		closePath:true,
-		//fillGradient: { startColor: rancolor, endColor: rancolor2 },
 		animation0:{property:"position",move:{x:0,y:Math.random() * 10 + 3},duration:.05,autoReverses:true},
 		
 		parent:name,
@@ -728,4 +782,36 @@ for (i = 0 ; i < 20 ; i++)
 }
 
 
+let happy5 = 
+{
+	type:TEXT,
+	name:"happy5",
+	text:"HAPPY BIRTHDAY REYN",
+	size:200,
+	x: 2000,
+	y: 200,
+	center:true,
+	textColor:orange,
+	font:"Futura",
+	waitStartSeconds:time14,
+	waitEndSeconds:time14 + time14duration,
+	animation1:{property:"position",move:{x:-4500,y:0},duration:3,autoReverses:false},
+}
+addBlock(happy5)
+
+let filmlang = 
+{
+	type:TEXT,
+	name:"filmlang",
+	text:"HBR 2022 - Rendered by FilmLang",
+	size:20,
+	x: 50,
+	y: 50,
+	textColor:gray,
+	font:"Futura",
+	waitStartSeconds:time15,
+	waitEndSeconds:time15 + time15duration,
+	animation0:{property:"opacity",from:1.0,to:0.0,duration:time15duration + 1,autoReverses:false},
+}
+addBlock(filmlang)
 

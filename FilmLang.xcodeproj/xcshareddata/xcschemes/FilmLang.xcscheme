@@ -52,7 +52,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "#--file /Users/robertdodson/PRo/dev/FilmLang/Demos/tests/TEST-PARENT.js"
+            argument = "--file /Users/robertdodson/PRo/dev/FilmLang/Demos/HBR2022/HBR2022.js"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

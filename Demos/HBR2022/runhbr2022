@@ -1,0 +1,3 @@
+#!/bin/sh
+dir='/Users/robertdodson/Pro/dev/FilmLang'
+open /Applications/FilmLang.app --args --file $dir/Demos/HBR2022/HBR2022.js

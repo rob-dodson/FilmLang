@@ -11,7 +11,6 @@
 		AE0F7871251D3BA200BCE3AD /* FLImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE0F7870251D3BA200BCE3AD /* FLImage.swift */; };
 		AE183D2F250EB4180017805E /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE183D2E250EB4180017805E /* Block.swift */; };
 		AE24CB0F25096A02000F20D7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE24CB0E25096A02000F20D7 /* AppDelegate.swift */; };
-		AE24CB1225096A02000F20D7 /* FilmLang.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AE24CB1025096A02000F20D7 /* FilmLang.xcdatamodeld */; };
 		AE24CB1425096A05000F20D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE24CB1325096A05000F20D7 /* Assets.xcassets */; };
 		AE24CB1725096A06000F20D7 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE24CB1525096A06000F20D7 /* MainMenu.xib */; };
 		AE24CB2A25096DC7000F20D7 /* Canvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE24CB2925096DC7000F20D7 /* Canvas.swift */; };
@@ -39,7 +38,6 @@
 		AE183D2E250EB4180017805E /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		AE24CB0B25096A02000F20D7 /* FilmLang.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilmLang.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE24CB0E25096A02000F20D7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		AE24CB1125096A02000F20D7 /* GraphToad.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GraphToad.xcdatamodel; sourceTree = "<group>"; };
 		AE24CB1325096A05000F20D7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AE24CB1625096A06000F20D7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		AE24CB1825096A06000F20D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -101,7 +99,6 @@
 				AE24CB1325096A05000F20D7 /* Assets.xcassets */,
 				AE24CB1525096A06000F20D7 /* MainMenu.xib */,
 				AE24CB1825096A06000F20D7 /* Info.plist */,
-				AE24CB1025096A02000F20D7 /* FilmLang.xcdatamodeld */,
 				AE183D2E250EB4180017805E /* Block.swift */,
 				AE0C92722540CCBD0016F2E6 /* Animation.swift */,
 				AE24CB2925096DC7000F20D7 /* Canvas.swift */,
@@ -207,7 +204,6 @@
 			files = (
 				AEC3FBE7251009F200C32210 /* FLRect.swift in Sources */,
 				AE7D2A1125672E21000CCAB8 /* Filter.swift in Sources */,
-				AE24CB1225096A02000F20D7 /* FilmLang.xcdatamodeld in Sources */,
 				AE93A982251BDDBA00F3D559 /* Javascript.swift in Sources */,
 				AED9688A25223188007B2CE6 /* FLBezier.swift in Sources */,
 				AE8E380C2512B79F0092C187 /* FLText.swift in Sources */,
@@ -431,19 +427,6 @@
 			productName = RobToolsLibrary;
 		};
 /* End XCSwiftPackageProductDependency section */
-
-/* Begin XCVersionGroup section */
-		AE24CB1025096A02000F20D7 /* FilmLang.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				AE24CB1125096A02000F20D7 /* GraphToad.xcdatamodel */,
-			);
-			currentVersion = AE24CB1125096A02000F20D7 /* GraphToad.xcdatamodel */;
-			path = FilmLang.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = AE24CB0325096A02000F20D7 /* Project object */;
 }

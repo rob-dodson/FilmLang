@@ -9,9 +9,6 @@ import Cocoa
 
 class Canvas: NSView
 {
-    var timer : Timer? = nil
- 
-    
     required init?(coder: NSCoder)
     {
         super.init(coder: coder)

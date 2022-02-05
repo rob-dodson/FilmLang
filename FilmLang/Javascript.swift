@@ -51,10 +51,9 @@ class Javascript
             Block.addBlockFromDictionary(dict: dict)
         }
         context!.setObject(addBlock, forKeyedSubscript: "addBlock" as NSString)
-        
-        
     }
 
+    
     //
     // execute some javascript
     //
@@ -87,8 +86,6 @@ class Javascript
                 info: "",
                 ok: {},
                 cancel: {})
-            
-            
         }
     }
 }

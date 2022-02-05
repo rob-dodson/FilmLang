@@ -34,24 +34,32 @@ class AppDelegate: NSObject, NSApplicationDelegate
     {
         if ignoreCmdLine == false
         {
+            var fileName : String!
+            
             let arguments = CommandLine.arguments
             
             var count = 0
             for arg in arguments
             {
-                if arg == "--file"
+                if arg == "--fullscreen"
                 {
-                    let file = CommandLine.arguments[count + 1]
-                    
-                    DispatchQueue.main.async
-                    {
-                        self.canvas.clear()
-                        self.canvas.run(path:file)
-                    }
-                    
-                    return
+                    window.toggleFullScreen(nil)
                 }
+                else if arg == "--file"
+                {
+                    fileName = CommandLine.arguments[count + 1]
+                }
+                
                 count = count + 1
+            }
+            
+            if let file = fileName
+            {
+                DispatchQueue.main.async
+                {
+                    self.canvas.clear()
+                    self.canvas.run(path:file)
+                }
             }
         }
         else
@@ -69,12 +77,12 @@ class AppDelegate: NSObject, NSApplicationDelegate
         
     }
     
-    func applicationWillTerminate(_ aNotification: Notification)
+    func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool
     {
-        NSLog("here")
+        return true
     }
 
-    private func applicationShouldTerminateAfterLastWindowClosed(app:NSApplication) -> Bool
+    func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool
     {
         return true
     }
@@ -83,25 +91,5 @@ class AppDelegate: NSObject, NSApplicationDelegate
     {
         return NSApplication.TerminateReply.terminateNow
     }
-
-    internal func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool
-    {
-        if (flag)
-        {
-            return false
-        }
-        else
-        {
-            window.makeKeyAndOrderFront(self)
-            return true
-        }
-    }
-
-    
-    
-    
-    
-   
-
 }
 

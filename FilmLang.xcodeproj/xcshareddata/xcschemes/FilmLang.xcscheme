@@ -55,6 +55,10 @@
             argument = "--file /Users/robertdodson/PRo/dev/FilmLang/Demos/HBR2022/HBR2022.js"
             isEnabled = "YES">
          </CommandLineArgument>
+         <CommandLineArgument
+            argument = "--fullscreen"
+            isEnabled = "YES">
+         </CommandLineArgument>
       </CommandLineArguments>
    </LaunchAction>
    <ProfileAction
